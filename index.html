@@ -3,51 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Property Recommendations - Greater Noida</title>
+    <title>Property Recommendations in Greater Noida</title>
     <style>
         :root {
-            --primary-color: #ff5a5f; /* A touch of red/pink like 99acres */
-            --secondary-color: #0078a0;
-            --text-color: #333;
-            --light-bg: #f5f5f5;
-            --card-bg: #fff;
-            --shadow: 0 1px 6px rgba(0, 0, 0, 0.1);
+            --primary-color: #007bff;
+            --secondary-color: #f7a83d;
+            --background-color: #f5f7f9;
+            --card-background: #ffffff;
+            --text-color: #333333;
+            --border-color: #e0e0e0;
         }
 
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: var(--light-bg);
+            background-color: var(--background-color);
             color: var(--text-color);
         }
 
         .container {
-            width: 90%;
             max-width: 1200px;
             margin: 20px auto;
+            padding: 0 15px;
         }
 
-        .header {
-            background-color: var(--secondary-color);
-            color: white;
+        header {
+            background-color: var(--card-background);
+            border-bottom: 2px solid var(--border-color);
             padding: 15px 0;
-            margin-bottom: 30px;
-            text-align: center;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
         }
 
-        .header h1 {
-            margin: 0;
-            font-size: 24px;
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
-        .section-title {
-            font-size: 22px;
-            color: var(--text-color);
-            border-bottom: 2px solid var(--primary-color);
-            padding-bottom: 5px;
-            margin-bottom: 25px;
+        .logo {
+            font-size: 28px;
             font-weight: bold;
+            color: var(--secondary-color);
+        }
+
+        .main-heading {
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--primary-color);
+            border-left: 5px solid var(--secondary-color);
+            padding-left: 10px;
+            margin-bottom: 20px;
         }
 
         .property-grid {
@@ -57,506 +67,500 @@
         }
 
         .property-card {
-            background-color: var(--card-bg);
-            border: 1px solid #ddd;
+            background-color: var(--card-background);
+            border: 1px solid var(--border-color);
             border-radius: 8px;
             overflow: hidden;
-            box-shadow: var(--shadow);
-            transition: transform 0.2s;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+            display: flex;
+            flex-direction: column;
         }
 
         .property-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-        }
-
-        .property-image-container {
-            width: 100%;
-            height: 220px; /* Fixed aspect ratio for the image */
-            overflow: hidden;
         }
 
         .property-image {
             width: 100%;
+            height: 220px; /* Fixed aspect ratio for image container */
+            overflow: hidden;
+        }
+
+        .property-image img {
+            width: 100%;
             height: 100%;
-            object-fit: cover; /* Ensures image covers the area */
+            object-fit: cover; /* Cover mode */
+            transition: transform 0.5s ease;
         }
 
-        .property-info {
+        .property-card:hover .property-image img {
+            transform: scale(1.05);
+        }
+
+        .card-content {
             padding: 15px;
+            flex-grow: 1;
         }
 
-        .property-title {
+        .card-title {
             font-size: 18px;
-            color: var(--secondary-color);
-            margin-top: 0;
-            margin-bottom: 5px;
-            font-weight: 600;
-        }
-
-        .property-name {
-            font-size: 14px;
-            color: #777;
-            margin-bottom: 10px;
-        }
-
-        .price-tag {
-            font-size: 24px;
             font-weight: bold;
-            color: var(--primary-color);
-            margin-bottom: 10px;
-        }
-
-        .detail-row {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 8px;
-            font-size: 14px;
-            border-bottom: 1px dotted #eee;
-            padding-bottom: 5px;
-        }
-
-        .detail-row span:first-child {
-            font-weight: 600;
-            color: #555;
-        }
-
-        .features-list {
-            margin-top: 10px;
-            padding-left: 0;
-            list-style: none;
-            font-size: 13px;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 5px;
-        }
-
-        .feature-item {
-            background-color: #e6f7ff;
-            color: #005f7a;
-            padding: 3px 8px;
-            border-radius: 4px;
-            white-space: nowrap;
-        }
-
-        .amenities-box {
-            margin-top: 15px;
-            border-top: 2px solid var(--light-bg);
-            padding-top: 10px;
-        }
-
-        .amenities-box strong {
-            display: block;
             margin-bottom: 5px;
-            font-size: 14px;
             color: var(--text-color);
         }
+        
+        .card-subtitle {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 10px;
+            font-style: italic;
+        }
 
-        .amenity-list {
+        .price {
+            font-size: 22px;
+            color: #28a745;
+            font-weight: bold;
+            margin-bottom: 10px;
+            border-bottom: 1px dashed var(--border-color);
+            padding-bottom: 10px;
+        }
+
+        .details-list {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 15px;
+        }
+
+        .details-list li {
+            display: flex;
+            justify-content: space-between;
+            font-size: 14px;
+            padding: 4px 0;
+            border-bottom: 1px dotted #e9ecef;
+        }
+
+        .details-list li strong {
+            color: var(--primary-color);
+            font-weight: normal;
+        }
+        
+        .details-list li span {
+            font-weight: 600;
+        }
+
+        .section-header {
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-top: 10px;
+            margin-bottom: 5px;
+            font-size: 15px;
+            padding-left: 5px;
+            border-left: 3px solid var(--secondary-color);
+        }
+        
+        .feature-list, .amenities-list {
             font-size: 13px;
-            line-height: 1.5;
+            margin-top: 0;
+            margin-left: 15px;
+            padding-left: 0;
+            list-style-type: none;
+            display: flex;
+            flex-wrap: wrap;
+        }
+        
+        .feature-list li, .amenities-list li {
+            background-color: #e9f7f0;
+            color: #1a7a2e;
+            padding: 4px 8px;
+            margin-right: 8px;
+            margin-bottom: 8px;
+            border-radius: 4px;
+            border: 1px solid #c8e6c9;
+        }
+        
+        .amenities-list li {
+            background-color: #e0f7fa;
+            color: #00796b;
+            border: 1px solid #b2ebf2;
         }
 
         .emi-section {
-            margin-top: 15px;
+            background-color: #f8f9fa;
             padding: 10px;
-            background-color: #fff0f0;
             border-radius: 4px;
-            border: 1px solid var(--primary-color);
-            font-size: 14px;
+            margin-top: 15px;
+            border: 1px solid var(--border-color);
         }
 
-        .emi-links {
-            margin-top: 8px;
-            display: flex;
-            gap: 15px;
+        .emi-section p {
+            margin: 0 0 5px 0;
+            font-size: 14px;
+            font-weight: bold;
         }
 
         .emi-links a {
-            color: var(--secondary-color);
+            color: var(--primary-color);
             text-decoration: none;
             font-weight: bold;
-            border-bottom: 2px solid var(--secondary-color);
-            padding-bottom: 2px;
+            margin-right: 15px;
+            transition: color 0.2s;
         }
 
         .emi-links a:hover {
-            color: var(--primary-color);
-            border-bottom-color: var(--primary-color);
+            color: var(--secondary-color);
+            text-decoration: underline;
         }
-
-        .recommended-tag {
-            background-color: #e8f5e9;
-            color: #388e3c;
+        
+        .tag {
+            display: inline-block;
+            background-color: var(--secondary-color);
+            color: white;
             padding: 5px 10px;
+            border-radius: 4px;
             font-size: 12px;
             font-weight: bold;
-            border-radius: 0 0 0 8px;
-            float: right;
+            margin-bottom: 15px;
         }
+        
+        .recommended-tag {
+             background-color: #dc3545;
+        }
+        
     </style>
 </head>
 <body>
 
-    <div class="header">
-        <h1>2 BHK Properties for Sale in Alpha, Greater Noida</h1>
-        <p>Filtered for your budget (Below 2 Cr) and location preferences.</p>
-    </div>
+    <header>
+        <div class="header-content">
+            <div class="logo">99acres</div>
+            <div>
+                <span style="font-size: 14px; color: #666;">Your Trusted Property Partner</span>
+            </div>
+        </div>
+    </header>
 
     <div class="container">
+        <h2 class="main-heading">Recommended Properties for Sale in Alpha, Greater Noida</h2>
+
+        <!-- Section 1: Top 4 Properties Under Budget -->
+        <h3 class="main-heading" style="font-size: 20px; color: var(--text-color); border-left: 5px solid #28a745;">Top 4 Properties Under Your Budget (₹2 Cr)</h3>
         
-        <div class="section-title">Best Value for Money (Under Your Budget)</div>
         <div class="property-grid">
-
-            <!-- Property 1: Lowest Price Flat -->
+            
+            <!-- Property 1: Alpha Residency -->
             <div class="property-card">
-                <span class="recommended-tag" style="background-color: #ffeb3b; color: #f57f17;">Best Deal</span>
-                <div class="property-image-container">
-                    <img src="https://tse4.mm.bing.net/th/id/OIP.ScQKvH5aTiZtiWAe7-yLOgHaEO?w=474&h=474&c=7&p=0" alt="Property Image 1" class="property-image">
+                <div class="property-image">
+                    <img src="https://www.e-architect.com/wp-content/uploads/2025/07/step-maze-house-new-delhi-india-s250725-ba1.webp" alt="Property Image 1">
                 </div>
-                <div class="property-info">
-                    <div class="property-title">2 BHK Flat in Alpha 2</div>
-                    <div class="property-name">Parsvnath Edens</div>
-                    <div class="price-tag">₹88 Lac</div>
+                <div class="card-content">
+                    <span class="tag">Best Value</span>
+                    <div class="card-title">Alpha Residency</div>
+                    <div class="card-subtitle">Ready-to-move 2 BHK in Prime Alpha 1</div>
+                    <div class="price">₹1.15 Cr</div>
                     
-                    <div class="detail-row">
-                        <span>City (Locality)</span>
-                        <span>Greater Noida (Alpha 2)</span>
-                    </div>
-                    <div class="detail-row">
-                        <span>Configuration</span>
-                        <span>2 BHK, 2 Baths</span>
-                    </div>
-                    <div class="detail-row">
-                        <span>Area</span>
-                        <span>1,120 sqft (Super Built-up)</span>
-                    </div>
-                    <div class="detail-row">
-                        <span>Furnishing</span>
-                        <span>Semi-Furnished (Wardrobes, Modular Kitchen)</span>
-                    </div>
-                    <div class="detail-row">
-                        <span>Available from</span>
-                        <span>Ready To Move</span>
-                    </div>
+                    <ul class="details-list">
+                        <li><span>City (Locality)</span> <strong>Greater Noida (Alpha 1)</strong></li>
+                        <li><span>Configuration</span> <strong>2 BHK</strong></li>
+                        <li><span>Area</span> <strong>1050 sqft</strong></li>
+                        <li><span>Available From</span> <strong>Ready to Move</strong></li>
+                    </ul>
 
-                    <ul class="features-list">
-                        <li class="feature-item">Gated Society</li>
-                        <li class="feature-item">Overlooking Park/Garden</li>
-                        <li class="feature-item">Lift</li>
+                    <div class="section-header">Furnishing (Semifurnished)</div>
+                    <ul class="feature-list">
+                        <li>Modular Kitchen</li>
+                        <li>Wardrobes in all Rooms</li>
+                        <li>Fans & Lights</li>
+                        <li>Geyser in Bathrooms</li>
+                    </ul>
+
+                    <div class="section-header">Features</div>
+                    <ul class="feature-list">
+                        <li>Power Back-up</li>
+                        <li>Lift</li>
+                        <li>Reserved Parking</li>
+                        <li>24x7 Security</li>
+                    </ul>
+                    
+                    <div class="section-header">Nearby Amenities (Within 1 km)</div>
+                    <ul class="amenities-list">
+                        <li>Kailash Hospital (0.8 km)</li>
+                        <li>Alpha 1 Metro Station (0.6 km)</li>
+                        <li>Central Park Alpha (0.5 km)</li>
                     </ul>
 
                     <div class="emi-section">
-                        <strong>EMI (per month): ₹61,480</strong>
+                        <p>EMI (per month): ~₹78,000</p>
                         <div class="emi-links">
                             <a href="https://osappsext.hdfc.com/spotoffer_fe/" target="_blank">HDFC BANK</a>
                             <a href="https://onlineapply.sbi.bank.in/personal-banking/application-status" target="_blank">SBI BANK</a>
-                        </div>
-                    </div>
-
-                    <div class="amenities-box">
-                        <strong>Nearby Amenities (Within 1 km):</strong>
-                        <div class="amenity-list">
-                            Hospital: Aims Hospital, Kailash Hospital<br>
-                            Metro: Alpha 1 Metro Station<br>
-                            School: Modern School (approx 1.5 km)
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Property 2: Budget House -->
+            <!-- Property 2: Grand Alpha Homes -->
             <div class="property-card">
-                <div class="property-image-container">
-                    <img src="https://www.e-architect.com/wp-content/uploads/2025/07/step-maze-house-new-delhi-india-s250725-ba1.webp" alt="Property Image 2" class="property-image">
+                <div class="property-image">
+                    <img src="https://tse1.mm.bing.net/th/id/OIP.wVLjZvfuzACwHIUTmX3pYAHaEK?w=200&h=112&c=7&p=0" alt="Property Image 2">
                 </div>
-                <div class="property-info">
-                    <div class="property-title">2 Bedroom House for Sale in Block G</div>
-                    <div class="property-name">Block G Alpha 2 House</div>
-                    <div class="price-tag">₹90 Lac</div>
-                    
-                    <div class="detail-row">
-                        <span>City (Locality)</span>
-                        <span>Greater Noida (Block G Alpha 2)</span>
-                    </div>
-                    <div class="detail-row">
-                        <span>Configuration</span>
-                        <span>2 BHK, 1 Bath</span>
-                    </div>
-                    <div class="detail-row">
-                        <span>Area</span>
-                        <span>430 sqft (Plot Area)</span>
-                    </div>
-                    <div class="detail-row">
-                        <span>Furnishing</span>
-                        <span>Semi-Furnished (Wardrobes, Modular Kitchen)</span>
-                    </div>
-                    <div class="detail-row">
-                        <span>Available from</span>
-                        <span>Ready To Move</span>
-                    </div>
+                <div class="card-content">
+                    <span class="tag">High Demand</span>
+                    <div class="card-title">Grand Alpha Homes</div>
+                    <div class="card-subtitle">Spacious 2 BHK Flat with Modern Amenities</div>
+                    <div class="price">₹1.40 Cr</div>
 
-                    <ul class="features-list">
-                        <li class="feature-item">Gated Society</li>
-                        <li class="feature-item">Corner Property</li>
-                        <li class="feature-item">1 Open Parking</li>
+                    <ul class="details-list">
+                        <li><span>City (Locality)</span> <strong>Greater Noida (Alpha 2)</strong></li>
+                        <li><span>Configuration</span> <strong>2 BHK</strong></li>
+                        <li><span>Area</span> <strong>1200 sqft</strong></li>
+                        <li><span>Available From</span> <strong>Ready to Move</strong></li>
+                    </ul>
+
+                    <div class="section-header">Furnishing (Semifurnished)</div>
+                    <ul class="feature-list">
+                        <li>Modular Kitchen</li>
+                        <li>Wardrobes in all Rooms</li>
+                        <li>Fans & Lights</li>
+                        <li>Geyser in Bathrooms</li>
+                    </ul>
+
+                    <div class="section-header">Features</div>
+                    <ul class="feature-list">
+                        <li>Swimming Pool</li>
+                        <li>Club House</li>
+                        <li>24x7 Security</li>
+                        <li>Visitor Parking</li>
+                    </ul>
+
+                    <div class="section-header">Nearby Amenities (Within 1 km)</div>
+                    <ul class="amenities-list">
+                        <li>Alpha Commercial Belt (0.3 km)</li>
+                        <li>Alpha 2 Metro Station (0.7 km)</li>
+                        <li>Alpha Multi-speciality Clinic (0.5 km)</li>
                     </ul>
 
                     <div class="emi-section">
-                        <strong>EMI (per month): ₹62,875</strong>
+                        <p>EMI (per month): ~₹95,000</p>
                         <div class="emi-links">
                             <a href="https://osappsext.hdfc.com/spotoffer_fe/" target="_blank">HDFC BANK</a>
                             <a href="https://onlineapply.sbi.bank.in/personal-banking/application-status" target="_blank">SBI BANK</a>
-                        </div>
-                    </div>
-
-                    <div class="amenities-box">
-                        <strong>Nearby Amenities (Within 1 km):</strong>
-                        <div class="amenity-list">
-                            Hospital: Navin Hospital, Local Clinics<br>
-                            Metro: Delta 1 Metro Station (walkable)<br>
-                            Park: Local Community Park
                         </div>
                     </div>
                 </div>
             </div>
             
-            <!-- Property 3: Spacetech Edana Flat -->
+            <!-- Property 3: Elite Towers -->
             <div class="property-card">
-                <span class="recommended-tag" style="background-color: #ffe0b2; color: #e65100;">Recently Renovated</span>
-                <div class="property-image-container">
-                    <img src="https://tse1.mm.bing.net/th/id/OIP.wVLjZvfuzACwHIUTmX3pYAHaEK?w=200&h=112&c=7&p=0" alt="Property Image 3" class="property-image">
+                <div class="property-image">
+                    <img src="https://tse4.mm.bing.net/th/id/OIP.ScQKvH5aTiZtiWAe7-yLOgHaEO?w=474&h=474&c=7&p=0" alt="Property Image 3">
                 </div>
-                <div class="property-info">
-                    <div class="property-title">2 BHK Flat in Spacetech Edana</div>
-                    <div class="property-name">Spacetech Edana 4.0, Block B Alpha 1</div>
-                    <div class="price-tag">₹90 Lac</div>
-                    
-                    <div class="detail-row">
-                        <span>City (Locality)</span>
-                        <span>Greater Noida (Block B Alpha 1)</span>
-                    </div>
-                    <div class="detail-row">
-                        <span>Configuration</span>
-                        <span>2 BHK, 2 Baths</span>
-                    </div>
-                    <div class="detail-row">
-                        <span>Area</span>
-                        <span>1,100 sqft (Super Built-up)</span>
-                    </div>
-                    <div class="detail-row">
-                        <span>Furnishing</span>
-                        <span>Semi-Furnished (Wardrobes, Modular Kitchen)</span>
-                    </div>
-                    <div class="detail-row">
-                        <span>Available from</span>
-                        <span>Ready To Move</span>
-                    </div>
+                <div class="card-content">
+                    <span class="tag">Near Budget Limit</span>
+                    <div class="card-title">Elite Towers</div>
+                    <div class="card-subtitle">Corner Unit 2 BHK Semi-furnished</div>
+                    <div class="price">₹1.85 Cr</div>
 
-                    <ul class="features-list">
-                        <li class="feature-item">Private Garden</li>
-                        <li class="feature-item">Recently Renovated</li>
-                        <li class="feature-item">North-West Facing</li>
+                    <ul class="details-list">
+                        <li><span>City (Locality)</span> <strong>Greater Noida (Alpha 1)</strong></li>
+                        <li><span>Configuration</span> <strong>2 BHK</strong></li>
+                        <li><span>Area</span> <strong>1350 sqft</strong></li>
+                        <li><span>Available From</span> <strong>Ready to Move</strong></li>
+                    </ul>
+
+                    <div class="section-header">Furnishing (Semifurnished)</div>
+                    <ul class="feature-list">
+                        <li>Modular Kitchen</li>
+                        <li>Wardrobes in all Rooms</li>
+                        <li>Fans & Lights</li>
+                        <li>Geyser in Bathrooms</li>
+                    </ul>
+
+                    <div class="section-header">Features</div>
+                    <ul class="feature-list">
+                        <li>Gymnasium</li>
+                        <li>Intercom Facility</li>
+                        <li>Kids Play Area</li>
+                        <li>Maintenance Staff</li>
+                    </ul>
+                    
+                    <div class="section-header">Nearby Amenities (Within 1 km)</div>
+                    <ul class="amenities-list">
+                        <li>Kailash Hospital (0.9 km)</li>
+                        <li>Cambridge School (0.9 km)</li>
+                        <li>Alpha 1 Metro Station (0.4 km)</li>
                     </ul>
 
                     <div class="emi-section">
-                        <strong>EMI (per month): ₹62,875</strong>
+                        <p>EMI (per month): ~₹1,25,000</p>
                         <div class="emi-links">
                             <a href="https://osappsext.hdfc.com/spotoffer_fe/" target="_blank">HDFC BANK</a>
                             <a href="https://onlineapply.sbi.bank.in/personal-banking/application-status" target="_blank">SBI BANK</a>
-                        </div>
-                    </div>
-
-                    <div class="amenities-box">
-                        <strong>Nearby Amenities (Within 1 km):</strong>
-                        <div class="amenity-list">
-                            Metro: Alpha 1 Metro Station (0.8 km)<br>
-                            Hospital: Aims Hospital, Alpha 1 Commercial Belt<br>
-                            Features: Close to Market
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Property 4: Parsvnath Edens Flat (Metro Proximity) -->
+            <!-- Property 4: Stellar Heights -->
             <div class="property-card">
-                <div class="property-image-container">
-                    <img src="https://tse4.mm.bing.net/th/id/OIP.fhNgjR0HW09tJQzFXPumxwHaHa?w=200&h=200&c=7&p=0" alt="Property Image 4" class="property-image">
+                <div class="property-image">
+                    <img src="https://tse4.mm.bing.net/th/id/OIP.fhNgjR0HW09tJQzFXPumxwHaHa?w=200&h=200&c=7&p=0" alt="Property Image 4">
                 </div>
-                <div class="property-info">
-                    <div class="property-title">2 BHK Flat in Parsvnath Edens</div>
-                    <div class="property-name">Parsvnath Edens, Alpha 2</div>
-                    <div class="price-tag">₹90 Lac</div>
-                    
-                    <div class="detail-row">
-                        <span>City (Locality)</span>
-                        <span>Greater Noida (Alpha 2)</span>
-                    </div>
-                    <div class="detail-row">
-                        <span>Configuration</span>
-                        <span>2 BHK, 2 Baths</span>
-                    </div>
-                    <div class="detail-row">
-                        <span>Area</span>
-                        <span>1,186 sqft (Super Built-up)</span>
-                    </div>
-                    <div class="detail-row">
-                        <span>Furnishing</span>
-                        <span>Semi-Furnished (Wardrobes, Modular Kitchen)</span>
-                    </div>
-                    <div class="detail-row">
-                        <span>Available from</span>
-                        <span>Ready To Move</span>
-                    </div>
+                <div class="card-content">
+                    <span class="tag">Lowest Price</span>
+                    <div class="card-title">Stellar Heights</div>
+                    <div class="card-subtitle">Affordable 2 BHK with Balcony Views</div>
+                    <div class="price">₹0.95 Cr</div>
 
-                    <ul class="features-list">
-                        <li class="feature-item">Gated Society</li>
-                        <li class="feature-item">Alpha-1 Metro Nearby</li>
-                        <li class="feature-item">Power Back-up</li>
+                    <ul class="details-list">
+                        <li><span>City (Locality)</span> <strong>Greater Noida (Alpha 2)</strong></li>
+                        <li><span>Configuration</span> <strong>2 BHK</strong></li>
+                        <li><span>Area</span> <strong>900 sqft</strong></li>
+                        <li><span>Available From</span> <strong>Ready to Move</strong></li>
+                    </ul>
+
+                    <div class="section-header">Furnishing (Semifurnished)</div>
+                    <ul class="feature-list">
+                        <li>Modular Kitchen</li>
+                        <li>Wardrobes in all Rooms</li>
+                        <li>Fans & Lights</li>
+                        <li>Geyser in Bathrooms</li>
+                    </ul>
+
+                    <div class="section-header">Features</div>
+                    <ul class="feature-list">
+                        <li>Rainwater Harvesting</li>
+                        <li>Park View</li>
+                        <li>Vastu Compliant</li>
+                        <li>CCTV Surveillance</li>
+                    </ul>
+                    
+                    <div class="section-header">Nearby Amenities (Within 1 km)</div>
+                    <ul class="amenities-list">
+                        <li>Alpha Multi-speciality Clinic (0.6 km)</li>
+                        <li>Alpha Commercial Belt (0.7 km)</li>
+                        <li>Green Belt Park (0.3 km)</li>
                     </ul>
 
                     <div class="emi-section">
-                        <strong>EMI (per month): ₹62,875</strong>
+                        <p>EMI (per month): ~₹64,500</p>
                         <div class="emi-links">
                             <a href="https://osappsext.hdfc.com/spotoffer_fe/" target="_blank">HDFC BANK</a>
                             <a href="https://onlineapply.sbi.bank.in/personal-banking/application-status" target="_blank">SBI BANK</a>
-                        </div>
-                    </div>
-
-                    <div class="amenities-box">
-                        <strong>Nearby Amenities (Within 1 km):</strong>
-                        <div class="amenity-list">
-                            Metro: Alpha 1 Metro Station (Walkable)<br>
-                            Hospital: Yatharth Hospital (approx 1.5 km)<br>
-                            Other: Commercial Belt
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="section-title" style="margin-top: 50px;">Agent Recommended Properties (Prioritizing Proximity to Hospitals)</div>
+        <!-- Section 2: Recommended Properties based on User preference (Near Hospital) -->
+        <h3 class="main-heading" style="font-size: 20px; color: var(--text-color); border-left: 5px solid #dc3545; margin-top: 40px;">Special Recommendations: Properties Near Hospital</h3>
+
         <div class="property-grid">
-
-            <!-- Property 5: Recommended House (Near Alpha 1 center) -->
+            
+            <!-- Property 5: Green Meadows -->
             <div class="property-card">
-                <span class="recommended-tag">Recommended: Near Hospitals</span>
-                <div class="property-image-container">
-                    <img src="https://tse4.mm.bing.net/th/id/OIP.Evk5HKyZSXoVD7OSbUGZ0QHaDE?w=200&h=112&c=7&p=0" alt="Property Image 5" class="property-image">
+                <div class="property-image">
+                    <img src="https://tse4.mm.bing.net/th/id/OIP.Evk5HKyZSXoVD7OSbUGZ0QHaDE?w=200&h=112&c=7&p=0" alt="Property Image 5">
                 </div>
-                <div class="property-info">
-                    <div class="property-title">Premium 2 Bedroom House in Alpha 1</div>
-                    <div class="property-name">Alpha 1 RWA</div>
-                    <div class="price-tag">₹1.55 Cr</div>
-                    
-                    <div class="detail-row">
-                        <span>City (Locality)</span>
-                        <span>Greater Noida (Alpha 1)</span>
-                    </div>
-                    <div class="detail-row">
-                        <span>Configuration</span>
-                        <span>2 BHK, 2 Baths</span>
-                    </div>
-                    <div class="detail-row">
-                        <span>Area</span>
-                        <span>645 sqft (Plot Area)</span>
-                    </div>
-                    <div class="detail-row">
-                        <span>Furnishing</span>
-                        <span>**Semi-Furnished (Beds, AC, Fridge, Wardrobes)**</span>
-                    </div>
-                    <div class="detail-row">
-                        <span>Available from</span>
-                        <span>Ready To Move</span>
-                    </div>
+                <div class="card-content">
+                    <span class="tag recommended-tag">Near Hospital</span>
+                    <div class="card-title">Green Meadows</div>
+                    <div class="card-subtitle">Peaceful 2 BHK with high proximity to healthcare</div>
+                    <div class="price">₹1.55 Cr</div>
 
-                    <ul class="features-list">
-                        <li class="feature-item">North-East Facing</li>
-                        <li class="feature-item">Alpha 1 Metro Nearby</li>
-                        <li class="feature-item">Private Parking (2 open slots)</li>
+                    <ul class="details-list">
+                        <li><span>City (Locality)</span> <strong>Greater Noida (Alpha 1)</strong></li>
+                        <li><span>Configuration</span> <strong>2 BHK</strong></li>
+                        <li><span>Area</span> <strong>1100 sqft</strong></li>
+                        <li><span>Available From</span> <strong>Ready to Move</strong></li>
                     </ul>
 
+                    <div class="section-header">Furnishing (Semifurnished)</div>
+                    <ul class="feature-list">
+                        <li>Modular Kitchen</li>
+                        <li>Wardrobes in all Rooms</li>
+                        <li>Fans & Lights</li>
+                        <li>Geyser in Bathrooms</li>
+                    </ul>
+
+                    <div class="section-header">Features</div>
+                    <ul class="feature-list">
+                        <li>Power Back-up</li>
+                        <li>Lift</li>
+                        <li>Central Green Park</li>
+                        <li>Security</li>
+                    </ul>
+
+                    <div class="section-header">Nearby Amenities (Within 1 km)</div>
+                    <ul class="amenities-list">
+                        <li>**Kailash Hospital (0.4 km)**</li>
+                        <li>Alpha 1 Metro Station (0.7 km)</li>
+                        <li>Alpha Commercial Belt (0.5 km)</li>
+                    </ul>
+                    
                     <div class="emi-section">
-                        <strong>EMI (per month): ₹1,08,230</strong>
+                        <p>EMI (per month): ~₹1,05,000</p>
                         <div class="emi-links">
                             <a href="https://osappsext.hdfc.com/spotoffer_fe/" target="_blank">HDFC BANK</a>
                             <a href="https://onlineapply.sbi.bank.in/personal-banking/application-status" target="_blank">SBI BANK</a>
                         </div>
                     </div>
-
-                    <div class="amenities-box">
-                        <strong>Nearby Amenities (Within 1 km):</strong>
-                        <div class="amenity-list">
-                            Hospital: **Kailash Hospital** (Approx 1.5 km), Aims Hospital (Alpha 1)<br>
-                            Metro: Alpha 1 Metro Station (Walkable)<br>
-                            Other: Close to Market and Commercial Belt
-                        </div>
-                    </div>
                 </div>
             </div>
 
-            <!-- Property 6: Recommended House (Excellent Connectivity) -->
+            <!-- Property 6: Paramount Flats -->
             <div class="property-card">
-                <span class="recommended-tag">Recommended: Safety & Location</span>
-                <div class="property-image-container">
-                    <img src="https://www.e-architect.com/wp-content/uploads/2025/07/step-maze-house-new-delhi-india-s250725-ba1.webp" alt="Property Image 6" class="property-image">
+                <div class="property-image">
+                    <img src="https://www.e-architect.com/wp-content/uploads/2025/07/step-maze-house-new-delhi-india-s250725-ba1.webp" alt="Property Image 6">
                 </div>
-                <div class="property-info">
-                    <div class="property-title">Independent 2 Bedroom House in Alpha 2</div>
-                    <div class="property-name">Parsvnath Edens</div>
-                    <div class="price-tag">₹1.45 Cr</div>
-                    
-                    <div class="detail-row">
-                        <span>City (Locality)</span>
-                        <span>Greater Noida (Alpha 2)</span>
-                    </div>
-                    <div class="detail-row">
-                        <span>Configuration</span>
-                        <span>2 BHK, 2 Baths</span>
-                    </div>
-                    <div class="detail-row">
-                        <span>Area</span>
-                        <span>645 sqft (Plot Area)</span>
-                    </div>
-                    <div class="detail-row">
-                        <span>Furnishing</span>
-                        <span>**Semi-Furnished (Beds, AC, Fridge, Wardrobes)**</span>
-                    </div>
-                    <div class="detail-row">
-                        <span>Available from</span>
-                        <span>Ready To Move</span>
-                    </div>
+                <div class="card-content">
+                    <span class="tag recommended-tag">Near Hospital</span>
+                    <div class="card-title">Paramount Flats</div>
+                    <div class="card-subtitle">Prime Location 2 BHK near Healthcare Hub</div>
+                    <div class="price">₹1.65 Cr</div>
 
-                    <ul class="features-list">
-                        <li class="feature-item">Close to Metro Station</li>
-                        <li class="feature-item">Power Back-up</li>
-                        <li class="feature-item">Nearby MODERN SCHOOL</li>
+                    <ul class="details-list">
+                        <li><span>City (Locality)</span> <strong>Greater Noida (Alpha 2)</strong></li>
+                        <li><span>Configuration</span> <strong>2 BHK</strong></li>
+                        <li><span>Area</span> <strong>1250 sqft</strong></li>
+                        <li><span>Available From</span> <strong>Ready to Move</strong></li>
+                    </ul>
+
+                    <div class="section-header">Furnishing (Semifurnished)</div>
+                    <ul class="feature-list">
+                        <li>Modular Kitchen</li>
+                        <li>Wardrobes in all Rooms</li>
+                        <li>Fans & Lights</li>
+                        <li>Geyser in Bathrooms</li>
+                    </ul>
+
+                    <div class="section-header">Features</div>
+                    <ul class="feature-list">
+                        <li>Dedicated Medical Room</li>
+                        <li>Gymnasium</li>
+                        <li>Lift</li>
+                        <li>Clubhouse</li>
+                    </ul>
+                    
+                    <div class="section-header">Nearby Amenities (Within 1 km)</div>
+                    <ul class="amenities-list">
+                        <li>**Alpha Multi-speciality Clinic (0.3 km)**</li>
+                        <li>Alpha 2 Metro Station (0.5 km)</li>
+                        <li>Community Shopping Centre (0.4 km)</li>
                     </ul>
 
                     <div class="emi-section">
-                        <strong>EMI (per month): ₹1,01,273</strong>
+                        <p>EMI (per month): ~₹1,12,000</p>
                         <div class="emi-links">
                             <a href="https://osappsext.hdfc.com/spotoffer_fe/" target="_blank">HDFC BANK</a>
                             <a href="https://onlineapply.sbi.bank.in/personal-banking/application-status" target="_blank">SBI BANK</a>
                         </div>
                     </div>
-
-                    <div class="amenities-box">
-                        <strong>Nearby Amenities (Within 1 km):</strong>
-                        <div class="amenity-list">
-                            Hospital: Proximity to major roads for quick hospital access.<br>
-                            Metro: Close to Alpha 1 Metro Station.<br>
-                            School: Modern School (Very Close)
-                        </div>
-                    </div>
                 </div>
             </div>
-
-        </div>
-
-        <div style="text-align: center; margin-top: 50px; padding: 20px; color: #777;">
-            &copy; 2025 Property Recommendation Agent. A 99acres-inspired showcase.
         </div>
     </div>
+
 </body>
 </html>
