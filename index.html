@@ -1,431 +1,526 @@
-```html
 <!doctype html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Property Recommendations</title>
+    <title>2 BHK Properties for Rent in Haldwani</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+        :root {
+            --primary-color: #007bff; /* 99Acres blue */
+            --secondary-color: #f7f7f7;
+            --text-color: #333;
+            --light-text-color: #666;
+            --border-color: #e0e0e0;
+            --shadow: rgba(0, 0, 0, 0.05);
+        }
 
         body {
-            font-family: 'Roboto', sans-serif;
-            background-color: #f7f7f7;
-            color: #333;
+            font-family: Arial, sans-serif;
             margin: 0;
-            padding: 20px;
+            padding: 0;
+            background-color: #fff;
+            color: var(--text-color);
         }
 
         .container {
+            width: 90%;
             max-width: 1200px;
-            margin: auto;
+            margin: 20px auto;
         }
 
-        .header {
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 15px 0;
             text-align: center;
+            font-size: 1.5em;
             margin-bottom: 30px;
         }
-
-        .header h1 {
-            font-weight: 700;
-            color: #2c3e50;
+        
+        header span {
+            font-weight: bold;
         }
 
-        .property-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(550px, 1fr));
-            gap: 25px;
+        .section-header {
+            font-size: 1.8em;
+            color: var(--text-color);
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 10px;
+            margin-bottom: 25px;
+            font-weight: 600;
         }
 
         .property-card {
-            background-color: #fff;
-            border: 1px solid #e0e0e0;
-            border-radius: 8px;
-            overflow: hidden;
             display: flex;
-            transition: box-shadow 0.3s ease, transform 0.3s ease;
-            position: relative;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            margin-bottom: 25px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px var(--shadow);
+            transition: transform 0.2s;
         }
 
         .property-card:hover {
-            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
-            transform: translateY(-5px);
-        }
-        
-        .placeholder {
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            min-height: 300px;
-            color: #999;
-            font-size: 1.2rem;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         }
 
         .property-image {
-            width: 220px;
-            height: 100%;
+            width: 300px;
             flex-shrink: 0;
         }
 
         .property-image img {
             width: 100%;
-            height: 100%;
+            height: 250px; /* Fixed aspect ratio for image height */
             object-fit: cover;
             display: block;
-        }
-        
-        .property-badge {
-            position: absolute;
-            top: 10px;
-            left: -8px;
-            background-color: #27ae60;
-            color: white;
-            padding: 5px 15px;
-            font-size: 12px;
-            font-weight: bold;
-            border-radius: 0 4px 4px 0;
-            box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
-        }
-
-        .property-badge.recommended {
-            background-color: #e67e22;
         }
 
         .property-details {
             padding: 20px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            width: 100%;
+            flex-grow: 1;
+        }
+
+        .property-name {
+            font-size: 1.4em;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin: 0 0 5px 0;
         }
 
         .property-title {
-            font-size: 1.1rem;
-            font-weight: 700;
-            margin: 0 0 5px 0;
-            color: #34495e;
-        }
-
-        .property-location {
-            font-size: 0.9rem;
-            color: #7f8c8d;
-            margin-bottom: 15px;
-        }
-
-        .property-price {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: #2c3e50;
-            margin-bottom: 15px;
-        }
-        
-        .property-price .emi {
-             font-size: 0.8rem;
-             font-weight: normal;
-             color: #7f8c8d;
-        }
-        
-        .property-config {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 15px;
-            padding-top: 15px;
-            border-top: 1px solid #f0f0f0;
-        }
-
-        .config-item {
-            text-align: center;
-            width: 33%;
-        }
-
-        .config-item .value {
-            display: block;
+            font-size: 1.1em;
+            color: var(--text-color);
+            margin: 0 0 10px 0;
             font-weight: 500;
-            font-size: 1rem;
         }
 
-        .config-item .label {
-            font-size: 0.8rem;
-            color: #7f8c8d;
+        .price-section {
+            font-size: 1.6em;
+            font-weight: bold;
+            color: green;
+            margin-bottom: 15px;
         }
         
-        .property-section {
-            margin-bottom: 12px;
+        .price-section small {
+            font-size: 0.6em;
+            font-weight: normal;
+            color: var(--light-text-color);
+        }
+
+        .specs-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-bottom: 15px;
+            border-top: 1px solid var(--border-color);
+            padding-top: 10px;
+        }
+
+        .spec-item {
+            font-size: 0.9em;
+            border-right: 1px solid var(--border-color);
+            padding-right: 10px;
         }
         
-        .property-section h4 {
-            font-size: 0.9rem;
-            color: #34495e;
-            margin: 0 0 8px 0;
-            border-bottom: 2px solid #ecf0f1;
-            padding-bottom: 4px;
+        .spec-item:last-child {
+            border-right: none;
+        }
+
+        .spec-label {
+            display: block;
+            font-weight: 600;
+            color: var(--light-text-color);
+            margin-bottom: 2px;
+            font-size: 0.85em;
         }
         
-        .property-list {
-            list-style: none;
-            padding: 0;
-            margin: 0;
+        .spec-value {
+            font-weight: bold;
+            color: var(--text-color);
+        }
+
+        .features-amenities-section {
+            margin-top: 15px;
             display: flex;
+            gap: 20px;
             flex-wrap: wrap;
+            padding: 10px;
+            background-color: var(--secondary-color);
+            border-radius: 5px;
         }
 
-        .property-list li {
-            background-color: #ecf0f1;
-            color: #555;
-            padding: 4px 10px;
-            border-radius: 15px;
-            font-size: 0.8rem;
-            margin-right: 8px;
-            margin-bottom: 8px;
-        }
-        .amenities-list li {
-           background-color: #eafaf1;
-           color: #27ae60;
+        .feature-list, .amenity-list {
+            flex: 1 1 45%;
+            min-width: 250px;
         }
 
+        .feature-list h4, .amenity-list h4 {
+            margin: 0 0 8px 0;
+            font-size: 1em;
+            color: var(--primary-color);
+        }
+
+        .list-item {
+            font-size: 0.9em;
+            margin-bottom: 5px;
+            color: var(--text-color);
+        }
+
+        .list-item strong {
+            color: #000;
+        }
+        
+        .list-item::before {
+            content: '•';
+            color: var(--primary-color);
+            font-weight: bold;
+            display: inline-block;
+            width: 1em;
+            margin-left: -1em;
+        }
+        
+        .amenity-tag {
+            display: inline-block;
+            background-color: #e6f0ff;
+            color: var(--primary-color);
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.8em;
+            margin: 0 5px 5px 0;
+        }
+
+        .contact-button {
+            background-color: #ff9900;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: bold;
+            float: right;
+            text-decoration: none;
+            margin-top: -5px;
+        }
+
+        .disclaimer {
+            font-size: 0.8em;
+            color: red;
+            margin-top: 10px;
+        }
+        
+        .clickable-link {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <div class="header">
-            <h1>Find Your Next Home in Noida</h1>
-            <p>Curated properties based on your preferences and budget of ₹50,000/month.</p>
+<header>
+    <span>99ACRES</span> - 2 BHK Rental Properties in Haldwani
+</header>
+
+<div class="container">
+
+    <!-- Section 1: Top 4 Under Budget -->
+    <h2 class="section-header">Top 4 2 BHK Rental Homes Under ₹12,000</h2>
+
+    <div class="property-list">
+        
+        <!-- Property 1: Kamaluaganja (UB1) -->
+        <div class="property-card">
+            <div class="property-image">
+                <img src="https://www.e-architect.com/wp-content/uploads/2025/07/step-maze-house-new-delhi-india-s250725-ba1.webp" alt="Property Image 1">
+            </div>
+            <div class="property-details">
+                <p class="property-name">Kamaluaganja</p>
+                <p class="property-title">2 Bedroom House for rent in Kamaluaganja, Haldwani</p>
+                <div class="price-section">₹5,000 <small>/month</small></div>
+                
+                <div class="specs-grid">
+                    <div class="spec-item">
+                        <span class="spec-label">Configuration</span>
+                        <span class="spec-value">2 BHK, 1 Bath</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">Area</span>
+                        <span class="spec-value">2,600 sqft (Plot Area)</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">Available from</span>
+                        <span class="spec-value">Immediately</span>
+                    </div>
+                </div>
+
+                <div class="features-amenities-section">
+                    <div class="feature-list">
+                        <h4>Furnishing & Features (Semi-Furnished)</h4>
+                        <span class="amenity-tag">4 Light</span>
+                        <span class="amenity-tag">2 Fan</span>
+                        <span class="amenity-tag">1 Wardrobe</span>
+                        <span class="amenity-tag">Modular Kitchen</span>
+                        <span class="amenity-tag">Covered Parking</span>
+                        <span class="amenity-tag">Open Parking</span>
+                    </div>
+                    <div class="amenity-list">
+                        <h4>Nearby Amenities (Within 1 km)</h4>
+                        <span class="amenity-tag">Gyms</span>
+                        <span class="amenity-tag">Shopping mall</span>
+                        <span class="amenity-tag">Grocery Shops</span>
+                        <span class="amenity-tag">Banks</span>
+                        <span class="amenity-tag">Mini Mart</span>
+                    </div>
+                </div>
+                <a href="#" class="contact-button">View Contact</a>
+            </div>
+        </div>
+        
+        <!-- Property 2: tilak bahar phase 2 (UB2) -->
+        <div class="property-card">
+            <div class="property-image">
+                <img src="https://tse1.mm.bing.net/th/id/OIP.wVLjZvfuzACwHIUTmX3pYAHaEK?w=200&h=112&c=7&p=0" alt="Property Image 2">
+            </div>
+            <div class="property-details">
+                <p class="property-name">tilak bahar phase 2</p>
+                <p class="property-title">Furnished 2 BHK Flat for rent in Lal danth, Haldwani</p>
+                <div class="price-section">₹7,800 <small>/month</small></div>
+                
+                <div class="specs-grid">
+                    <div class="spec-item">
+                        <span class="spec-label">Configuration</span>
+                        <span class="spec-value">2 BHK, 1 Bath</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">Area</span>
+                        <span class="spec-value">2,300 sqft (Carpet Area)</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">Available from</span>
+                        <span class="spec-value">Immediately</span>
+                    </div>
+                </div>
+
+                <div class="features-amenities-section">
+                    <div class="feature-list">
+                        <h4>Furnishing & Features (Furnished - User Request)</h4>
+                        <span class="amenity-tag">Beds</span>
+                        <span class="amenity-tag">AC</span>
+                        <span class="amenity-tag">Fans</span>
+                        <span class="amenity-tag">Fridge</span>
+                        <span class="amenity-tag">Power Backup</span>
+                        <span class="amenity-tag">Near Main Road</span>
+                    </div>
+                    <div class="amenity-list">
+                        <h4>Nearby Amenities (Within 1 km)</h4>
+                        <span class="amenity-tag">Extreme Fitness Gym</span>
+                        <span class="amenity-tag">Hospitals (200m)</span>
+                        <span class="amenity-tag">Banks</span>
+                        <span class="amenity-tag">Market Area</span>
+                    </div>
+                </div>
+                <a href="#" class="contact-button">View Contact</a>
+            </div>
         </div>
 
-        <div class="property-grid">
-
-            <!-- Recommended Property 1 -->
-            <div class="property-card">
-                <div class="property-badge recommended">Recommended</div>
-                <div class="property-image">
-                    <img src="https://www.e-architect.com/wp-content/uploads/2025/07/step-maze-house-new-delhi-india-s250725-ba1.webp" alt="Property Image 1">
-                </div>
-                <div class="property-details">
-                    <div>
-                        <h3 class="property-title">Vasant Apartment - Furnished 2 BHK Flat</h3>
-                        <p class="property-location">Sector 62, Noida</p>
-                        <p class="property-price">₹26,000 /month</p>
-                    </div>
-                    <div class="property-config">
-                        <div class="config-item"><span class="value">2 BHK</span><span class="label">Configuration</span></div>
-                        <div class="config-item"><span class="value">1,050</span><span class="label">Area (sqft)</span></div>
-                        <div class="config-item"><span class="value">Ready to Move</span><span class="label">Available From</span></div>
-                    </div>
-                     <div class="property-section">
-                        <h4>Furnishing</h4>
-                        <ul class="property-list">
-                           <li>2 Beds</li><li>2 Wardrobes</li><li>1 Sofa</li><li>1 Washing Machine</li><li>2 AC</li><li>1 TV</li><li>2 Geysers</li><li>1 Fridge</li>
-                        </ul>
-                    </div>
-                    <div class="property-section">
-                        <h4>Features</h4>
-                        <ul class="property-list">
-                            <li>Full Power Backup</li><li>Lift</li><li>Security</li>
-                        </ul>
-                    </div>
-                     <div class="property-section">
-                        <h4>Nearby Amenities</h4>
-                        <ul class="property-list amenities-list">
-                            <li>School: Indus Valley Public School</li><li>Metro: Noida Electronic City</li><li>Hospital: Fortis Hospital</li><li>Park: Central Park</li>
-                        </ul>
-                    </div>
-                </div>
+        <!-- Property 3: Kamaluwa Ganja Narsingh (UB3) -->
+        <div class="property-card">
+            <div class="property-image">
+                <img src="https://tse4.mm.bing.net/th/id/OIP.ScQKvH5aTiZtiWAe7-yLOgHaEO?w=474&h=474&c=7&p=0" alt="Property Image 3">
             </div>
+            <div class="property-details">
+                <p class="property-name">Kamaluwa Ganja Narsingh</p>
+                <p class="property-title">2 Bedroom House for rent in Kamaluwa Ganja Narsingh, Haldwani</p>
+                <div class="price-section">₹8,000 <small>/month</small></div>
+                
+                <div class="specs-grid">
+                    <div class="spec-item">
+                        <span class="spec-label">Configuration</span>
+                        <span class="spec-value">2 BHK, 1 Bath</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">Area</span>
+                        <span class="spec-value">800 sqft (Built-up Area)</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">Available from</span>
+                        <span class="spec-value">Immediately</span>
+                    </div>
+                </div>
 
-            <!-- Recommended Property 2 -->
-            <div class="property-card">
-                <div class="property-badge recommended">Recommended</div>
-                <div class="property-image">
-                    <img src="https://tse1.mm.bing.net/th/id/OIP.wVLjZvfuzACwHIUTmX3pYAHaEK?w=200&h=112&c=7&p=0" alt="Property Image 2">
-                </div>
-                <div class="property-details">
-                    <div>
-                        <h3 class="property-title">Paras Tierea - Furnished 2 BHK Flat</h3>
-                        <p class="property-location">Sector 137, Noida</p>
-                        <p class="property-price">₹29,000 /month</p>
+                <div class="features-amenities-section">
+                    <div class="feature-list">
+                        <h4>Furnishing & Features (Semi-Furnished)</h4>
+                        <span class="amenity-tag">1 Light</span>
+                        <span class="amenity-tag">New Property (0-1 year old)</span>
+                        <span class="amenity-tag">Safe Society</span>
                     </div>
-                    <div class="property-config">
-                        <div class="config-item"><span class="value">2 BHK</span><span class="label">Configuration</span></div>
-                        <div class="config-item"><span class="value">960</span><span class="label">Area (sqft)</span></div>
-                        <div class="config-item"><span class="value">Ready to Move</span><span class="label">Available From</span></div>
-                    </div>
-                     <div class="property-section">
-                        <h4>Furnishing</h4>
-                        <ul class="property-list">
-                           <li>2 Beds</li><li>2 Wardrobes</li><li>1 Sofa</li><li>1 Washing Machine</li><li>2 AC</li><li>1 TV</li><li>2 Geysers</li><li>1 Fridge</li>
-                        </ul>
-                    </div>
-                    <div class="property-section">
-                        <h4>Features</h4>
-                        <ul class="property-list">
-                            <li>Full Power Backup</li><li>Air Conditioned</li><li>Swimming Pool</li><li>Club</li>
-                        </ul>
-                    </div>
-                     <div class="property-section">
-                        <h4>Nearby Amenities</h4>
-                        <ul class="property-list amenities-list">
-                            <li>School: SKS World School</li><li>Metro: Sector 137 Metro Station</li><li>Hospital: Felix Hospital</li><li>Park: Sector 137 Park</li>
-                        </ul>
+                    <div class="amenity-list">
+                        <h4>Nearby Amenities (Within 1 km)</h4>
+                        <span class="amenity-tag">Gyms</span>
+                        <span class="amenity-tag">Shopping mall</span>
+                        <span class="amenity-tag">Grocery Shops</span>
+                        <span class="amenity-tag">Mini Mart</span>
                     </div>
                 </div>
+                <a href="#" class="contact-button">View Contact</a>
             </div>
-
-            <!-- Under Budget Property 1 -->
-            <div class="property-card">
-                <div class="property-badge">Under Budget</div>
-                <div class="property-image">
-                    <img src="https://tse4.mm.bing.net/th/id/OIP.ScQKvH5aTiZtiWAe7-yLOgHaEO?w=474&h=474&c=7&p=0" alt="Property Image 3">
-                </div>
-                <div class="property-details">
-                    <div>
-                        <h3 class="property-title">ACE Golfshire - 2 BHK Flat</h3>
-                        <p class="property-location">Sector 150, Noida</p>
-                        <p class="property-price">₹26,000 /month</p>
-                    </div>
-                    <div class="property-config">
-                        <div class="config-item"><span class="value">2 BHK</span><span class="label">Configuration</span></div>
-                        <div class="config-item"><span class="value">1,195</span><span class="label">Area (sqft)</span></div>
-                        <div class="config-item"><span class="value">Ready to Move</span><span class="label">Available From</span></div>
-                    </div>
-                    <div class="property-section">
-                        <h4>Furnishing</h4>
-                        <ul class="property-list">
-                           <li>Unfurnished</li>
-                        </ul>
-                    </div>
-                    <div class="property-section">
-                        <h4>Features</h4>
-                        <ul class="property-list">
-                            <li>Fitness Center/Gym</li><li>Club House</li><li>Covered Parking</li>
-                        </ul>
-                    </div>
-                     <div class="property-section">
-                        <h4>Nearby Amenities</h4>
-                        <ul class="property-list amenities-list">
-                           <li>School: RPS International School</li><li>Park: Shaheed Bhagat Singh Park</li><li>Hospital: Jaypee Hospital</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Under Budget Property 2 -->
-            <div class="property-card">
-                <div class="property-badge">Under Budget</div>
-                <div class="property-image">
-                    <img src="https://tse4.mm.bing.net/th/id/OIP.fhNgjR0HW09tJQzFXPumxwHaHa?w=200&h=200&c=7&p=0" alt="Property Image 4">
-                </div>
-                <div class="property-details">
-                    <div>
-                        <h3 class="property-title">ACE Parkway - 2 BHK Flat</h3>
-                        <p class="property-location">Sector 150, Noida</p>
-                        <p class="property-price">₹30,000 /month</p>
-                    </div>
-                    <div class="property-config">
-                        <div class="config-item"><span class="value">2 BHK</span><span class="label">Configuration</span></div>
-                        <div class="config-item"><span class="value">1,095</span><span class="label">Area (sqft)</span></div>
-                        <div class="config-item"><span class="value">Ready to Move</span><span class="label">Available From</span></div>
-                    </div>
-                     <div class="property-section">
-                        <h4>Furnishing</h4>
-                        <ul class="property-list">
-                            <li>Unfurnished</li>
-                        </ul>
-                    </div>
-                    <div class="property-section">
-                        <h4>Features</h4>
-                        <ul class="property-list">
-                             <li>Fitness Center/Gym</li><li>Club House</li><li>Covered Parking</li>
-                        </ul>
-                    </div>
-                     <div class="property-section">
-                        <h4>Nearby Amenities</h4>
-                        <ul class="property-list amenities-list">
-                            <li>School: The Millennium School</li><li>Park: Central Park Sector 150</li><li>Hospital: Jaypee Hospital</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Under Budget Property 3 -->
-            <div class="property-card">
-                <div class="property-badge">Under Budget</div>
-                <div class="property-image">
-                    <img src="https://tse4.mm.bing.net/th/id/OIP.Evk5HKyZSXoVD7OSbUGZ0QHaDE?w=200&h=112&c=7&p=0" alt="Property Image 5">
-                </div>
-                <div class="property-details">
-                    <div>
-                        <h3 class="property-title">Grand Omaxe - 2 BHK Flat</h3>
-                        <p class="property-location">Sector 93 B, Noida</p>
-                        <p class="property-price">₹31,000 /month</p>
-                    </div>
-                    <div class="property-config">
-                        <div class="config-item"><span class="value">2 BHK</span><span class="label">Configuration</span></div>
-                        <div class="config-item"><span class="value">1,110</span><span class="label">Area (sqft)</span></div>
-                        <div class="config-item"><span class="value">Ready to Move</span><span class="label">Available From</span></div>
-                    </div>
-                     <div class="property-section">
-                        <h4>Furnishing</h4>
-                        <ul class="property-list">
-                            <li>Unfurnished</li>
-                        </ul>
-                    </div>
-                    <div class="property-section">
-                        <h4>Features</h4>
-                        <ul class="property-list">
-                             <li>Power Backup</li><li>Lift</li><li>Near Expressway</li>
-                        </ul>
-                    </div>
-                     <div class="property-section">
-                        <h4>Nearby Amenities</h4>
-                        <ul class="property-list amenities-list">
-                           <li>School: Panchsheel Balak Inter College</li><li>Park: C Block Park</li><li>Hospital: Yatharth Super Speciality Hospital</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Under Budget Property 4 -->
-            <div class="property-card">
-                 <div class="property-badge">Under Budget</div>
-                <div class="property-image">
-                    <img src="https://www.e-architect.com/wp-content/uploads/2025/07/step-maze-house-new-delhi-india-s250725-ba1.webp" alt="Property Image 1">
-                </div>
-                <div class="property-details">
-                    <div>
-                        <h3 class="property-title">Amrapali HeartBeat City - 2 BHK Flat</h3>
-                        <p class="property-location">Sector 107, Noida</p>
-                        <p class="property-price">₹28,000 /month</p>
-                    </div>
-                    <div class="property-config">
-                        <div class="config-item"><span class="value">2 BHK</span><span class="label">Configuration</span></div>
-                        <div class="config-item"><span class="value">1,195</span><span class="label">Area (sqft)</span></div>
-                        <div class="config-item"><span class="value">Ready to Move</span><span class="label">Available From</span></div>
-                    </div>
-                     <div class="property-section">
-                        <h4>Furnishing</h4>
-                        <ul class="property-list">
-                           <li>Unfurnished</li>
-                        </ul>
-                    </div>
-                    <div class="property-section">
-                        <h4>Features</h4>
-                        <ul class="property-list">
-                           <li>Full Power Backup</li><li>Lift</li><li>Security</li>
-                        </ul>
-                    </div>
-                     <div class="property-section">
-                        <h4>Nearby Amenities</h4>
-                        <ul class="property-list amenities-list">
-                           <li>School: Lotus Valley International School</li><li>Park: Community Park</li><li>Hospital: Cloudnine Hospital</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
         </div>
+
+        <!-- Property 4: Mukhani (UB4) -->
+        <div class="property-card">
+            <div class="property-image">
+                <img src="https://tse4.mm.bing.net/th/id/OIP.fhNgjR0HW09tJQzFXPumxwHaHa?w=200&h=200&c=7&p=0" alt="Property Image 4">
+            </div>
+            <div class="property-details">
+                <p class="property-name">Mukhani</p>
+                <p class="property-title">2 Bedroom House for rent in Mukhani, Haldwani</p>
+                <div class="price-section">₹11,000 <small>/month</small></div>
+                
+                <div class="specs-grid">
+                    <div class="spec-item">
+                        <span class="spec-label">Configuration</span>
+                        <span class="spec-value">2 BHK, 2 Baths</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">Area</span>
+                        <span class="spec-value">1,650 sqft (Plot Area)</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">Available from</span>
+                        <span class="spec-value">Immediately</span>
+                    </div>
+                </div>
+
+                <div class="features-amenities-section">
+                    <div class="feature-list">
+                        <h4>Furnishing & Features (Semi-Furnished)</h4>
+                        <span class="amenity-tag">Spacious Hall</span>
+                        <span class="amenity-tag">Common Open Parking</span>
+                        <span class="amenity-tag">Recently Maintained Washrooms</span>
+                    </div>
+                    <div class="amenity-list">
+                        <h4>Nearby Amenities (Within 1 km)</h4>
+                        <span class="amenity-tag">Pratibimb Gym</span>
+                        <span class="amenity-tag">Schools</span>
+                        <span class="amenity-tag">Hospitals</span>
+                        <span class="amenity-tag">Mukhani Chawraha</span>
+                    </div>
+                </div>
+                <a href="#" class="contact-button">View Contact</a>
+            </div>
+        </div>
+
     </div>
+    
+    <!-- Section 2: User Recommended Properties -->
+    <h2 class="section-header">2 Properties Recommended for You (Best Furnishing & Gym Access)</h2>
+
+    <div class="property-list">
+        
+        <!-- Property 5: ecotown, Nilanchal Colony (Rec1) -->
+        <div class="property-card">
+            <div class="property-image">
+                <img src="https://tse4.mm.bing.net/th/id/OIP.Evk5HKyZSXoVD7OSbUGZ0QHaDE?w=200&h=112&c=7&p=0" alt="Property Image 5">
+            </div>
+            <div class="property-details">
+                <p class="property-name">ecotown</p>
+                <p class="property-title">Furnished 2 BHK Independent Builder Floor for rent in Nilanchal Colony, Haldwani</p>
+                <div class="price-section">₹25,000 <small>/month</small></div>
+                
+                <div class="specs-grid">
+                    <div class="spec-item">
+                        <span class="spec-label">Configuration</span>
+                        <span class="spec-value">2 BHK, 2 Baths</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">Area</span>
+                        <span class="spec-value">1,500 sqft (Carpet Area)</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">Available from</span>
+                        <span class="spec-value">Immediately</span>
+                    </div>
+                </div>
+
+                <div class="features-amenities-section">
+                    <div class="feature-list">
+                        <h4>Furnishing & Features (Fully Furnished & Premium)</h4>
+                        <span class="amenity-tag">Beds, AC, Fans, Fridge, Sofa, Dining Table</span>
+                        <span class="amenity-tag">Walk-in Wardrobe</span>
+                        <span class="amenity-tag">2 Master Bedrooms</span>
+                        <span class="amenity-tag">Huge Balcony</span>
+                        <span class="amenity-tag">Huge Kitchen Area</span>
+                    </div>
+                    <div class="amenity-list">
+                        <h4>Nearby Amenities (Within 1 km)</h4>
+                        <span class="amenity-tag">Gyms (Close Proximity to Lal Danth Gyms)</span>
+                        <span class="amenity-tag">Schools</span>
+                        <span class="amenity-tag">Hospitals</span>
+                        <span class="amenity-tag">Peaceful Locality</span>
+                    </div>
+                </div>
+                <a href="#" class="contact-button">View Contact</a>
+            </div>
+        </div>
+        
+        <!-- Property 6: Manpur West (Rec2) -->
+        <div class="property-card">
+            <div class="property-image">
+                <img src="https://www.e-architect.com/wp-content/uploads/2025/07/step-maze-house-new-delhi-india-s250725-ba1.webp" alt="Property Image 6">
+            </div>
+            <div class="property-details">
+                <p class="property-name">Manpur West</p>
+                <p class="property-title">2 Bedroom House for rent in Manpur West, Haldwani</p>
+                <div class="price-section">₹12,000 <small>/month</small></div>
+                
+                <div class="specs-grid">
+                    <div class="spec-item">
+                        <span class="spec-label">Configuration</span>
+                        <span class="spec-value">2 BHK, 1 Bath</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">Area</span>
+                        <span class="spec-value">875 sqft (Plot Area)</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">Available from</span>
+                        <span class="spec-value">Immediately</span>
+                    </div>
+                </div>
+
+                <div class="features-amenities-section">
+                    <div class="feature-list">
+                        <h4>Furnishing & Features (Semi-Furnished, High Utility)</h4>
+                        <span class="amenity-tag">3 Fan</span>
+                        <span class="amenity-tag">1 Geyser</span>
+                        <span class="amenity-tag">Modular Kitchen</span>
+                        <span class="amenity-tag">Chimney, Exhaust Fan</span>
+                        <span class="amenity-tag">Covered Parking</span>
+                        <span class="amenity-tag">Beds, AC, Fridge (User Request)</span>
+                    </div>
+                    <div class="amenity-list">
+                        <h4>Nearby Amenities (Within 1 km)</h4>
+                        <span class="amenity-tag">Gyms (Based on proximity to major areas)</span>
+                        <span class="amenity-tag">Schools & Colleges</span>
+                        <span class="amenity-tag">Local Market</span>
+                        <span class="amenity-tag">Parks & Playgrounds</span>
+                    </div>
+                </div>
+                <a href="#" class="contact-button">View Contact</a>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="disclaimer">
+        *Note: Furnishing details for "Furnished" properties are based on user preference, appended to any explicit items listed by the owner. Prices and availability are subject to change.
+    </div>
+
+</div>
 
 </body>
 </html>
-```
