@@ -3,523 +3,537 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Property Recommendations - Noida</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <title>Property Recommendations in Noida</title>
     <style>
         :root {
-            --primary-color: #f7b400; /* 99acres yellow/orange */
-            --secondary-color: #172132;
+            --primary-color: #ff5a5f; /* A color often associated with real estate platforms */
+            --secondary-color: #0078d4;
+            --background-color: #f5f5f5;
+            --card-background: #ffffff;
             --text-color: #333;
-            --light-bg: #f5f5f5;
-            --card-border: #e0e0e0;
+            --light-text: #666;
+            --border-color: #e0e0e0;
         }
 
         body {
-            font-family: 'Roboto', sans-serif;
-            background-color: var(--light-bg);
+            font-family: Arial, sans-serif;
             margin: 0;
-            padding: 20px;
+            padding: 0;
+            background-color: var(--background-color);
             color: var(--text-color);
         }
 
-        .header {
-            max-width: 1200px;
-            margin: 0 auto 30px;
-            padding: 20px;
-            background-color: #ffffff;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-            border-left: 5px solid var(--primary-color);
-        }
-
-        .header h1 {
-            color: var(--secondary-color);
+        .header-bar {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 15px 30px;
             font-size: 24px;
-            margin: 0 0 5px 0;
+            font-weight: bold;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            text-align: center;
         }
-
-        .header p {
-            color: #666;
-            margin: 0;
+        
+        .header-bar span {
             font-size: 14px;
+            font-weight: normal;
+            display: block;
+            margin-top: 5px;
         }
 
-        .property-container {
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 0 15px;
+        }
+
+        .property-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
             gap: 25px;
-            max-width: 1200px;
-            margin: auto;
         }
 
         .property-card {
-            background-color: #fff;
-            border: 1px solid var(--card-border);
+            background-color: var(--card-background);
+            border: 1px solid var(--border-color);
             border-radius: 8px;
             overflow: hidden;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            transition: transform 0.2s;
             display: flex;
             flex-direction: column;
         }
 
         .property-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.12);
-        }
-
-        .tag {
-            position: absolute;
-            top: 15px;
-            left: 0;
-            background-color: var(--primary-color);
-            color: var(--secondary-color);
-            padding: 4px 10px;
-            font-size: 12px;
-            font-weight: 700;
-            border-top-right-radius: 4px;
-            border-bottom-right-radius: 4px;
-            z-index: 10;
-        }
-
-        .tag.recommended {
-            background-color: #007bff;
-            color: #fff;
-        }
-
-        .property-image-container {
-            position: relative;
-            width: 100%;
-            padding-top: 56.25%; /* 16:9 Aspect Ratio */
-            overflow: hidden;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
         }
 
         .property-image {
-            position: absolute;
-            top: 0;
-            left: 0;
+            width: 100%;
+            height: 220px; /* Fixed aspect ratio for consistency */
+            overflow: hidden;
+        }
+
+        .property-image img {
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            object-fit: cover; /* Cover mode */
+            transition: transform 0.3s;
+        }
+
+        .property-image img:hover {
+            transform: scale(1.05);
         }
 
         .card-content {
-            padding: 15px 20px;
+            padding: 15px;
             flex-grow: 1;
             display: flex;
             flex-direction: column;
         }
 
+        .tag {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .tag.recommended {
+            background-color: #28a745;
+            color: white;
+        }
+
+        .tag.budget {
+            background-color: var(--secondary-color);
+            color: white;
+        }
+
         .price {
-            font-size: 24px;
-            font-weight: 700;
-            color: var(--secondary-color);
+            font-size: 22px;
+            font-weight: bold;
+            color: var(--primary-color);
             margin-bottom: 5px;
         }
 
-        .emi-info {
-            font-size: 12px;
-            color: #666;
-            margin-bottom: 15px;
+        .emi-details {
+            font-size: 14px;
+            color: var(--light-text);
+            margin-bottom: 10px;
+            border-bottom: 1px dashed var(--border-color);
+            padding-bottom: 8px;
         }
 
-        .emi-info a {
-            color: #007bff;
+        .emi-details a {
+            color: var(--secondary-color);
             text-decoration: none;
-            font-weight: 500;
-            margin-right: 10px;
+            font-weight: bold;
+            margin-right: 8px;
+        }
+        
+        .property-name {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 5px;
+            line-height: 1.3;
         }
 
         .property-title {
-            font-size: 18px;
-            font-weight: 700;
-            color: var(--secondary-color);
-            margin: 0 0 5px 0;
+            font-size: 14px;
+            color: var(--light-text);
+            margin-bottom: 10px;
+        }
+
+        .details-table {
+            width: 100%;
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+
+        .details-table td {
+            padding: 4px 0;
+            vertical-align: top;
         }
         
-        .property-subtitle {
-            font-size: 14px;
-            color: #666;
-            margin: 0 0 10px 0;
+        .details-table .label {
+            color: var(--light-text);
+            width: 40%;
         }
 
-        .details-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-            margin-bottom: 15px;
-            border-top: 1px solid #eee;
-            padding-top: 10px;
-        }
-
-        .detail-item {
-            font-size: 14px;
+        .details-table .value {
+            font-weight: 500;
             color: var(--text-color);
         }
-
-        .detail-label {
-            font-weight: 500;
-            color: #666;
-            display: block;
-            font-size: 12px;
-            margin-bottom: 2px;
-        }
-
-        .furnishing-section, .amenity-section {
-            margin-top: 10px;
-            padding-top: 10px;
-            border-top: 1px solid #eee;
-        }
-
-        .section-title {
-            font-size: 15px;
-            font-weight: 700;
-            color: var(--secondary-color);
-            margin-bottom: 8px;
-        }
-
-        .feature-list {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            font-size: 13px;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 5px 10px;
-        }
-
-        .feature-list li::before {
-            content: "•";
-            color: var(--primary-color);
-            font-weight: 700;
-            display: inline-block;
-            width: 1em;
-            margin-left: -1em;
-        }
-
-        .contact-button-container {
-            margin-top: 20px;
-            text-align: center;
-        }
-
-        .contact-button {
-            display: block;
-            width: 100%;
-            padding: 10px;
-            background-color: var(--primary-color);
-            color: var(--secondary-color);
-            font-weight: 700;
-            text-align: center;
-            text-decoration: none;
-            border-radius: 4px;
-            transition: background-color 0.2s;
-            border: none;
-            cursor: pointer;
-        }
-
-        .contact-button:hover {
-            background-color: #e6a500;
-        }
         
-        .placeholder-card {
-            border: 2px dashed var(--card-border);
-            text-align: center;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 400px; /* Match card height */
-            color: #999;
-            font-size: 18px;
-            background-color: #fafafa;
+        .section-heading {
+            font-size: 16px;
+            font-weight: bold;
+            color: var(--primary-color);
+            margin: 10px 0 5px 0;
+            padding-bottom: 3px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .list-amenities, .list-features {
+            font-size: 13px;
+            color: var(--light-text);
+            margin-top: 5px;
+        }
+
+        .list-amenities li, .list-features li {
+            margin-bottom: 4px;
+            list-style: disc;
+            margin-left: 20px;
+        }
+
+        .list-amenities strong, .list-features strong {
+            color: var(--text-color);
         }
     </style>
 </head>
 <body>
 
-    <div class="header">
-        <h1>2 BHK Rental Recommendations in Noida</h1>
-        <p>Filtered for: **City: Noida | Locality: Sector 63/62 | Budget: < 40k/month | Type: Rent | Preference: Metro Proximity**</p>
+    <div class="header-bar">
+        Property Listings in Noida <span>(Filtered by City, Locality: Sector 122, and Budget: Under ₹80 Lakh)</span>
     </div>
 
-    <div class="property-container">
-        
-        <!-- --- RECOMMENDED PROPERTY 1 (Best Metro Proximity, Semi-Furnished) --- -->
-        <div class="property-card">
-            <div class="property-image-container">
-                <div class="tag recommended">★ RECOMMENDED (Near Metro)</div>
-                <img src="https://www.e-architect.com/wp-content/uploads/2025/07/step-maze-house-new-delhi-india-s250725-ba1.webp" alt="Property Image" class="property-image">
-            </div>
-            <div class="card-content">
-                <p class="price">₹30,000 /month</p>
-                <h2 class="property-title">Overseas Towers</h2>
-                <p class="property-subtitle">2 BHK Flat for rent in Sector 62, Noida</p>
-                
-                <div class="details-grid">
-                    <div class="detail-item"><span class="detail-label">Configuration</span> 2 BHK, 2 Baths</div>
-                    <div class="detail-item"><span class="detail-label">Area</span> 1,550 sqft (Super Built-up)</div>
-                    <div class="detail-item"><span class="detail-label">Deposit</span> ₹62,000</div>
-                    <div class="detail-item"><span class="detail-label">Available From</span> Last Month (1mo ago)</div>
-                </div>
+    <div class="container">
+        <div class="property-grid">
 
-                <div class="furnishing-section">
-                    <p class="section-title">Furnishing (User Preference)</p>
-                    <ul class="feature-list">
-                        <li>Modular Kitchen</li>
-                        <li>Wardrobes in all rooms</li>
-                        <li>Lights & Fans fitted</li>
-                        <li>Water Purifier</li>
+            <!-- Utility function to calculate EMI -->
+            <script>
+                function calculateEMI(P) {
+                    const r_a = 0.085; /* 8.5% annual rate */
+                    const r = r_a / 12; /* Monthly rate */
+                    const n = 240; /* 20 years * 12 months */
+                    const emi = P * r * Math.pow((1 + r), n) / (Math.pow((1 + r), n) - 1);
+                    return emi.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                }
+                const imageList = [
+                    "https://www.e-architect.com/wp-content/uploads/2025/07/step-maze-house-new-delhi-india-s250725-ba1.webp",
+                    "https://tse1.mm.bing.net/th/id/OIP.wVLjZvfuzACwHIUTmX3pYAHaEK?w=200&h=112&c=7&p=0",
+                    "https://tse4.mm.bing.net/th/id/OIP.ScQKvH5aTiZtiWAe7-yLOgHaEO?w=474&h=474&c=7&p=0",
+                    "https://tse4.mm.bing.net/th/id/OIP.fhNgjR0HW09tJQzFXPumxwHaHa?w=200&h=200&c=7&p=0",
+                    "https://tse4.mm.bing.net/th/id/OIP.Evk5HKyZSXoVD7OSbUGZ0QHaDE?w=200&h=112&c=7&p=0"
+                ];
+            </script>
+
+            <!-- Property 1: Golden Residency (Under Budget) -->
+            <div class="property-card">
+                <div class="property-image">
+                    <img src="https://www.e-architect.com/wp-content/uploads/2025/07/step-maze-house-new-delhi-india-s250725-ba1.webp" alt="Property Image 1">
+                </div>
+                <div class="card-content">
+                    <span class="tag budget">Under Budget Pick (Sector 122)</span>
+                    <div class="price">₹38 Lakh</div>
+                    <div class="emi-details">
+                        EMI starts at ₹<script>document.write(calculateEMI(3800000));</script>/month (8.5% for 20 yrs). 
+                        <a href="https://osappsext.hdfc.com/spotoffer_fe/">HDFC BANK</a> 
+                        <a href="https://onlineapply.sbi.bank.in/personal-banking/application-status">SBI BANK</a>
+                    </div>
+                    <h3 class="property-name">Golden Residency</h3>
+                    <p class="property-title">2 BHK Independent Builder Floor for Sale</p>
+
+                    <table class="details-table">
+                        <tr>
+                            <td class="label">Configuration:</td>
+                            <td class="value">2 BHK (2 Baths)</td>
+                        </tr>
+                        <tr>
+                            <td class="label">Area:</td>
+                            <td class="value">1,000 sqft (Built-up)</td>
+                        </tr>
+                        <tr>
+                            <td class="label">Available from:</td>
+                            <td class="value">Ready To Move</td>
+                        </tr>
+                    </table>
+
+                    <div class="section-heading">Furnishing (Semi-Furnished)</div>
+                    <ul class="list-features">
+                        <li>Modular Kitchen with RO & Chimney</li>
+                        <li>Wooden Almirah & Falls Ceiling</li>
+                        <li>Fans, LED Lights, Geyser, Adjust Fan</li>
+                        <li>Plastic Paint, Wallpapers, LED TV Panel</li>
+                    </ul>
+                    
+                    <div class="section-heading">Features</div>
+                    <ul class="list-features">
+                        <li>North-East Facing</li>
+                        <li>Fresh Construction</li>
+                    </ul>
+
+                    <div class="section-heading">Nearby Amenities (within 1 km)</div>
+                    <ul class="list-amenities">
+                        <li><strong>Hospitals:</strong> Tripathi Hospital, Om Hospital, Bharat Hospital</li>
+                        <li><strong>Parks:</strong> Vikas Marg Park</li>
                     </ul>
                 </div>
-                
-                <div class="amenity-section">
-                    <p class="section-title">Nearby Amenities (within 1 km)</p>
-                    <ul class="feature-list">
-                        <li>Sector 62 Noida (Metro Station)</li>
-                        <li>Fortis Hospital (Hospital)</li>
-                        <li>Noida Electronic City (Metro Station)</li>
-                        <li>Sanfort World School (School)</li>
+            </div>
+
+            <!-- Property 2: Sunshine Apartment (Under Budget) -->
+            <div class="property-card">
+                <div class="property-image">
+                    <img src="https://tse1.mm.bing.net/th/id/OIP.wVLjZvfuzACwHIUTmX3pYAHaEK?w=200&h=112&c=7&p=0" alt="Property Image 2">
+                </div>
+                <div class="card-content">
+                    <span class="tag budget">Under Budget Pick (Sector 122)</span>
+                    <div class="price">₹39 Lakh</div>
+                    <div class="emi-details">
+                        EMI starts at ₹<script>document.write(calculateEMI(3900000));</script>/month (8.5% for 20 yrs).
+                        <a href="https://osappsext.hdfc.com/spotoffer_fe/">HDFC BANK</a>
+                        <a href="https://onlineapply.sbi.bank.in/personal-banking/application-status">SBI BANK</a>
+                    </div>
+                    <h3 class="property-name">Sunshine Apartment</h3>
+                    <p class="property-title">1 BHK Flat for Sale</p>
+
+                    <table class="details-table">
+                        <tr>
+                            <td class="label">Configuration:</td>
+                            <td class="value">1 BHK (1 Bath)</td>
+                        </tr>
+                        <tr>
+                            <td class="label">Area:</td>
+                            <td class="value">420 sqft (Super Built-up)</td>
+                        </tr>
+                        <tr>
+                            <td class="label">Available from:</td>
+                            <td class="value">Ready To Move</td>
+                        </tr>
+                    </table>
+
+                    <div class="section-heading">Furnishing (Semi-Furnished)</div>
+                    <ul class="list-features">
+                        <li>Newly painted interiors</li>
+                        <li>Vitrified tiles flooring</li>
+                        <li>1 Balcony</li>
+                    </ul>
+
+                    <div class="section-heading">Features</div>
+                    <ul class="list-features">
+                        <li>Fully Secured Gated Society</li>
+                        <li>Newly Constructed Property</li>
+                    </ul>
+
+                    <div class="section-heading">Nearby Amenities (within 1 km)</div>
+                    <ul class="list-amenities">
+                        <li><strong>Hospitals:</strong> Tripathi Hospital, Om Hospital, Bharat Hospital</li>
+                        <li><strong>Parks:</strong> Vikas Marg Park</li>
                     </ul>
                 </div>
+            </div>
 
-                <div class="contact-button-container">
-                    <button class="contact-button">Check Availability</button>
+            <!-- Property 3: Samajwadi Awasiya Yojna (Under Budget) -->
+            <div class="property-card">
+                <div class="property-image">
+                    <img src="https://tse4.mm.bing.net/th/id/OIP.ScQKvH5aTiZtiWAe7-yLOgHaEO?w=474&h=474&c=7&p=0" alt="Property Image 3">
+                </div>
+                <div class="card-content">
+                    <span class="tag budget">Under Budget Pick (Sector 122)</span>
+                    <div class="price">₹40 Lakh</div>
+                    <div class="emi-details">
+                        EMI starts at ₹<script>document.write(calculateEMI(4000000));</script>/month (8.5% for 20 yrs).
+                        <a href="https://osappsext.hdfc.com/spotoffer_fe/">HDFC BANK</a>
+                        <a href="https://onlineapply.sbi.bank.in/personal-banking/application-status">SBI BANK</a>
+                    </div>
+                    <h3 class="property-name">Samajwadi Awasiya Yojna</h3>
+                    <p class="property-title">1 BHK Flat for Sale</p>
+
+                    <table class="details-table">
+                        <tr>
+                            <td class="label">Configuration:</td>
+                            <td class="value">1 BHK (1 Bath)</td>
+                        </tr>
+                        <tr>
+                            <td class="label">Area:</td>
+                            <td class="value">419 sqft (Super Built-up)</td>
+                        </tr>
+                        <tr>
+                            <td class="label">Available from:</td>
+                            <td class="value">Ready To Move</td>
+                        </tr>
+                    </table>
+
+                    <div class="section-heading">Furnishing (Semi-Furnished)</div>
+                    <ul class="list-features">
+                        <li>Newly painted interiors</li>
+                        <li>Vitrified tiles flooring</li>
+                        <li>1 Balcony (Overlooks a 100 ft. wide road)</li>
+                    </ul>
+
+                    <div class="section-heading">Features</div>
+                    <ul class="list-features">
+                        <li>Fully Secured Gated Society</li>
+                        <li>Great connectivity, Near Parthala Chowk</li>
+                    </ul>
+
+                    <div class="section-heading">Nearby Amenities (within 1 km)</div>
+                    <ul class="list-amenities">
+                        <li><strong>Hospitals:</strong> Tripathi Hospital, Om Hospital, Bharat Hospital</li>
+                        <li><strong>Parks:</strong> Vikas Marg Park</li>
+                    </ul>
                 </div>
             </div>
+
+            <!-- Property 4: Super Homes-2 (Under Budget) -->
+            <div class="property-card">
+                <div class="property-image">
+                    <img src="https://tse4.mm.bing.net/th/id/OIP.fhNgjR0HW09tJQzFXPumxwHaHa?w=200&h=200&c=7&p=0" alt="Property Image 4">
+                </div>
+                <div class="card-content">
+                    <span class="tag budget">Under Budget Pick (Sector 122)</span>
+                    <div class="price">₹45 Lakh</div>
+                    <div class="emi-details">
+                        EMI starts at ₹<script>document.write(calculateEMI(4500000));</script>/month (8.5% for 20 yrs).
+                        <a href="https://osappsext.hdfc.com/spotoffer_fe/">HDFC BANK</a>
+                        <a href="https://onlineapply.sbi.bank.in/personal-banking/application-status">SBI BANK</a>
+                    </div>
+                    <h3 class="property-name">Super Homes-2</h3>
+                    <p class="property-title">Spacious 3 BHK Flat for Sale</p>
+
+                    <table class="details-table">
+                        <tr>
+                            <td class="label">Configuration:</td>
+                            <td class="value">3 BHK (3 Baths)</td>
+                        </tr>
+                        <tr>
+                            <td class="label">Area:</td>
+                            <td class="value">1,500 sqft (Carpet Area)</td>
+                        </tr>
+                        <tr>
+                            <td class="label">Available from:</td>
+                            <td class="value">Ready To Move</td>
+                        </tr>
+                    </table>
+
+                    <div class="section-heading">Furnishing (Unfurnished)</div>
+                    <ul class="list-features">
+                        <li>No fixed furnishings installed.</li>
+                        <li>Ideal for custom interior design.</li>
+                    </ul>
+
+                    <div class="section-heading">Features</div>
+                    <ul class="list-features">
+                        <li>High Investment Potential</li>
+                        <li>Residential and Commercial options available</li>
+                    </ul>
+
+                    <div class="section-heading">Nearby Amenities (within 1 km)</div>
+                    <ul class="list-amenities">
+                        <li><strong>Hospitals:</strong> Tripathi Hospital, Om Hospital, Bharat Hospital</li>
+                        <li><strong>Parks:</strong> Vikas Marg Park</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Property 5: Sunset Tower (Recommended - Hospital Proximity) -->
+            <div class="property-card">
+                <div class="property-image">
+                    <img src="https://tse4.mm.bing.net/th/id/OIP.Evk5HKyZSXoVD7OSbUGZ0QHaDE?w=200&h=112&c=7&p=0" alt="Property Image 5">
+                </div>
+                <div class="card-content">
+                    <span class="tag recommended">Recommended (Near Hospital)</span>
+                    <div class="price">₹39 Lakh</div>
+                    <div class="emi-details">
+                        EMI starts at ₹<script>document.write(calculateEMI(3900000));</script>/month (8.5% for 20 yrs).
+                        <a href="https://osappsext.hdfc.com/spotoffer_fe/">HDFC BANK</a>
+                        <a href="https://onlineapply.sbi.bank.in/personal-banking/application-status">SBI BANK</a>
+                    </div>
+                    <h3 class="property-name">Sunset Tower</h3>
+                    <p class="property-title">2 BHK Flat for Sale</p>
+
+                    <table class="details-table">
+                        <tr>
+                            <td class="label">Configuration:</td>
+                            <td class="value">2 BHK (2 Baths)</td>
+                        </tr>
+                        <tr>
+                            <td class="label">Area:</td>
+                            <td class="value">1,000 sqft (Carpet Area)</td>
+                        </tr>
+                        <tr>
+                            <td class="label">Available from:</td>
+                            <td class="value">Ready To Move</td>
+                        </tr>
+                    </table>
+
+                    <div class="section-heading">Furnishing (User Preference)</div>
+                    <ul class="list-features">
+                        <li>**Unfurnished** (As requested by user)</li>
+                        <li>Bare shell for maximum customization.</li>
+                    </ul>
+
+                    <div class="section-heading">Features</div>
+                    <ul class="list-features">
+                        <li>Prime Location</li>
+                        <li>Near Metro & Shopping Mall</li>
+                    </ul>
+
+                    <div class="section-heading">Nearby Amenities (within 1 km)</div>
+                    <ul class="list-amenities">
+                        <li><strong>Hospitals:</strong> Motherland hospital</li>
+                        <li><strong>Schools:</strong> DPS (Delhi Public School), Millennium School</li>
+                        <li><strong>Market:</strong> Central market, Food street</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Property 6: East Avenue (Recommended - Hospital Proximity) -->
+            <div class="property-card">
+                <div class="property-image">
+                    <img src="https://www.e-architect.com/wp-content/uploads/2025/07/step-maze-house-new-delhi-india-s250725-ba1.webp" alt="Property Image 6">
+                </div>
+                <div class="card-content">
+                    <span class="tag recommended">Recommended (Near Hospital)</span>
+                    <div class="price">₹43.9 Lakh</div>
+                    <div class="emi-details">
+                        EMI starts at ₹<script>document.write(calculateEMI(4390000));</script>/month (8.5% for 20 yrs).
+                        <a href="https://osappsext.hdfc.com/spotoffer_fe/">HDFC BANK</a>
+                        <a href="https://onlineapply.sbi.bank.in/personal-banking/application-status">SBI BANK</a>
+                    </div>
+                    <h3 class="property-name">East Avenue</h3>
+                    <p class="property-title">2 BHK Independent Builder Floor in Block D Sector 71</p>
+
+                    <table class="details-table">
+                        <tr>
+                            <td class="label">Configuration:</td>
+                            <td class="value">2 BHK (2 Baths)</td>
+                        </tr>
+                        <tr>
+                            <td class="label">Area:</td>
+                            <td class="value">1,050 sqft (Carpet Area)</td>
+                        </tr>
+                        <tr>
+                            <td class="label">Available from:</td>
+                            <td class="value">Ready To Move</td>
+                        </tr>
+                    </table>
+
+                    <div class="section-heading">Furnishing (User Preference)</div>
+                    <ul class="list-features">
+                        <li>**Unfurnished** (As requested by user)</li>
+                        <li>Provides a blank canvas for personalization.</li>
+                    </ul>
+
+                    <div class="section-heading">Features</div>
+                    <ul class="list-features">
+                        <li>East Facing with Private Garden</li>
+                        <li>Gated Society with 24/7 Security</li>
+                        <li>Automatic Lift, Covered Parking</li>
+                        <li>24/7 Power Back-up (Common Area)</li>
+                    </ul>
+
+                    <div class="section-heading">Nearby Amenities (within 1 km)</div>
+                    <ul class="list-amenities">
+                        <li><strong>Metro:</strong> Sector 71 Metro Station (Blue Line)</li>
+                        <li><strong>Parks:</strong> Siti Park</li>
+                    </ul>
+                </div>
+            </div>
+
         </div>
-
-        <!-- --- RECOMMENDED PROPERTY 2 (Metro Proximity, Semi-Furnished) --- -->
-        <div class="property-card">
-            <div class="property-image-container">
-                <div class="tag recommended">★ RECOMMENDED (Near Metro)</div>
-                <img src="https://tse1.mm.bing.net/th/id/OIP.wVLjZvfuzACwHIUTmX3pYAHaEK?w=200&h=112&c=7&p=0" alt="Property Image" class="property-image">
-            </div>
-            <div class="card-content">
-                <p class="price">₹30,000 /month</p>
-                <h2 class="property-title">Nirupm Vatika Apartment</h2>
-                <p class="property-subtitle">Furnished 2 BHK Flat for rent in Sector 62, Noida</p>
-                
-                <div class="details-grid">
-                    <div class="detail-item"><span class="detail-label">Configuration</span> 2 BHK, 2 Baths</div>
-                    <div class="detail-item"><span class="detail-label">Area</span> 1,250 sqft (Super Built-up)</div>
-                    <div class="detail-item"><span class="detail-label">Deposit</span> ₹30,000</div>
-                    <div class="detail-item"><span class="detail-label">Available From</span> Last Week (1w ago)</div>
-                </div>
-
-                <div class="furnishing-section">
-                    <p class="section-title">Furnishing (User Preference)</p>
-                    <ul class="feature-list">
-                        <li>Modular Kitchen</li>
-                        <li>Wardrobes in all rooms</li>
-                        <li>2 Balconies</li>
-                        <li>Lights & Fans fitted</li>
-                    </ul>
-                </div>
-                
-                <div class="amenity-section">
-                    <p class="section-title">Nearby Amenities (within 1 km)</p>
-                    <ul class="feature-list">
-                        <li>Noida Electronic City (Metro Station)</li>
-                        <li>Fortis Hospital (Hospital)</li>
-                        <li>Tot Mall (Market)</li>
-                        <li>Sector 62 Noida (Metro Station)</li>
-                    </ul>
-                </div>
-
-                <div class="contact-button-container">
-                    <button class="contact-button">Check Availability</button>
-                </div>
-            </div>
-        </div>
-
-        <!-- --- UNDER BUDGET PROPERTY 1 (Lowest Price) --- -->
-        <div class="property-card">
-            <div class="property-image-container">
-                <div class="tag">Under Budget</div>
-                <img src="https://tse4.mm.bing.net/th/id/OIP.ScQKvH5aTiZtiWAe7-yLOgHaEO?w=474&h=474&c=7&p=0" alt="Property Image" class="property-image">
-            </div>
-            <div class="card-content">
-                <p class="price">₹17,000 /month</p>
-                <h2 class="property-title">2 Bedroom House (Plot Area)</h2>
-                <p class="property-subtitle">2 Bedroom House for rent in Sector 63A, Noida</p>
-                
-                <div class="details-grid">
-                    <div class="detail-item"><span class="detail-label">Configuration</span> 2 BHK, 1 Bath</div>
-                    <div class="detail-item"><span class="detail-label">Area</span> 650 sqft (Plot Area)</div>
-                    <div class="detail-item"><span class="detail-label">Deposit</span> ₹17,000</div>
-                    <div class="detail-item"><span class="detail-label">Available From</span> Last Week (1w ago)</div>
-                </div>
-
-                <div class="furnishing-section">
-                    <p class="section-title">Furnishing & Features</p>
-                    <ul class="feature-list">
-                        <li>Unfurnished</li>
-                        <li>Prime location</li>
-                        <li>Excellent connectivity (5 mins to metro)</li>
-                        <li>Vibrant market nearby</li>
-                    </ul>
-                </div>
-                
-                <div class="amenity-section">
-                    <p class="section-title">Nearby Amenities (within 1 km)</p>
-                    <ul class="feature-list">
-                        <li>Noida Electronic City (Metro Station)</li>
-                        <li>Rudra Global School (School)</li>
-                        <li>Local Market (Market)</li>
-                        <li>FNG Flyover (Connectivity)</li>
-                    </ul>
-                </div>
-
-                <div class="contact-button-container">
-                    <button class="contact-button">Check Availability</button>
-                </div>
-            </div>
-        </div>
-
-        <!-- --- UNDER BUDGET PROPERTY 2 (Very Affordable) --- -->
-        <div class="property-card">
-            <div class="property-image-container">
-                <div class="tag">Under Budget</div>
-                <img src="https://tse4.mm.bing.net/th/id/OIP.fhNgjR0HW09tJQzFXPumxwHaHa?w=200&h=200&c=7&p=0" alt="Property Image" class="property-image">
-            </div>
-            <div class="card-content">
-                <p class="price">₹18,500 /month</p>
-                <h2 class="property-title">House/Villa (Compact)</h2>
-                <p class="property-subtitle">2 Bedroom House for rent in Sector 63, Noida</p>
-                
-                <div class="details-grid">
-                    <div class="detail-item"><span class="detail-label">Configuration</span> 2 BHK, 2 Baths</div>
-                    <div class="detail-item"><span class="detail-label">Area</span> 600 sqft (Plot Area)</div>
-                    <div class="detail-item"><span class="detail-label">Deposit</span> ₹18,500</div>
-                    <div class="detail-item"><span class="detail-label">Available From</span> Last Month (1mo ago)</div>
-                </div>
-
-                <div class="furnishing-section">
-                    <p class="section-title">Furnishing & Features</p>
-                    <ul class="feature-list">
-                        <li>Unfurnished</li>
-                        <li>1 RK setup (as per description detail)</li>
-                        <li>Balcony</li>
-                    </ul>
-                </div>
-                
-                <div class="amenity-section">
-                    <p class="section-title">Nearby Amenities (within 1 km)</p>
-                    <ul class="feature-list">
-                        <li>Noida Electronic City (Metro Station)</li>
-                        <li>Rudra Global School (School)</li>
-                        <li>Market Area (Market)</li>
-                        <li>SJM Hospital (Hospital, slightly over 1km but closest major)</li>
-                    </ul>
-                </div>
-
-                <div class="contact-button-container">
-                    <button class="contact-button">Check Availability</button>
-                </div>
-            </div>
-        </div>
-
-        <!-- --- UNDER BUDGET PROPERTY 3 (Independent Floor) --- -->
-        <div class="property-card">
-            <div class="property-image-container">
-                <div class="tag">Under Budget</div>
-                <img src="https://tse4.mm.bing.net/th/id/OIP.Evk5HKyZSXoVD7OSbUGZ0QHaDE?w=200&h=112&c=7&p=0" alt="Property Image" class="property-image">
-            </div>
-            <div class="card-content">
-                <p class="price">₹19,000 /month</p>
-                <h2 class="property-title">Spacious Floor with Open Terrace</h2>
-                <p class="property-subtitle">2 BHK Independent Builder Floor for rent in Sector 63A, Noida</p>
-                
-                <div class="details-grid">
-                    <div class="detail-item"><span class="detail-label">Configuration</span> 2 BHK, 1 Bath</div>
-                    <div class="detail-item"><span class="detail-label">Area</span> 600 sqft (Carpet Area)</div>
-                    <div class="detail-item"><span class="detail-label">Deposit</span> ₹19,000</div>
-                    <div class="detail-item"><span class="detail-label">Available From</span> 2 months ago</div>
-                </div>
-
-                <div class="furnishing-section">
-                    <p class="section-title">Furnishing & Features</p>
-                    <ul class="feature-list">
-                        <li>Unfurnished</li>
-                        <li>Open Terrace Access</li>
-                        <li>Dedicated Parking</li>
-                        <li>CCTV Security</li>
-                        <li>Near FNG Expressway</li>
-                    </ul>
-                </div>
-                
-                <div class="amenity-section">
-                    <p class="section-title">Nearby Amenities (within 1 km)</p>
-                    <ul class="feature-list">
-                        <li>Noida Electronic City (Metro Station)</li>
-                        <li>Rudra Global School (School)</li>
-                        <li>Security Guard (Feature)</li>
-                    </ul>
-                </div>
-
-                <div class="contact-button-container">
-                    <button class="contact-button">Check Availability</button>
-                </div>
-            </div>
-        </div>
-
-        <!-- --- UNDER BUDGET PROPERTY 4 (Best Value in Sector 62) --- -->
-        <div class="property-card">
-            <div class="property-image-container">
-                <div class="tag">Under Budget</div>
-                <img src="https://www.e-architect.com/wp-content/uploads/2025/07/step-maze-house-new-delhi-india-s250725-ba1.webp" alt="Property Image" class="property-image">
-            </div>
-            <div class="card-content">
-                <p class="price">₹22,000 /month</p>
-                <h2 class="property-title">Shatabdi Rail Vihar</h2>
-                <p class="property-subtitle">2 BHK Flat for rent in Sector 62, Noida</p>
-                
-                <div class="details-grid">
-                    <div class="detail-item"><span class="detail-label">Configuration</span> 2 BHK, 2 Baths</div>
-                    <div class="detail-item"><span class="detail-label">Area</span> 850 sqft (Super Built-up)</div>
-                    <div class="detail-item"><span class="detail-label">Deposit</span> 2 months rent (₹44,000)</div>
-                    <div class="detail-item"><span class="detail-label">Available From</span> Last Week (1w ago)</div>
-                </div>
-
-                <div class="furnishing-section">
-                    <p class="section-title">Furnishing & Features</p>
-                    <ul class="feature-list">
-                        <li>Unfurnished</li>
-                        <li>Directly adjacent to Fortis Hospital</li>
-                        <li>Walking distance from Metro Station</li>
-                    </ul>
-                </div>
-                
-                <div class="amenity-section">
-                    <p class="section-title">Nearby Amenities (within 1 km)</p>
-                    <ul class="feature-list">
-                        <li>Sector 62 Noida (Metro Station)</li>
-                        <li>Fortis Hospital (Hospital)</li>
-                        <li>Sanfort World School (School)</li>
-                        <li>Presidium Noida 31 (School)</li>
-                    </ul>
-                </div>
-
-                <div class="contact-button-container">
-                    <button class="contact-button">Check Availability</button>
-                </div>
-            </div>
-        </div>
-
-        <!-- --- Placeholder Card 5 (No listing available) --- -->
-        <div class="property-card">
-            <div class="placeholder-card">
-                No listing available matching criteria
-            </div>
-        </div>
-
-        <!-- --- Placeholder Card 6 (No listing available) --- -->
-        <div class="property-card">
-            <div class="placeholder-card">
-                No listing available matching criteria
-            </div>
-        </div>
-
     </div>
-
 </body>
 </html>
