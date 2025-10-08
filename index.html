@@ -3,22 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>2 BHK Properties for Rent in Haldwani</title>
+    <title>Pune Property Recommendations | 99acres Style</title>
     <style>
         :root {
-            --primary-color: #007bff; /* 99Acres blue */
-            --secondary-color: #f7f7f7;
+            --primary-color: #ff7212;
+            --secondary-color: #122b49;
             --text-color: #333;
-            --light-text-color: #666;
-            --border-color: #e0e0e0;
-            --shadow: rgba(0, 0, 0, 0.05);
+            --light-bg: #f5f5f5;
+            --card-border: #e0e0e0;
         }
 
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #fff;
+            background-color: var(--light-bg);
             color: var(--text-color);
         }
 
@@ -28,499 +27,567 @@
             margin: 20px auto;
         }
 
-        header {
-            background-color: var(--primary-color);
-            color: white;
-            padding: 15px 0;
+        .header {
             text-align: center;
-            font-size: 1.5em;
+            padding: 20px 0;
+            border-bottom: 2px solid var(--primary-color);
             margin-bottom: 30px;
         }
-        
-        header span {
+
+        .header h1 {
+            color: var(--secondary-color);
+            margin: 0;
+            font-size: 28px;
+        }
+
+        .section-title {
+            font-size: 24px;
+            color: var(--secondary-color);
+            border-left: 5px solid var(--primary-color);
+            padding-left: 10px;
+            margin: 40px 0 20px 0;
             font-weight: bold;
         }
 
-        .section-header {
-            font-size: 1.8em;
-            color: var(--text-color);
-            border-bottom: 2px solid var(--primary-color);
-            padding-bottom: 10px;
-            margin-bottom: 25px;
-            font-weight: 600;
+        .property-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
         }
 
         .property-card {
-            display: flex;
-            border: 1px solid var(--border-color);
+            background-color: #fff;
+            border: 1px solid var(--card-border);
             border-radius: 8px;
-            margin-bottom: 25px;
             overflow: hidden;
-            box-shadow: 0 2px 5px var(--shadow);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
             transition: transform 0.2s;
         }
 
         .property-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transform: translateY(-5px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .property-image-container {
+            width: 100%;
+            height: 200px; 
+            overflow: hidden;
         }
 
         .property-image {
-            width: 300px;
-            flex-shrink: 0;
-        }
-
-        .property-image img {
             width: 100%;
-            height: 250px; /* Fixed aspect ratio for image height */
+            height: 100%;
             object-fit: cover;
-            display: block;
+            transition: transform 0.3s ease;
         }
 
-        .property-details {
-            padding: 20px;
-            flex-grow: 1;
+        .property-image:hover {
+            transform: scale(1.05);
+        }
+
+        .property-content {
+            padding: 15px;
         }
 
         .property-name {
-            font-size: 1.4em;
-            font-weight: 600;
-            color: var(--primary-color);
-            margin: 0 0 5px 0;
+            font-size: 18px;
+            font-weight: bold;
+            color: var(--secondary-color);
+            margin-bottom: 5px;
         }
 
         .property-title {
-            font-size: 1.1em;
-            color: var(--text-color);
-            margin: 0 0 10px 0;
-            font-weight: 500;
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 10px;
         }
 
-        .price-section {
-            font-size: 1.6em;
-            font-weight: bold;
-            color: green;
-            margin-bottom: 15px;
-        }
-        
-        .price-section small {
-            font-size: 0.6em;
-            font-weight: normal;
-            color: var(--light-text-color);
-        }
-
-        .specs-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-            margin-bottom: 15px;
-            border-top: 1px solid var(--border-color);
-            padding-top: 10px;
-        }
-
-        .spec-item {
-            font-size: 0.9em;
-            border-right: 1px solid var(--border-color);
-            padding-right: 10px;
-        }
-        
-        .spec-item:last-child {
-            border-right: none;
-        }
-
-        .spec-label {
-            display: block;
-            font-weight: 600;
-            color: var(--light-text-color);
-            margin-bottom: 2px;
-            font-size: 0.85em;
-        }
-        
-        .spec-value {
-            font-weight: bold;
-            color: var(--text-color);
-        }
-
-        .features-amenities-section {
-            margin-top: 15px;
+        .property-details div {
             display: flex;
-            gap: 20px;
-            flex-wrap: wrap;
-            padding: 10px;
-            background-color: var(--secondary-color);
-            border-radius: 5px;
-        }
-
-        .feature-list, .amenity-list {
-            flex: 1 1 45%;
-            min-width: 250px;
-        }
-
-        .feature-list h4, .amenity-list h4 {
-            margin: 0 0 8px 0;
-            font-size: 1em;
-            color: var(--primary-color);
-        }
-
-        .list-item {
-            font-size: 0.9em;
-            margin-bottom: 5px;
-            color: var(--text-color);
-        }
-
-        .list-item strong {
-            color: #000;
+            justify-content: space-between;
+            padding: 4px 0;
+            border-bottom: 1px dashed var(--card-border);
+            font-size: 14px;
         }
         
-        .list-item::before {
-            content: '•';
-            color: var(--primary-color);
+        .property-details div:last-child {
+            border-bottom: none;
+        }
+
+        .detail-label {
+            font-weight: 600;
+            color: #555;
+        }
+
+        .price-tag {
+            background-color: #e6f7ff;
+            color: var(--secondary-color);
+            padding: 8px 15px;
+            font-size: 22px;
             font-weight: bold;
-            display: inline-block;
-            width: 1em;
-            margin-left: -1em;
-        }
-        
-        .amenity-tag {
-            display: inline-block;
-            background-color: #e6f0ff;
-            color: var(--primary-color);
-            padding: 4px 8px;
             border-radius: 4px;
-            font-size: 0.8em;
-            margin: 0 5px 5px 0;
+            text-align: center;
+            margin-bottom: 15px;
+            border: 1px solid #cceeff;
         }
 
-        .contact-button {
-            background-color: #ff9900;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 1em;
-            font-weight: bold;
-            float: right;
-            text-decoration: none;
-            margin-top: -5px;
+        .price-tag span {
+            font-size: 14px;
+            font-weight: normal;
+            display: block;
+            color: #666;
         }
 
-        .disclaimer {
-            font-size: 0.8em;
-            color: red;
-            margin-top: 10px;
+        .features, .amenities {
+            margin-top: 15px;
+            padding-top: 10px;
+            border-top: 1px solid var(--card-border);
+        }
+
+        .features h4, .amenities h4 {
+            color: var(--primary-color);
+            font-size: 15px;
+            margin-top: 0;
+            margin-bottom: 5px;
+        }
+
+        .features ul, .amenities ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            font-size: 13px;
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .features li, .amenities li {
+            background-color: #f0f0f0;
+            padding: 3px 8px;
+            margin-right: 5px;
+            margin-bottom: 5px;
+            border-radius: 3px;
         }
         
-        .clickable-link {
-            color: var(--primary-color);
+        .emi-section {
+            background-color: #fffaf0;
+            padding: 10px;
+            border: 1px solid #ffcc66;
+            border-radius: 4px;
+            margin-top: 15px;
+        }
+
+        .emi-section h4 {
+            margin: 0 0 5px 0;
+            color: #a0522d;
+            font-size: 15px;
+        }
+
+        .emi-value {
+            font-size: 18px;
+            font-weight: bold;
+            color: var(--secondary-color);
+            margin-bottom: 8px;
+        }
+
+        .bank-links a {
+            color: var(--secondary-color);
             text-decoration: none;
             font-weight: bold;
+            margin-right: 15px;
+            font-size: 13px;
+            transition: color 0.2s;
+        }
+
+        .bank-links a:hover {
+            color: var(--primary-color);
+            text-decoration: underline;
         }
     </style>
 </head>
 <body>
+    <div class="container">
+        <div class="header">
+            <h1>Recommended Properties in Pune for Purchase (Under ₹1 Cr)</h1>
+        </div>
 
-<header>
-    <span>99ACRES</span> - 2 BHK Rental Properties in Haldwani
-</header>
-
-<div class="container">
-
-    <!-- Section 1: Top 4 Under Budget -->
-    <h2 class="section-header">Top 4 2 BHK Rental Homes Under ₹12,000</h2>
-
-    <div class="property-list">
+        <!-- Section 1: Top 4 Under Budget -->
+        <h2 class="section-title">Top 4 Properties Under Your Budget (Max ₹1 Cr)</h2>
         
-        <!-- Property 1: Kamaluaganja (UB1) -->
-        <div class="property-card">
-            <div class="property-image">
-                <img src="https://www.e-architect.com/wp-content/uploads/2025/07/step-maze-house-new-delhi-india-s250725-ba1.webp" alt="Property Image 1">
-            </div>
-            <div class="property-details">
-                <p class="property-name">Kamaluaganja</p>
-                <p class="property-title">2 Bedroom House for rent in Kamaluaganja, Haldwani</p>
-                <div class="price-section">₹5,000 <small>/month</small></div>
-                
-                <div class="specs-grid">
-                    <div class="spec-item">
-                        <span class="spec-label">Configuration</span>
-                        <span class="spec-value">2 BHK, 1 Bath</span>
-                    </div>
-                    <div class="spec-item">
-                        <span class="spec-label">Area</span>
-                        <span class="spec-value">2,600 sqft (Plot Area)</span>
-                    </div>
-                    <div class="spec-item">
-                        <span class="spec-label">Available from</span>
-                        <span class="spec-value">Immediately</span>
-                    </div>
-                </div>
+        <div class="property-grid">
 
-                <div class="features-amenities-section">
-                    <div class="feature-list">
-                        <h4>Furnishing & Features (Semi-Furnished)</h4>
-                        <span class="amenity-tag">4 Light</span>
-                        <span class="amenity-tag">2 Fan</span>
-                        <span class="amenity-tag">1 Wardrobe</span>
-                        <span class="amenity-tag">Modular Kitchen</span>
-                        <span class="amenity-tag">Covered Parking</span>
-                        <span class="amenity-tag">Open Parking</span>
+            <!-- Property 1: Majestique Rhythm County -->
+            <div class="property-card">
+                <div class="property-image-container">
+                    <img src="https://www.e-architect.com/wp-content/uploads/2025/07/step-maze-house-new-delhi-india-s250725-ba1.webp" alt="Majestique Rhythm County" class="property-image">
+                </div>
+                <div class="property-content">
+                    <div class="property-name">Majestique Rhythm County</div>
+                    <div class="property-title">2 BHK Flat in Handewadi, Pune East</div>
+                    
+                    <div class="price-tag">
+                        ₹54 Lac 
+                        <span>(₹7,458 /sqft)</span>
                     </div>
-                    <div class="amenity-list">
+
+                    <div class="property-details">
+                        <div><span class="detail-label">Configuration:</span> 2 BHK Apartment</div>
+                        <div><span class="detail-label">Area (Carpet):</span> 724 sqft</div>
+                        <div><span class="detail-label">Available from:</span> April 2028 (Under Construction)</div>
+                    </div>
+
+                    <div class="features">
+                        <h4>Furnishing (Semi-Furnished)</h4>
+                        <ul>
+                            <li>Modular Kitchen</li>
+                            <li>Wardrobes</li>
+                            <li>Fans & Lights</li>
+                            <li>Geysers</li>
+                        </ul>
+                    </div>
+
+                    <div class="features">
+                        <h4>Project Features</h4>
+                        <ul>
+                            <li>Gymnasium</li>
+                            <li>Card Room</li>
+                            <li>Skating Rink</li>
+                            <li>Garbage Disposal</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="emi-section">
+                        <h4>EMI (per month, est.)</h4>
+                        <div class="emi-value">₹37,400</div>
+                        <div class="bank-links">
+                            <a href="https://osappsext.hdfc.com/spotoffer_fe/" target="_blank">HDFC BANK</a>
+                            <a href="https://onlineapply.sbi.bank.in/personal-banking/application-status" target="_blank">SBI BANK</a>
+                        </div>
+                    </div>
+
+                    <div class="amenities">
                         <h4>Nearby Amenities (Within 1 km)</h4>
-                        <span class="amenity-tag">Gyms</span>
-                        <span class="amenity-tag">Shopping mall</span>
-                        <span class="amenity-tag">Grocery Shops</span>
-                        <span class="amenity-tag">Banks</span>
-                        <span class="amenity-tag">Mini Mart</span>
+                        <ul>
+                            <li>Hospitals</li>
+                            <li>Local Markets</li>
+                            <li>Schools</li>
+                            <li>ATMs & Banks</li>
+                        </ul>
                     </div>
                 </div>
-                <a href="#" class="contact-button">View Contact</a>
+            </div>
+
+            <!-- Property 2: Skyi Park -->
+            <div class="property-card">
+                <div class="property-image-container">
+                    <img src="https://tse1.mm.bing.net/th/id/OIP.wVLjZvfuzACwHIUTmX3pYAHaEK?w=200&h=112&c=7&p=0" alt="Skyi Park" class="property-image">
+                </div>
+                <div class="property-content">
+                    <div class="property-name">Skyi Park</div>
+                    <div class="property-title">2 BHK Apartment in Bhukum, Pune West</div>
+                    
+                    <div class="price-tag">
+                        ₹63 Lac 
+                        <span>(Approx. ₹5,855 /sqft)</span>
+                    </div>
+
+                    <div class="property-details">
+                        <div><span class="detail-label">Configuration:</span> 2 BHK Apartment</div>
+                        <div><span class="detail-label">Area (Carpet):</span> 1,076 sqft (Spacious)</div>
+                        <div><span class="detail-label">Available from:</span> May 2029 (New Launch)</div>
+                    </div>
+
+                    <div class="features">
+                        <h4>Furnishing (Semi-Furnished)</h4>
+                        <ul>
+                            <li>Modular Kitchen</li>
+                            <li>Wardrobes</li>
+                            <li>Fans & Lights</li>
+                            <li>Geysers</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="features">
+                        <h4>Project Features</h4>
+                        <ul>
+                            <li>Power Backup</li>
+                            <li>Lift</li>
+                            <li>Club House</li>
+                            <li>Kids Play Area</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="emi-section">
+                        <h4>EMI (per month, est.)</h4>
+                        <div class="emi-value">₹43,650</div>
+                        <div class="bank-links">
+                            <a href="https://osappsext.hdfc.com/spotoffer_fe/" target="_blank">HDFC BANK</a>
+                            <a href="https://onlineapply.sbi.bank.in/personal-banking/application-status" target="_blank">SBI BANK</a>
+                        </div>
+                    </div>
+
+                    <div class="amenities">
+                        <h4>Nearby Amenities (Within 1 km)</h4>
+                        <ul>
+                            <li>Sanskriti School</li>
+                            <li>Café CO2</li>
+                            <li>Banks/ATMs</li>
+                            <li>Highway Access</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Property 3: Nivasa Enchante Phase 3 -->
+            <div class="property-card">
+                <div class="property-image-container">
+                    <img src="https://tse4.mm.bing.net/th/id/OIP.ScQKvH5aTiZtiWAe7-yLOgHaEO?w=474&h=474&c=7&p=0" alt="Nivasa Enchante Phase 3" class="property-image">
+                </div>
+                <div class="property-content">
+                    <div class="property-name">Nivasa Enchante Phase 3</div>
+                    <div class="property-title">2 BHK Apartment in Dhanori, Pune</div>
+                    
+                    <div class="price-tag">
+                        ₹72.57 Lac 
+                        <span>(Approx. ₹9,245 /sqft)</span>
+                    </div>
+
+                    <div class="property-details">
+                        <div><span class="detail-label">Configuration:</span> 2 BHK Apartment</div>
+                        <div><span class="detail-label">Area (Carpet):</span> 785 sqft</div>
+                        <div><span class="detail-label">Available from:</span> December 2027 (New Launch)</div>
+                    </div>
+
+                    <div class="features">
+                        <h4>Furnishing (Semi-Furnished)</h4>
+                        <ul>
+                            <li>Modular Kitchen</li>
+                            <li>Wardrobes</li>
+                            <li>Fans & Lights</li>
+                            <li>Geysers</li>
+                        </ul>
+                    </div>
+
+                    <div class="features">
+                        <h4>Project Features</h4>
+                        <ul>
+                            <li>Gated Community</li>
+                            <li>Security/CCTV</li>
+                            <li>Landscaped Garden</li>
+                            <li>Internal Roads</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="emi-section">
+                        <h4>EMI (per month, est.)</h4>
+                        <div class="emi-value">₹50,250</div>
+                        <div class="bank-links">
+                            <a href="https://osappsext.hdfc.com/spotoffer_fe/" target="_blank">HDFC BANK</a>
+                            <a href="https://onlineapply.sbi.bank.in/personal-banking/application-status" target="_blank">SBI BANK</a>
+                        </div>
+                    </div>
+
+                    <div class="amenities">
+                        <h4>Nearby Amenities (Within 1 km)</h4>
+                        <ul>
+                            <li>Shreekalyani Hospital</li>
+                            <li>Dr. Mar Theophilus School</li>
+                            <li>Dhanori Jakat Naka</li>
+                            <li>Retail Outlets</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Property 4: Godrej Park Springs -->
+            <div class="property-card">
+                <div class="property-image-container">
+                    <img src="https://tse4.mm.bing.net/th/id/OIP.fhNgjR0HW09tJQzFXPumxwHaHa?w=200&h=200&c=7&p=0" alt="Godrej Park Springs" class="property-image">
+                </div>
+                <div class="property-content">
+                    <div class="property-name">Godrej Park Springs</div>
+                    <div class="property-title">2 BHK Apartment in Manjari Budruk, Pune East</div>
+                    
+                    <div class="price-tag">
+                        ₹74.99 Lac 
+                        <span>(Approx. ₹12,477 /sqft)</span>
+                    </div>
+
+                    <div class="property-details">
+                        <div><span class="detail-label">Configuration:</span> 2 BHK Apartment</div>
+                        <div><span class="detail-label">Area (Carpet):</span> 601 sqft</div>
+                        <div><span class="detail-label">Available from:</span> September 2029 (Under Construction)</div>
+                    </div>
+
+                    <div class="features">
+                        <h4>Furnishing (Semi-Furnished)</h4>
+                        <ul>
+                            <li>Modular Kitchen</li>
+                            <li>Wardrobes</li>
+                            <li>Fans & Lights</li>
+                            <li>Geysers</li>
+                        </ul>
+                    </div>
+
+                    <div class="features">
+                        <h4>Project Features</h4>
+                        <ul>
+                            <li>Swimming Pool</li>
+                            <li>Lift Access</li>
+                            <li>Jogging Track</li>
+                            <li>Club House</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="emi-section">
+                        <h4>EMI (per month, est.)</h4>
+                        <div class="emi-value">₹51,950</div>
+                        <div class="bank-links">
+                            <a href="https://osappsext.hdfc.com/spotoffer_fe/" target="_blank">HDFC BANK</a>
+                            <a href="https://onlineapply.sbi.bank.in/personal-banking/application-status" target="_blank">SBI BANK</a>
+                        </div>
+                    </div>
+
+                    <div class="amenities">
+                        <h4>Nearby Amenities (Within 1 km)</h4>
+                        <ul>
+                            <li>Kunjir Public School</li>
+                            <li>Rayat Primary School</li>
+                            <li>Local Clinics</li>
+                            <li>Manjari Railway Station</li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
+
+        <!-- Section 2: User Recommended Properties (Hospitals) -->
+        <h2 class="section-title">Recommended for You: Focus on Proximity to Hospitals</h2>
         
-        <!-- Property 2: tilak bahar phase 2 (UB2) -->
-        <div class="property-card">
-            <div class="property-image">
-                <img src="https://tse1.mm.bing.net/th/id/OIP.wVLjZvfuzACwHIUTmX3pYAHaEK?w=200&h=112&c=7&p=0" alt="Property Image 2">
-            </div>
-            <div class="property-details">
-                <p class="property-name">tilak bahar phase 2</p>
-                <p class="property-title">Furnished 2 BHK Flat for rent in Lal danth, Haldwani</p>
-                <div class="price-section">₹7,800 <small>/month</small></div>
-                
-                <div class="specs-grid">
-                    <div class="spec-item">
-                        <span class="spec-label">Configuration</span>
-                        <span class="spec-value">2 BHK, 1 Bath</span>
-                    </div>
-                    <div class="spec-item">
-                        <span class="spec-label">Area</span>
-                        <span class="spec-value">2,300 sqft (Carpet Area)</span>
-                    </div>
-                    <div class="spec-item">
-                        <span class="spec-label">Available from</span>
-                        <span class="spec-value">Immediately</span>
-                    </div>
-                </div>
+        <div class="property-grid">
 
-                <div class="features-amenities-section">
-                    <div class="feature-list">
-                        <h4>Furnishing & Features (Furnished - User Request)</h4>
-                        <span class="amenity-tag">Beds</span>
-                        <span class="amenity-tag">AC</span>
-                        <span class="amenity-tag">Fans</span>
-                        <span class="amenity-tag">Fridge</span>
-                        <span class="amenity-tag">Power Backup</span>
-                        <span class="amenity-tag">Near Main Road</span>
+            <!-- Property 5: Rohan Saroha -->
+            <div class="property-card">
+                <div class="property-image-container">
+                    <img src="https://tse4.mm.bing.net/th/id/OIP.Evk5HKyZSXoVD7OSbUGZ0QHaDE?w=200&h=112&c=7&p=0" alt="Rohan Saroha" class="property-image">
+                </div>
+                <div class="property-content">
+                    <div class="property-name">Rohan Saroha</div>
+                    <div class="property-title">2 BHK Apartment in Bhugaon, Bavdhan, Pune West</div>
+                    
+                    <div class="price-tag">
+                        ₹81.46 Lac 
+                        <span>(Approx. ₹10,430 /sqft)</span>
                     </div>
-                    <div class="amenity-list">
+
+                    <div class="property-details">
+                        <div><span class="detail-label">Configuration:</span> 2 BHK Apartment</div>
+                        <div><span class="detail-label">Area (Carpet):</span> 781 sqft</div>
+                        <div><span class="detail-label">Available from:</span> September 2028 (New Launch)</div>
+                    </div>
+
+                    <div class="features">
+                        <h4>Furnishing (Semi-Furnished)</h4>
+                        <ul>
+                            <li>Modular Kitchen</li>
+                            <li>Wardrobes</li>
+                            <li>Fans & Lights</li>
+                            <li>Geysers</li>
+                        </ul>
+                    </div>
+
+                    <div class="features">
+                        <h4>Project Features</h4>
+                        <ul>
+                            <li>Power Back-up</li>
+                            <li>Rain Water Harvesting</li>
+                            <li>Club House</li>
+                            <li>24/7 Security</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="emi-section">
+                        <h4>EMI (per month, est.)</h4>
+                        <div class="emi-value">₹56,400</div>
+                        <div class="bank-links">
+                            <a href="https://osappsext.hdfc.com/spotoffer_fe/" target="_blank">HDFC BANK</a>
+                            <a href="https://onlineapply.sbi.bank.in/personal-banking/application-status" target="_blank">SBI BANK</a>
+                        </div>
+                    </div>
+
+                    <div class="amenities">
                         <h4>Nearby Amenities (Within 1 km)</h4>
-                        <span class="amenity-tag">Extreme Fitness Gym</span>
-                        <span class="amenity-tag">Hospitals (200m)</span>
-                        <span class="amenity-tag">Banks</span>
-                        <span class="amenity-tag">Market Area</span>
+                        <ul>
+                            <li>**Chellaram Hospital** (Critical)</li>
+                            <li>Indian Model School</li>
+                            <li>Mumbai-Pune Expressway</li>
+                            <li>ATMs & Groceries</li>
+                        </ul>
                     </div>
                 </div>
-                <a href="#" class="contact-button">View Contact</a>
+            </div>
+
+            <!-- Property 6: Skyi Songbirds -->
+            <div class="property-card">
+                <div class="property-image-container">
+                    <img src="https://www.e-architect.com/wp-content/uploads/2025/07/step-maze-house-new-delhi-india-s250725-ba1.webp" alt="Skyi Songbirds" class="property-image">
+                </div>
+                <div class="property-content">
+                    <div class="property-name">Skyi Songbirds</div>
+                    <div class="property-title">3 BHK Apartment in Bhugaon, Bavdhan, Pune West</div>
+                    
+                    <div class="price-tag">
+                        ₹87.09 Lac 
+                        <span>(Approx. ₹10,738 /sqft)</span>
+                    </div>
+
+                    <div class="property-details">
+                        <div><span class="detail-label">Configuration:</span> 3 BHK Apartment</div>
+                        <div><span class="detail-label">Area (Carpet):</span> 811 sqft</div>
+                        <div><span class="detail-label">Available from:</span> December 2026 (Partially Ready)</div>
+                    </div>
+
+                    <div class="features">
+                        <h4>Furnishing (Semi-Furnished)</h4>
+                        <ul>
+                            <li>Modular Kitchen</li>
+                            <li>Wardrobes</li>
+                            <li>Fans & Lights</li>
+                            <li>Geysers</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="features">
+                        <h4>Project Features</h4>
+                        <ul>
+                            <li>Swimming Pool</li>
+                            <li>Amphitheater</li>
+                            <li>Gymnasium</li>
+                            <li>Yoga Deck</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="emi-section">
+                        <h4>EMI (per month, est.)</h4>
+                        <div class="emi-value">₹60,300</div>
+                        <div class="bank-links">
+                            <a href="https://osappsext.hdfc.com/spotoffer_fe/" target="_blank">HDFC BANK</a>
+                            <a href="https://onlineapply.sbi.bank.in/personal-banking/application-status" target="_blank">SBI BANK</a>
+                        </div>
+                    </div>
+
+                    <div class="amenities">
+                        <h4>Nearby Amenities (Within 1 km)</h4>
+                        <ul>
+                            <li>**Lifeline Hospital** (Critical)</li>
+                            <li>SNBP Bavdhan (School)</li>
+                            <li>IT/Commercial Hubs</li>
+                            <li>Parks & Gardens</li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
-
-        <!-- Property 3: Kamaluwa Ganja Narsingh (UB3) -->
-        <div class="property-card">
-            <div class="property-image">
-                <img src="https://tse4.mm.bing.net/th/id/OIP.ScQKvH5aTiZtiWAe7-yLOgHaEO?w=474&h=474&c=7&p=0" alt="Property Image 3">
-            </div>
-            <div class="property-details">
-                <p class="property-name">Kamaluwa Ganja Narsingh</p>
-                <p class="property-title">2 Bedroom House for rent in Kamaluwa Ganja Narsingh, Haldwani</p>
-                <div class="price-section">₹8,000 <small>/month</small></div>
-                
-                <div class="specs-grid">
-                    <div class="spec-item">
-                        <span class="spec-label">Configuration</span>
-                        <span class="spec-value">2 BHK, 1 Bath</span>
-                    </div>
-                    <div class="spec-item">
-                        <span class="spec-label">Area</span>
-                        <span class="spec-value">800 sqft (Built-up Area)</span>
-                    </div>
-                    <div class="spec-item">
-                        <span class="spec-label">Available from</span>
-                        <span class="spec-value">Immediately</span>
-                    </div>
-                </div>
-
-                <div class="features-amenities-section">
-                    <div class="feature-list">
-                        <h4>Furnishing & Features (Semi-Furnished)</h4>
-                        <span class="amenity-tag">1 Light</span>
-                        <span class="amenity-tag">New Property (0-1 year old)</span>
-                        <span class="amenity-tag">Safe Society</span>
-                    </div>
-                    <div class="amenity-list">
-                        <h4>Nearby Amenities (Within 1 km)</h4>
-                        <span class="amenity-tag">Gyms</span>
-                        <span class="amenity-tag">Shopping mall</span>
-                        <span class="amenity-tag">Grocery Shops</span>
-                        <span class="amenity-tag">Mini Mart</span>
-                    </div>
-                </div>
-                <a href="#" class="contact-button">View Contact</a>
-            </div>
-        </div>
-
-        <!-- Property 4: Mukhani (UB4) -->
-        <div class="property-card">
-            <div class="property-image">
-                <img src="https://tse4.mm.bing.net/th/id/OIP.fhNgjR0HW09tJQzFXPumxwHaHa?w=200&h=200&c=7&p=0" alt="Property Image 4">
-            </div>
-            <div class="property-details">
-                <p class="property-name">Mukhani</p>
-                <p class="property-title">2 Bedroom House for rent in Mukhani, Haldwani</p>
-                <div class="price-section">₹11,000 <small>/month</small></div>
-                
-                <div class="specs-grid">
-                    <div class="spec-item">
-                        <span class="spec-label">Configuration</span>
-                        <span class="spec-value">2 BHK, 2 Baths</span>
-                    </div>
-                    <div class="spec-item">
-                        <span class="spec-label">Area</span>
-                        <span class="spec-value">1,650 sqft (Plot Area)</span>
-                    </div>
-                    <div class="spec-item">
-                        <span class="spec-label">Available from</span>
-                        <span class="spec-value">Immediately</span>
-                    </div>
-                </div>
-
-                <div class="features-amenities-section">
-                    <div class="feature-list">
-                        <h4>Furnishing & Features (Semi-Furnished)</h4>
-                        <span class="amenity-tag">Spacious Hall</span>
-                        <span class="amenity-tag">Common Open Parking</span>
-                        <span class="amenity-tag">Recently Maintained Washrooms</span>
-                    </div>
-                    <div class="amenity-list">
-                        <h4>Nearby Amenities (Within 1 km)</h4>
-                        <span class="amenity-tag">Pratibimb Gym</span>
-                        <span class="amenity-tag">Schools</span>
-                        <span class="amenity-tag">Hospitals</span>
-                        <span class="amenity-tag">Mukhani Chawraha</span>
-                    </div>
-                </div>
-                <a href="#" class="contact-button">View Contact</a>
-            </div>
-        </div>
-
     </div>
-    
-    <!-- Section 2: User Recommended Properties -->
-    <h2 class="section-header">2 Properties Recommended for You (Best Furnishing & Gym Access)</h2>
-
-    <div class="property-list">
-        
-        <!-- Property 5: ecotown, Nilanchal Colony (Rec1) -->
-        <div class="property-card">
-            <div class="property-image">
-                <img src="https://tse4.mm.bing.net/th/id/OIP.Evk5HKyZSXoVD7OSbUGZ0QHaDE?w=200&h=112&c=7&p=0" alt="Property Image 5">
-            </div>
-            <div class="property-details">
-                <p class="property-name">ecotown</p>
-                <p class="property-title">Furnished 2 BHK Independent Builder Floor for rent in Nilanchal Colony, Haldwani</p>
-                <div class="price-section">₹25,000 <small>/month</small></div>
-                
-                <div class="specs-grid">
-                    <div class="spec-item">
-                        <span class="spec-label">Configuration</span>
-                        <span class="spec-value">2 BHK, 2 Baths</span>
-                    </div>
-                    <div class="spec-item">
-                        <span class="spec-label">Area</span>
-                        <span class="spec-value">1,500 sqft (Carpet Area)</span>
-                    </div>
-                    <div class="spec-item">
-                        <span class="spec-label">Available from</span>
-                        <span class="spec-value">Immediately</span>
-                    </div>
-                </div>
-
-                <div class="features-amenities-section">
-                    <div class="feature-list">
-                        <h4>Furnishing & Features (Fully Furnished & Premium)</h4>
-                        <span class="amenity-tag">Beds, AC, Fans, Fridge, Sofa, Dining Table</span>
-                        <span class="amenity-tag">Walk-in Wardrobe</span>
-                        <span class="amenity-tag">2 Master Bedrooms</span>
-                        <span class="amenity-tag">Huge Balcony</span>
-                        <span class="amenity-tag">Huge Kitchen Area</span>
-                    </div>
-                    <div class="amenity-list">
-                        <h4>Nearby Amenities (Within 1 km)</h4>
-                        <span class="amenity-tag">Gyms (Close Proximity to Lal Danth Gyms)</span>
-                        <span class="amenity-tag">Schools</span>
-                        <span class="amenity-tag">Hospitals</span>
-                        <span class="amenity-tag">Peaceful Locality</span>
-                    </div>
-                </div>
-                <a href="#" class="contact-button">View Contact</a>
-            </div>
-        </div>
-        
-        <!-- Property 6: Manpur West (Rec2) -->
-        <div class="property-card">
-            <div class="property-image">
-                <img src="https://www.e-architect.com/wp-content/uploads/2025/07/step-maze-house-new-delhi-india-s250725-ba1.webp" alt="Property Image 6">
-            </div>
-            <div class="property-details">
-                <p class="property-name">Manpur West</p>
-                <p class="property-title">2 Bedroom House for rent in Manpur West, Haldwani</p>
-                <div class="price-section">₹12,000 <small>/month</small></div>
-                
-                <div class="specs-grid">
-                    <div class="spec-item">
-                        <span class="spec-label">Configuration</span>
-                        <span class="spec-value">2 BHK, 1 Bath</span>
-                    </div>
-                    <div class="spec-item">
-                        <span class="spec-label">Area</span>
-                        <span class="spec-value">875 sqft (Plot Area)</span>
-                    </div>
-                    <div class="spec-item">
-                        <span class="spec-label">Available from</span>
-                        <span class="spec-value">Immediately</span>
-                    </div>
-                </div>
-
-                <div class="features-amenities-section">
-                    <div class="feature-list">
-                        <h4>Furnishing & Features (Semi-Furnished, High Utility)</h4>
-                        <span class="amenity-tag">3 Fan</span>
-                        <span class="amenity-tag">1 Geyser</span>
-                        <span class="amenity-tag">Modular Kitchen</span>
-                        <span class="amenity-tag">Chimney, Exhaust Fan</span>
-                        <span class="amenity-tag">Covered Parking</span>
-                        <span class="amenity-tag">Beds, AC, Fridge (User Request)</span>
-                    </div>
-                    <div class="amenity-list">
-                        <h4>Nearby Amenities (Within 1 km)</h4>
-                        <span class="amenity-tag">Gyms (Based on proximity to major areas)</span>
-                        <span class="amenity-tag">Schools & Colleges</span>
-                        <span class="amenity-tag">Local Market</span>
-                        <span class="amenity-tag">Parks & Playgrounds</span>
-                    </div>
-                </div>
-                <a href="#" class="contact-button">View Contact</a>
-            </div>
-        </div>
-
-    </div>
-
-    <div class="disclaimer">
-        *Note: Furnishing details for "Furnished" properties are based on user preference, appended to any explicit items listed by the owner. Prices and availability are subject to change.
-    </div>
-
-</div>
-
 </body>
 </html>
