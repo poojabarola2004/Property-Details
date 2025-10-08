@@ -3,188 +3,201 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Property Recommendations in Haldwani</title>
+    <title>Property Recommendations in Greater Noida</title>
     <style>
         :root {
-            --primary-color: #ff5a5f; /* 99acres-like red */
-            --secondary-color: #0073e6;
+            --primary-color: #007bff; /* Blue for primary accents */
+            --secondary-color: #28a745; /* Green for good deals */
+            --background-light: #f8f9fa;
+            --card-background: #ffffff;
             --text-dark: #333;
-            --text-light: #555;
-            --bg-light: #f7f7f7;
-            --border-color: #ddd;
+            --border-color: #e9ecef;
+            --shadow-light: 0 4px 8px rgba(0,0,0,0.05);
         }
 
         body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: var(--bg-light);
+            font-family: 'Arial', sans-serif;
+            background-color: var(--background-light);
             color: var(--text-dark);
+            margin: 0;
+            padding: 20px;
         }
 
         .container {
-            width: 90%;
             max-width: 1200px;
-            margin: 20px auto;
+            margin: 0 auto;
         }
 
         .header {
-            background-color: #fff;
+            background-color: var(--primary-color);
+            color: white;
             padding: 15px 20px;
-            border-bottom: 3px solid var(--primary-color);
             margin-bottom: 20px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            border-radius: 5px;
+            box-shadow: var(--shadow-light);
         }
 
         .header h1 {
             margin: 0;
-            font-size: 28px;
-            color: var(--text-dark);
+            font-size: 24px;
+            display: inline-block;
         }
 
-        .section-title {
-            font-size: 24px;
-            color: var(--text-dark);
-            margin-bottom: 15px;
-            border-bottom: 2px solid var(--primary-color);
-            padding-bottom: 5px;
-            font-weight: 600;
+        .header .user-criteria {
+            font-size: 14px;
+            margin-top: 5px;
         }
 
         .property-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 20px;
+            gap: 25px;
         }
 
         .property-card {
-            background: #fff;
+            background-color: var(--card-background);
             border: 1px solid var(--border-color);
             border-radius: 8px;
             overflow: hidden;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s ease;
+            box-shadow: var(--shadow-light);
+            transition: transform 0.2s;
+            position: relative;
         }
 
         .property-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
         }
 
-        .property-image {
+        .property-tag {
+            position: absolute;
+            top: 15px;
+            left: 0;
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 5px 10px;
+            font-weight: bold;
+            font-size: 12px;
+            border-radius: 0 5px 5px 0;
+            z-index: 10;
+        }
+
+        .recommended-tag {
+            background-color: #ffc107; /* Yellow for recommendation */
+            color: var(--text-dark);
+        }
+
+        .card-image {
             width: 100%;
-            height: 200px; /* Fixed aspect ratio for image */
+            height: 200px; /* Fixed aspect ratio height */
             overflow: hidden;
         }
 
-        .property-image img {
+        .card-image img {
             width: 100%;
             height: 100%;
-            object-fit: cover; /* Cover mode */
+            object-fit: cover;
         }
 
-        .property-content {
+        .card-content {
             padding: 15px;
         }
 
-        .property-content h3 {
-            font-size: 20px;
-            color: var(--primary-color);
+        .card-content h3 {
             margin-top: 0;
-            margin-bottom: 5px;
-            line-height: 1.2;
+            font-size: 18px;
+            color: var(--primary-color);
         }
 
-        .property-content .title {
-            font-size: 14px;
-            color: var(--text-light);
+        .card-content .price-location {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             margin-bottom: 10px;
+            padding-bottom: 5px;
+            border-bottom: 1px solid var(--border-color);
         }
 
-        .price-tag {
-            font-size: 24px;
-            font-weight: bold;
-            color: #12b76a;
-            margin-bottom: 10px;
+        .price-location .price {
+            font-size: 22px;
+            font-weight: 700;
+            color: #d9534f; /* Red/Crimson for price */
         }
 
-        .details-list {
-            list-style: none;
-            padding: 0;
-            margin: 10px 0;
+        .details-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 5px 10px;
-            border-top: 1px solid var(--border-color);
-            padding-top: 10px;
-        }
-
-        .details-list li {
+            gap: 10px 5px;
+            margin-bottom: 15px;
             font-size: 14px;
-            color: var(--text-light);
         }
 
-        .details-list li strong {
-            color: var(--text-dark);
+        .detail-item strong {
+            display: block;
             font-weight: 600;
+            color: #555;
         }
 
-        .features-box, .amenities-box {
-            margin-top: 15px;
-            padding: 10px;
-            border-radius: 4px;
-            border: 1px solid #e0e0e0;
-        }
-
-        .features-box h4, .amenities-box h4 {
-            margin: 0 0 5px 0;
-            font-size: 16px;
+        .detail-item span {
             color: var(--text-dark);
-            border-bottom: 1px dashed #eee;
-            padding-bottom: 3px;
         }
 
-        .features-box ul, .amenities-box ul {
+        .features-section, .amenities-section {
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px dashed var(--border-color);
+        }
+
+        .features-section p, .amenities-section p {
+            margin: 5px 0 10px 0;
+            font-weight: 600;
+            color: #555;
+        }
+
+        .feature-list, .amenity-list {
             list-style: none;
             padding: 0;
             margin: 0;
             display: flex;
             flex-wrap: wrap;
-            gap: 5px 10px;
+            gap: 5px;
         }
 
-        .features-box li, .amenities-box li {
-            font-size: 13px;
-            color: var(--text-dark);
-            background-color: #f0f8ff;
+        .feature-list li, .amenity-list li {
+            background-color: #f0f0f0;
+            border-radius: 4px;
             padding: 3px 8px;
-            border-radius: 12px;
-            border: 1px solid #cceeff;
+            font-size: 12px;
+            color: #555;
         }
 
-        .footer-cta {
-            background-color: var(--primary-color);
-            color: white;
+        .emi-section {
+            background-color: #e6f7ff;
             padding: 10px;
-            text-align: center;
-            border-radius: 0 0 8px 8px;
+            border-radius: 5px;
             margin-top: 15px;
+            text-align: center;
+            border: 1px solid #b3e0ff;
         }
-        
-        .footer-cta a {
-            color: white;
+
+        .emi-section strong {
+            font-size: 16px;
+            color: #0056b3;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .emi-banks a {
+            color: var(--primary-color);
             text-decoration: none;
             font-weight: bold;
+            margin: 0 8px;
+            transition: color 0.2s;
         }
 
-        /* Recommendation Banner Style */
-        .recommended-card {
-            border: 2px solid var(--secondary-color);
-            box-shadow: 0 4px 15px rgba(0, 115, 230, 0.2);
-        }
-
-        .recommended-card .features-box h4 {
-            color: var(--secondary-color);
+        .emi-banks a:hover {
+            color: #0056b3;
+            text-decoration: underline;
         }
     </style>
 </head>
@@ -192,314 +205,304 @@
 
 <div class="container">
     <div class="header">
-        <h1>2 BHK Rental Properties in Haldwani</h1>
-        <p style="color: var(--text-light); margin: 5px 0 0 0;">Filter: Rent | City: Haldwani | Furnishing: Furnished | User Goal: Near Park</p>
-    </div>
-
-    <!-- User Recommended Properties Section -->
-    <div class="section-title">⭐ Top 2 Properties Matching Your Recommendation (Park Access)</div>
-    <div class="property-grid">
-
-        <!-- Recommended Property 1: Park Feature -->
-        <div class="property-card recommended-card">
-            <div class="property-image">
-                <img src="https://tse4.mm.bing.net/th/id/OIP.Evk5HKyZSXoVD7OSbUGZ0QHaDE?w=200&h=112&c=7&p=0" alt="2 BHK Flat for rent in Charyal Nayawad, Haldwani">
-            </div>
-            <div class="property-content">
-                <h3>Dev Ganga Vihar</h3>
-                <div class="title">2 BHK Flat for rent in Charyal Nayawad, Haldwani</div>
-                <div class="price-tag">₹15,000 /month</div>
-                <ul class="details-list">
-                    <li><strong>City (Locality):</strong> Haldwani (Charyal Nayawad)</li>
-                    <li><strong>Configuration:</strong> 2 BHK</li>
-                    <li><strong>Area:</strong> 1,400 sqft (Built-up)</li>
-                    <li><strong>Available from:</strong> Immediate</li>
-                </ul>
-
-                <div class="features-box">
-                    <h4>Furnishing (User Request: Furnished)</h4>
-                    <ul>
-                        <li>Beds</li>
-                        <li>AC</li>
-                        <li>Sofa Set</li>
-                        <li>Fans & Lights</li>
-                        <li>Fridge</li>
-                    </ul>
-                </div>
-                
-                <div class="features-box">
-                    <h4>Features</h4>
-                    <ul>
-                        <li>Security Guard</li>
-                        <li>Dedicated Park/Play Area (User Match)</li>
-                        <li>30ft Road Access</li>
-                    </ul>
-                </div>
-                
-                <div class="amenities-box">
-                    <h4>Nearby Amenities (within 1 km)</h4>
-                    <ul>
-                        <li>Schools: Shemford School, Delhi Public School</li>
-                        <li>Hospitals: Local Clinics/Emergency Services</li>
-                        <li>Park: Society Park (in-complex)</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="footer-cta">
-                View Contact
-            </div>
-        </div>
-
-        <!-- Recommended Property 2: High-End Furnished -->
-        <div class="property-card recommended-card">
-            <div class="property-image">
-                <img src="https://www.e-architect.com/wp-content/uploads/2025/07/step-maze-house-new-delhi-india-s250725-ba1.webp" alt="Furnished 2 BHK Builder Floor for rent in Nilanchal Colony">
-            </div>
-            <div class="property-content">
-                <h3>1/2 ecotown</h3>
-                <div class="title">Furnished 2 BHK Independent Builder Floor for rent in Nilanchal Colony, Haldwani</div>
-                <div class="price-tag">₹25,000 /month</div>
-                <ul class="details-list">
-                    <li><strong>City (Locality):</strong> Haldwani (Nilanchal Colony)</li>
-                    <li><strong>Configuration:</strong> 2 BHK</li>
-                    <li><strong>Area:</strong> 1,500 sqft (Carpet)</li>
-                    <li><strong>Available from:</strong> Immediate</li>
-                </ul>
-
-                <div class="features-box">
-                    <h4>Furnishing (Fully Furnished)</h4>
-                    <ul>
-                        <li>Beds & Mattress</li>
-                        <li>ACs</li>
-                        <li>Sofa & Dining</li>
-                        <li>Walk-in Wardrobe</li>
-                        <li>Modular Kitchen</li>
-                    </ul>
-                </div>
-                
-                <div class="features-box">
-                    <h4>Features</h4>
-                    <ul>
-                        <li>Huge Balcony</li>
-                        <li>2 Master Bedrooms</li>
-                        <li>High-End Fittings</li>
-                    </ul>
-                </div>
-
-                <div class="amenities-box">
-                    <h4>Nearby Amenities (within 1 km)</h4>
-                    <ul>
-                        <li>Hospitals: Multi-specialty Clinics nearby</li>
-                        <li>Schools: Private & Public Schools</li>
-                        <li>Market: Local Market Area</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="footer-cta">
-                View Contact
-            </div>
+        <h1>6 Best Property Matches in Greater Noida (Alpha Locality)</h1>
+        <div class="user-criteria">
+            Budget: **₹80 Lakh** | Type: **Buy** | Furnishing Preference: **Semi-furnished**
         </div>
     </div>
-    
-    <!-- Under Budget Section -->
-    <div class="section-title" style="margin-top: 40px;">💰 4 Properties Under Your Budget (Best Value)</div>
+
     <div class="property-grid">
 
-        <!-- Under Budget 1: Cheapest Value -->
+        <!-- Property 1: Rail Vihar (Under Budget) -->
         <div class="property-card">
-            <div class="property-image">
-                <img src="https://tse1.mm.bing.net/th/id/OIP.wVLjZvfuzACwHIUTmX3pYAHaEK?w=200&h=112&c=7&p=0" alt="2 Bedroom House for rent in Kamaluaganja, Haldwani">
+            <div class="property-tag">Under Budget</div>
+            <div class="card-image">
+                <img src="https://www.e-architect.com/wp-content/uploads/2025/07/step-maze-house-new-delhi-india-s250725-ba1.webp" alt="Property Image">
             </div>
-            <div class="property-content">
-                <h3>Kamaluaganja, Haldwani</h3>
-                <div class="title">2 Bedroom House for rent in Kamaluaganja, Haldwani</div>
-                <div class="price-tag">₹4,500 /month</div>
-                <ul class="details-list">
-                    <li><strong>City (Locality):</strong> Haldwani (Kamaluaganja)</li>
-                    <li><strong>Configuration:</strong> 2 BHK</li>
-                    <li><strong>Area:</strong> 2,600 sqft (Plot Area)</li>
-                    <li><strong>Available from:</strong> Immediate</li>
-                </ul>
-
-                <div class="features-box">
-                    <h4>Furnishing (Semi-Furnished)</h4>
-                    <ul>
-                        <li>1 Bed</li>
-                        <li>2 Fans</li>
-                        <li>4 Lights</li>
-                        <li>1 Modular Kitchen</li>
+            <div class="card-content">
+                <h3>Rail Vihar - 2 BHK Flat</h3>
+                <div class="price-location">
+                    <div class="price">₹75 Lac</div>
+                    <div>Greater Noida (Alpha 1)</div>
+                </div>
+                <div class="details-grid">
+                    <div class="detail-item"><strong>Configuration:</strong> <span>2 BHK (2 Baths)</span></div>
+                    <div class="detail-item"><strong>Area:</strong> <span>850 sqft (Carpet)</span></div>
+                    <div class="detail-item"><strong>Available From:</strong> <span>Ready To Move</span></div>
+                    <div class="detail-item"><strong>Age:</strong> <span>5-10 years old</span></div>
+                </div>
+                <div class="features-section">
+                    <p>Furnishing:</p>
+                    <ul class="feature-list">
+                        <li>Unfurnished (Standard Resale)</li>
+                        <li>East-Facing</li>
+                        <li>2 Balconies</li>
+                    </ul>
+                    <p>Features:</p>
+                    <ul class="feature-list">
+                        <li>Lift</li>
                     </ul>
                 </div>
-                
-                <div class="features-box">
-                    <h4>Features</h4>
-                    <ul>
-                        <li>Covered Parking</li>
-                        <li>Open Parking</li>
-                        <li>New Property (0-1 year old)</li>
+                <div class="amenities-section">
+                    <p>Nearby Amenities (within 1 km):</p>
+                    <ul class="amenity-list">
+                        <li>Alpha 1 Metro Station (Metro)</li>
+                        <li>Kailash Hospital (Hospital)</li>
+                        <li>Alpha Commercial Belt (Market)</li>
+                    </ul>
+                </div>
+                <div class="emi-section">
+                    <strong>EMI: ₹65,221/Month</strong> (8.5% for 20 years)
+                    <div class="emi-banks">
+                        <a href="https://osappsext.hdfc.com/spotoffer_fe/" target="_blank">HDFC BANK</a> |
+                        <a href="https://onlineapply.sbi.bank.in/personal-banking/application-status" target="_blank">SBI BANK</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Property 2: Alpha 2 Independent House (Under Budget) -->
+        <div class="property-card">
+            <div class="property-tag">Under Budget</div>
+            <div class="card-image">
+                <img src="https://tse1.mm.bing.net/th/id/OIP.wVLjZvfuzACwHIUTmX3pYAHaEK?w=200&h=112&c=7&p=0" alt="Property Image">
+            </div>
+            <div class="card-content">
+                <h3>Independent House</h3>
+                <div class="price-location">
+                    <div class="price">₹80 Lac</div>
+                    <div>Greater Noida (Alpha 2)</div>
+                </div>
+                <div class="details-grid">
+                    <div class="detail-item"><strong>Configuration:</strong> <span>2 BHK (2 Baths)</span></div>
+                    <div class="detail-item"><strong>Area:</strong> <span>42 sqft (Built-up)</span></div>
+                    <div class="detail-item"><strong>Available From:</strong> <span>Ready To Move</span></div>
+                    <div class="detail-item"><strong>Title:</strong> <span>Freehold</span></div>
+                </div>
+                <div class="features-section">
+                    <p>Furnishing:</p>
+                    <ul class="feature-list">
+                        <li>Unfurnished (Independent House)</li>
                         <li>1 Balcony</li>
                     </ul>
-                </div>
-
-                <div class="amenities-box">
-                    <h4>Nearby Amenities (within 1 km)</h4>
-                    <ul>
-                        <li>Schools: Brijwasi Public School, G H S Isainagar</li>
-                        <li>Hospitals: Local Clinics</li>
+                    <p>Features:</p>
+                    <ul class="feature-list">
+                        <li>Independent unit</li>
+                        <li>Peaceful Locality</li>
                     </ul>
                 </div>
+                <div class="amenities-section">
+                    <p>Nearby Amenities (within 1 km):</p>
+                    <ul class="amenity-list">
+                        <li>Delta 1 Metro Station (Metro)</li>
+                        <li>Alpha 2 Commercial Belt (Market)</li>
+                        <li>Kailash Hospital (Hospital)</li>
+                    </ul>
+                </div>
+                <div class="emi-section">
+                    <strong>EMI: ₹69,409/Month</strong> (8.5% for 20 years)
+                    <div class="emi-banks">
+                        <a href="https://osappsext.hdfc.com/spotoffer_fe/" target="_blank">HDFC BANK</a> |
+                        <a href="https://onlineapply.sbi.bank.in/personal-banking/application-status" target="_blank">SBI BANK</a>
+                    </div>
+                </div>
             </div>
-            <div class="footer-cta">
-                View Contact
+        </div>
+
+        <!-- Property 3: Omaxe ITC - 1 BHK (Under Budget) -->
+        <div class="property-card">
+            <div class="property-tag">Under Budget</div>
+            <div class="card-image">
+                <img src="https://tse4.mm.bing.net/th/id/OIP.ScQKvH5aTiZtiWAe7-yLOgHaEO?w=474&h=474&c=7&p=0" alt="Property Image">
+            </div>
+            <div class="card-content">
+                <h3>Omaxe India Trade Center - Studio</h3>
+                <div class="price-location">
+                    <div class="price">₹45 Lac</div>
+                    <div>Greater Noida (Alpha 2)</div>
+                </div>
+                <div class="details-grid">
+                    <div class="detail-item"><strong>Configuration:</strong> <span>1 BHK (1 Bath)</span></div>
+                    <div class="detail-item"><strong>Area:</strong> <span>530 sqft (Built-up)</span></div>
+                    <div class="detail-item"><strong>Available From:</strong> <span>Ready To Move</span></div>
+                    <div class="detail-item"><strong>Floor:</strong> <span>4th Floor</span></div>
+                </div>
+                <div class="features-section">
+                    <p>Furnishing:</p>
+                    <ul class="feature-list">
+                        <li>Unfurnished (Studio Apt)</li>
+                        <li>Front Facing</li>
+                    </ul>
+                    <p>Features:</p>
+                    <ul class="feature-list">
+                        <li>Near Delta Metro Station</li>
+                        <li>High Rental Yield Potential</li>
+                    </ul>
+                </div>
+                <div class="amenities-section">
+                    <p>Nearby Amenities (within 1 km):</p>
+                    <ul class="amenity-list">
+                        <li>Delta Metro Station (Metro)</li>
+                        <li>Pari Chowk (Landmark)</li>
+                        <li>Alpha 2 Market (Shopping)</li>
+                    </ul>
+                </div>
+                <div class="emi-section">
+                    <strong>EMI: ₹39,132/Month</strong> (8.5% for 20 years)
+                    <div class="emi-banks">
+                        <a href="https://osappsext.hdfc.com/spotoffer_fe/" target="_blank">HDFC BANK</a> |
+                        <a href="https://onlineapply.sbi.bank.in/personal-banking/application-status" target="_blank">SBI BANK</a>
+                    </div>
+                </div>
             </div>
         </div>
         
-        <!-- Under Budget 2: Lowest Rent, Unfurnished -->
+        <!-- Property 4: LIG Flat (Under Budget - Value outside Alpha) -->
         <div class="property-card">
-            <div class="property-image">
-                <img src="https://tse4.mm.bing.net/th/id/OIP.ScQKvH5aTiZtiWAe7-yLOgHaEO?w=474&h=474&c=7&p=0" alt="2 Bedroom House for rent in Loharia Saltalla, Haldwani">
+            <div class="property-tag">Under Budget - Value Pick</div>
+            <div class="card-image">
+                <img src="https://tse4.mm.bing.net/th/id/OIP.fhNgjR0HW09tJQzFXPumxwHaHa?w=200&h=200&c=7&p=0" alt="Property Image">
             </div>
-            <div class="property-content">
-                <h3>Loharia Saltalla, Haldwani</h3>
-                <div class="title">2 Bedroom House for rent in Loharia Saltalla, Haldwani</div>
-                <div class="price-tag">₹6,000 /month</div>
-                <ul class="details-list">
-                    <li><strong>City (Locality):</strong> Haldwani (Loharia Saltalla)</li>
-                    <li><strong>Configuration:</strong> 2 BHK</li>
-                    <li><strong>Area:</strong> 900 sqft (Built-up)</li>
-                    <li><strong>Available from:</strong> Immediate</li>
-                </ul>
-
-                <div class="features-box">
-                    <h4>Furnishing (Can be Semi-Furnished)</h4>
-                    <ul>
-                        <li>Fans & Lights</li>
-                        <li>Basic Appliances</li>
-                        <li>Water purifier (on request)</li>
+            <div class="card-content">
+                <h3>LIG Flat (Compact)</h3>
+                <div class="price-location">
+                    <div class="price">₹60 Lac</div>
+                    <div>Greater Noida (Beta 1)</div>
+                </div>
+                <div class="details-grid">
+                    <div class="detail-item"><strong>Configuration:</strong> <span>2 BHK (2 Baths)</span></div>
+                    <div class="detail-item"><strong>Area:</strong> <span>36 sqft (Carpet)</span></div>
+                    <div class="detail-item"><strong>Available From:</strong> <span>Ready To Move</span></div>
+                    <div class="detail-item"><strong>Floor:</strong> <span>Ground Floor</span></div>
+                </div>
+                <div class="features-section">
+                    <p>Furnishing:</p>
+                    <ul class="feature-list">
+                        <li>Unfurnished (Compact Flat)</li>
+                        <li>2 Balconies</li>
+                    </ul>
+                    <p>Features:</p>
+                    <ul class="feature-list">
+                        <li>Immediate Possession</li>
+                        <li>1-5 years old</li>
                     </ul>
                 </div>
-                
-                <div class="features-box">
-                    <h4>Features</h4>
-                    <ul>
-                        <li>Independent House</li>
-                        <li>General Store Nearby</li>
-                        <li>10 Year Old Construction</li>
+                <div class="amenities-section">
+                    <p>Nearby Amenities (within 1 km):</p>
+                    <ul class="amenity-list">
+                        <li>Beta 1 Market (Shopping)</li>
+                        <li>Metro Connectivity (Public Transit)</li>
+                        <li>Local Parks (Recreation)</li>
                     </ul>
                 </div>
-
-                <div class="amenities-box">
-                    <h4>Nearby Amenities (within 1 km)</h4>
-                    <ul>
-                        <li>Stores: Local General Store</li>
-                        <li>Basic Services: Public Transport Stop</li>
-                    </ul>
+                <div class="emi-section">
+                    <strong>EMI: ₹52,177/Month</strong> (8.5% for 20 years)
+                    <div class="emi-banks">
+                        <a href="https://osappsext.hdfc.com/spotoffer_fe/" target="_blank">HDFC BANK</a> |
+                        <a href="https://onlineapply.sbi.bank.in/personal-banking/application-status" target="_blank">SBI BANK</a>
+                    </div>
                 </div>
-            </div>
-            <div class="footer-cta">
-                View Contact
             </div>
         </div>
 
-        <!-- Under Budget 3: Gated Society -->
+        <!-- Property 5: Spacetech Edana (Recommended - Location) -->
         <div class="property-card">
-            <div class="property-image">
-                <img src="https://tse4.mm.bing.net/th/id/OIP.fhNgjR0HW09tJQzFXPumxwHaHa?w=200&h=200&c=7&p=0" alt="2 Bedroom House for rent in Unchapul, Haldwani">
+            <div class="property-tag recommended-tag">Recommended - Location & Value</div>
+            <div class="card-image">
+                <img src="https://tse4.mm.bing.net/th/id/OIP.Evk5HKyZSXoVD7OSbUGZ0QHaDE?w=200&h=112&c=7&p=0" alt="Property Image">
             </div>
-            <div class="property-content">
-                <h3>Kapil niketan, RHS, house no 3</h3>
-                <div class="title">2 Bedroom House for rent in Unchapul, Haldwani</div>
-                <div class="price-tag">₹6,500 /month</div>
-                <ul class="details-list">
-                    <li><strong>City (Locality):</strong> Haldwani (Unchapul)</li>
-                    <li><strong>Configuration:</strong> 2 BHK</li>
-                    <li><strong>Area:</strong> 2,270 sqft (Plot Area)</li>
-                    <li><strong>Available from:</strong> Immediate</li>
-                </ul>
-
-                <div class="features-box">
-                    <h4>Furnishing (Semi-Furnished)</h4>
-                    <ul>
-                        <li>Fans & Lights</li>
-                        <li>Stone Flooring</li>
+            <div class="card-content">
+                <h3>Spacetech Edana - Premium Flat</h3>
+                <div class="price-location">
+                    <div class="price">₹94 Lac</div>
+                    <div>Greater Noida (Alpha 1)</div>
+                </div>
+                <div class="details-grid">
+                    <div class="detail-item"><strong>Configuration:</strong> <span>2 BHK (2 Baths)</span></div>
+                    <div class="detail-item"><strong>Area:</strong> <span>1100 sqft (SBU)</span></div>
+                    <div class="detail-item"><strong>Available From:</strong> <span>Ready To Move</span></div>
+                    <div class="detail-item"><strong>Facing:</strong> <span>North-West</span></div>
+                </div>
+                <div class="features-section">
+                    <p>Furnishing (User Preference):</p>
+                    <ul class="feature-list">
+                        <li>Semi-furnished (Modular Kitchen, Wardrobes)</li>
+                    </ul>
+                    <p>Features:</p>
+                    <ul class="feature-list">
+                        <li>Private Garden</li>
+                        <li>Recently Renovated</li>
+                        <li>Lift, Power Back-up</li>
                     </ul>
                 </div>
-                
-                <div class="features-box">
-                    <h4>Features</h4>
-                    <ul>
-                        <li>Gated Society</li>
-                        <li>Attach Toilet/Bath & Kitchen</li>
-                        <li>Near Vaibhav Colony</li>
+                <div class="amenities-section">
+                    <p>Nearby Amenities (Walking Distance):</p>
+                    <ul class="amenity-list">
+                        <li>Knowledge Park II Station (Metro)</li>
+                        <li>Kailash Hospital (Hospital)</li>
+                        <li>DDPS School (School)</li>
+                        <li>Alpha Commercial Market (Shopping)</li>
                     </ul>
                 </div>
-                
-                <div class="amenities-box">
-                    <h4>Nearby Amenities (within 1 km)</h4>
-                    <ul>
-                        <li>Hospitals: Local Clinics</li>
-                        <li>Schools: Primary Schools nearby</li>
-                        <li>Connectivity: Proximity to Unchapul Road</li>
-                    </ul>
+                <div class="emi-section">
+                    <strong>EMI: ₹81,675/Month</strong> (8.5% for 20 years)
+                    <div class="emi-banks">
+                        <a href="https://osappsext.hdfc.com/spotoffer_fe/" target="_blank">HDFC BANK</a> |
+                        <a href="https://onlineapply.sbi.bank.in/personal-banking/application-status" target="_blank">SBI BANK</a>
+                    </div>
                 </div>
-            </div>
-            <div class="footer-cta">
-                View Contact
             </div>
         </div>
 
-        <!-- Under Budget 4: Fully Furnished Best Price -->
+        <!-- Property 6: Omaxe ITC - Under Construction (Recommended - Potential) -->
         <div class="property-card">
-            <div class="property-image">
-                <img src="https://tse4.mm.bing.net/th/id/OIP.Evk5HKyZSXoVD7OSbUGZ0QHaDE?w=200&h=112&c=7&p=0" alt="Furnished 2 BHK Flat for rent in Lal danth, Haldwani">
+            <div class="property-tag recommended-tag">Recommended - Investment Potential</div>
+            <div class="card-image">
+                <img src="https://tse4.mm.bing.net/th/id/OIP.ScQKvH5aTiZtiWAe7-yLOgHaEO?w=474&h=474&c=7&p=0" alt="Property Image">
             </div>
-            <div class="property-content">
-                <h3>tilak bahar phase 2</h3>
-                <div class="title">Furnished 2 BHK Flat for rent in Lal danth, Haldwani</div>
-                <div class="price-tag">₹7,800 /month</div>
-                <ul class="details-list">
-                    <li><strong>City (Locality):</strong> Haldwani (Lal danth)</li>
-                    <li><strong>Configuration:</strong> 2 BHK</li>
-                    <li><strong>Area:</strong> 2,300 sqft (Carpet Area)</li>
-                    <li><strong>Available from:</strong> Immediate</li>
-                </ul>
-
-                <div class="features-box">
-                    <h4>Furnishing (Fully Furnished)</h4>
-                    <ul>
-                        <li>Beds</li>
-                        <li>AC (on request)</li>
-                        <li>Fans & Lights</li>
-                        <li>Fridge</li>
-                        <li>Wardrobes</li>
+            <div class="card-content">
+                <h3>Omaxe India Trade Center - UC</h3>
+                <div class="price-location">
+                    <div class="price">₹49.5 Lac</div>
+                    <div>Greater Noida (Alpha 2)</div>
+                </div>
+                <div class="details-grid">
+                    <div class="detail-item"><strong>Configuration:</strong> <span>1 BHK (1 Bath)</span></div>
+                    <div class="detail-item"><strong>Area:</strong> <span>640 sqft (Built-up)</span></div>
+                    <div class="detail-item"><strong>Available From:</strong> <span>October 2025</span></div>
+                    <div class="detail-item"><strong>Floor:</strong> <span>Fifth Floor</span></div>
+                </div>
+                <div class="features-section">
+                    <p>Furnishing (User Preference):</p>
+                    <ul class="feature-list">
+                        <li>Semi-furnished (Lights & Fans, Geyser)</li>
+                    </ul>
+                    <p>Features:</p>
+                    <ul class="feature-list">
+                        <li>Front Side Facing</li>
+                        <li>Under Construction (RERA Registered)</li>
+                        <li>Prime Commercial Location</li>
                     </ul>
                 </div>
-                
-                <div class="features-box">
-                    <h4>Features</h4>
-                    <ul>
-                        <li>Proper Area for Living</li>
-                        <li>Large Carpet Area</li>
-                        <li>Close to Main Road</li>
+                <div class="amenities-section">
+                    <p>Nearby Amenities (within 1 km):</p>
+                    <ul class="amenity-list">
+                        <li>Delta Metro Station (Metro)</li>
+                        <li>Alpha 2 Commercial Belt (Market)</li>
+                        <li>Reputed Schools nearby (School)</li>
                     </ul>
                 </div>
-                
-                <div class="amenities-box">
-                    <h4>Nearby Amenities (within 1 km)</h4>
-                    <ul>
-                        <li>Hospitals: 200m from Hospitals</li>
-                        <li>Banks: Nearby Banks and Market</li>
-                        <li>Connectivity: 150m from Main Road</li>
-                    </ul>
+                <div class="emi-section">
+                    <strong>EMI: ₹43,046/Month</strong> (8.5% for 20 years)
+                    <div class="emi-banks">
+                        <a href="https://osappsext.hdfc.com/spotoffer_fe/" target="_blank">HDFC BANK</a> |
+                        <a href="https://onlineapply.sbi.bank.in/personal-banking/application-status" target="_blank">SBI BANK</a>
+                    </div>
                 </div>
-            </div>
-            <div class="footer-cta">
-                View Contact
             </div>
         </div>
 
     </div>
-
 </div>
 
 </body>
