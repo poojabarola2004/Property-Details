@@ -1,3 +1,4 @@
+```html
 <!doctype html>
 <html lang="en">
 <head>
@@ -6,377 +7,425 @@
     <title>Property Recommendations</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
         body {
             font-family: 'Roboto', sans-serif;
-            background-color: #f3f4f6;
+            background-color: #f7f7f7;
+            color: #333;
             margin: 0;
             padding: 20px;
         }
+
         .container {
             max-width: 1200px;
             margin: auto;
         }
+
         .header {
             text-align: center;
             margin-bottom: 30px;
         }
+
         .header h1 {
-            color: #333;
             font-weight: 700;
+            color: #2c3e50;
         }
+
         .property-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(550px, 1fr));
             gap: 25px;
         }
+
         .property-card {
             background-color: #fff;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
             overflow: hidden;
-            transition: transform 0.3s, box-shadow 0.3s;
             display: flex;
-            flex-direction: column;
-        }
-        .property-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 16px rgba(0,0,0,0.15);
-        }
-        .property-card.placeholder {
-            background-color: #e9ecef;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 100%;
-            min-height: 400px;
-            color: #6c757d;
-            font-size: 1.2rem;
-        }
-        .property-image {
+            transition: box-shadow 0.3s ease, transform 0.3s ease;
             position: relative;
         }
+
+        .property-card:hover {
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            transform: translateY(-5px);
+        }
+        
+        .placeholder {
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            min-height: 300px;
+            color: #999;
+            font-size: 1.2rem;
+        }
+
+        .property-image {
+            width: 220px;
+            height: 100%;
+            flex-shrink: 0;
+        }
+
         .property-image img {
             width: 100%;
-            height: 220px;
+            height: 100%;
             object-fit: cover;
             display: block;
         }
-        .property-tag {
+        
+        .property-badge {
             position: absolute;
-            top: 15px;
-            left: -5px;
-            background-color: #fd9644;
+            top: 10px;
+            left: -8px;
+            background-color: #27ae60;
             color: white;
-            padding: 5px 15px 5px 20px;
-            font-size: 0.9rem;
-            font-weight: 500;
-            clip-path: polygon(0% 0%, 100% 0%, 95% 50%, 100% 100%, 0% 100%);
+            padding: 5px 15px;
+            font-size: 12px;
+            font-weight: bold;
+            border-radius: 0 4px 4px 0;
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
         }
-        .property-tag.recommended {
-            background-color: #26de81;
+
+        .property-badge.recommended {
+            background-color: #e67e22;
         }
+
         .property-details {
             padding: 20px;
-            flex-grow: 1;
             display: flex;
             flex-direction: column;
+            justify-content: space-between;
+            width: 100%;
         }
-        .property-name {
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: #2c3e50;
-            margin: 0 0 5px 0;
-        }
+
         .property-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin: 0 0 5px 0;
+            color: #34495e;
+        }
+
+        .property-location {
             font-size: 0.9rem;
             color: #7f8c8d;
             margin-bottom: 15px;
-            min-height: 35px;
         }
-        .property-location {
-            font-size: 1rem;
-            color: #34495e;
-            margin-bottom: 15px;
-        }
+
         .property-price {
             font-size: 1.5rem;
-            font-weight: 700;
-            color: #e74c3c;
-            margin-bottom: 20px;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 15px;
         }
-        .property-specs {
+        
+        .property-price .emi {
+             font-size: 0.8rem;
+             font-weight: normal;
+             color: #7f8c8d;
+        }
+        
+        .property-config {
             display: flex;
             justify-content: space-between;
-            border-top: 1px solid #eee;
-            border-bottom: 1px solid #eee;
-            padding: 15px 0;
             margin-bottom: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #f0f0f0;
         }
-        .spec-item {
+
+        .config-item {
             text-align: center;
+            width: 33%;
         }
-        .spec-item .value {
-            font-weight: 700;
-            font-size: 1.1rem;
-            color: #333;
+
+        .config-item .value {
+            display: block;
+            font-weight: 500;
+            font-size: 1rem;
         }
-        .spec-item .label {
+
+        .config-item .label {
             font-size: 0.8rem;
-            color: #888;
+            color: #7f8c8d;
         }
-        .property-info {
-            font-size: 0.95rem;
-            color: #555;
-            margin-bottom: 15px;
+        
+        .property-section {
+            margin-bottom: 12px;
         }
-        .property-info strong {
-            color: #333;
+        
+        .property-section h4 {
+            font-size: 0.9rem;
+            color: #34495e;
+            margin: 0 0 8px 0;
+            border-bottom: 2px solid #ecf0f1;
+            padding-bottom: 4px;
         }
-        .amenities-section {
-            margin-top: auto;
-        }
-        .amenities-title {
-            font-weight: 700;
-            color: #333;
-            margin-bottom: 10px;
-        }
-        .amenities-list {
+        
+        .property-list {
             list-style: none;
             padding: 0;
             margin: 0;
-            font-size: 0.9rem;
-            color: #666;
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .property-list li {
+            background-color: #ecf0f1;
+            color: #555;
+            padding: 4px 10px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            margin-right: 8px;
+            margin-bottom: 8px;
         }
         .amenities-list li {
-            margin-bottom: 5px;
+           background-color: #eafaf1;
+           color: #27ae60;
         }
-        .bank-links a {
-            color: #3498db;
-            text-decoration: none;
-            font-weight: 500;
-            margin-right: 15px;
-            transition: color 0.3s;
-        }
-        .bank-links a:hover {
-            color: #2980b9;
-        }
+
     </style>
 </head>
 <body>
 
-<div class="container">
-    <div class="header">
-        <h1>2 BHK Properties for Rent in Indirapuram, Ghaziabad</h1>
+    <div class="container">
+        <div class="header">
+            <h1>Find Your Next Home in Noida</h1>
+            <p>Curated properties based on your preferences and budget of ₹50,000/month.</p>
+        </div>
+
+        <div class="property-grid">
+
+            <!-- Recommended Property 1 -->
+            <div class="property-card">
+                <div class="property-badge recommended">Recommended</div>
+                <div class="property-image">
+                    <img src="https://www.e-architect.com/wp-content/uploads/2025/07/step-maze-house-new-delhi-india-s250725-ba1.webp" alt="Property Image 1">
+                </div>
+                <div class="property-details">
+                    <div>
+                        <h3 class="property-title">Vasant Apartment - Furnished 2 BHK Flat</h3>
+                        <p class="property-location">Sector 62, Noida</p>
+                        <p class="property-price">₹26,000 /month</p>
+                    </div>
+                    <div class="property-config">
+                        <div class="config-item"><span class="value">2 BHK</span><span class="label">Configuration</span></div>
+                        <div class="config-item"><span class="value">1,050</span><span class="label">Area (sqft)</span></div>
+                        <div class="config-item"><span class="value">Ready to Move</span><span class="label">Available From</span></div>
+                    </div>
+                     <div class="property-section">
+                        <h4>Furnishing</h4>
+                        <ul class="property-list">
+                           <li>2 Beds</li><li>2 Wardrobes</li><li>1 Sofa</li><li>1 Washing Machine</li><li>2 AC</li><li>1 TV</li><li>2 Geysers</li><li>1 Fridge</li>
+                        </ul>
+                    </div>
+                    <div class="property-section">
+                        <h4>Features</h4>
+                        <ul class="property-list">
+                            <li>Full Power Backup</li><li>Lift</li><li>Security</li>
+                        </ul>
+                    </div>
+                     <div class="property-section">
+                        <h4>Nearby Amenities</h4>
+                        <ul class="property-list amenities-list">
+                            <li>School: Indus Valley Public School</li><li>Metro: Noida Electronic City</li><li>Hospital: Fortis Hospital</li><li>Park: Central Park</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recommended Property 2 -->
+            <div class="property-card">
+                <div class="property-badge recommended">Recommended</div>
+                <div class="property-image">
+                    <img src="https://tse1.mm.bing.net/th/id/OIP.wVLjZvfuzACwHIUTmX3pYAHaEK?w=200&h=112&c=7&p=0" alt="Property Image 2">
+                </div>
+                <div class="property-details">
+                    <div>
+                        <h3 class="property-title">Paras Tierea - Furnished 2 BHK Flat</h3>
+                        <p class="property-location">Sector 137, Noida</p>
+                        <p class="property-price">₹29,000 /month</p>
+                    </div>
+                    <div class="property-config">
+                        <div class="config-item"><span class="value">2 BHK</span><span class="label">Configuration</span></div>
+                        <div class="config-item"><span class="value">960</span><span class="label">Area (sqft)</span></div>
+                        <div class="config-item"><span class="value">Ready to Move</span><span class="label">Available From</span></div>
+                    </div>
+                     <div class="property-section">
+                        <h4>Furnishing</h4>
+                        <ul class="property-list">
+                           <li>2 Beds</li><li>2 Wardrobes</li><li>1 Sofa</li><li>1 Washing Machine</li><li>2 AC</li><li>1 TV</li><li>2 Geysers</li><li>1 Fridge</li>
+                        </ul>
+                    </div>
+                    <div class="property-section">
+                        <h4>Features</h4>
+                        <ul class="property-list">
+                            <li>Full Power Backup</li><li>Air Conditioned</li><li>Swimming Pool</li><li>Club</li>
+                        </ul>
+                    </div>
+                     <div class="property-section">
+                        <h4>Nearby Amenities</h4>
+                        <ul class="property-list amenities-list">
+                            <li>School: SKS World School</li><li>Metro: Sector 137 Metro Station</li><li>Hospital: Felix Hospital</li><li>Park: Sector 137 Park</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Under Budget Property 1 -->
+            <div class="property-card">
+                <div class="property-badge">Under Budget</div>
+                <div class="property-image">
+                    <img src="https://tse4.mm.bing.net/th/id/OIP.ScQKvH5aTiZtiWAe7-yLOgHaEO?w=474&h=474&c=7&p=0" alt="Property Image 3">
+                </div>
+                <div class="property-details">
+                    <div>
+                        <h3 class="property-title">ACE Golfshire - 2 BHK Flat</h3>
+                        <p class="property-location">Sector 150, Noida</p>
+                        <p class="property-price">₹26,000 /month</p>
+                    </div>
+                    <div class="property-config">
+                        <div class="config-item"><span class="value">2 BHK</span><span class="label">Configuration</span></div>
+                        <div class="config-item"><span class="value">1,195</span><span class="label">Area (sqft)</span></div>
+                        <div class="config-item"><span class="value">Ready to Move</span><span class="label">Available From</span></div>
+                    </div>
+                    <div class="property-section">
+                        <h4>Furnishing</h4>
+                        <ul class="property-list">
+                           <li>Unfurnished</li>
+                        </ul>
+                    </div>
+                    <div class="property-section">
+                        <h4>Features</h4>
+                        <ul class="property-list">
+                            <li>Fitness Center/Gym</li><li>Club House</li><li>Covered Parking</li>
+                        </ul>
+                    </div>
+                     <div class="property-section">
+                        <h4>Nearby Amenities</h4>
+                        <ul class="property-list amenities-list">
+                           <li>School: RPS International School</li><li>Park: Shaheed Bhagat Singh Park</li><li>Hospital: Jaypee Hospital</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Under Budget Property 2 -->
+            <div class="property-card">
+                <div class="property-badge">Under Budget</div>
+                <div class="property-image">
+                    <img src="https://tse4.mm.bing.net/th/id/OIP.fhNgjR0HW09tJQzFXPumxwHaHa?w=200&h=200&c=7&p=0" alt="Property Image 4">
+                </div>
+                <div class="property-details">
+                    <div>
+                        <h3 class="property-title">ACE Parkway - 2 BHK Flat</h3>
+                        <p class="property-location">Sector 150, Noida</p>
+                        <p class="property-price">₹30,000 /month</p>
+                    </div>
+                    <div class="property-config">
+                        <div class="config-item"><span class="value">2 BHK</span><span class="label">Configuration</span></div>
+                        <div class="config-item"><span class="value">1,095</span><span class="label">Area (sqft)</span></div>
+                        <div class="config-item"><span class="value">Ready to Move</span><span class="label">Available From</span></div>
+                    </div>
+                     <div class="property-section">
+                        <h4>Furnishing</h4>
+                        <ul class="property-list">
+                            <li>Unfurnished</li>
+                        </ul>
+                    </div>
+                    <div class="property-section">
+                        <h4>Features</h4>
+                        <ul class="property-list">
+                             <li>Fitness Center/Gym</li><li>Club House</li><li>Covered Parking</li>
+                        </ul>
+                    </div>
+                     <div class="property-section">
+                        <h4>Nearby Amenities</h4>
+                        <ul class="property-list amenities-list">
+                            <li>School: The Millennium School</li><li>Park: Central Park Sector 150</li><li>Hospital: Jaypee Hospital</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Under Budget Property 3 -->
+            <div class="property-card">
+                <div class="property-badge">Under Budget</div>
+                <div class="property-image">
+                    <img src="https://tse4.mm.bing.net/th/id/OIP.Evk5HKyZSXoVD7OSbUGZ0QHaDE?w=200&h=112&c=7&p=0" alt="Property Image 5">
+                </div>
+                <div class="property-details">
+                    <div>
+                        <h3 class="property-title">Grand Omaxe - 2 BHK Flat</h3>
+                        <p class="property-location">Sector 93 B, Noida</p>
+                        <p class="property-price">₹31,000 /month</p>
+                    </div>
+                    <div class="property-config">
+                        <div class="config-item"><span class="value">2 BHK</span><span class="label">Configuration</span></div>
+                        <div class="config-item"><span class="value">1,110</span><span class="label">Area (sqft)</span></div>
+                        <div class="config-item"><span class="value">Ready to Move</span><span class="label">Available From</span></div>
+                    </div>
+                     <div class="property-section">
+                        <h4>Furnishing</h4>
+                        <ul class="property-list">
+                            <li>Unfurnished</li>
+                        </ul>
+                    </div>
+                    <div class="property-section">
+                        <h4>Features</h4>
+                        <ul class="property-list">
+                             <li>Power Backup</li><li>Lift</li><li>Near Expressway</li>
+                        </ul>
+                    </div>
+                     <div class="property-section">
+                        <h4>Nearby Amenities</h4>
+                        <ul class="property-list amenities-list">
+                           <li>School: Panchsheel Balak Inter College</li><li>Park: C Block Park</li><li>Hospital: Yatharth Super Speciality Hospital</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Under Budget Property 4 -->
+            <div class="property-card">
+                 <div class="property-badge">Under Budget</div>
+                <div class="property-image">
+                    <img src="https://www.e-architect.com/wp-content/uploads/2025/07/step-maze-house-new-delhi-india-s250725-ba1.webp" alt="Property Image 1">
+                </div>
+                <div class="property-details">
+                    <div>
+                        <h3 class="property-title">Amrapali HeartBeat City - 2 BHK Flat</h3>
+                        <p class="property-location">Sector 107, Noida</p>
+                        <p class="property-price">₹28,000 /month</p>
+                    </div>
+                    <div class="property-config">
+                        <div class="config-item"><span class="value">2 BHK</span><span class="label">Configuration</span></div>
+                        <div class="config-item"><span class="value">1,195</span><span class="label">Area (sqft)</span></div>
+                        <div class="config-item"><span class="value">Ready to Move</span><span class="label">Available From</span></div>
+                    </div>
+                     <div class="property-section">
+                        <h4>Furnishing</h4>
+                        <ul class="property-list">
+                           <li>Unfurnished</li>
+                        </ul>
+                    </div>
+                    <div class="property-section">
+                        <h4>Features</h4>
+                        <ul class="property-list">
+                           <li>Full Power Backup</li><li>Lift</li><li>Security</li>
+                        </ul>
+                    </div>
+                     <div class="property-section">
+                        <h4>Nearby Amenities</h4>
+                        <ul class="property-list amenities-list">
+                           <li>School: Lotus Valley International School</li><li>Park: Community Park</li><li>Hospital: Cloudnine Hospital</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </div>
     </div>
-
-    <div class="property-grid">
-
-        <!-- Property Card 1: Under Budget -->
-        <div class="property-card">
-            <div class="property-image">
-                <img src="https://www.e-architect.com/wp-content/uploads/2025/07/step-maze-house-new-delhi-india-s250725-ba1.webp" alt="Property Image 1">
-                <div class="property-tag">Under Budget</div>
-            </div>
-            <div class="property-details">
-                <h2 class="property-name">Independent Builder Floor</h2>
-                <p class="property-title">2 BHK Independent Builder Floor for rent</p>
-                <p class="property-location">Gyan Khand 1, Ghaziabad</p>
-                <div class="property-price">₹22,000 /month</div>
-                <div class="property-specs">
-                    <div class="spec-item"><span class="value">2 BHK</span><br><span class="label">Configuration</span></div>
-                    <div class="spec-item"><span class="value">1,000</span><br><span class="label">sqft</span></div>
-                </div>
-                <div class="property-info">
-                    <strong>Furnishing:</strong> Semi-Furnished (Wardrobes, Modular Kitchen)<br>
-                    <strong>Available From:</strong> Ready to move
-                </div>
-                <div class="property-info">
-                    <strong>Features:</strong> Power Back-up, Reserved Parking
-                </div>
-                <div class="amenities-section">
-                    <h4 class="amenities-title">Nearby Amenities (within 1 km)</h4>
-                    <ul class="amenities-list">
-                        <li><strong>Schools:</strong> St. Thomas School, Amity International School</li>
-                        <li><strong>Hospitals:</strong> Shanti Gopal Hospital, LYF Hospital</li>
-                        <li><strong>Metro:</strong> Vaishali Metro Station</li>
-                        <li><strong>Parks:</strong> Central Park</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-        <!-- Property Card 2: Under Budget -->
-        <div class="property-card">
-            <div class="property-image">
-                <img src="https://tse1.mm.bing.net/th/id/OIP.wVLjZvfuzACwHIUTmX3pYAHaEK?w=200&h=112&c=7&p=0" alt="Property Image 2">
-                <div class="property-tag">Under Budget</div>
-            </div>
-            <div class="property-details">
-                <h2 class="property-name">Independent Builder Floor</h2>
-                <p class="property-title">Spacious builder floor for rent</p>
-                <p class="property-location">Shakti Khand 2, Ghaziabad</p>
-                <div class="property-price">₹23,000 /month</div>
-                <div class="property-specs">
-                    <div class="spec-item"><span class="value">2 BHK</span><br><span class="label">Configuration</span></div>
-                    <div class="spec-item"><span class="value">1,000</span><br><span class="label">sqft</span></div>
-                </div>
-                <div class="property-info">
-                    <strong>Furnishing:</strong> Semi-Furnished (Fans, Lights, Wardrobes)<br>
-                    <strong>Available From:</strong> 26 Sep 2025
-                </div>
-                 <div class="property-info">
-                    <strong>Features:</strong> Gated Street, 24x7 Security
-                </div>
-                <div class="amenities-section">
-                    <h4 class="amenities-title">Nearby Amenities (within 1 km)</h4>
-                    <ul class="amenities-list">
-                        <li><strong>Schools:</strong> Delhi Public School, Rama International School</li>
-                        <li><strong>Hospitals:</strong> Shanti Gopal Hospital, Max Vaishali</li>
-                        <li><strong>Metro:</strong> Vaishali Metro Station</li>
-                        <li><strong>Parks:</strong> Green Park</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-        <!-- Property Card 3: Recommended -->
-        <div class="property-card">
-            <div class="property-image">
-                <img src="https://tse4.mm.bing.net/th/id/OIP.ScQKvH5aTiZtiWAe7-yLOgHaEO?w=474&h=474&c=7&p=0" alt="Property Image 3">
-                <div class="property-tag recommended">Recommended</div>
-            </div>
-            <div class="property-details">
-                <h2 class="property-name">Saya Gold Avenue</h2>
-                <p class="property-title">2 BHK apartment for rent in indirapuram</p>
-                <p class="property-location">Vaibhav Khand, Ghaziabad</p>
-                <div class="property-price">₹32,000 /month</div>
-                <div class="property-specs">
-                    <div class="spec-item"><span class="value">2 BHK</span><br><span class="label">Configuration</span></div>
-                    <div class="spec-item"><span class="value">1,100</span><br><span class="label">sqft</span></div>
-                </div>
-                <div class="property-info">
-                    <strong>Furnishing:</strong> Semi-Furnished<br>
-                    <strong>Available From:</strong> Ready to move
-                </div>
-                 <div class="property-info">
-                    <strong>Features:</strong> Swimming Pool, Lift, Power Back-up, Park
-                </div>
-                <div class="amenities-section">
-                    <h4 class="amenities-title">Nearby Amenities (within 1 km)</h4>
-                    <ul class="amenities-list">
-                        <li><strong>Schools:</strong> Indirapuram Public School, JKG International School</li>
-                        <li><strong>Hospitals:</strong> Fortis Hospital, Shanti Gopal Hospital</li>
-                        <li><strong>Metro:</strong> Noida Electronic City Metro Station</li>
-                        <li><strong>Malls:</strong> Shipra Mall, Aditya Mall</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-        <!-- Property Card 4: Under Budget -->
-        <div class="property-card">
-            <div class="property-image">
-                <img src="https://tse4.mm.bing.net/th/id/OIP.fhNgjR0HW09tJQzFXPumxwHaHa?w=200&h=200&c=7&p=0" alt="Property Image 4">
-                <div class="property-tag">Under Budget</div>
-            </div>
-            <div class="property-details">
-                <h2 class="property-name">ATS Advantage</h2>
-                <p class="property-title">2 BHK corner apartment available on rent</p>
-                <p class="property-location">Ahinsa Khand 1, Ghaziabad</p>
-                <div class="property-price">₹35,000 /month</div>
-                <div class="property-specs">
-                    <div class="spec-item"><span class="value">2 BHK</span><br><span class="label">Configuration</span></div>
-                    <div class="spec-item"><span class="value">1,100</span><br><span class="label">sqft</span></div>
-                </div>
-                <div class="property-info">
-                    <strong>Furnishing:</strong> Semi-Furnished (Wooden Work, Chimney, Lights)<br>
-                    <strong>Available From:</strong> Ready to move
-                </div>
-                 <div class="property-info">
-                    <strong>Features:</strong> Park & Pool Facing, IGL Gas Connection
-                </div>
-                <div class="amenities-section">
-                    <h4 class="amenities-title">Nearby Amenities (within 1 km)</h4>
-                    <ul class="amenities-list">
-                        <li><strong>Schools:</strong> Presidium School, Indirapuram Public School</li>
-                        <li><strong>Hospitals:</strong> Max Super Speciality Hospital, Shanti Gopal Hospital</li>
-                        <li><strong>Metro:</strong> Noida Electronic City, Vaishali</li>
-                        <li><strong>Malls:</strong> Indirapuram Habitat Centre</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Property Card 5: Recommended -->
-        <div class="property-card">
-            <div class="property-image">
-                <img src="https://tse4.mm.bing.net/th/id/OIP.Evk5HKyZSXoVD7OSbUGZ0QHaDE?w=200&h=112&c=7&p=0" alt="Property Image 5">
-                <div class="property-tag recommended">Recommended</div>
-            </div>
-            <div class="property-details">
-                <h2 class="property-name">Express Garden</h2>
-                <p class="property-title">2 BHK Flat for rent in Vaibhav Khand</p>
-                <p class="property-location">Vaibhav Khand, Ghaziabad</p>
-                <div class="property-price">₹24,000 /month</div>
-                <div class="property-specs">
-                    <div class="spec-item"><span class="value">2 BHK</span><br><span class="label">Configuration</span></div>
-                    <div class="spec-item"><span class="value">1,100</span><br><span class="label">sqft</span></div>
-                </div>
-                <div class="property-info">
-                    <strong>Furnishing:</strong> Semi-Furnished<br>
-                    <strong>Available From:</strong> Ready to move
-                </div>
-                 <div class="property-info">
-                    <strong>Features:</strong> Modular Kitchen, Sun Facing Unit
-                </div>
-                <div class="amenities-section">
-                    <h4 class="amenities-title">Nearby Amenities (within 1 km)</h4>
-                     <ul class="amenities-list">
-                        <li><strong>Schools:</strong> Indirapuram Public School, St. Francis School</li>
-                        <li><strong>Hospitals:</strong> Scope Hospital, Fortis Hospital</li>
-                        <li><strong>Metro:</strong> Noida Electronic City Metro Station</li>
-                        <li><strong>Malls:</strong> Shipra Mall</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-        <!-- Property Card 6: Under Budget -->
-        <div class="property-card">
-            <div class="property-image">
-                <img src="https://www.e-architect.com/wp-content/uploads/2025/07/step-maze-house-new-delhi-india-s250725-ba1.webp" alt="Property Image 6">
-                <div class="property-tag">Under Budget</div>
-            </div>
-            <div class="property-details">
-                <h2 class="property-name">Cloud 9</h2>
-                <p class="property-title">2 BHK apartment in popular society</p>
-                <p class="property-location">Indirapuram, Ghaziabad</p>
-                <div class="property-price">₹22,000 /month</div>
-                <div class="property-specs">
-                    <div class="spec-item"><span class="value">2 BHK</span><br><span class="label">Configuration</span></div>
-                    <div class="spec-item"><span class="value">887</span><br><span class="label">sqft</span></div>
-                </div>
-                <div class="property-info">
-                    <strong>Furnishing:</strong> Semi-Furnished (Fans, Lights)<br>
-                    <strong>Available From:</strong> Ready to move
-                </div>
-                 <div class="property-info">
-                    <strong>Features:</strong> Covered Parking, 2 Balconies
-                </div>
-                <div class="amenities-section">
-                    <h4 class="amenities-title">Nearby Amenities (within 1 km)</h4>
-                    <ul class="amenities-list">
-                        <li><strong>Schools:</strong> Aamrapali English Senior Secondary School</li>
-                        <li><strong>Hospitals:</strong> Shanti Gopal Hospital, Fortis Hospital</li>
-                        <li><strong>Metro:</strong> Noida Electronic City Metro</li>
-                        <li><strong>Parks:</strong> Central Park</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-    </div>
-</div>
 
 </body>
 </html>
+```
