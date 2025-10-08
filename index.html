@@ -3,587 +3,390 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pune Property Recommendations | 99acres Style</title>
+    <title>Property Recommendations in Haldwani</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --primary-color: #ff7212;
-            --secondary-color: #122b49;
-            --text-color: #333;
-            --light-bg: #f5f5f5;
-            --card-border: #e0e0e0;
-        }
-
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Roboto', sans-serif;
             margin: 0;
             padding: 0;
-            background-color: var(--light-bg);
-            color: var(--text-color);
+            background-color: #f0f2f5;
         }
-
         .container {
             width: 90%;
             max-width: 1200px;
             margin: 20px auto;
         }
-
         .header {
-            text-align: center;
-            padding: 20px 0;
-            border-bottom: 2px solid var(--primary-color);
-            margin-bottom: 30px;
-        }
-
-        .header h1 {
-            color: var(--secondary-color);
-            margin: 0;
             font-size: 28px;
+            color: #2b2b2b;
+            font-weight: 700;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #ff7143;
         }
-
-        .section-title {
-            font-size: 24px;
-            color: var(--secondary-color);
-            border-left: 5px solid var(--primary-color);
-            padding-left: 10px;
-            margin: 40px 0 20px 0;
-            font-weight: bold;
-        }
-
-        .property-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 30px;
-        }
-
         .property-card {
-            background-color: #fff;
-            border: 1px solid var(--card-border);
+            background-color: #ffffff;
+            border: 1px solid #e0e0e0;
             border-radius: 8px;
+            margin-bottom: 25px;
             overflow: hidden;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-            transition: transform 0.2s;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            display: flex;
         }
-
-        .property-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
-        }
-
-        .property-image-container {
-            width: 100%;
-            height: 200px; 
-            overflow: hidden;
-        }
-
         .property-image {
+            width: 300px; /* Fixed width */
+            flex-shrink: 0;
+            overflow: hidden;
+        }
+        .property-image img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.3s ease;
+            aspect-ratio: 16/10;
         }
-
-        .property-image:hover {
-            transform: scale(1.05);
+        .property-details {
+            padding: 20px;
+            flex-grow: 1;
         }
-
-        .property-content {
-            padding: 15px;
-        }
-
-        .property-name {
-            font-size: 18px;
-            font-weight: bold;
-            color: var(--secondary-color);
-            margin-bottom: 5px;
-        }
-
-        .property-title {
-            font-size: 14px;
-            color: #666;
+        .property-header {
             margin-bottom: 10px;
         }
-
-        .property-details div {
-            display: flex;
-            justify-content: space-between;
-            padding: 4px 0;
-            border-bottom: 1px dashed var(--card-border);
+        .property-title {
+            font-size: 20px;
+            font-weight: 500;
+            color: #000;
+            margin: 0;
+        }
+        .property-location {
             font-size: 14px;
+            color: #666;
+            margin: 5px 0 15px 0;
         }
-        
-        .property-details div:last-child {
-            border-bottom: none;
+        .price-tag {
+            font-size: 24px;
+            color: #2b2b2b;
+            font-weight: 700;
+            margin: 0 0 15px 0;
         }
-
-        .detail-label {
-            font-weight: 600;
+        .specs {
+            display: flex;
+            gap: 30px;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #f0f0f0;
+            padding-bottom: 10px;
+        }
+        .spec-item {
+            font-size: 14px;
             color: #555;
         }
-
-        .price-tag {
-            background-color: #e6f7ff;
-            color: var(--secondary-color);
-            padding: 8px 15px;
-            font-size: 22px;
-            font-weight: bold;
-            border-radius: 4px;
-            text-align: center;
-            margin-bottom: 15px;
-            border: 1px solid #cceeff;
-        }
-
-        .price-tag span {
-            font-size: 14px;
-            font-weight: normal;
+        .spec-item strong {
             display: block;
-            color: #666;
+            color: #2b2b2b;
+            font-weight: 500;
         }
-
-        .features, .amenities {
-            margin-top: 15px;
-            padding-top: 10px;
-            border-top: 1px solid var(--card-border);
-        }
-
-        .features h4, .amenities h4 {
-            color: var(--primary-color);
-            font-size: 15px;
-            margin-top: 0;
-            margin-bottom: 5px;
-        }
-
-        .features ul, .amenities ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            font-size: 13px;
+        .features-amenities {
             display: flex;
-            flex-wrap: wrap;
-        }
-
-        .features li, .amenities li {
-            background-color: #f0f0f0;
-            padding: 3px 8px;
-            margin-right: 5px;
-            margin-bottom: 5px;
-            border-radius: 3px;
-        }
-        
-        .emi-section {
-            background-color: #fffaf0;
-            padding: 10px;
-            border: 1px solid #ffcc66;
-            border-radius: 4px;
             margin-top: 15px;
+            gap: 40px;
         }
-
-        .emi-section h4 {
-            margin: 0 0 5px 0;
-            color: #a0522d;
+        .feature-list, .amenity-list {
+            flex: 1;
+        }
+        .list-header {
             font-size: 15px;
-        }
-
-        .emi-value {
-            font-size: 18px;
-            font-weight: bold;
-            color: var(--secondary-color);
+            font-weight: 700;
+            color: #ff7143;
             margin-bottom: 8px;
         }
-
-        .bank-links a {
-            color: var(--secondary-color);
-            text-decoration: none;
-            font-weight: bold;
-            margin-right: 15px;
-            font-size: 13px;
-            transition: color 0.2s;
+        .list-item {
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 5px;
         }
-
-        .bank-links a:hover {
-            color: var(--primary-color);
+        .emi-section {
+            background-color: #f7f7f7;
+            padding: 10px 15px;
+            border-radius: 4px;
+            margin-top: 15px;
+            border: 1px solid #e0e0e0;
+        }
+        .emi-text {
+            font-size: 16px;
+            font-weight: 700;
+            color: #007bff;
+            margin-bottom: 5px;
+        }
+        .loan-links a {
+            color: #007bff;
+            text-decoration: none;
+            font-weight: 500;
+            margin-right: 15px;
+            transition: color 0.3s;
+        }
+        .loan-links a:hover {
+            color: #0056b3;
             text-decoration: underline;
+        }
+        .status-badge {
+            background-color: #e6f7ff;
+            color: #007bff;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 500;
+            margin-left: 10px;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="header">
-            <h1>Recommended Properties in Pune for Purchase (Under ₹1 Cr)</h1>
-        </div>
+        <div class="header">Property Recommendations in Haldwani (Buy - Plots)</div>
 
-        <!-- Section 1: Top 4 Under Budget -->
-        <h2 class="section-title">Top 4 Properties Under Your Budget (Max ₹1 Cr)</h2>
+        <!-- Section 1: Under Budget -->
+        <h2 style="font-size: 22px; color: #2b2b2b; margin-top: 30px; border-left: 5px solid #ff7143; padding-left: 10px;">Properties Under Your Budget (Max ₹1 Crore)</h2>
         
-        <div class="property-grid">
-
-            <!-- Property 1: Majestique Rhythm County -->
-            <div class="property-card">
-                <div class="property-image-container">
-                    <img src="https://www.e-architect.com/wp-content/uploads/2025/07/step-maze-house-new-delhi-india-s250725-ba1.webp" alt="Majestique Rhythm County" class="property-image">
-                </div>
-                <div class="property-content">
-                    <div class="property-name">Majestique Rhythm County</div>
-                    <div class="property-title">2 BHK Flat in Handewadi, Pune East</div>
-                    
-                    <div class="price-tag">
-                        ₹54 Lac 
-                        <span>(₹7,458 /sqft)</span>
-                    </div>
-
-                    <div class="property-details">
-                        <div><span class="detail-label">Configuration:</span> 2 BHK Apartment</div>
-                        <div><span class="detail-label">Area (Carpet):</span> 724 sqft</div>
-                        <div><span class="detail-label">Available from:</span> April 2028 (Under Construction)</div>
-                    </div>
-
-                    <div class="features">
-                        <h4>Furnishing (Semi-Furnished)</h4>
-                        <ul>
-                            <li>Modular Kitchen</li>
-                            <li>Wardrobes</li>
-                            <li>Fans & Lights</li>
-                            <li>Geysers</li>
-                        </ul>
-                    </div>
-
-                    <div class="features">
-                        <h4>Project Features</h4>
-                        <ul>
-                            <li>Gymnasium</li>
-                            <li>Card Room</li>
-                            <li>Skating Rink</li>
-                            <li>Garbage Disposal</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="emi-section">
-                        <h4>EMI (per month, est.)</h4>
-                        <div class="emi-value">₹37,400</div>
-                        <div class="bank-links">
-                            <a href="https://osappsext.hdfc.com/spotoffer_fe/" target="_blank">HDFC BANK</a>
-                            <a href="https://onlineapply.sbi.bank.in/personal-banking/application-status" target="_blank">SBI BANK</a>
-                        </div>
-                    </div>
-
-                    <div class="amenities">
-                        <h4>Nearby Amenities (Within 1 km)</h4>
-                        <ul>
-                            <li>Hospitals</li>
-                            <li>Local Markets</li>
-                            <li>Schools</li>
-                            <li>ATMs & Banks</li>
-                        </ul>
-                    </div>
-                </div>
+        <!-- Property 1 -->
+        <div class="property-card">
+            <div class="property-image">
+                <img src="https://www.e-architect.com/wp-content/uploads/2025/07/step-maze-house-new-delhi-india-s250725-ba1.webp" alt="Property Image 1">
             </div>
-
-            <!-- Property 2: Skyi Park -->
-            <div class="property-card">
-                <div class="property-image-container">
-                    <img src="https://tse1.mm.bing.net/th/id/OIP.wVLjZvfuzACwHIUTmX3pYAHaEK?w=200&h=112&c=7&p=0" alt="Skyi Park" class="property-image">
+            <div class="property-details">
+                <div class="property-header">
+                    <h3 class="property-title">Residential land / Plot in gaulapar, Haldwani</h3>
+                    <div class="property-location">Haldwani (Gaulapar)</div>
                 </div>
-                <div class="property-content">
-                    <div class="property-name">Skyi Park</div>
-                    <div class="property-title">2 BHK Apartment in Bhukum, Pune West</div>
-                    
-                    <div class="price-tag">
-                        ₹63 Lac 
-                        <span>(Approx. ₹5,855 /sqft)</span>
-                    </div>
-
-                    <div class="property-details">
-                        <div><span class="detail-label">Configuration:</span> 2 BHK Apartment</div>
-                        <div><span class="detail-label">Area (Carpet):</span> 1,076 sqft (Spacious)</div>
-                        <div><span class="detail-label">Available from:</span> May 2029 (New Launch)</div>
-                    </div>
-
-                    <div class="features">
-                        <h4>Furnishing (Semi-Furnished)</h4>
-                        <ul>
-                            <li>Modular Kitchen</li>
-                            <li>Wardrobes</li>
-                            <li>Fans & Lights</li>
-                            <li>Geysers</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="features">
-                        <h4>Project Features</h4>
-                        <ul>
-                            <li>Power Backup</li>
-                            <li>Lift</li>
-                            <li>Club House</li>
-                            <li>Kids Play Area</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="emi-section">
-                        <h4>EMI (per month, est.)</h4>
-                        <div class="emi-value">₹43,650</div>
-                        <div class="bank-links">
-                            <a href="https://osappsext.hdfc.com/spotoffer_fe/" target="_blank">HDFC BANK</a>
-                            <a href="https://onlineapply.sbi.bank.in/personal-banking/application-status" target="_blank">SBI BANK</a>
-                        </div>
-                    </div>
-
-                    <div class="amenities">
-                        <h4>Nearby Amenities (Within 1 km)</h4>
-                        <ul>
-                            <li>Sanskriti School</li>
-                            <li>Café CO2</li>
-                            <li>Banks/ATMs</li>
-                            <li>Highway Access</li>
-                        </ul>
+                <div class="price-tag">₹26.15 Lac</div>
+                <div class="specs">
+                    <div class="spec-item"><strong>Configuration</strong> Plot/Land</div>
+                    <div class="spec-item"><strong>Area</strong> 1,902 sqft (177 sqm)</div>
+                    <div class="spec-item"><strong>Furnishing</strong> Unfurnished</div>
+                    <div class="spec-item"><strong>Available from</strong> Under Construction</div>
+                </div>
+                <div class="emi-section">
+                    <div class="emi-text">EMI (per month): Approx. ₹18,810</div>
+                    <div class="loan-links">
+                        <a href="https://osappsext.hdfc.com/spotoffer_fe/" target="_blank">HDFC BANK</a>
+                        <a href="https://onlineapply.sbi.bank.in/personal-banking/application-status" target="_blank">SBI BANK</a>
                     </div>
                 </div>
-            </div>
-
-            <!-- Property 3: Nivasa Enchante Phase 3 -->
-            <div class="property-card">
-                <div class="property-image-container">
-                    <img src="https://tse4.mm.bing.net/th/id/OIP.ScQKvH5aTiZtiWAe7-yLOgHaEO?w=474&h=474&c=7&p=0" alt="Nivasa Enchante Phase 3" class="property-image">
-                </div>
-                <div class="property-content">
-                    <div class="property-name">Nivasa Enchante Phase 3</div>
-                    <div class="property-title">2 BHK Apartment in Dhanori, Pune</div>
-                    
-                    <div class="price-tag">
-                        ₹72.57 Lac 
-                        <span>(Approx. ₹9,245 /sqft)</span>
+                <div class="features-amenities">
+                    <div class="feature-list">
+                        <div class="list-header">Features</div>
+                        <div class="list-item">Electricity and water line available</div>
+                        <div class="list-item">20 feet road access</div>
                     </div>
-
-                    <div class="property-details">
-                        <div><span class="detail-label">Configuration:</span> 2 BHK Apartment</div>
-                        <div><span class="detail-label">Area (Carpet):</span> 785 sqft</div>
-                        <div><span class="detail-label">Available from:</span> December 2027 (New Launch)</div>
-                    </div>
-
-                    <div class="features">
-                        <h4>Furnishing (Semi-Furnished)</h4>
-                        <ul>
-                            <li>Modular Kitchen</li>
-                            <li>Wardrobes</li>
-                            <li>Fans & Lights</li>
-                            <li>Geysers</li>
-                        </ul>
-                    </div>
-
-                    <div class="features">
-                        <h4>Project Features</h4>
-                        <ul>
-                            <li>Gated Community</li>
-                            <li>Security/CCTV</li>
-                            <li>Landscaped Garden</li>
-                            <li>Internal Roads</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="emi-section">
-                        <h4>EMI (per month, est.)</h4>
-                        <div class="emi-value">₹50,250</div>
-                        <div class="bank-links">
-                            <a href="https://osappsext.hdfc.com/spotoffer_fe/" target="_blank">HDFC BANK</a>
-                            <a href="https://onlineapply.sbi.bank.in/personal-banking/application-status" target="_blank">SBI BANK</a>
-                        </div>
-                    </div>
-
-                    <div class="amenities">
-                        <h4>Nearby Amenities (Within 1 km)</h4>
-                        <ul>
-                            <li>Shreekalyani Hospital</li>
-                            <li>Dr. Mar Theophilus School</li>
-                            <li>Dhanori Jakat Naka</li>
-                            <li>Retail Outlets</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Property 4: Godrej Park Springs -->
-            <div class="property-card">
-                <div class="property-image-container">
-                    <img src="https://tse4.mm.bing.net/th/id/OIP.fhNgjR0HW09tJQzFXPumxwHaHa?w=200&h=200&c=7&p=0" alt="Godrej Park Springs" class="property-image">
-                </div>
-                <div class="property-content">
-                    <div class="property-name">Godrej Park Springs</div>
-                    <div class="property-title">2 BHK Apartment in Manjari Budruk, Pune East</div>
-                    
-                    <div class="price-tag">
-                        ₹74.99 Lac 
-                        <span>(Approx. ₹12,477 /sqft)</span>
-                    </div>
-
-                    <div class="property-details">
-                        <div><span class="detail-label">Configuration:</span> 2 BHK Apartment</div>
-                        <div><span class="detail-label">Area (Carpet):</span> 601 sqft</div>
-                        <div><span class="detail-label">Available from:</span> September 2029 (Under Construction)</div>
-                    </div>
-
-                    <div class="features">
-                        <h4>Furnishing (Semi-Furnished)</h4>
-                        <ul>
-                            <li>Modular Kitchen</li>
-                            <li>Wardrobes</li>
-                            <li>Fans & Lights</li>
-                            <li>Geysers</li>
-                        </ul>
-                    </div>
-
-                    <div class="features">
-                        <h4>Project Features</h4>
-                        <ul>
-                            <li>Swimming Pool</li>
-                            <li>Lift Access</li>
-                            <li>Jogging Track</li>
-                            <li>Club House</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="emi-section">
-                        <h4>EMI (per month, est.)</h4>
-                        <div class="emi-value">₹51,950</div>
-                        <div class="bank-links">
-                            <a href="https://osappsext.hdfc.com/spotoffer_fe/" target="_blank">HDFC BANK</a>
-                            <a href="https://onlineapply.sbi.bank.in/personal-banking/application-status" target="_blank">SBI BANK</a>
-                        </div>
-                    </div>
-
-                    <div class="amenities">
-                        <h4>Nearby Amenities (Within 1 km)</h4>
-                        <ul>
-                            <li>Kunjir Public School</li>
-                            <li>Rayat Primary School</li>
-                            <li>Local Clinics</li>
-                            <li>Manjari Railway Station</li>
-                        </ul>
+                    <div class="amenity-list">
+                        <div class="list-header">Nearby Amenities (within 1 km)</div>
+                        <div class="list-item">Hiway access (700m away)</div>
+                        <div class="list-item">Local shops/market</div>
+                        <div class="list-item">Hotels in Gaulapar (General Area)</div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Section 2: User Recommended Properties (Hospitals) -->
-        <h2 class="section-title">Recommended for You: Focus on Proximity to Hospitals</h2>
-        
-        <div class="property-grid">
-
-            <!-- Property 5: Rohan Saroha -->
-            <div class="property-card">
-                <div class="property-image-container">
-                    <img src="https://tse4.mm.bing.net/th/id/OIP.Evk5HKyZSXoVD7OSbUGZ0QHaDE?w=200&h=112&c=7&p=0" alt="Rohan Saroha" class="property-image">
+        <!-- Property 2 -->
+        <div class="property-card">
+            <div class="property-image">
+                <img src="https://tse1.mm.bing.net/th/id/OIP.wVLjZvfuzACwHIUTmX3pYAHaEK?w=200&h=112&c=7&p=0" alt="Property Image 2">
+            </div>
+            <div class="property-details">
+                <div class="property-header">
+                    <h3 class="property-title">Residential land / Plot in Kathghariya, Haldwani</h3>
+                    <div class="property-location">Haldwani (Kathghariya)</div>
                 </div>
-                <div class="property-content">
-                    <div class="property-name">Rohan Saroha</div>
-                    <div class="property-title">2 BHK Apartment in Bhugaon, Bavdhan, Pune West</div>
-                    
-                    <div class="price-tag">
-                        ₹81.46 Lac 
-                        <span>(Approx. ₹10,430 /sqft)</span>
+                <div class="price-tag">₹22.00 Lac</div>
+                <div class="specs">
+                    <div class="spec-item"><strong>Configuration</strong> Plot/Land</div>
+                    <div class="spec-item"><strong>Area</strong> 900 sqft (84 sqm)</div>
+                    <div class="spec-item"><strong>Furnishing</strong> Unfurnished</div>
+                    <div class="spec-item"><strong>Available from</strong> Ready To Move</div>
+                </div>
+                <div class="emi-section">
+                    <div class="emi-text">EMI (per month): Approx. ₹15,840</div>
+                    <div class="loan-links">
+                        <a href="https://osappsext.hdfc.com/spotoffer_fe/" target="_blank">HDFC BANK</a>
+                        <a href="https://onlineapply.sbi.bank.in/personal-banking/application-status" target="_blank">SBI BANK</a>
                     </div>
-
-                    <div class="property-details">
-                        <div><span class="detail-label">Configuration:</span> 2 BHK Apartment</div>
-                        <div><span class="detail-label">Area (Carpet):</span> 781 sqft</div>
-                        <div><span class="detail-label">Available from:</span> September 2028 (New Launch)</div>
+                </div>
+                <div class="features-amenities">
+                    <div class="feature-list">
+                        <div class="list-header">Features</div>
+                        <div class="list-item">Freehold ownership</div>
+                        <div class="list-item">Negotiable price</div>
                     </div>
-
-                    <div class="features">
-                        <h4>Furnishing (Semi-Furnished)</h4>
-                        <ul>
-                            <li>Modular Kitchen</li>
-                            <li>Wardrobes</li>
-                            <li>Fans & Lights</li>
-                            <li>Geysers</li>
-                        </ul>
-                    </div>
-
-                    <div class="features">
-                        <h4>Project Features</h4>
-                        <ul>
-                            <li>Power Back-up</li>
-                            <li>Rain Water Harvesting</li>
-                            <li>Club House</li>
-                            <li>24/7 Security</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="emi-section">
-                        <h4>EMI (per month, est.)</h4>
-                        <div class="emi-value">₹56,400</div>
-                        <div class="bank-links">
-                            <a href="https://osappsext.hdfc.com/spotoffer_fe/" target="_blank">HDFC BANK</a>
-                            <a href="https://onlineapply.sbi.bank.in/personal-banking/application-status" target="_blank">SBI BANK</a>
-                        </div>
-                    </div>
-
-                    <div class="amenities">
-                        <h4>Nearby Amenities (Within 1 km)</h4>
-                        <ul>
-                            <li>**Chellaram Hospital** (Critical)</li>
-                            <li>Indian Model School</li>
-                            <li>Mumbai-Pune Expressway</li>
-                            <li>ATMs & Groceries</li>
-                        </ul>
+                    <div class="amenity-list">
+                        <div class="list-header">Nearby Amenities (within 1 km)</div>
+                        <div class="list-item">Kathghariya Chauraha (Local Hub)</div>
+                        <div class="list-item">Multiple road connectivity</div>
+                        <div class="list-item">Tourist Attractions/Temples</div>
                     </div>
                 </div>
             </div>
+        </div>
 
-            <!-- Property 6: Skyi Songbirds -->
-            <div class="property-card">
-                <div class="property-image-container">
-                    <img src="https://www.e-architect.com/wp-content/uploads/2025/07/step-maze-house-new-delhi-india-s250725-ba1.webp" alt="Skyi Songbirds" class="property-image">
+        <!-- Property 3 -->
+        <div class="property-card">
+            <div class="property-image">
+                <img src="https://tse4.mm.bing.net/th/id/OIP.ScQKvH5aTiZtiWAe7-yLOgHaEO?w=474&h=474&c=7&p=0" alt="Property Image 3">
+            </div>
+            <div class="property-details">
+                <div class="property-header">
+                    <h3 class="property-title">Residential land / Plot in Kathgodam, Haldwani</h3>
+                    <div class="property-location">Haldwani (Kathgodam)</div>
                 </div>
-                <div class="property-content">
-                    <div class="property-name">Skyi Songbirds</div>
-                    <div class="property-title">3 BHK Apartment in Bhugaon, Bavdhan, Pune West</div>
-                    
-                    <div class="price-tag">
-                        ₹87.09 Lac 
-                        <span>(Approx. ₹10,738 /sqft)</span>
+                <div class="price-tag">₹23.00 Lac</div>
+                <div class="specs">
+                    <div class="spec-item"><strong>Configuration</strong> Plot/Land</div>
+                    <div class="spec-item"><strong>Area</strong> 1,000 sqft (93 sqm)</div>
+                    <div class="spec-item"><strong>Furnishing</strong> Unfurnished</div>
+                    <div class="spec-item"><strong>Available from</strong> Ready To Move</div>
+                </div>
+                <div class="emi-section">
+                    <div class="emi-text">EMI (per month): Approx. ₹16,560</div>
+                    <div class="loan-links">
+                        <a href="https://osappsext.hdfc.com/spotoffer_fe/" target="_blank">HDFC BANK</a>
+                        <a href="https://onlineapply.sbi.bank.in/personal-banking/application-status" target="_blank">SBI BANK</a>
                     </div>
+                </div>
+                <div class="features-amenities">
+                    <div class="feature-list">
+                        <div class="list-header">Features</div>
+                        <div class="list-item">North Face</div>
+                        <div class="list-item">25 ft front, 40 ft depth</div>
+                    </div>
+                    <div class="amenity-list">
+                        <div class="list-header">Nearby Amenities (within 1 km)</div>
+                        <div class="list-item">Kathgodam Railway Station (Approx 5 km)</div>
+                        <div class="list-item">Haldwani Main Market (Approx 4 km)</div>
+                        <div class="list-item">Temples (Kali Chaud, Shitala Devi)</div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-                    <div class="property-details">
-                        <div><span class="detail-label">Configuration:</span> 3 BHK Apartment</div>
-                        <div><span class="detail-label">Area (Carpet):</span> 811 sqft</div>
-                        <div><span class="detail-label">Available from:</span> December 2026 (Partially Ready)</div>
+        <!-- Property 4 -->
+        <div class="property-card">
+            <div class="property-image">
+                <img src="https://tse4.mm.bing.net/th/id/OIP.fhNgjR0HW09tJQzFXPumxwHaHa?w=200&h=200&c=7&p=0" alt="Property Image 4">
+            </div>
+            <div class="property-details">
+                <div class="property-header">
+                    <h3 class="property-title">vrindavan vihar Residential land / Plot in rto office road, Haldwani</h3>
+                    <div class="property-location">Haldwani (RTO Office Road)</div>
+                </div>
+                <div class="price-tag">₹27.00 Lac</div>
+                <div class="specs">
+                    <div class="spec-item"><strong>Configuration</strong> Plot/Land</div>
+                    <div class="spec-item"><strong>Area</strong> 1,000 sqft (93 sqm)</div>
+                    <div class="spec-item"><strong>Furnishing</strong> Unfurnished</div>
+                    <div class="spec-item"><strong>Available from</strong> Ready To Move</div>
+                </div>
+                <div class="emi-section">
+                    <div class="emi-text">EMI (per month): Approx. ₹19,440</div>
+                    <div class="loan-links">
+                        <a href="https://osappsext.hdfc.com/spotoffer_fe/" target="_blank">HDFC BANK</a>
+                        <a href="https://onlineapply.sbi.bank.in/personal-banking/application-status" target="_blank">SBI BANK</a>
                     </div>
+                </div>
+                <div class="features-amenities">
+                    <div class="feature-list">
+                        <div class="list-header">Features</div>
+                        <div class="list-item">North Facing Plot</div>
+                        <div class="list-item">Peaceful neighborhood</div>
+                    </div>
+                    <div class="amenity-list">
+                        <div class="list-header">Nearby Amenities (within 1 km)</div>
+                        <div class="list-item">Tagore Public School</div>
+                        <div class="list-item">Regional Transport Office (RTO)</div>
+                        <div class="list-item">Essential Civic Amenities</div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-                    <div class="features">
-                        <h4>Furnishing (Semi-Furnished)</h4>
-                        <ul>
-                            <li>Modular Kitchen</li>
-                            <li>Wardrobes</li>
-                            <li>Fans & Lights</li>
-                            <li>Geysers</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="features">
-                        <h4>Project Features</h4>
-                        <ul>
-                            <li>Swimming Pool</li>
-                            <li>Amphitheater</li>
-                            <li>Gymnasium</li>
-                            <li>Yoga Deck</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="emi-section">
-                        <h4>EMI (per month, est.)</h4>
-                        <div class="emi-value">₹60,300</div>
-                        <div class="bank-links">
-                            <a href="https://osappsext.hdfc.com/spotoffer_fe/" target="_blank">HDFC BANK</a>
-                            <a href="https://onlineapply.sbi.bank.in/personal-banking/application-status" target="_blank">SBI BANK</a>
-                        </div>
-                    </div>
+        <!-- Section 2: User Recommended -->
+        <h2 style="font-size: 22px; color: #2b2b2b; margin-top: 30px; border-left: 5px solid #ff7143; padding-left: 10px;">Recommended Properties (Based on Hospital Proximity)</h2>
 
-                    <div class="amenities">
-                        <h4>Nearby Amenities (Within 1 km)</h4>
-                        <ul>
-                            <li>**Lifeline Hospital** (Critical)</li>
-                            <li>SNBP Bavdhan (School)</li>
-                            <li>IT/Commercial Hubs</li>
-                            <li>Parks & Gardens</li>
-                        </ul>
+        <!-- Property 5 (Recommended) -->
+        <div class="property-card">
+            <div class="property-image">
+                <img src="https://tse4.mm.bing.net/th/id/OIP.Evk5HKyZSXoVD7OSbUGZ0QHaDE?w=200&h=112&c=7&p=0" alt="Property Image 5">
+            </div>
+            <div class="property-details">
+                <div class="property-header">
+                    <h3 class="property-title">Residential land / Plot in Teen Pani Bareilly Road Dholakhera, Haldwani</h3>
+                    <div class="property-location">Haldwani (Teen Pani Bareilly Road Dholakhera)</div>
+                    <span class="status-badge">User Recommended: Hospital</span>
+                </div>
+                <div class="price-tag">₹88.00 Lac</div>
+                <div class="specs">
+                    <div class="spec-item"><strong>Configuration</strong> Plot/Land</div>
+                    <div class="spec-item"><strong>Area</strong> 4,000 sqft (372 sqm)</div>
+                    <div class="spec-item"><strong>Furnishing</strong> Unfurnished</div>
+                    <div class="spec-item"><strong>Available from</strong> Ready To Move</div>
+                </div>
+                <div class="emi-section">
+                    <div class="emi-text">EMI (per month): Approx. ₹63,360</div>
+                    <div class="loan-links">
+                        <a href="https://osappsext.hdfc.com/spotoffer_fe/" target="_blank">HDFC BANK</a>
+                        <a href="https://onlineapply.sbi.bank.in/personal-banking/application-status" target="_blank">SBI BANK</a>
+                    </div>
+                </div>
+                <div class="features-amenities">
+                    <div class="feature-list">
+                        <div class="list-header">Features</div>
+                        <div class="list-item">North Facing</div>
+                        <div class="list-item">Strategic location (near National Highway)</div>
+                        <div class="list-item">Potential for high visibility/footfall</div>
+                    </div>
+                    <div class="amenity-list">
+                        <div class="list-header">Nearby Amenities (within 1 km)</div>
+                        <div class="list-item">City Hospital Nearby <strong style="color: green;">(Key Feature)</strong></div>
+                        <div class="list-item">National Highway (200-300 meters)</div>
+                        <div class="list-item">Excellent connectivity</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Property 6 (Recommended) -->
+        <div class="property-card">
+            <div class="property-image">
+                <img src="https://www.e-architect.com/wp-content/uploads/2025/07/step-maze-house-new-delhi-india-s250725-ba1.webp" alt="Property Image 6">
+            </div>
+            <div class="property-details">
+                <div class="property-header">
+                    <h3 class="property-title">Residential land / Plot in Lal danth, Haldwani</h3>
+                    <div class="property-location">Haldwani (Lal danth)</div>
+                    <span class="status-badge">User Recommended: Hospital</span>
+                </div>
+                <div class="price-tag">₹78.71 Lac</div>
+                <div class="specs">
+                    <div class="spec-item"><strong>Configuration</strong> Plot/Land</div>
+                    <div class="spec-item"><strong>Area</strong> 2,186 sqft (203 sqm)</div>
+                    <div class="spec-item"><strong>Furnishing</strong> Unfurnished</div>
+                    <div class="spec-item"><strong>Available from</strong> Ready To Move</div>
+                </div>
+                <div class="emi-section">
+                    <div class="emi-text">EMI (per month): Approx. ₹56,670</div>
+                    <div class="loan-links">
+                        <a href="https://osappsext.hdfc.com/spotoffer_fe/" target="_blank">HDFC BANK</a>
+                        <a href="https://onlineapply.sbi.bank.in/personal-banking/application-status" target="_blank">SBI BANK</a>
+                    </div>
+                </div>
+                <div class="features-amenities">
+                    <div class="feature-list">
+                        <div class="list-header">Features</div>
+                        <div class="list-item">Located in the center of the city</div>
+                        <div class="list-item">Premium area locality</div>
+                    </div>
+                    <div class="amenity-list">
+                        <div class="list-header">Nearby Amenities (within 1 km)</div>
+                        <div class="list-item">Central Hospital <strong style="color: green;">(Key Feature)</strong></div>
+                        <div class="list-item">All basic amenities nearby</div>
+                        <div class="list-item">Major City Landmarks</div>
                     </div>
                 </div>
             </div>
