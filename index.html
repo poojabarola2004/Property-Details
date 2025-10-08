@@ -3,352 +3,380 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Property Listings</title>
+    <title>Property Recommendations</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
         body {
-            font-family: 'Arial', sans-serif;
-            background-color: #f4f7f6;
+            font-family: 'Roboto', sans-serif;
+            background-color: #f3f4f6;
             margin: 0;
             padding: 20px;
-            color: #333;
         }
         .container {
             max-width: 1200px;
-            margin: 0 auto;
+            margin: auto;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .header h1 {
+            color: #333;
+            font-weight: 700;
+        }
+        .property-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
             gap: 25px;
         }
         .property-card {
-            background-color: #ffffff;
+            background-color: #fff;
             border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
             overflow: hidden;
-            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+            transition: transform 0.3s, box-shadow 0.3s;
             display: flex;
             flex-direction: column;
         }
         .property-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+        }
+        .property-card.placeholder {
+            background-color: #e9ecef;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            min-height: 400px;
+            color: #6c757d;
+            font-size: 1.2rem;
         }
         .property-image {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-            background-color: #e0e0e0; /* Placeholder color */
+            position: relative;
         }
-        .property-content {
+        .property-image img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            display: block;
+        }
+        .property-tag {
+            position: absolute;
+            top: 15px;
+            left: -5px;
+            background-color: #fd9644;
+            color: white;
+            padding: 5px 15px 5px 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            clip-path: polygon(0% 0%, 100% 0%, 95% 50%, 100% 100%, 0% 100%);
+        }
+        .property-tag.recommended {
+            background-color: #26de81;
+        }
+        .property-details {
             padding: 20px;
             flex-grow: 1;
             display: flex;
             flex-direction: column;
         }
-        .property-title {
-            font-size: 1.3em;
+        .property-name {
+            font-size: 1.3rem;
             font-weight: 700;
-            color: #003459;
-            margin-bottom: 5px;
+            color: #2c3e50;
+            margin: 0 0 5px 0;
+        }
+        .property-title {
+            font-size: 0.9rem;
+            color: #7f8c8d;
+            margin-bottom: 15px;
+            min-height: 35px;
         }
         .property-location {
-            font-size: 0.95em;
-            color: #555;
+            font-size: 1rem;
+            color: #34495e;
             margin-bottom: 15px;
         }
         .property-price {
-            font-size: 1.5em;
+            font-size: 1.5rem;
             font-weight: 700;
-            color: #e63946;
-            margin-bottom: 15px;
+            color: #e74c3c;
+            margin-bottom: 20px;
         }
-        .property-details {
-            font-size: 0.9em;
-            margin-bottom: 15px;
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 10px;
-        }
-        .property-details span {
-            font-weight: 500;
-        }
-        .property-details .label {
-            color: #777;
-        }
-        .property-features, .property-amenities {
-            margin-top: 15px;
+        .property-specs {
+            display: flex;
+            justify-content: space-between;
             border-top: 1px solid #eee;
-            padding-top: 15px;
+            border-bottom: 1px solid #eee;
+            padding: 15px 0;
+            margin-bottom: 15px;
         }
-        .property-features h4, .property-amenities h4 {
-            margin-top: 0;
-            font-size: 1.1em;
-            color: #003459;
+        .spec-item {
+            text-align: center;
+        }
+        .spec-item .value {
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: #333;
+        }
+        .spec-item .label {
+            font-size: 0.8rem;
+            color: #888;
+        }
+        .property-info {
+            font-size: 0.95rem;
+            color: #555;
+            margin-bottom: 15px;
+        }
+        .property-info strong {
+            color: #333;
+        }
+        .amenities-section {
+            margin-top: auto;
+        }
+        .amenities-title {
+            font-weight: 700;
+            color: #333;
             margin-bottom: 10px;
         }
-        .property-features ul, .property-amenities ul {
+        .amenities-list {
             list-style: none;
             padding: 0;
             margin: 0;
+            font-size: 0.9rem;
+            color: #666;
         }
-        .property-features li, .property-amenities li {
-            background-color: #f0f8ff;
-            border-radius: 5px;
-            padding: 8px 12px;
-            margin-bottom: 8px;
-            font-size: 0.9em;
-            border-left: 3px solid #0077b6;
+        .amenities-list li {
+            margin-bottom: 5px;
         }
-         .property-amenities li {
-            border-left: 3px solid #ff9f1c;
-         }
-        .recommendation-badge {
-            background-color: #4CAF50;
-            color: white;
-            padding: 5px 10px;
-            border-radius: 5px;
-            font-size: 0.8em;
-            font-weight: 700;
-            display: inline-block;
-            margin-bottom: 10px;
+        .bank-links a {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: 500;
+            margin-right: 15px;
+            transition: color 0.3s;
         }
-        .budget-badge {
-            background-color: #0077b6;
-            color: white;
-            padding: 5px 10px;
-            border-radius: 5px;
-            font-size: 0.8em;
-            font-weight: 700;
-            display: inline-block;
-            margin-bottom: 10px;
-        }
-        .no-listing {
-            text-align: center;
-            padding: 40px;
-            background-color: #fff;
-            border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            font-size: 1.2em;
-            color: #777;
+        .bank-links a:hover {
+            color: #2980b9;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="property-card">
-            <img src="https://www.e-architect.com/wp-content/uploads/2025/07/step-maze-house-new-delhi-india-s250725-ba1.webp" alt="Property Image" class="property-image">
-            <div class="property-content">
-                <span class="budget-badge">Under Budget</span>
-                <h3 class="property-title">2 BHK Independent Builder Floor</h3>
-                <div class="property-location">Gyan Khand 1, Indirapuram, Ghaziabad</div>
-                <div class="property-price">₹22,000 /month</div>
-                <div class="property-details">
-                    <div><span class="label">Beds:</span> 2</div>
-                    <div><span class="label">Baths:</span> 2</div>
-                    <div><span class="label">Area:</span> 1,000 sqft</div>
-                    <div><span class="label">Furnishing:</span> Furnished</div>
-                </div>
-                <div class="property-features">
-                    <h4>Features</h4>
-                    <ul>
-                        <li>2 BHK</li>
-                        <li>2 Baths</li>
-                        <li>Front side luxurious flat</li>
-                        <li>Big size</li>
-                        <li>Semi-furnished</li>
-                    </ul>
-                </div>
-                <div class="property-amenities">
-                    <h4>Nearby Amenities</h4>
-                    <ul>
-                        <li>Metro Station</li>
-                        <li>School</li>
-                        <li>Hospital</li>
-                        <li>Market</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
 
-        <div class="property-card">
-            <img src="https://tse1.mm.bing.net/th/id/OIP.wVLjZvfuzACwHIUTmX3pYAHaEK?w=200&h=112&c=7&p=0" alt="Property Image" class="property-image">
-            <div class="property-content">
-                <span class="budget-badge">Under Budget</span>
-                <h3 class="property-title">2 BHK Independent Builder Floor</h3>
-                <div class="property-location">Indirapuram, Ghaziabad</div>
-                <div class="property-price">₹21,000 /month</div>
-                <div class="property-details">
-                    <div><span class="label">Beds:</span> 2</div>
-                    <div><span class="label">Baths:</span> 2</div>
-                    <div><span class="label">Area:</span> 950 sqft</div>
-                    <div><span class="label">Furnishing:</span> Semi-furnished</div>
-                </div>
-                <div class="property-features">
-                    <h4>Features</h4>
-                    <ul>
-                        <li>2 BHK</li>
-                        <li>2 Baths</li>
-                        <li>East Facing</li>
-                        <li>Fresh Construction</li>
-                        <li>Well-Maintained</li>
-                        <li>Spacious</li>
-                        <li>Semi-furnished</li>
-                    </ul>
-                </div>
-                <div class="property-amenities">
-                    <h4>Nearby Amenities</h4>
-                    <ul>
-                        <li>Metro Station</li>
-                        <li>School</li>
-                        <li>Hospital</li>
-                        <li>Market</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-        <div class="property-card">
-            <img src="https://tse4.mm.bing.net/th/id/OIP.ScQKvH5aTiZtiWAe7-yLOgHaEO?w=474&h=474&c=7&p=0" alt="Property Image" class="property-image">
-            <div class="property-content">
-                <span class="budget-badge">Under Budget</span>
-                <h3 class="property-title">2 BHK Flat</h3>
-                <div class="property-location">Gyan Khand 2, Indirapuram, Ghaziabad</div>
-                <div class="property-price">₹20,000 /month</div>
-                <div class="property-details">
-                    <div><span class="label">Beds:</span> 2</div>
-                    <div><span class="label">Baths:</span> 2</div>
-                    <div><span class="label">Area:</span> 750 sqft</div>
-                    <div><span class="label">Furnishing:</span> Semi-furnished</div>
-                </div>
-                <div class="property-features">
-                    <h4>Features</h4>
-                    <ul>
-                        <li>2 BHK</li>
-                        <li>2 Baths</li>
-                        <li>North-East Facing</li>
-                        <li>Vaishali within 500m</li>
-                        <li>Spacious</li>
-                        <li>Semi-furnished</li>
-                    </ul>
-                </div>
-                <div class="property-amenities">
-                    <h4>Nearby Amenities</h4>
-                    <ul>
-                        <li>Metro Station</li>
-                        <li>School</li>
-                        <li>Hospital</li>
-                        <li>Market</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-        <div class="property-card">
-            <img src="https://tse4.mm.bing.net/th/id/OIP.fhNgjR0HW09tJQzFXPumxwHaHa?w=200&h=200&c=7&p=0" alt="Property Image" class="property-image">
-            <div class="property-content">
-                <span class="budget-badge">Under Budget</span>
-                <h3 class="property-title">2 BHK Flat</h3>
-                <div class="property-location">Gyan Khand 2, Indirapuram, Ghaziabad</div>
-                <div class="property-price">₹21,000 /month</div>
-                <div class="property-details">
-                    <div><span class="label">Beds:</span> 2</div>
-                    <div><span class="label">Baths:</span> 2</div>
-                    <div><span class="label">Area:</span> 950 sqft</div>
-                    <div><span class="label">Furnishing:</span> Semi-furnished</div>
-                </div>
-                <div class="property-features">
-                    <h4>Features</h4>
-                    <ul>
-                        <li>2 BHK</li>
-                        <li>2 Baths</li>
-                        <li>East Facing</li>
-                        <li>Semi-furnished</li>
-                    </ul>
-                </div>
-                <div class="property-amenities">
-                    <h4>Nearby Amenities</h4>
-                    <ul>
-                        <li>Metro Station</li>
-                        <li>School</li>
-                        <li>Hospital</li>
-                        <li>Market</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-        <div class="property-card">
-            <img src="https://tse4.mm.bing.net/th/id/OIP.Evk5HKyZSXoVD7OSbUGZ0QHaDE?w=200&h=112&c=7&p=0" alt="Property Image" class="property-image">
-            <div class="property-content">
-                <span class="recommendation-badge">Recommended</span>
-                <h3 class="property-title">2 BHK Independent Builder Floor</h3>
-                <div class="property-location">Shakti Khand 3, Indirapuram, Ghaziabad</div>
-                <div class="property-price">₹23,000 /month</div>
-                <div class="property-details">
-                    <div><span class="label">Beds:</span> 2</div>
-                    <div><span class="label">Baths:</span> 2</div>
-                    <div><span class="label">Area:</span> 900 sqft</div>
-                    <div><span class="label">Furnishing:</span> Semi-furnished</div>
-                </div>
-                <div class="property-features">
-                    <h4>Features</h4>
-                    <ul>
-                        <li>2 BHK</li>
-                        <li>2 Baths</li>
-                        <li>North-East Facing</li>
-                        <li>Vaishali nearby</li>
-                        <li>Semi-furnished</li>
-                    </ul>
-                </div>
-                <div class="property-amenities">
-                    <h4>Nearby Amenities</h4>
-                    <ul>
-                        <li>Market</li>
-                        <li>School</li>
-                        <li>Hospital</li>
-                        <li>Metro Station</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-        <div class="property-card">
-            <img src="https://www.e-architect.com/wp-content/uploads/2025/07/step-maze-house-new-delhi-india-s250725-ba1.webp" alt="Property Image" class="property-image">
-            <div class="property-content">
-                <span class="recommendation-badge">Recommended</span>
-                <h3 class="property-title">2 BHK Flat</h3>
-                <div class="property-location">Vaibhav Khand, Indirapuram, Ghaziabad</div>
-                <div class="property-price">₹32,000 /month</div>
-                <div class="property-details">
-                    <div><span class="label">Beds:</span> 2</div>
-                    <div><span class="label">Baths:</span> 2</div>
-                    <div><span class="label">Area:</span> 1,100 sqft</div>
-                    <div><span class="label">Furnishing:</span> Semi-furnished</div>
-                </div>
-                <div class="property-features">
-                    <h4>Features</h4>
-                    <ul>
-                        <li>2 BHK</li>
-                        <li>2 Baths</li>
-                        <li>North Facing</li>
-                        <li>Full Power Backup</li>
-                        <li>Close to Metro Station</li>
-                        <li>Close to School</li>
-                        <li>Close to Hospital</li>
-                        <li>Close to Market</li>
-                        <li>Semi-furnished</li>
-                    </ul>
-                </div>
-                <div class="property-amenities">
-                    <h4>Nearby Amenities</h4>
-                    <ul>
-                        <li>Metro Station</li>
-                        <li>School</li>
-                        <li>Hospital</li>
-                        <li>Market</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
+<div class="container">
+    <div class="header">
+        <h1>2 BHK Properties for Rent in Indirapuram, Ghaziabad</h1>
     </div>
+
+    <div class="property-grid">
+
+        <!-- Property Card 1: Under Budget -->
+        <div class="property-card">
+            <div class="property-image">
+                <img src="https://www.e-architect.com/wp-content/uploads/2025/07/step-maze-house-new-delhi-india-s250725-ba1.webp" alt="Property Image 1">
+                <div class="property-tag">Under Budget</div>
+            </div>
+            <div class="property-details">
+                <h2 class="property-name">Independent Builder Floor</h2>
+                <p class="property-title">2 BHK Independent Builder Floor for rent</p>
+                <p class="property-location">Gyan Khand 1, Ghaziabad</p>
+                <div class="property-price">₹22,000 /month</div>
+                <div class="property-specs">
+                    <div class="spec-item"><span class="value">2 BHK</span><br><span class="label">Configuration</span></div>
+                    <div class="spec-item"><span class="value">1,000</span><br><span class="label">sqft</span></div>
+                </div>
+                <div class="property-info">
+                    <strong>Furnishing:</strong> Semi-Furnished (Wardrobes, Modular Kitchen)<br>
+                    <strong>Available From:</strong> Ready to move
+                </div>
+                <div class="property-info">
+                    <strong>Features:</strong> Power Back-up, Reserved Parking
+                </div>
+                <div class="amenities-section">
+                    <h4 class="amenities-title">Nearby Amenities (within 1 km)</h4>
+                    <ul class="amenities-list">
+                        <li><strong>Schools:</strong> St. Thomas School, Amity International School</li>
+                        <li><strong>Hospitals:</strong> Shanti Gopal Hospital, LYF Hospital</li>
+                        <li><strong>Metro:</strong> Vaishali Metro Station</li>
+                        <li><strong>Parks:</strong> Central Park</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Property Card 2: Under Budget -->
+        <div class="property-card">
+            <div class="property-image">
+                <img src="https://tse1.mm.bing.net/th/id/OIP.wVLjZvfuzACwHIUTmX3pYAHaEK?w=200&h=112&c=7&p=0" alt="Property Image 2">
+                <div class="property-tag">Under Budget</div>
+            </div>
+            <div class="property-details">
+                <h2 class="property-name">Independent Builder Floor</h2>
+                <p class="property-title">Spacious builder floor for rent</p>
+                <p class="property-location">Shakti Khand 2, Ghaziabad</p>
+                <div class="property-price">₹23,000 /month</div>
+                <div class="property-specs">
+                    <div class="spec-item"><span class="value">2 BHK</span><br><span class="label">Configuration</span></div>
+                    <div class="spec-item"><span class="value">1,000</span><br><span class="label">sqft</span></div>
+                </div>
+                <div class="property-info">
+                    <strong>Furnishing:</strong> Semi-Furnished (Fans, Lights, Wardrobes)<br>
+                    <strong>Available From:</strong> 26 Sep 2025
+                </div>
+                 <div class="property-info">
+                    <strong>Features:</strong> Gated Street, 24x7 Security
+                </div>
+                <div class="amenities-section">
+                    <h4 class="amenities-title">Nearby Amenities (within 1 km)</h4>
+                    <ul class="amenities-list">
+                        <li><strong>Schools:</strong> Delhi Public School, Rama International School</li>
+                        <li><strong>Hospitals:</strong> Shanti Gopal Hospital, Max Vaishali</li>
+                        <li><strong>Metro:</strong> Vaishali Metro Station</li>
+                        <li><strong>Parks:</strong> Green Park</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Property Card 3: Recommended -->
+        <div class="property-card">
+            <div class="property-image">
+                <img src="https://tse4.mm.bing.net/th/id/OIP.ScQKvH5aTiZtiWAe7-yLOgHaEO?w=474&h=474&c=7&p=0" alt="Property Image 3">
+                <div class="property-tag recommended">Recommended</div>
+            </div>
+            <div class="property-details">
+                <h2 class="property-name">Saya Gold Avenue</h2>
+                <p class="property-title">2 BHK apartment for rent in indirapuram</p>
+                <p class="property-location">Vaibhav Khand, Ghaziabad</p>
+                <div class="property-price">₹32,000 /month</div>
+                <div class="property-specs">
+                    <div class="spec-item"><span class="value">2 BHK</span><br><span class="label">Configuration</span></div>
+                    <div class="spec-item"><span class="value">1,100</span><br><span class="label">sqft</span></div>
+                </div>
+                <div class="property-info">
+                    <strong>Furnishing:</strong> Semi-Furnished<br>
+                    <strong>Available From:</strong> Ready to move
+                </div>
+                 <div class="property-info">
+                    <strong>Features:</strong> Swimming Pool, Lift, Power Back-up, Park
+                </div>
+                <div class="amenities-section">
+                    <h4 class="amenities-title">Nearby Amenities (within 1 km)</h4>
+                    <ul class="amenities-list">
+                        <li><strong>Schools:</strong> Indirapuram Public School, JKG International School</li>
+                        <li><strong>Hospitals:</strong> Fortis Hospital, Shanti Gopal Hospital</li>
+                        <li><strong>Metro:</strong> Noida Electronic City Metro Station</li>
+                        <li><strong>Malls:</strong> Shipra Mall, Aditya Mall</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Property Card 4: Under Budget -->
+        <div class="property-card">
+            <div class="property-image">
+                <img src="https://tse4.mm.bing.net/th/id/OIP.fhNgjR0HW09tJQzFXPumxwHaHa?w=200&h=200&c=7&p=0" alt="Property Image 4">
+                <div class="property-tag">Under Budget</div>
+            </div>
+            <div class="property-details">
+                <h2 class="property-name">ATS Advantage</h2>
+                <p class="property-title">2 BHK corner apartment available on rent</p>
+                <p class="property-location">Ahinsa Khand 1, Ghaziabad</p>
+                <div class="property-price">₹35,000 /month</div>
+                <div class="property-specs">
+                    <div class="spec-item"><span class="value">2 BHK</span><br><span class="label">Configuration</span></div>
+                    <div class="spec-item"><span class="value">1,100</span><br><span class="label">sqft</span></div>
+                </div>
+                <div class="property-info">
+                    <strong>Furnishing:</strong> Semi-Furnished (Wooden Work, Chimney, Lights)<br>
+                    <strong>Available From:</strong> Ready to move
+                </div>
+                 <div class="property-info">
+                    <strong>Features:</strong> Park & Pool Facing, IGL Gas Connection
+                </div>
+                <div class="amenities-section">
+                    <h4 class="amenities-title">Nearby Amenities (within 1 km)</h4>
+                    <ul class="amenities-list">
+                        <li><strong>Schools:</strong> Presidium School, Indirapuram Public School</li>
+                        <li><strong>Hospitals:</strong> Max Super Speciality Hospital, Shanti Gopal Hospital</li>
+                        <li><strong>Metro:</strong> Noida Electronic City, Vaishali</li>
+                        <li><strong>Malls:</strong> Indirapuram Habitat Centre</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Property Card 5: Recommended -->
+        <div class="property-card">
+            <div class="property-image">
+                <img src="https://tse4.mm.bing.net/th/id/OIP.Evk5HKyZSXoVD7OSbUGZ0QHaDE?w=200&h=112&c=7&p=0" alt="Property Image 5">
+                <div class="property-tag recommended">Recommended</div>
+            </div>
+            <div class="property-details">
+                <h2 class="property-name">Express Garden</h2>
+                <p class="property-title">2 BHK Flat for rent in Vaibhav Khand</p>
+                <p class="property-location">Vaibhav Khand, Ghaziabad</p>
+                <div class="property-price">₹24,000 /month</div>
+                <div class="property-specs">
+                    <div class="spec-item"><span class="value">2 BHK</span><br><span class="label">Configuration</span></div>
+                    <div class="spec-item"><span class="value">1,100</span><br><span class="label">sqft</span></div>
+                </div>
+                <div class="property-info">
+                    <strong>Furnishing:</strong> Semi-Furnished<br>
+                    <strong>Available From:</strong> Ready to move
+                </div>
+                 <div class="property-info">
+                    <strong>Features:</strong> Modular Kitchen, Sun Facing Unit
+                </div>
+                <div class="amenities-section">
+                    <h4 class="amenities-title">Nearby Amenities (within 1 km)</h4>
+                     <ul class="amenities-list">
+                        <li><strong>Schools:</strong> Indirapuram Public School, St. Francis School</li>
+                        <li><strong>Hospitals:</strong> Scope Hospital, Fortis Hospital</li>
+                        <li><strong>Metro:</strong> Noida Electronic City Metro Station</li>
+                        <li><strong>Malls:</strong> Shipra Mall</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Property Card 6: Under Budget -->
+        <div class="property-card">
+            <div class="property-image">
+                <img src="https://www.e-architect.com/wp-content/uploads/2025/07/step-maze-house-new-delhi-india-s250725-ba1.webp" alt="Property Image 6">
+                <div class="property-tag">Under Budget</div>
+            </div>
+            <div class="property-details">
+                <h2 class="property-name">Cloud 9</h2>
+                <p class="property-title">2 BHK apartment in popular society</p>
+                <p class="property-location">Indirapuram, Ghaziabad</p>
+                <div class="property-price">₹22,000 /month</div>
+                <div class="property-specs">
+                    <div class="spec-item"><span class="value">2 BHK</span><br><span class="label">Configuration</span></div>
+                    <div class="spec-item"><span class="value">887</span><br><span class="label">sqft</span></div>
+                </div>
+                <div class="property-info">
+                    <strong>Furnishing:</strong> Semi-Furnished (Fans, Lights)<br>
+                    <strong>Available From:</strong> Ready to move
+                </div>
+                 <div class="property-info">
+                    <strong>Features:</strong> Covered Parking, 2 Balconies
+                </div>
+                <div class="amenities-section">
+                    <h4 class="amenities-title">Nearby Amenities (within 1 km)</h4>
+                    <ul class="amenities-list">
+                        <li><strong>Schools:</strong> Aamrapali English Senior Secondary School</li>
+                        <li><strong>Hospitals:</strong> Shanti Gopal Hospital, Fortis Hospital</li>
+                        <li><strong>Metro:</strong> Noida Electronic City Metro</li>
+                        <li><strong>Parks:</strong> Central Park</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
 </body>
 </html>
