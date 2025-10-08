@@ -3,507 +3,484 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Property Recommendations in Greater Noida</title>
+    <title>2 BHK Rental Properties in Bandra, Mumbai</title>
     <style>
         :root {
             --primary-color: #007bff; /* Blue for primary accents */
-            --secondary-color: #28a745; /* Green for good deals */
-            --background-light: #f8f9fa;
-            --card-background: #ffffff;
-            --text-dark: #333;
-            --border-color: #e9ecef;
-            --shadow-light: 0 4px 8px rgba(0,0,0,0.05);
+            --secondary-color: #f7f7f7; /* Light gray background */
+            --text-color: #333;
+            --price-color: #e74c3c; /* Reddish for price */
+            --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            --border-color: #ddd;
         }
 
         body {
-            font-family: 'Arial', sans-serif;
-            background-color: var(--background-light);
-            color: var(--text-dark);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: var(--secondary-color);
+            color: var(--text-color);
+            line-height: 1.6;
             margin: 0;
-            padding: 20px;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
+            padding: 0;
         }
 
         .header {
-            background-color: var(--primary-color);
-            color: white;
-            padding: 15px 20px;
-            margin-bottom: 20px;
-            border-radius: 5px;
-            box-shadow: var(--shadow-light);
+            background-color: #fff;
+            padding: 20px 0;
+            border-bottom: 1px solid var(--border-color);
+            text-align: center;
         }
 
         .header h1 {
+            color: var(--primary-color);
             margin: 0;
             font-size: 24px;
-            display: inline-block;
+            font-weight: 600;
         }
 
-        .header .user-criteria {
-            font-size: 14px;
-            margin-top: 5px;
-        }
-
-        .property-grid {
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 20px auto;
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
             gap: 25px;
         }
 
         .property-card {
-            background-color: var(--card-background);
-            border: 1px solid var(--border-color);
+            background-color: #fff;
             border-radius: 8px;
             overflow: hidden;
-            box-shadow: var(--shadow-light);
-            transition: transform 0.2s;
-            position: relative;
+            box-shadow: var(--card-shadow);
+            transition: transform 0.2s, box-shadow 0.2s;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid var(--border-color);
         }
 
         .property-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
         }
 
-        .property-tag {
+        .tag {
             position: absolute;
-            top: 15px;
+            top: 0;
             left: 0;
-            background-color: var(--secondary-color);
+            background-color: var(--primary-color);
             color: white;
             padding: 5px 10px;
-            font-weight: bold;
-            font-size: 12px;
-            border-radius: 0 5px 5px 0;
+            font-size: 14px;
+            font-weight: 700;
+            border-bottom-right-radius: 8px;
             z-index: 10;
         }
 
-        .recommended-tag {
-            background-color: #ffc107; /* Yellow for recommendation */
-            color: var(--text-dark);
+        .tag.recommended {
+            background-color: #2ecc71; /* Green for recommendation */
         }
 
-        .card-image {
+        .image-container {
+            position: relative;
             width: 100%;
-            height: 200px; /* Fixed aspect ratio height */
+            padding-top: 56.25%; /* 16:9 Aspect Ratio */
             overflow: hidden;
         }
 
-        .card-image img {
+        .property-image {
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
 
-        .card-content {
+        .content-area {
             padding: 15px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
         }
 
-        .card-content h3 {
-            margin-top: 0;
-            font-size: 18px;
-            color: var(--primary-color);
-        }
-
-        .card-content .price-location {
+        .price-row {
             display: flex;
             justify-content: space-between;
             align-items: center;
             margin-bottom: 10px;
-            padding-bottom: 5px;
-            border-bottom: 1px solid var(--border-color);
         }
 
-        .price-location .price {
-            font-size: 22px;
+        .price {
+            font-size: 24px;
             font-weight: 700;
-            color: #d9534f; /* Red/Crimson for price */
+            color: var(--price-color);
+        }
+
+        .price small {
+            font-size: 14px;
+            color: var(--text-color);
+            font-weight: 400;
+        }
+
+        .property-title h2 {
+            margin: 0 0 5px 0;
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--primary-color);
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+
+        .property-title p {
+            margin: 0 0 10px 0;
+            font-size: 14px;
+            color: #777;
         }
 
         .details-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 10px 5px;
+            gap: 10px;
             margin-bottom: 15px;
             font-size: 14px;
         }
 
         .detail-item strong {
             display: block;
-            font-weight: 600;
-            color: #555;
+            font-size: 13px;
+            color: #999;
+            font-weight: 500;
         }
 
         .detail-item span {
-            color: var(--text-dark);
-        }
-
-        .features-section, .amenities-section {
-            margin-top: 10px;
-            padding-top: 10px;
-            border-top: 1px dashed var(--border-color);
-        }
-
-        .features-section p, .amenities-section p {
-            margin: 5px 0 10px 0;
             font-weight: 600;
-            color: #555;
+            color: var(--text-color);
         }
 
-        .feature-list, .amenity-list {
+        .features-section h3, .amenities-section h3 {
+            font-size: 16px;
+            color: var(--primary-color);
+            border-bottom: 1px solid #eee;
+            padding-bottom: 5px;
+            margin-bottom: 10px;
+            margin-top: 0;
+        }
+
+        .features-list, .amenities-list {
             list-style: none;
             padding: 0;
             margin: 0;
             display: flex;
             flex-wrap: wrap;
-            gap: 5px;
+            gap: 5px 10px;
+            font-size: 13px;
         }
-
-        .feature-list li, .amenity-list li {
-            background-color: #f0f0f0;
-            border-radius: 4px;
-            padding: 3px 8px;
-            font-size: 12px;
-            color: #555;
-        }
-
-        .emi-section {
-            background-color: #e6f7ff;
-            padding: 10px;
-            border-radius: 5px;
-            margin-top: 15px;
-            text-align: center;
-            border: 1px solid #b3e0ff;
-        }
-
-        .emi-section strong {
-            font-size: 16px;
-            color: #0056b3;
-            display: block;
-            margin-bottom: 5px;
-        }
-
-        .emi-banks a {
+        
+        .features-list li, .amenities-list li {
+            background-color: #f0f8ff;
             color: var(--primary-color);
-            text-decoration: none;
-            font-weight: bold;
-            margin: 0 8px;
-            transition: color 0.2s;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-weight: 500;
         }
 
-        .emi-banks a:hover {
-            color: #0056b3;
-            text-decoration: underline;
+        .furnishing-details {
+            font-size: 13px;
+            color: #555;
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px dashed #eee;
+        }
+
+        .furnishing-details strong {
+            color: var(--text-color);
+        }
+        
+        /* Placeholder Style */
+        .placeholder-card {
+            background-color: #eee;
+            color: #777;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 400px;
+            border: 2px dashed #ccc;
+            border-radius: 8px;
+            box-shadow: none;
+        }
+        .placeholder-card .content-area {
+            justify-content: center;
+            align-items: center;
+        }
+        .placeholder-card h2 {
+            font-size: 20px;
+            color: #777;
         }
     </style>
 </head>
 <body>
 
-<div class="container">
     <div class="header">
-        <h1>6 Best Property Matches in Greater Noida (Alpha Locality)</h1>
-        <div class="user-criteria">
-            Budget: **₹80 Lakh** | Type: **Buy** | Furnishing Preference: **Semi-furnished**
-        </div>
+        <h1>2 BHK Properties for Rent in Bandra, Mumbai</h1>
+        <p style="color: #555; font-size: 16px; margin-top: 5px;">Filtered for Budget: ₹80,000 | Furnishing Preference: Semi-Furnished</p>
     </div>
 
-    <div class="property-grid">
-
-        <!-- Property 1: Rail Vihar (Under Budget) -->
+    <div class="container">
+        
+        <!-- Property 1: Under Budget (Lowest Price) -->
         <div class="property-card">
-            <div class="property-tag">Under Budget</div>
-            <div class="card-image">
-                <img src="https://www.e-architect.com/wp-content/uploads/2025/07/step-maze-house-new-delhi-india-s250725-ba1.webp" alt="Property Image">
+            <div class="tag">Under Budget</div>
+            <div class="image-container">
+                <img src="https://www.e-architect.com/wp-content/uploads/2025/07/step-maze-house-new-delhi-india-s250725-ba1.webp" alt="Property Image" class="property-image">
             </div>
-            <div class="card-content">
-                <h3>Rail Vihar - 2 BHK Flat</h3>
-                <div class="price-location">
-                    <div class="price">₹75 Lac</div>
-                    <div>Greater Noida (Alpha 1)</div>
+            <div class="content-area">
+                <div class="price-row">
+                    <div class="price">₹65,000 <small>/month</small></div>
+                </div>
+                <div class="property-title">
+                    <h2>MIG COLONY</h2>
+                    <p>2 BHK Flat for rent in Kala Nagar, Bandra</p>
                 </div>
                 <div class="details-grid">
-                    <div class="detail-item"><strong>Configuration:</strong> <span>2 BHK (2 Baths)</span></div>
-                    <div class="detail-item"><strong>Area:</strong> <span>850 sqft (Carpet)</span></div>
-                    <div class="detail-item"><strong>Available From:</strong> <span>Ready To Move</span></div>
-                    <div class="detail-item"><strong>Age:</strong> <span>5-10 years old</span></div>
+                    <div class="detail-item"><strong>Configuration</strong><span>2 BHK, 2 Baths</span></div>
+                    <div class="detail-item"><strong>Area</strong><span>645 sqft (Carpet)</span></div>
+                    <div class="detail-item"><strong>Furnishing</strong><span>Unfurnished (Original)</span></div>
+                    <div class="detail-item"><strong>Available From</strong><span>Fri, 14 Mar 2025</span></div>
                 </div>
+                
                 <div class="features-section">
-                    <p>Furnishing:</p>
-                    <ul class="feature-list">
-                        <li>Unfurnished (Standard Resale)</li>
-                        <li>East-Facing</li>
-                        <li>2 Balconies</li>
-                    </ul>
-                    <p>Features:</p>
-                    <ul class="feature-list">
-                        <li>Lift</li>
+                    <h3>Key Highlights</h3>
+                    <ul class="features-list">
+                        <li>Ground Floor</li>
+                        <li>Corner Property</li>
                     </ul>
                 </div>
-                <div class="amenities-section">
-                    <p>Nearby Amenities (within 1 km):</p>
-                    <ul class="amenity-list">
-                        <li>Alpha 1 Metro Station (Metro)</li>
-                        <li>Kailash Hospital (Hospital)</li>
-                        <li>Alpha Commercial Belt (Market)</li>
+                
+                <div class="amenities-section" style="margin-top: 15px;">
+                    <h3>Nearby Amenities (Within 1 km)</h3>
+                    <ul class="amenities-list">
+                        <li>Lilavati Hospital (Medical Center)</li>
+                        <li>K.B. BHABHA MUNICIPAL GENERAL HOSPITAL (Hospital)</li>
                     </ul>
-                </div>
-                <div class="emi-section">
-                    <strong>EMI: ₹65,221/Month</strong> (8.5% for 20 years)
-                    <div class="emi-banks">
-                        <a href="https://osappsext.hdfc.com/spotoffer_fe/" target="_blank">HDFC BANK</a> |
-                        <a href="https://onlineapply.sbi.bank.in/personal-banking/application-status" target="_blank">SBI BANK</a>
-                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- Property 2: Alpha 2 Independent House (Under Budget) -->
+        <!-- Property 2: Under Budget (Next Lowest Price) -->
         <div class="property-card">
-            <div class="property-tag">Under Budget</div>
-            <div class="card-image">
-                <img src="https://tse1.mm.bing.net/th/id/OIP.wVLjZvfuzACwHIUTmX3pYAHaEK?w=200&h=112&c=7&p=0" alt="Property Image">
+            <div class="tag">Under Budget</div>
+            <div class="image-container">
+                <img src="https://tse1.mm.bing.net/th/id/OIP.wVLjZvfuzACwHIUTmX3pYAHaEK?w=200&h=112&c=7&p=0" alt="Property Image" class="property-image">
             </div>
-            <div class="card-content">
-                <h3>Independent House</h3>
-                <div class="price-location">
-                    <div class="price">₹80 Lac</div>
-                    <div>Greater Noida (Alpha 2)</div>
+            <div class="content-area">
+                <div class="price-row">
+                    <div class="price">₹65,000 <small>/month</small></div>
+                </div>
+                <div class="property-title">
+                    <h2>Mig Group 6</h2>
+                    <p>2 BHK Flat for rent in Bandra East, Mumbai</p>
                 </div>
                 <div class="details-grid">
-                    <div class="detail-item"><strong>Configuration:</strong> <span>2 BHK (2 Baths)</span></div>
-                    <div class="detail-item"><strong>Area:</strong> <span>42 sqft (Built-up)</span></div>
-                    <div class="detail-item"><strong>Available From:</strong> <span>Ready To Move</span></div>
-                    <div class="detail-item"><strong>Title:</strong> <span>Freehold</span></div>
+                    <div class="detail-item"><strong>Configuration</strong><span>2 BHK, 2 Baths</span></div>
+                    <div class="detail-item"><strong>Area</strong><span>607 sqft (Carpet)</span></div>
+                    <div class="detail-item"><strong>Furnishing</strong><span>Unfurnished (Original)</span></div>
+                    <div class="detail-item"><strong>Available From</strong><span>Contact Dealer</span></div>
                 </div>
+                
                 <div class="features-section">
-                    <p>Furnishing:</p>
-                    <ul class="feature-list">
-                        <li>Unfurnished (Independent House)</li>
+                    <h3>Key Highlights</h3>
+                    <ul class="features-list">
+                        <li>East Facing</li>
+                        <li>Ground Floor</li>
+                        <li>Open Parking</li>
+                    </ul>
+                </div>
+                
+                <div class="amenities-section" style="margin-top: 15px;">
+                    <h3>Nearby Amenities (Within 1 km)</h3>
+                    <ul class="amenities-list">
+                        <li>Lilavati Hospital (Medical Center)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Property 3: Under Budget (Semi-Furnished Match) -->
+        <div class="property-card">
+            <div class="tag">Under Budget</div>
+            <div class="image-container">
+                <img src="https://tse4.mm.bing.net/th/id/OIP.ScQKvH5aTiZtiWAe7-yLOgHaEO?w=474&h=474&c=7&p=0" alt="Property Image" class="property-image">
+            </div>
+            <div class="content-area">
+                <div class="price-row">
+                    <div class="price">₹70,000 <small>/month</small></div>
+                </div>
+                <div class="property-title">
+                    <h2>Rustomjee Erika</h2>
+                    <p>2 BHK Flat for rent in Bandra East, Mumbai</p>
+                </div>
+                <div class="details-grid">
+                    <div class="detail-item"><strong>Configuration</strong><span>2 BHK, 2 Baths</span></div>
+                    <div class="detail-item"><strong>Area</strong><span>510 sqft (Carpet)</span></div>
+                    <div class="detail-item"><strong>Furnishing</strong><span>Semi-Furnished</span></div>
+                    <div class="detail-item"><strong>Available From</strong><span>Contact Dealer</span></div>
+                </div>
+                
+                <div class="features-section">
+                    <h3>Key Highlights</h3>
+                    <ul class="features-list">
+                        <li>East Facing</li>
+                        <li>Covered Parking</li>
+                        <li>23 Storey Building</li>
+                    </ul>
+                </div>
+                
+                <div class="furnishing-details">
+                    <strong>Furnishing Includes:</strong> 10 Lights, 5 Fans, 3 ACs, 2 Geysers, 1 Modular Kitchen, 1 Chimney, 1 Exhaust Fan.
+                </div>
+
+                <div class="amenities-section" style="margin-top: 15px;">
+                    <h3>Nearby Amenities (Within 1 km)</h3>
+                    <ul class="amenities-list">
+                        <li>Lilavati Hospital (Medical Center)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Property 4: Under Budget (Semi-Furnished by Owner) -->
+        <div class="property-card">
+            <div class="tag">Under Budget</div>
+            <div class="image-container">
+                <img src="https://tse4.mm.bing.net/th/id/OIP.fhNgjR0HW09tJQzFXPumxwHaHa?w=200&h=200&c=7&p=0" alt="Property Image" class="property-image">
+            </div>
+            <div class="content-area">
+                <div class="price-row">
+                    <div class="price">₹70,000 <small>/month</small></div>
+                </div>
+                <div class="property-title">
+                    <h2>Shapoorji Pallonji BKC 28</h2>
+                    <p>2 BHK Flat for rent in Bandra East, Mumbai</p>
+                </div>
+                <div class="details-grid">
+                    <div class="detail-item"><strong>Configuration</strong><span>2 BHK, 2 Baths</span></div>
+                    <div class="detail-item"><strong>Area</strong><span>540 sqft (Built-up)</span></div>
+                    <div class="detail-item"><strong>Furnishing</strong><span>Semi-Furnished (Owner will install)</span></div>
+                    <div class="detail-item"><strong>Available From</strong><span>Contact Owner</span></div>
+                </div>
+                
+                <div class="features-section">
+                    <h3>Key Highlights</h3>
+                    <ul class="features-list">
+                        <li>Road Facing</li>
+                        <li>2 Lifts</li>
+                        <li>1 Parking</li>
+                    </ul>
+                </div>
+
+                <div class="furnishing-details">
+                    <strong>Furnishing Includes:</strong> Kitchen work, Lights, Fans, Sofa, Bed, 2 Geysers.
+                </div>
+                
+                <div class="amenities-section" style="margin-top: 15px;">
+                    <h3>Nearby Amenities (Within 1 km)</h3>
+                    <ul class="amenities-list">
+                        <li>Lilavati Hospital (Medical Center)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Property 5: Recommended (Hospitals) - Bandra West Location -->
+        <div class="property-card">
+            <div class="tag recommended">Recommended: Hospitals</div>
+            <div class="image-container">
+                <img src="https://tse4.mm.bing.net/th/id/OIP.Evk5HKyZSXoVD7OSbUGZ0QHaDE?w=200&h=112&c=7&p=0" alt="Property Image" class="property-image">
+            </div>
+            <div class="content-area">
+                <div class="price-row">
+                    <div class="price">₹80,000 <small>/month</small></div>
+                </div>
+                <div class="property-title">
+                    <h2>Co Operative Housing Society</h2>
+                    <p>2 BHK Flat for rent in Bandra West, Mumbai</p>
+                </div>
+                <div class="details-grid">
+                    <div class="detail-item"><strong>Configuration</strong><span>2 BHK, 2 Baths</span></div>
+                    <div class="detail-item"><strong>Area</strong><span>750 sqft (Carpet)</span></div>
+                    <div class="detail-item"><strong>Furnishing</strong><span>Semi-Furnished (User Preference)</span></div>
+                    <div class="detail-item"><strong>Available From</strong><span>Contact Dealer</span></div>
+                </div>
+                
+                <div class="features-section">
+                    <h3>Key Highlights</h3>
+                    <ul class="features-list">
+                        <li>Close to SV Road Metro</li>
+                        <li>Close to Market</li>
                         <li>1 Balcony</li>
                     </ul>
-                    <p>Features:</p>
-                    <ul class="feature-list">
-                        <li>Independent unit</li>
-                        <li>Peaceful Locality</li>
-                    </ul>
                 </div>
-                <div class="amenities-section">
-                    <p>Nearby Amenities (within 1 km):</p>
-                    <ul class="amenity-list">
-                        <li>Delta 1 Metro Station (Metro)</li>
-                        <li>Alpha 2 Commercial Belt (Market)</li>
-                        <li>Kailash Hospital (Hospital)</li>
-                    </ul>
+                
+                <div class="furnishing-details">
+                    <strong>Furnishing (Semi-Furnished):</strong> Modular Kitchen, Lights, Fans, Water Heater.
                 </div>
-                <div class="emi-section">
-                    <strong>EMI: ₹69,409/Month</strong> (8.5% for 20 years)
-                    <div class="emi-banks">
-                        <a href="https://osappsext.hdfc.com/spotoffer_fe/" target="_blank">HDFC BANK</a> |
-                        <a href="https://onlineapply.sbi.bank.in/personal-banking/application-status" target="_blank">SBI BANK</a>
-                    </div>
+
+                <div class="amenities-section" style="margin-top: 15px;">
+                    <h3>Nearby Amenities (Within 1 km)</h3>
+                    <ul class="amenities-list">
+                        <li>Holy Family Hospital (Hospital)</li>
+                        <li>K.B. BHABHA Hospital (Hospital)</li>
+                        <li>SV Road Metro Station (Metro)</li>
+                    </ul>
                 </div>
             </div>
         </div>
 
-        <!-- Property 3: Omaxe ITC - 1 BHK (Under Budget) -->
+        <!-- Property 6: Recommended (Hospitals) - Close to Hospital & Railway -->
         <div class="property-card">
-            <div class="property-tag">Under Budget</div>
-            <div class="card-image">
-                <img src="https://tse4.mm.bing.net/th/id/OIP.ScQKvH5aTiZtiWAe7-yLOgHaEO?w=474&h=474&c=7&p=0" alt="Property Image">
+            <div class="tag recommended">Recommended: Hospitals</div>
+            <div class="image-container">
+                <img src="https://www.e-architect.com/wp-content/uploads/2025/07/step-maze-house-new-delhi-india-s250725-ba1.webp" alt="Property Image" class="property-image">
             </div>
-            <div class="card-content">
-                <h3>Omaxe India Trade Center - Studio</h3>
-                <div class="price-location">
-                    <div class="price">₹45 Lac</div>
-                    <div>Greater Noida (Alpha 2)</div>
+            <div class="content-area">
+                <div class="price-row">
+                    <div class="price">₹75,000 <small>/month</small></div>
+                </div>
+                <div class="property-title">
+                    <h2>Jeevansheela CHS</h2>
+                    <p>2 BHK Flat for rent in Kala Nagar, Bandra</p>
                 </div>
                 <div class="details-grid">
-                    <div class="detail-item"><strong>Configuration:</strong> <span>1 BHK (1 Bath)</span></div>
-                    <div class="detail-item"><strong>Area:</strong> <span>530 sqft (Built-up)</span></div>
-                    <div class="detail-item"><strong>Available From:</strong> <span>Ready To Move</span></div>
-                    <div class="detail-item"><strong>Floor:</strong> <span>4th Floor</span></div>
+                    <div class="detail-item"><strong>Configuration</strong><span>2 BHK, 2 Baths</span></div>
+                    <div class="detail-item"><strong>Area</strong><span>650 sqft (Super Built-up)</span></div>
+                    <div class="detail-item"><strong>Furnishing</strong><span>Semi-Furnished (User Preference)</span></div>
+                    <div class="detail-item"><strong>Available From</strong><span>Contact Dealer</span></div>
                 </div>
+                
                 <div class="features-section">
-                    <p>Furnishing:</p>
-                    <ul class="feature-list">
-                        <li>Unfurnished (Studio Apt)</li>
-                        <li>Front Facing</li>
-                    </ul>
-                    <p>Features:</p>
-                    <ul class="feature-list">
-                        <li>Near Delta Metro Station</li>
-                        <li>High Rental Yield Potential</li>
+                    <h3>Key Highlights</h3>
+                    <ul class="features-list">
+                        <li>East Facing</li>
+                        <li>Full Power Backup</li>
+                        <li>Close to Railway Station</li>
                     </ul>
                 </div>
-                <div class="amenities-section">
-                    <p>Nearby Amenities (within 1 km):</p>
-                    <ul class="amenity-list">
-                        <li>Delta Metro Station (Metro)</li>
-                        <li>Pari Chowk (Landmark)</li>
-                        <li>Alpha 2 Market (Shopping)</li>
-                    </ul>
-                </div>
-                <div class="emi-section">
-                    <strong>EMI: ₹39,132/Month</strong> (8.5% for 20 years)
-                    <div class="emi-banks">
-                        <a href="https://osappsext.hdfc.com/spotoffer_fe/" target="_blank">HDFC BANK</a> |
-                        <a href="https://onlineapply.sbi.bank.in/personal-banking/application-status" target="_blank">SBI BANK</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Property 4: LIG Flat (Under Budget - Value outside Alpha) -->
-        <div class="property-card">
-            <div class="property-tag">Under Budget - Value Pick</div>
-            <div class="card-image">
-                <img src="https://tse4.mm.bing.net/th/id/OIP.fhNgjR0HW09tJQzFXPumxwHaHa?w=200&h=200&c=7&p=0" alt="Property Image">
-            </div>
-            <div class="card-content">
-                <h3>LIG Flat (Compact)</h3>
-                <div class="price-location">
-                    <div class="price">₹60 Lac</div>
-                    <div>Greater Noida (Beta 1)</div>
-                </div>
-                <div class="details-grid">
-                    <div class="detail-item"><strong>Configuration:</strong> <span>2 BHK (2 Baths)</span></div>
-                    <div class="detail-item"><strong>Area:</strong> <span>36 sqft (Carpet)</span></div>
-                    <div class="detail-item"><strong>Available From:</strong> <span>Ready To Move</span></div>
-                    <div class="detail-item"><strong>Floor:</strong> <span>Ground Floor</span></div>
-                </div>
-                <div class="features-section">
-                    <p>Furnishing:</p>
-                    <ul class="feature-list">
-                        <li>Unfurnished (Compact Flat)</li>
-                        <li>2 Balconies</li>
-                    </ul>
-                    <p>Features:</p>
-                    <ul class="feature-list">
-                        <li>Immediate Possession</li>
-                        <li>1-5 years old</li>
-                    </ul>
-                </div>
-                <div class="amenities-section">
-                    <p>Nearby Amenities (within 1 km):</p>
-                    <ul class="amenity-list">
-                        <li>Beta 1 Market (Shopping)</li>
-                        <li>Metro Connectivity (Public Transit)</li>
-                        <li>Local Parks (Recreation)</li>
-                    </ul>
-                </div>
-                <div class="emi-section">
-                    <strong>EMI: ₹52,177/Month</strong> (8.5% for 20 years)
-                    <div class="emi-banks">
-                        <a href="https://osappsext.hdfc.com/spotoffer_fe/" target="_blank">HDFC BANK</a> |
-                        <a href="https://onlineapply.sbi.bank.in/personal-banking/application-status" target="_blank">SBI BANK</a>
-                    </div>
-                </div>
-            </div>
-        </div>
 
-        <!-- Property 5: Spacetech Edana (Recommended - Location) -->
-        <div class="property-card">
-            <div class="property-tag recommended-tag">Recommended - Location & Value</div>
-            <div class="card-image">
-                <img src="https://tse4.mm.bing.net/th/id/OIP.Evk5HKyZSXoVD7OSbUGZ0QHaDE?w=200&h=112&c=7&p=0" alt="Property Image">
-            </div>
-            <div class="card-content">
-                <h3>Spacetech Edana - Premium Flat</h3>
-                <div class="price-location">
-                    <div class="price">₹94 Lac</div>
-                    <div>Greater Noida (Alpha 1)</div>
+                <div class="furnishing-details">
+                    <strong>Furnishing (Semi-Furnished):</strong> Modular Kitchen, Lights, Fans, Water Heater.
                 </div>
-                <div class="details-grid">
-                    <div class="detail-item"><strong>Configuration:</strong> <span>2 BHK (2 Baths)</span></div>
-                    <div class="detail-item"><strong>Area:</strong> <span>1100 sqft (SBU)</span></div>
-                    <div class="detail-item"><strong>Available From:</strong> <span>Ready To Move</span></div>
-                    <div class="detail-item"><strong>Facing:</strong> <span>North-West</span></div>
-                </div>
-                <div class="features-section">
-                    <p>Furnishing (User Preference):</p>
-                    <ul class="feature-list">
-                        <li>Semi-furnished (Modular Kitchen, Wardrobes)</li>
-                    </ul>
-                    <p>Features:</p>
-                    <ul class="feature-list">
-                        <li>Private Garden</li>
-                        <li>Recently Renovated</li>
-                        <li>Lift, Power Back-up</li>
-                    </ul>
-                </div>
-                <div class="amenities-section">
-                    <p>Nearby Amenities (Walking Distance):</p>
-                    <ul class="amenity-list">
-                        <li>Knowledge Park II Station (Metro)</li>
-                        <li>Kailash Hospital (Hospital)</li>
-                        <li>DDPS School (School)</li>
-                        <li>Alpha Commercial Market (Shopping)</li>
-                    </ul>
-                </div>
-                <div class="emi-section">
-                    <strong>EMI: ₹81,675/Month</strong> (8.5% for 20 years)
-                    <div class="emi-banks">
-                        <a href="https://osappsext.hdfc.com/spotoffer_fe/" target="_blank">HDFC BANK</a> |
-                        <a href="https://onlineapply.sbi.bank.in/personal-banking/application-status" target="_blank">SBI BANK</a>
-                    </div>
-                </div>
-            </div>
-        </div>
 
-        <!-- Property 6: Omaxe ITC - Under Construction (Recommended - Potential) -->
-        <div class="property-card">
-            <div class="property-tag recommended-tag">Recommended - Investment Potential</div>
-            <div class="card-image">
-                <img src="https://tse4.mm.bing.net/th/id/OIP.ScQKvH5aTiZtiWAe7-yLOgHaEO?w=474&h=474&c=7&p=0" alt="Property Image">
-            </div>
-            <div class="card-content">
-                <h3>Omaxe India Trade Center - UC</h3>
-                <div class="price-location">
-                    <div class="price">₹49.5 Lac</div>
-                    <div>Greater Noida (Alpha 2)</div>
-                </div>
-                <div class="details-grid">
-                    <div class="detail-item"><strong>Configuration:</strong> <span>1 BHK (1 Bath)</span></div>
-                    <div class="detail-item"><strong>Area:</strong> <span>640 sqft (Built-up)</span></div>
-                    <div class="detail-item"><strong>Available From:</strong> <span>October 2025</span></div>
-                    <div class="detail-item"><strong>Floor:</strong> <span>Fifth Floor</span></div>
-                </div>
-                <div class="features-section">
-                    <p>Furnishing (User Preference):</p>
-                    <ul class="feature-list">
-                        <li>Semi-furnished (Lights & Fans, Geyser)</li>
+                <div class="amenities-section" style="margin-top: 15px;">
+                    <h3>Nearby Amenities (Within 1 km)</h3>
+                    <ul class="amenities-list">
+                        <li>Lilavati Hospital (Medical Center)</li>
+                        <li>K.B. BHABHA MUNICIPAL GENERAL HOSPITAL (Hospital)</li>
                     </ul>
-                    <p>Features:</p>
-                    <ul class="feature-list">
-                        <li>Front Side Facing</li>
-                        <li>Under Construction (RERA Registered)</li>
-                        <li>Prime Commercial Location</li>
-                    </ul>
-                </div>
-                <div class="amenities-section">
-                    <p>Nearby Amenities (within 1 km):</p>
-                    <ul class="amenity-list">
-                        <li>Delta Metro Station (Metro)</li>
-                        <li>Alpha 2 Commercial Belt (Market)</li>
-                        <li>Reputed Schools nearby (School)</li>
-                    </ul>
-                </div>
-                <div class="emi-section">
-                    <strong>EMI: ₹43,046/Month</strong> (8.5% for 20 years)
-                    <div class="emi-banks">
-                        <a href="https://osappsext.hdfc.com/spotoffer_fe/" target="_blank">HDFC BANK</a> |
-                        <a href="https://onlineapply.sbi.bank.in/personal-banking/application-status" target="_blank">SBI BANK</a>
-                    </div>
                 </div>
             </div>
         </div>
 
     </div>
-</div>
-
 </body>
 </html>
