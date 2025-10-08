@@ -3,23 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Property Recommendations - Noida, Sector 63</title>
+    <title>Property Recommendations | Noida, Sector 122</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300,400,500,700&display=swap');
+
         :root {
-            --primary-color: #ff5722; /* 99acres orange */
-            --secondary-color: #007bff; /* Blue for links/buttons */
-            --text-color: #333;
-            --light-bg: #f5f5f5;
-            --card-bg: #fff;
-            --border-color: #ddd;
+            --primary-color: #007bff;
+            --secondary-color: #f7f7f7;
+            --text-dark: #333;
+            --text-light: #555;
+            --border-color: #e0e0e0;
+            --price-color: #28a745;
         }
 
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Roboto', sans-serif;
+            background-color: #f4f7f9;
             margin: 0;
             padding: 0;
-            background-color: var(--light-bg);
-            color: var(--text-color);
+            color: var(--text-dark);
         }
 
         .container {
@@ -28,334 +30,444 @@
             margin: 20px auto;
         }
 
-        .header {
-            background-color: var(--card-bg);
-            padding: 20px;
+        header {
+            background-color: white;
+            padding: 15px 0;
             border-bottom: 3px solid var(--primary-color);
             margin-bottom: 20px;
         }
 
-        .header h1 {
-            margin: 0;
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
             font-size: 24px;
+            font-weight: 700;
             color: var(--primary-color);
         }
 
-        .header p {
-            margin: 5px 0 0;
-            color: #777;
+        .filters {
+            font-size: 14px;
+            color: var(--text-light);
         }
 
-        .section-title {
-            font-size: 22px;
-            color: #000;
-            border-left: 5px solid var(--primary-color);
-            padding-left: 10px;
-            margin: 30px 0 20px;
+        .section-header {
+            font-size: 24px;
+            font-weight: 500;
+            margin-bottom: 15px;
+            padding-bottom: 5px;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--text-dark);
         }
 
-        .property-list {
+        .section-header.highlight {
+            color: #dc3545; /* Red for emphasis on recommendation */
+            border-bottom: 1px solid #dc3545;
+        }
+
+        .property-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 20px;
+            gap: 25px;
+            margin-bottom: 40px;
         }
 
         .property-card {
-            background-color: var(--card-bg);
+            background-color: white;
             border: 1px solid var(--border-color);
             border-radius: 8px;
             overflow: hidden;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            transition: transform 0.2s;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
         }
 
         .property-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
         }
 
         .property-image {
-            width: 100%;
-            height: 200px; /* Fixed aspect ratio for image height */
-            object-fit: cover;
+            height: 200px; /* Fixed aspect ratio for the image container */
+            overflow: hidden;
         }
 
-        .property-info {
+        .property-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Cover mode */
+        }
+
+        .property-details {
             padding: 15px;
         }
 
-        .property-title {
+        .property-name {
             font-size: 18px;
-            font-weight: bold;
-            color: #000;
-            margin-top: 0;
+            font-weight: 700;
+            color: var(--primary-color);
             margin-bottom: 5px;
         }
-        
-        .property-subtitle {
+
+        .property-title {
             font-size: 14px;
-            color: #555;
-            margin-top: 0;
+            color: var(--text-light);
             margin-bottom: 10px;
         }
 
+        .price-locality {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding: 5px 0;
+            border-top: 1px dotted var(--border-color);
+        }
+
         .price {
-            font-size: 24px;
-            color: var(--primary-color);
+            font-size: 22px;
             font-weight: 700;
-            margin: 10px 0;
+            color: var(--price-color);
         }
 
-        .price small {
+        .locality {
             font-size: 14px;
-            color: #777;
-            font-weight: normal;
+            color: var(--text-light);
+            background-color: var(--secondary-color);
+            padding: 5px 10px;
+            border-radius: 4px;
         }
 
-        .details-grid {
+        .info-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 10px;
-            font-size: 14px;
-            border-top: 1px dashed var(--border-color);
-            padding-top: 10px;
+            font-size: 13px;
             margin-bottom: 15px;
         }
 
-        .detail-item strong {
-            display: block;
-            font-size: 13px;
-            color: #777;
-            margin-bottom: 2px;
+        .info-item {
+            display: flex;
+            flex-direction: column;
         }
 
-        .features, .amenities {
-            margin-top: 15px;
-            padding-top: 10px;
+        .info-label {
+            font-weight: 500;
+            color: var(--text-dark);
+        }
+
+        .info-value {
+            color: var(--text-light);
+        }
+
+        .features-amenities {
             border-top: 1px dashed var(--border-color);
+            padding-top: 15px;
         }
 
-        .features h4, .amenities h4 {
+        .features-amenities h4 {
             font-size: 15px;
-            margin: 0 0 5px;
+            margin-top: 0;
+            margin-bottom: 8px;
             color: var(--primary-color);
+            font-weight: 500;
         }
 
-        .features ul, .amenities ul {
+        .list {
             list-style: none;
             padding: 0;
-            margin: 5px 0 0;
+            margin: 0;
             font-size: 13px;
             display: flex;
             flex-wrap: wrap;
+            gap: 5px 10px;
         }
 
-        .features li, .amenities li {
-            background-color: #f0f0f0;
+        .list-item {
+            background-color: var(--secondary-color);
+            padding: 3px 8px;
             border-radius: 3px;
-            padding: 4px 8px;
-            margin-right: 5px;
-            margin-bottom: 5px;
+            color: var(--text-light);
         }
-        
-        .amenities li {
+
+        .list-item.rec-highlight {
+            background-color: #ffe0e6;
+            color: #dc3545;
+            font-weight: 500;
+        }
+
+        .emi-section {
+            padding: 10px 15px;
             background-color: #e6f7ff;
-            color: #0056b3;
+            border-top: 1px solid #b3e0ff;
+            font-size: 13px;
+            text-align: center;
         }
 
-        .furnishing-details {
-            margin-top: 10px;
-            font-size: 14px;
-            line-height: 1.4;
-            color: #555;
+        .emi-section a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+            margin: 0 5px;
         }
 
-        .furnishing-details strong {
-            color: var(--text-color);
+        .emi-section a:hover {
+            text-decoration: underline;
         }
+
     </style>
 </head>
 <body>
+
+    <header>
+        <div class="header-content">
+            <div class="logo">99acres</div>
+            <div class="filters">
+                Showing **Semi-furnished** Properties for **Rent** in **Noida (Sector 122)**, Budget **< ₹40,000**
+            </div>
+        </div>
+    </header>
+
     <div class="container">
-        <div class="header">
-            <h1>Recommended 2 & 3 BHK Rentals in Noida</h1>
-            <p>Filtered for: **Sector 63, Noida | Rent | Furnished | Budget up to ₹50k**</p>
-        </div>
 
-        <?php
-        $properties = [
-            [
-                "name" => "The Lotus Tower",
-                "title" => "Spacious 2 BHK for Rent in Sector 63",
-                "city" => "Noida (Sector 63)",
-                "price" => "₹28,000/month",
-                "config" => "2 BHK",
-                "area" => "1100 sqft",
-                "furnishing" => "Fully Furnished: Sofa Set, Double Beds, AC, Fridge, Modular Kitchen, Fans",
-                "available" => "Immediate",
-                "features" => ["Power Back-up", "Gymnasium", "24/7 Security", "CCTV"],
-                "amenities" => ["Sector 62 Metro Station (1.2 km)", "Sector 63 Market (0.8 km)", "Kailash Hospital (2 km)"],
-                "image" => "https://www.e-architect.com/wp-content/uploads/2025/07/step-maze-house-new-delhi-india-s250725-ba1.webp"
-            ],
-            [
-                "name" => "Emerald Residency",
-                "title" => "Modern 3 BHK Flat in Prime Locality",
-                "city" => "Noida (Sector 63)",
-                "price" => "₹45,000/month",
-                "config" => "3 BHK",
-                "area" => "1500 sqft",
-                "furnishing" => "Fully Furnished: Beds, ACs, Washing Machine, Geysers, Dining Table",
-                "available" => "1st Nov 2024",
-                "features" => ["Lift/Elevator", "Reserved Parking", "Kids Play Area", "Fire Safety"],
-                "amenities" => ["Corenthum Business Park (0.5 km)", "Wave Mall Noida (4 km)", "Local Schools nearby"],
-                "image" => "https://tse1.mm.bing.net/th/id/OIP.wVLjZvfuzACwHIUTmX3pYAHaEK?w=200&h=112&c=7&p=0"
-            ],
-            [
-                "name" => "Sapphire Heights",
-                "title" => "Compact 2 BHK for Working Professionals",
-                "city" => "Noida (Sector 63)",
-                "price" => "₹22,000/month",
-                "config" => "2 BHK",
-                "area" => "950 sqft",
-                "furnishing" => "Fully Furnished: AC, Fans, Built-in Wardrobes, Basic Kitchen Setup",
-                "available" => "Immediate",
-                "features" => ["Power Backup", "Visitor Parking", "Rain Water Harvesting"],
-                "amenities" => ["Sector 63 Market (1 km)", "DND Flyway Access (5 km)", "Shopping Centers nearby"],
-                "image" => "https://tse4.mm.bing.net/th/id/OIP.ScQKvH5aTiZtiWAe7-yLOgHaEO?w=474&h=474&c=7&p=0"
-            ],
-            [
-                "name" => "Stellar Homes",
-                "title" => "Luxury 3 BHK Duplex Apartment",
-                "city" => "Noida (Sector 63)",
-                "price" => "₹48,000/month",
-                "config" => "3 BHK",
-                "area" => "1800 sqft",
-                "furnishing" => "Fully Furnished: Premium Furniture, Dishwasher, Central AC, Study Unit",
-                "available" => "15th Nov 2024",
-                "features" => ["Swimming Pool", "Club House", "Intercom Facility", "24x7 Water"],
-                "amenities" => ["Gym nearby (0.5 km)", "The Great India Place Mall (5 km)", "Botanical Garden (6 km)"],
-                "image" => "https://tse4.mm.bing.net/th/id/OIP.fhNgjR0HW09tJQzFXPumxwHaHa?w=200&h=200&c=7&p=0"
-            ],
-            // Recommended Properties (Metro Proximity)
-            [
-                "name" => "MetroView Towers",
-                "title" => "2 BHK - 5 Min Walk to Metro Station",
-                "city" => "Noida (Sector 63)",
-                "price" => "₹35,000/month",
-                "config" => "2 BHK",
-                "area" => "1050 sqft",
-                "furnishing" => "Fully Furnished: Beds, AC, Fridge, Fans, Modular Kitchen (Matching User's choice)",
-                "available" => "Immediate",
-                "features" => ["Near Metro", "24/7 Water Supply", "Security Staff", "Maintenance Service"],
-                "amenities" => ["Sector 62 Noida Metro Station (0.3 km)", "Sector 63 Market (1 km)", "Easy Highway Access"],
-                "image" => "https://tse4.mm.bing.net/th/id/OIP.Evk5HKyZSXoVD7OSbUGZ0QHaDE?w=200&h=112&c=7&p=0"
-            ],
-            [
-                "name" => "Rail Connect Apt",
-                "title" => "Executive 3 BHK with Excellent Metro Access",
-                "city" => "Noida (Sector 63)",
-                "price" => "₹42,000/month",
-                "config" => "3 BHK",
-                "area" => "1400 sqft",
-                "furnishing" => "Fully Furnished: Beds, ACs, Fans, Wardrobes, Geysers (Matching User's choice)",
-                "available" => "1st Dec 2024",
-                "features" => ["Lift", "Covered Parking", "Excellent Metro Access", "Vaastu Compliant"],
-                "amenities" => ["Sector 62 Noida Metro Station (0.5 km)", "Kailash Hospital (2.5 km)", "Local Park (0.4 km)"],
-                "image" => "https://www.e-architect.com/wp-content/uploads/2025/07/step-maze-house-new-delhi-india-s250725-ba1.webp"
-            ]
-        ];
+        <!-- Section 1: Top 4 Under Budget Properties -->
+        <h2 class="section-header">Top 4 Options Under Your Budget (Rent ≤ ₹40,000)</h2>
+        <div class="property-grid">
 
-        $under_budget = array_slice($properties, 0, 4);
-        $recommended = array_slice($properties, 4, 2);
-        ?>
-
-        <!-- Under Budget Section -->
-        <h2 class="section-title">4 Properties Under Your Budget (₹50,000)</h2>
-        <div class="property-list">
-            <?php foreach ($under_budget as $prop): ?>
-                <div class="property-card">
-                    <img src="<?= $prop['image'] ?>" alt="<?= $prop['name'] ?>" class="property-image">
-                    <div class="property-info">
-                        <p class="property-title"><?= $prop['name'] ?></p>
-                        <p class="property-subtitle"><?= $prop['title'] ?></p>
-                        <p class="price"><?= $prop['price'] ?> <small>onwards</small></p>
-                        
-                        <div class="details-grid">
-                            <div class="detail-item"><strong>Configuration</strong><?= $prop['config'] ?></div>
-                            <div class="detail-item"><strong>Area</strong><?= $prop['area'] ?></div>
-                            <div class="detail-item"><strong>City (Locality)</strong><?= $prop['city'] ?></div>
-                            <div class="detail-item"><strong>Available From</strong><?= $prop['available'] ?></div>
-                        </div>
-
-                        <div class="furnishing-details">
-                            <strong>Furnishing Details:</strong> <?= $prop['furnishing'] ?>
-                        </div>
-
-                        <div class="features">
-                            <h4>Key Features</h4>
-                            <ul>
-                                <?php foreach ($prop['features'] as $feature): ?>
-                                    <li><?= $feature ?></li>
-                                <?php endforeach; ?>
-                            </ul>
-                        </div>
-                        
-                        <div class="amenities">
-                            <h4>Nearby Amenities (within 1 km)</h4>
-                            <ul>
-                                <?php foreach ($prop['amenities'] as $amenity): ?>
-                                    <li><?= $amenity ?></li>
-                                <?php endforeach; ?>
-                            </ul>
-                        </div>
+            <!-- Property 1 -->
+            <div class="property-card">
+                <div class="property-image">
+                    <img src="https://www.e-architect.com/wp-content/uploads/2025/07/step-maze-house-new-delhi-india-s250725-ba1.webp" alt="Property Image 1">
+                </div>
+                <div class="property-details">
+                    <div class="price-locality">
+                        <div class="price">₹ 28,000/month</div>
+                        <div class="locality">Noida (Sector 122)</div>
+                    </div>
+                    <div class="property-name">Royal Residency</div>
+                    <div class="property-title">Premium 2 BHK Flat for Rent in Sector 122, Noida</div>
+                    <div class="info-grid">
+                        <div class="info-item"><span class="info-label">Configuration:</span><span class="info-value">2 BHK</span></div>
+                        <div class="info-item"><span class="info-label">Area:</span><span class="info-value">1100 sqft</span></div>
+                        <div class="info-item"><span class="info-label">Furnishing:</span><span class="info-value">Semi-furnished</span></div>
+                        <div class="info-item"><span class="info-label">Available from:</span><span class="info-value">2024-11-01</span></div>
+                    </div>
+                    <div class="features-amenities">
+                        <h4>Features</h4>
+                        <ul class="list">
+                            <li class="list-item">Power Back-up</li>
+                            <li class="list-item">Lift</li>
+                            <li class="list-item">24x7 Security</li>
+                            <li class="list-item">Reserved Parking</li>
+                            <li class="list-item">Wardrobes, Modular Kitchen, Fans, Lights</li>
+                        </ul>
+                        <h4>Nearby Amenities (&lt; 1 km)</h4>
+                        <ul class="list">
+                            <li class="list-item">Motherland Hospital & IVF Centre</li>
+                            <li class="list-item">Central Park</li>
+                            <li class="list-item">Sector 81 Metro Station</li>
+                        </ul>
                     </div>
                 </div>
-            <?php endforeach; ?>
-        </div>
+            </div>
 
-        <!-- Recommended Section -->
-        <h2 class="section-title">2 Properties Based on Your Recommendation (Metro Connectivity)</h2>
-        <div class="property-list">
-            <?php foreach ($recommended as $prop): ?>
-                <div class="property-card">
-                    <img src="<?= $prop['image'] ?>" alt="<?= $prop['name'] ?>" class="property-image">
-                    <div class="property-info">
-                        <p class="property-title"><?= $prop['name'] ?> <span style="color: green; font-size: 12px; margin-left: 5px;">(Highly Recommended)</span></p>
-                        <p class="property-subtitle"><?= $prop['title'] ?></p>
-                        <p class="price"><?= $prop['price'] ?> <small>onwards</small></p>
-                        
-                        <div class="details-grid">
-                            <div class="detail-item"><strong>Configuration</strong><?= $prop['config'] ?></div>
-                            <div class="detail-item"><strong>Area</strong><?= $prop['area'] ?></div>
-                            <div class="detail-item"><strong>City (Locality)</strong><?= $prop['city'] ?></div>
-                            <div class="detail-item"><strong>Available From</strong><?= $prop['available'] ?></div>
-                        </div>
-
-                        <div class="furnishing-details">
-                            <strong>Furnishing Details (Your Choice):</strong> <?= $prop['furnishing'] ?>
-                        </div>
-
-                        <div class="features">
-                            <h4>Key Features</h4>
-                            <ul>
-                                <?php foreach ($prop['features'] as $feature): ?>
-                                    <li><?= $feature ?></li>
-                                <?php endforeach; ?>
-                            </ul>
-                        </div>
-                        
-                        <div class="amenities">
-                            <h4>Nearby Amenities (Metro Focus)</h4>
-                            <ul>
-                                <?php foreach ($prop['amenities'] as $amenity): ?>
-                                    <li><?= $amenity ?></li>
-                                <?php endforeach; ?>
-                            </ul>
-                        </div>
+            <!-- Property 2 -->
+            <div class="property-card">
+                <div class="property-image">
+                    <img src="https://tse1.mm.bing.net/th/id/OIP.wVLjZvfuzACwHIUTmX3pYAHaEK?w=200&h=112&c=7&p=0" alt="Property Image 2">
+                </div>
+                <div class="property-details">
+                    <div class="price-locality">
+                        <div class="price">₹ 35,000/month</div>
+                        <div class="locality">Noida (Sector 122)</div>
+                    </div>
+                    <div class="property-name">Sapphire Heights</div>
+                    <div class="property-title">Spacious 2 BHK Apartment in a Gated Society</div>
+                    <div class="info-grid">
+                        <div class="info-item"><span class="info-label">Configuration:</span><span class="info-value">2 BHK</span></div>
+                        <div class="info-item"><span class="info-label">Area:</span><span class="info-value">1250 sqft</span></div>
+                        <div class="info-item"><span class="info-label">Furnishing:</span><span class="info-value">Semi-furnished</span></div>
+                        <div class="info-item"><span class="info-label">Available from:</span><span class="info-value">2024-10-15</span></div>
+                    </div>
+                    <div class="features-amenities">
+                        <h4>Features</h4>
+                        <ul class="list">
+                            <li class="list-item">Swimming Pool</li>
+                            <li class="list-item">Club House</li>
+                            <li class="list-item">Gym</li>
+                            <li class="list-item">Intercom</li>
+                            <li class="list-item">Wardrobes, Modular Kitchen, Fans, Geyser</li>
+                        </ul>
+                        <h4>Nearby Amenities (&lt; 1 km)</h4>
+                        <ul class="list">
+                            <li class="list-item">Shri Ram Singh Multi Specialty Hospital</li>
+                            <li class="list-item">Global Indian International School</li>
+                            <li class="list-item">Vikas Marg Park</li>
+                        </ul>
                     </div>
                 </div>
-            <?php endforeach; ?>
+            </div>
+
+            <!-- Property 3 -->
+            <div class="property-card">
+                <div class="property-image">
+                    <img src="https://tse4.mm.bing.net/th/id/OIP.ScQKvH5aTiZtiWAe7-yLOgHaEO?w=474&h=474&c=7&p=0" alt="Property Image 3">
+                </div>
+                <div class="property-details">
+                    <div class="price-locality">
+                        <div class="price">₹ 32,000/month</div>
+                        <div class="locality">Noida (Sector 122)</div>
+                    </div>
+                    <div class="property-name">Green Acres</div>
+                    <div class="property-title">New Construction 2 BHK for Families</div>
+                    <div class="info-grid">
+                        <div class="info-item"><span class="info-label">Configuration:</span><span class="info-value">2 BHK</span></div>
+                        <div class="info-item"><span class="info-label">Area:</span><span class="info-value">1050 sqft</span></div>
+                        <div class="info-item"><span class="info-label">Furnishing:</span><span class="info-value">Semi-furnished</span></div>
+                        <div class="info-item"><span class="info-label">Available from:</span><span class="info-value">2024-11-10</span></div>
+                    </div>
+                    <div class="features-amenities">
+                        <h4>Features</h4>
+                        <ul class="list">
+                            <li class="list-item">Park</li>
+                            <li class="list-item">Maintenance Staff</li>
+                            <li class="list-item">Visitor Parking</li>
+                            <li class="list-item">Wardrobes, Geyser</li>
+                        </ul>
+                        <h4>Nearby Amenities (&lt; 1 km)</h4>
+                        <ul class="list">
+                            <li class="list-item">Tripathi Hospital</li>
+                            <li class="list-item">Central Park</li>
+                            <li class="list-item">Sector 81 Metro Station</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Property 4 -->
+            <div class="property-card">
+                <div class="property-image">
+                    <img src="https://tse4.mm.bing.net/th/id/OIP.fhNgjR0HW09tJQzFXPumxwHaHa?w=200&h=200&c=7&p=0" alt="Property Image 4">
+                </div>
+                <div class="property-details">
+                    <div class="price-locality">
+                        <div class="price">₹ 25,000/month</div>
+                        <div class="locality">Noida (Sector 122)</div>
+                    </div>
+                    <div class="property-name">Lotus Towers</div>
+                    <div class="property-title">Affordable 2 BHK in Prime Locality</div>
+                    <div class="info-grid">
+                        <div class="info-item"><span class="info-label">Configuration:</span><span class="info-value">2 BHK</span></div>
+                        <div class="info-item"><span class="info-label">Area:</span><span class="info-value">950 sqft</span></div>
+                        <div class="info-item"><span class="info-label">Furnishing:</span><span class="info-value">Semi-furnished</span></div>
+                        <div class="info-item"><span class="info-label">Available from:</span><span class="info-value">2024-10-25</span></div>
+                    </div>
+                    <div class="features-amenities">
+                        <h4>Features</h4>
+                        <ul class="list">
+                            <li class="list-item">Lift</li>
+                            <li class="list-item">Rain Water Harvesting</li>
+                            <li class="list-item">Fire Fighting Equipment</li>
+                            <li class="list-item">Modular Kitchen, Fans, Lights</li>
+                        </ul>
+                        <h4>Nearby Amenities (&lt; 1 km)</h4>
+                        <ul class="list">
+                            <li class="list-item">Om Hospital</li>
+                            <li class="list-item">Global Indian International School</li>
+                            <li class="list-item">Vikas Marg Park</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
         </div>
+
+        <!-- Section 2: Properties Based on User Recommendation (Hospitals) -->
+        <h2 class="section-header highlight">Recommended Properties (Proximity to Hospitals)</h2>
+        <div class="property-grid">
+
+            <!-- Property 5 (Recommended) -->
+            <div class="property-card">
+                <div class="property-image">
+                    <img src="https://tse4.mm.bing.net/th/id/OIP.Evk5HKyZSXoVD7OSbUGZ0QHaDE?w=200&h=112&c=7&p=0" alt="Property Image 5">
+                </div>
+                <div class="property-details">
+                    <div class="price-locality">
+                        <div class="price">₹ 38,000/month</div>
+                        <div class="locality">Noida (Sector 122)</div>
+                    </div>
+                    <div class="property-name">Healthcare Hub</div>
+                    <div class="property-title">Luxurious 3 BHK Near Top Hospitals</div>
+                    <div class="info-grid">
+                        <div class="info-item"><span class="info-label">Configuration:</span><span class="info-value">3 BHK</span></div>
+                        <div class="info-item"><span class="info-label">Area:</span><span class="info-value">1400 sqft</span></div>
+                        <div class="info-item"><span class="info-label">Furnishing:</span><span class="info-value">Semi-furnished (Beds, AC, fans, fridge, etc.)</span></div>
+                        <div class="info-item"><span class="info-label">Available from:</span><span class="info-value">2024-10-20</span></div>
+                    </div>
+                    <div class="features-amenities">
+                        <h4>Features</h4>
+                        <ul class="list">
+                            <li class="list-item">Power Back-up</li>
+                            <li class="list-item">Gym</li>
+                            <li class="list-item">Lift</li>
+                            <li class="list-item">Vaastu Compliant</li>
+                        </ul>
+                        <h4>Nearby Amenities (&lt; 1 km)</h4>
+                        <ul class="list">
+                            <li class="list-item rec-highlight">Motherland Hospital & IVF Centre (500m)</li>
+                            <li class="list-item">Tripathi Hospital</li>
+                            <li class="list-item">Sector 81 Metro Station</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Property 6 (Recommended) -->
+            <div class="property-card">
+                <div class="property-image">
+                    <img src="https://www.e-architect.com/wp-content/uploads/2025/07/step-maze-house-new-delhi-india-s250725-ba1.webp" alt="Property Image 6">
+                </div>
+                <div class="property-details">
+                    <div class="price-locality">
+                        <div class="price">₹ 30,000/month</div>
+                        <div class="locality">Noida (Sector 122)</div>
+                    </div>
+                    <div class="property-name">Wellness View</div>
+                    <div class="property-title">Best Value 2 BHK for Health Professionals</div>
+                    <div class="info-grid">
+                        <div class="info-item"><span class="info-label">Configuration:</span><span class="info-value">2 BHK</span></div>
+                        <div class="info-item"><span class="info-label">Area:</span><span class="info-value">1000 sqft</span></div>
+                        <div class="info-item"><span class="info-label">Furnishing:</span><span class="info-value">Semi-furnished (Beds, AC, fans, fridge, etc.)</span></div>
+                        <div class="info-item"><span class="info-label">Available from:</span><span class="info-value">2024-11-05</span></div>
+                    </div>
+                    <div class="features-amenities">
+                        <h4>Features</h4>
+                        <ul class="list">
+                            <li class="list-item">Reserved Parking</li>
+                            <li class="list-item">Security</li>
+                            <li class="list-item">Park</li>
+                            <li class="list-item">24-Hour Water Supply</li>
+                        </ul>
+                        <h4>Nearby Amenities (&lt; 1 km)</h4>
+                        <ul class="list">
+                            <li class="list-item rec-highlight">Shri Ram Singh Multi Specialty Hospital (750m)</li>
+                            <li class="list-item">Vikas Marg Park</li>
+                            <li class="list-item">Global Indian International School</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Note: EMI Section is skipped as Property Type is 'Rent' -->
+
     </div>
+
 </body>
 </html>
