@@ -3,19 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Property Recommendations in Noida</title>
+    <title>Property Recommendations - Noida, Sector 122</title>
     <style>
         :root {
-            --primary-color: #0078d4;
+            --primary-color: #0078a1; /* Blue from 99acres */
             --secondary-color: #f7f7f7;
             --text-color: #333;
-            --light-text: #666;
-            --border-color: #ddd;
-            --card-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            --price-color: #000;
+            --border-color: #e0e0e0;
+            --success-color: #4CAF50;
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
             background-color: var(--secondary-color);
@@ -23,351 +23,437 @@
         }
 
         .container {
+            width: 90%;
             max-width: 1200px;
             margin: 20px auto;
-            padding: 0 15px;
-        }
-
-        .header {
-            background-color: #fff;
             padding: 20px;
-            border-bottom: 3px solid var(--primary-color);
-            margin-bottom: 20px;
-            box-shadow: var(--card-shadow);
+            background-color: #fff;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
         }
 
-        .header h1 {
-            margin: 0;
+        h1 {
             color: var(--primary-color);
-            font-size: 28px;
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+            font-size: 24px;
+        }
+
+        h2 {
+            color: var(--text-color);
+            font-size: 20px;
+            margin-top: 40px;
             border-left: 5px solid var(--primary-color);
             padding-left: 10px;
-        }
-
-        .section-title {
-            font-size: 24px;
-            color: var(--text-color);
-            margin-top: 30px;
             margin-bottom: 20px;
-            padding-bottom: 5px;
-            border-bottom: 2px solid var(--border-color);
-            font-weight: 600;
         }
 
-        .property-grid {
+        .property-list {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
             gap: 25px;
-            margin-bottom: 40px;
         }
 
         .property-card {
-            background-color: #fff;
             border: 1px solid var(--border-color);
             border-radius: 8px;
             overflow: hidden;
-            transition: transform 0.2s, box-shadow 0.2s;
-            box-shadow: var(--card-shadow);
-            display: flex;
-            flex-direction: column;
+            background-color: #fff;
+            transition: box-shadow 0.3s ease;
         }
 
         .property-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        .property-image-container {
+            width: 100%;
+            /* Fixed aspect ratio (e.g., 16:9) for the image area */
+            padding-top: 56.25%; /* 16:9 Aspect Ratio (9/16 * 100) */
+            position: relative;
+            overflow: hidden;
         }
 
         .property-image {
-            width: 100%;
-            height: 200px; /* Fixed aspect ratio for image */
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-color: #eee;
-        }
-
-        .property-image img {
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
             height: 100%;
-            object-fit: cover; /* Cover mode */
+            object-fit: cover; /* Ensures image covers the area without distortion */
         }
 
-        .card-content {
+        .property-details {
             padding: 15px;
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
         }
 
-        .price {
-            font-size: 28px;
-            color: #28a745;
-            font-weight: 700;
-            margin-bottom: 10px;
-        }
-
-        .title {
+        .title-section h3 {
+            margin: 0;
             font-size: 18px;
-            font-weight: 600;
             color: var(--primary-color);
-            margin-bottom: 5px;
-            line-height: 1.3;
         }
 
-        .name {
+        .title-section p {
+            margin: 5px 0 10px 0;
             font-size: 14px;
-            color: var(--light-text);
-            margin-bottom: 10px;
+            color: #666;
         }
 
-        .details-list {
-            list-style: none;
-            padding: 0;
-            margin: 10px 0;
-            flex-grow: 1;
-        }
-
-        .details-list li {
-            font-size: 14px;
-            margin-bottom: 6px;
-            padding-left: 20px;
-            position: relative;
-        }
-
-        .details-list li::before {
-            content: "•";
-            color: var(--primary-color);
+        .price-tag {
+            font-size: 24px;
             font-weight: bold;
-            display: inline-block;
-            width: 1em;
-            margin-left: -1em;
+            color: var(--price-color);
+            margin-bottom: 15px;
+            border-bottom: 1px dashed var(--border-color);
+            padding-bottom: 10px;
         }
 
-        .features-box {
-            border-top: 1px solid var(--border-color);
-            padding-top: 10px;
-            margin-top: 10px;
-        }
-
-        .features-box strong {
-            display: block;
+        .specs {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
             font-size: 14px;
-            margin-bottom: 5px;
+            color: #555;
+        }
+
+        .spec-item {
+            flex: 1;
+            text-align: center;
+            padding: 5px;
+            border-right: 1px solid var(--border-color);
+        }
+
+        .spec-item:last-child {
+            border-right: none;
+        }
+
+        .spec-item strong {
+            display: block;
+            font-size: 16px;
             color: var(--text-color);
         }
-        
-        .furnishing-tag {
-            display: inline-block;
-            background-color: #ffe0b2; /* Light Orange/Yellow */
-            color: #e65100; /* Darker Orange */
-            padding: 3px 8px;
-            border-radius: 4px;
-            font-size: 12px;
-            font-weight: 600;
-            margin-top: 5px;
-            margin-bottom: 10px;
+
+        .feature-list, .amenity-list {
+            margin-top: 15px;
+            font-size: 13px;
         }
 
-        .amenities-list {
-            font-size: 13px;
-            color: var(--light-text);
-            margin-top: 5px;
-            line-height: 1.5;
+        .feature-list strong, .amenity-list strong {
+            display: block;
+            margin-bottom: 5px;
+            color: var(--primary-color);
+            font-size: 14px;
         }
+
+        .feature-list ul, .amenity-list ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+
+        .feature-list li, .amenity-list li {
+            background-color: #f0f8ff;
+            border: 1px solid #cceeff;
+            padding: 3px 8px;
+            border-radius: 4px;
+            color: #00567f;
+            white-space: nowrap;
+        }
+
+        .emi-section {
+            background-color: #e6f7ff;
+            padding: 10px 15px;
+            border-radius: 4px;
+            margin-top: 15px;
+            font-size: 14px;
+            border-top: 1px solid #b3e0ff;
+        }
+
+        .emi-section strong {
+            color: #004085;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .emi-section a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        .emi-section a:hover {
+            text-decoration: underline;
+        }
+        .rent-note {
+            text-align: center;
+            padding: 10px;
+            background-color: #fff3cd;
+            color: #856404;
+            border: 1px solid #ffeeba;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+
+        .available-from {
+            font-size: 13px;
+            margin-top: 10px;
+            padding-top: 5px;
+            border-top: 1px solid var(--border-color);
+            text-align: right;
+            color: var(--success-color);
+            font-weight: bold;
+        }
+
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="header">
-            <h1>Property Recommendations in Noida</h1>
-            <p style="color: var(--light-text); margin-top: 5px;">Showing 6 properties matching your criteria in Sector 62 & 63, Noida (Rent, Semi-Furnished, Budget: Max ₹50,000)</p>
+        <h1>2 BHK Rental Properties in Sector 122, Noida</h1>
+
+        <h2>Top 4 Properties Under Your Budget (Max ₹50,000/month)</h2>
+        <div class="property-list">
+            
+            <!-- Property 1: Lowest Price Semi-Furnished -->
+            <div class="property-card">
+                <div class="property-image-container">
+                    <img class="property-image" src="https://www.e-architect.com/wp-content/uploads/2025/07/step-maze-house-new-delhi-india-s250725-ba1.webp" alt="Property Image 1">
+                </div>
+                <div class="property-details">
+                    <div class="title-section">
+                        <h3>2 Bedroom House for rent in Sector 122, Noida</h3>
+                        <p>RWA Sector 122, Noida</p>
+                    </div>
+                    <p class="price-tag">₹23,000 /month</p>
+                    <div class="specs">
+                        <div class="spec-item"><strong>2 BHK</strong><small>Config</small></div>
+                        <div class="spec-item"><strong>1205 sqft</strong><small>Area (Carpet)</small></div>
+                        <div class="spec-item"><strong>2</strong><small>Baths</small></div>
+                    </div>
+                    <div class="feature-list">
+                        <strong>Furnishing (Semi-Furnished):</strong>
+                        <ul>
+                            <li>4 Lights</li>
+                            <li>5 Fans</li>
+                            <li>2 Wardrobes</li>
+                            <li>Modular Kitchen</li>
+                            <li>Chimney</li>
+                            <li>Curtains</li>
+                        </ul>
+                    </div>
+                    <div class="amenity-list">
+                        <strong>Nearby Amenities:</strong>
+                        <ul>
+                            <li>Tripathi Hospital</li>
+                            <li>Hindu Shiv Temple</li>
+                            <li>Parks</li>
+                            <li>Gautam Buddha Nagar</li>
+                        </ul>
+                    </div>
+                    <p class="available-from">Available from: Immediate</p>
+                </div>
+            </div>
+
+            <!-- Property 2: Second Lowest Price Semi-Furnished -->
+            <div class="property-card">
+                <div class="property-image-container">
+                    <img class="property-image" src="https://tse1.mm.bing.net/th/id/OIP.wVLjZvfuzACwHIUTmX3pYAHaEK?w=200&h=112&c=7&p=0" alt="Property Image 2">
+                </div>
+                <div class="property-details">
+                    <div class="title-section">
+                        <h3>2 BHK Independent Builder Floor for rent in Sector 122, Noida</h3>
+                        <p>10 RWA Sector 122, Noida</p>
+                    </div>
+                    <p class="price-tag">₹24,000 /month</p>
+                    <div class="specs">
+                        <div class="spec-item"><strong>2 BHK</strong><small>Config</small></div>
+                        <div class="spec-item"><strong>1200 sqft</strong><small>Area (Super Built-up)</small></div>
+                        <div class="spec-item"><strong>1</strong><small>Bath</small></div>
+                    </div>
+                    <div class="feature-list">
+                        <strong>Furnishing (Semi-Furnished):</strong>
+                        <ul>
+                            <li>Modular Kitchen (Implied)</li>
+                            <li>Lights & Fans (Implied)</li>
+                        </ul>
+                    </div>
+                    <div class="amenity-list">
+                        <strong>Nearby Amenities:</strong>
+                        <ul>
+                            <li>Tripathi Hospital</li>
+                            <li>Hindu Shiv Temple</li>
+                            <li>Market Area</li>
+                            <li>Community Centre</li>
+                        </ul>
+                    </div>
+                    <p class="available-from">Available from: Immediate (New Construction)</p>
+                </div>
+            </div>
+            
+            <!-- Property 3: Third Lowest Price Semi-Furnished -->
+            <div class="property-card">
+                <div class="property-image-container">
+                    <img class="property-image" src="https://tse4.mm.bing.net/th/id/OIP.ScQKvH5aTiZtiWAe7-yLOgHaEO?w=474&h=474&c=7&p=0" alt="Property Image 3">
+                </div>
+                <div class="property-details">
+                    <div class="title-section">
+                        <h3>2 Bedroom House for rent in Sector 122, Noida</h3>
+                        <p>11 RWA Sector 122, Noida</p>
+                    </div>
+                    <p class="price-tag">₹25,000 /month</p>
+                    <div class="specs">
+                        <div class="spec-item"><strong>2 BHK</strong><small>Config</small></div>
+                        <div class="spec-item"><strong>1750 sqft</strong><small>Area (Plot)</small></div>
+                        <div class="spec-item"><strong>2</strong><small>Baths</small></div>
+                    </div>
+                    <div class="feature-list">
+                        <strong>Furnishing (Semi-Furnished):</strong>
+                        <ul>
+                            <li>Semi-Furnished for office/family use</li>
+                            <li>Can be used for Doctor's Clinic/Architect Firm</li>
+                        </ul>
+                    </div>
+                    <div class="amenity-list">
+                        <strong>Nearby Amenities:</strong>
+                        <ul>
+                            <li>Tripathi Hospital</li>
+                            <li>Hindu Shiv Temple</li>
+                            <li>Sunshine Apartment</li>
+                            <li>Hotel The Anvi Residency</li>
+                        </ul>
+                    </div>
+                    <p class="available-from">Available from: Immediate (Newly constructed)</p>
+                </div>
+            </div>
+
+            <!-- Property 4: Fourth Lowest Price Semi-Furnished -->
+            <div class="property-card">
+                <div class="property-image-container">
+                    <img class="property-image" src="https://tse4.mm.bing.net/th/id/OIP.fhNgjR0HW09tJQzFXPumxwHaHa?w=200&h=200&c=7&p=0" alt="Property Image 4">
+                </div>
+                <div class="property-details">
+                    <div class="title-section">
+                        <h3>2 Bedroom House for rent in Sector 122, Noida</h3>
+                        <p>RWA Sector 122, Noida</p>
+                    </div>
+                    <p class="price-tag">₹25,000 /month</p>
+                    <div class="specs">
+                        <div class="spec-item"><strong>2 BHK</strong><small>Config</small></div>
+                        <div class="spec-item"><strong>162 sqft</strong><small>Area (Plot)</small></div>
+                        <div class="spec-item"><strong>1</strong><small>Bath</small></div>
+                    </div>
+                    <div class="feature-list">
+                        <strong>Furnishing (Semi-Furnished):</strong>
+                        <ul>
+                            <li>5 Lights</li>
+                            <li>4 Fans</li>
+                            <li>2 Wardrobes</li>
+                            <li>Modular Kitchen</li>
+                            <li>Chimney</li>
+                            <li>Curtains</li>
+                        </ul>
+                    </div>
+                    <div class="amenity-list">
+                        <strong>Nearby Amenities:</strong>
+                        <ul>
+                            <li>Tripathi Hospital</li>
+                            <li>Modular Kitchen</li>
+                            <li>Community Centre</li>
+                            <li>Parks</li>
+                        </ul>
+                    </div>
+                    <p class="available-from">Available from: Immediate</p>
+                </div>
+            </div>
         </div>
 
-        <!-- Section 1: Properties Under Your Budget -->
-        <h2 class="section-title">Properties Under Your Budget (Max ₹50,000/month)</h2>
-        <div class="property-grid">
-
-            <!-- Property U1 -->
+        <h2>Recommended Properties (Based on Proximity to Hospitals)</h2>
+        <div class="property-list">
+            
+            <!-- Property 5: Recommended - Near Hospital -->
             <div class="property-card">
-                <div class="property-image">
-                    <img src="https://www.e-architect.com/wp-content/uploads/2025/07/step-maze-house-new-delhi-india-s250725-ba1.webp" alt="Property Image 1">
+                <div class="property-image-container">
+                    <img class="property-image" src="https://tse4.mm.bing.net/th/id/OIP.Evk5HKyZSXoVD7OSbUGZ0QHaDE?w=200&h=112&c=7&p=0" alt="Property Image 5">
                 </div>
-                <div class="card-content">
-                    <div class="price">₹17,000 /month</div>
-                    <div class="title">2 Bedroom House for rent</div>
-                    <div class="name">Independent House - Sector 63A, Noida</div>
-                    <span class="furnishing-tag">Semi-furnished</span>
-                    
-                    <ul class="details-list">
-                        <li><strong>Configuration:</strong> 2 BHK, 1 Bath</li>
-                        <li><strong>Area:</strong> 650 sqft Plot Area</li>
-                        <li><strong>Available From:</strong> Immediate</li>
-                        <li><strong>Furnishing Includes:</strong> Wardrobes, Fans, Lights (Semi-furnished as requested)</li>
-                    </ul>
-                    <div class="features-box">
-                        <strong>Features:</strong> Prime Location, No Owner Interference, Near Metro Station & Active Market.
-                        <strong>Nearby Amenities (within 1 km):</strong>
-                        <div class="amenities-list">
-                            Metro: Noida Electronic City Metro Station (Walkable)<br>
-                            Hospitals: Fortis Hospital (Nearest Landmark)<br>
-                            Schools/Market: Local market, schools mentioned in Sector 63 area.
-                        </div>
+                <div class="property-details">
+                    <div class="title-section">
+                        <h3>2 Bedroom House for rent in Sector 122, Noida</h3>
+                        <p>RWA Sector 122, Noida</p>
                     </div>
+                    <p class="price-tag">₹28,000 /month</p>
+                    <div class="specs">
+                        <div class="spec-item"><strong>2 BHK</strong><small>Config</small></div>
+                        <div class="spec-item"><strong>1205 sqft</strong><small>Area (Plot)</small></div>
+                        <div class="spec-item"><strong>2</strong><small>Baths</small></div>
+                    </div>
+                    <div class="feature-list">
+                        <strong>Furnishing (Semi-Furnished):</strong>
+                        <ul>
+                            <li>18 Lights</li>
+                            <li>5 Fans</li>
+                            <li>3 Wardrobes</li>
+                            <li>Modular Kitchen</li>
+                            <li>Chimney</li>
+                            <li>Curtains</li>
+                        </ul>
+                    </div>
+                    <div class="amenity-list">
+                        <strong>Nearby Amenities:</strong>
+                        <ul>
+                            <li>Tripathi Hospital (Nearby)</li>
+                            <li>Hindu Shiv Temple</li>
+                            <li>Market Area</li>
+                            <li>Gautam Buddha Nagar</li>
+                        </ul>
+                    </div>
+                    <p class="available-from">Available from: Immediate</p>
                 </div>
             </div>
 
-            <!-- Property U2 -->
+            <!-- Property 6: Recommended - Near Hospital with Lift -->
             <div class="property-card">
-                <div class="property-image">
-                    <img src="https://tse1.mm.bing.net/th/id/OIP.wVLjZvfuzACcHIUTmX3pYAHaEK?w=200&h=112&c=7&p=0" alt="Property Image 2">
+                <div class="property-image-container">
+                    <img class="property-image" src="https://www.e-architect.com/wp-content/uploads/2025/07/step-maze-house-new-delhi-india-s250725-ba1.webp" alt="Property Image 6">
                 </div>
-                <div class="card-content">
-                    <div class="price">₹18,500 /month</div>
-                    <div class="title">2 Bedroom House for rent</div>
-                    <div class="name">Independent House - Sector 63, Noida</div>
-                    <span class="furnishing-tag">Semi-furnished</span>
-
-                    <ul class="details-list">
-                        <li><strong>Configuration:</strong> 2 BHK, 2 Baths</li>
-                        <li><strong>Area:</strong> 600 sqft Plot Area</li>
-                        <li><strong>Available From:</strong> Immediate</li>
-                        <li><strong>Furnishing Includes:</strong> Geysers, Basic Kitchen Fittings, Lights (Semi-furnished as requested)</li>
-                    </ul>
-                    <div class="features-box">
-                        <strong>Features:</strong> House/Villa, Balcony.
-                        <strong>Nearby Amenities (within 1 km):</strong>
-                        <div class="amenities-list">
-                            Metro: Noida Electronic City Metro Station (Close)<br>
-                            Hospitals: Fortis Hospital (Close Proximity)<br>
-                            Market: Sector 63 local market.
-                        </div>
+                <div class="property-details">
+                    <div class="title-section">
+                        <h3>2 BHK Independent Builder Floor for rent in Sector 122, Noida</h3>
+                        <p>23 RWA Sector 122, Noida</p>
                     </div>
-                </div>
-            </div>
-
-            <!-- Property U3 -->
-            <div class="property-card">
-                <div class="property-image">
-                    <img src="https://tse4.mm.bing.net/th/id/OIP.ScQKvH5aTiZtiWAe7-yLOgHaEO?w=474&h=474&c=7&p=0" alt="Property Image 3">
-                </div>
-                <div class="card-content">
-                    <div class="price">₹19,000 /month</div>
-                    <div class="title">2 BHK Independent Builder Floor for rent</div>
-                    <div class="name">Independent Builder Floor - Sector 63A, Noida</div>
-                    <span class="furnishing-tag">Semi-furnished</span>
-
-                    <ul class="details-list">
-                        <li><strong>Configuration:</strong> 2 BHK, 1 Bath</li>
-                        <li><strong>Area:</strong> 600 sqft Carpet Area</li>
-                        <li><strong>Available From:</strong> Immediate</li>
-                        <li><strong>Furnishing Includes:</strong> Modular Kitchen, Wardrobe in one room (Semi-furnished as requested)</li>
-                    </ul>
-                    <div class="features-box">
-                        <strong>Features:</strong> Spacious Full Floor, Open Terrace Access, Parking, Society with Guard & CCTV, Near FNG.
-                        <strong>Nearby Amenities (within 1 km):</strong>
-                        <div class="amenities-list">
-                            Connectivity: Wide 18 metre road, near FNG.<br>
-                            Security: 24hr Security, CCTV.<br>
-                            Metro: Noida Electronic City Metro Station.
-                        </div>
+                    <p class="price-tag">₹35,000 /month</p>
+                    <div class="specs">
+                        <div class="spec-item"><strong>2 BHK</strong><small>Config</small></div>
+                        <div class="spec-item"><strong>1750 sqft</strong><small>Area (Super Built-up)</small></div>
+                        <div class="spec-item"><strong>2</strong><small>Baths</small></div>
                     </div>
-                </div>
-            </div>
-
-            <!-- Property U4 -->
-            <div class="property-card">
-                <div class="property-image">
-                    <img src="https://tse4.mm.bing.net/th/id/OIP.fhNgjR0HW09tJQzFXPumxwHaHa?w=200&h=200&c=7&p=0" alt="Property Image 4">
-                </div>
-                <div class="card-content">
-                    <div class="price">₹21,200 /month</div>
-                    <div class="title">2 BHK Flat for rent</div>
-                    <div class="name">Rajat Vihar - Sector 62, Noida</div>
-                    <span class="furnishing-tag">Semi-furnished</span>
-
-                    <ul class="details-list">
-                        <li><strong>Configuration:</strong> 2 BHK, 2 Baths</li>
-                        <li><strong>Area:</strong> 1,050 sqft Super Built-up Area</li>
-                        <li><strong>Available From:</strong> Immediate</li>
-                        <li><strong>Furnishing Includes:</strong> Modular Kitchen (with Chimney), 2 Full-size Wardrobes, Bathroom Fittings.</li>
-                    </ul>
-                    <div class="features-box">
-                        <strong>Features:</strong> Extended Balcony, Full Modular Kitchen (German Channels), New Showcase in Drawing Room, Car Parking.
-                        <strong>Nearby Amenities (within 1 km):</strong>
-                        <div class="amenities-list">
-                            Metro: Noida Sector 62 Metro Station (Close)<br>
-                            Hospitals: Fortis/Metro Hospital (Approx. 1 km)<br>
-                            Shopping: Spectrum Metro Mall.
-                        </div>
+                    <div class="feature-list">
+                        <strong>Furnishing (Semi-Furnished):</strong>
+                        <ul>
+                            <li>Semi-Furnished</li>
+                            <li>Lift Access</li>
+                            <li>Newly Constructed</li>
+                            <li>Suitable for Families</li>
+                        </ul>
                     </div>
+                    <div class="amenity-list">
+                        <strong>Nearby Amenities:</strong>
+                        <ul>
+                            <li>Tripathi Hospital (Nearby)</li>
+                            <li>Hindu Shiv Temple</li>
+                            <li>DPS School (Nearby)</li>
+                            <li>Ratan Dairy (Nearby)</li>
+                        </ul>
+                    </div>
+                    <p class="available-from">Available from: Immediate</p>
                 </div>
             </div>
         </div>
-
-        <!-- Section 2: Recommended Properties (Focus: Hospitals) -->
-        <h2 class="section-title">Recommended Properties (Focus: Near Hospitals)</h2>
-        <div class="property-grid">
-
-            <!-- Property R1 -->
-            <div class="property-card">
-                <div class="property-image">
-                    <img src="https://tse4.mm.bing.net/th/id/OIP.Evk5HKyZSXoVD7OSbUGZ0QHaDE?w=200&h=112&c=7&p=0" alt="Property Image 5">
-                </div>
-                <div class="card-content">
-                    <div class="price">₹30,000 /month</div>
-                    <div class="title">2 BHK Flat for rent</div>
-                    <div class="name">Nirupm Vatika Apartment - Sector 62, Noida</div>
-                    <span class="furnishing-tag">Semi-furnished</span>
-
-                    <ul class="details-list">
-                        <li><strong>Configuration:</strong> 2 BHK, 2 Baths</li>
-                        <li><strong>Area:</strong> 1,250 sqft Super Built-up Area</li>
-                        <li><strong>Available From:</strong> Immediate</li>
-                        <li><strong>Furnishing Includes:</strong> Basic Woodwork, Kitchen Cabinets, Lights & Fans.</li>
-                    </ul>
-                    <div class="features-box">
-                        <strong>Features:</strong> Excellent view towards Green Belt, Serene Place.
-                        <strong>Nearby Amenities (within 1 km):</strong>
-                        <div class="amenities-list" style="font-weight: 600;">
-                            HOSPITALS: Fortis Hospital (Very Near) - User Recommendation Match!<br>
-                            Metro: Noida Sector 62 Metro Station (Near)<br>
-                            Shopping: TOT Mall.
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Property R2 -->
-            <div class="property-card">
-                <div class="property-image">
-                    <img src="https://www.e-architect.com/wp-content/uploads/2025/07/step-maze-house-new-delhi-india-s250725-ba1.webp" alt="Property Image 6">
-                </div>
-                <div class="card-content">
-                    <div class="price">₹27,000 /month</div>
-                    <div class="title">2 BHK Flat for rent</div>
-                    <div class="name">Purvanchal PMO Apartments - Sector 62, Noida</div>
-                    <span class="furnishing-tag">Semi-furnished</span>
-
-                    <ul class="details-list">
-                        <li><strong>Configuration:</strong> 2 BHK, 2 Baths, 3 Balconies</li>
-                        <li><strong>Area:</strong> 950 sqft Super Built-up Area</li>
-                        <li><strong>Available From:</strong> Immediate</li>
-                        <li><strong>Furnishing Includes:</strong> Electrical Fittings, Wardrobes, Basic Kitchen Setup.</li>
-                    </ul>
-                    <div class="features-box">
-                        <strong>Features:</strong> Close to Metro Station, School, Hospital and Market.
-                        <strong>Nearby Amenities (within 1 km):</strong>
-                        <div class="amenities-list" style="font-weight: 600;">
-                            HOSPITAL: Close to Hospital (General mention, near Fortis/Metro)<br>
-                            Metro: Noida Sector 62 & 59 Metro Station<br>
-                            Essentials: Close to School and Market.
-                        </div>
-                    </div>
-                </div>
-            </div>
+        
+        <div style="margin-top: 40px;" class="rent-note">
+            NOTE: All listed properties are for **Rent**. EMI calculation is only applicable for 'Buy' properties and is therefore omitted.
         </div>
     </div>
 </body>
 </html>
-<!-- EMI Section was skipped as per instructions, because the property type is 'rent'. -->
