@@ -1,0 +1,430 @@
+```html
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Property Recommendations</title>
+<style>
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #f8f8f8;
+    color: #333;
+  }
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  h1, h2 {
+    color: #0056b3;
+    text-align: center;
+    margin-bottom: 30px;
+  }
+  .section-title {
+    font-size: 2em;
+    border-bottom: 2px solid #e0e0e0;
+    padding-bottom: 10px;
+    margin-top: 40px;
+  }
+  .property-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 30px;
+  }
+  .property-card {
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .property-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  }
+  .property-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    display: block;
+  }
+  .property-details {
+    padding: 20px;
+  }
+  .property-name {
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #007bff;
+  }
+  .property-title {
+    font-size: 1.1em;
+    color: #555;
+    margin-bottom: 15px;
+  }
+  .price {
+    font-size: 1.6em;
+    font-weight: bold;
+    color: #28a745;
+    margin-bottom: 10px;
+  }
+  .info-item {
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+  }
+  .info-item strong {
+    margin-right: 5px;
+    color: #333;
+  }
+  .features, .nearby-amenities, .emi-section {
+    margin-top: 20px;
+    border-top: 1px solid #eee;
+    padding-top: 15px;
+  }
+  .features h3, .nearby-amenities h3, .emi-section h3 {
+    font-size: 1.2em;
+    color: #0056b3;
+    margin-bottom: 10px;
+  }
+  .features ul, .nearby-amenities ul, .emi-section ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .features li, .nearby-amenities li, .emi-section li {
+    background-color: #e9f7ff;
+    padding: 8px 12px;
+    margin-bottom: 5px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+  }
+  .features li::before {
+    content: '✔️';
+    margin-right: 8px;
+    color: #28a745;
+  }
+  .nearby-amenities li::before {
+    content: '📍';
+    margin-right: 8px;
+    color: #ffc107;
+  }
+  .emi-details {
+    font-size: 1.1em;
+    font-weight: bold;
+    color: #dc3545;
+    margin-bottom: 10px;
+  }
+  .emi-banks li {
+    background-color: #f0f8ff;
+    color: #0056b3;
+  }
+  .emi-banks a {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+  }
+  .emi-banks a:hover {
+    text-decoration: underline;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+    <h1>Property Recommendations for You</h1>
+
+    <section class="under-budget">
+        <h2 class="section-title">🏠 Under Budget Properties</h2>
+        <div class="property-grid">
+            
+            <div class="property-card">
+                <img src="https://housing-images.n7net.in/01c16c28/621cd3f60a06467eb1183eeed4abd49f/v0/medium/3_bhk_independent_builder_floor-for-rent-sector_122-Noida-kitchen.jpg" alt="Super Homes-2" class="property-image">
+                <div class="property-details">
+                    <div class="property-name">Super Homes-2</div>
+                    <div class="property-title">Furnished 3 BHK Flat for Sale in Sector 122</div>
+                    <div class="info-item"><strong>City (Locality):</strong> Noida (Sector 122)</div>
+                    <div class="price">₹45 Lac</div>
+                    <div class="info-item"><strong>Configuration:</strong> 3 BHK (3 Baths)</div>
+                    <div class="info-item"><strong>Area:</strong> 1,500 sqft</div>
+                    <div class="info-item"><strong>Furnishing Details:</strong> 2 Beds, 3 Fans, 1 AC, 1 Fridge</div>
+                    <div class="info-item"><strong>Available From:</strong> Ready To Move</div>
+                    <div class="features">
+                        <h3>Features / Amenities:</h3>
+                        <ul>
+                            <li>Owner Verified</li>
+                            <li>Ready To Move</li>
+                            <li>With Photos</li>
+                            <li>With Videos</li>
+                            <li>Power Backup</li>
+                            <li>Lift</li>
+                            <li>24x7 Security</li>
+                        </ul>
+                    </div>
+                    <div class="nearby-amenities">
+                        <h3>Nearby Amenities:</h3>
+                        <ul>
+                            <li>Shri Ram Singh Multi Specialty Hospital (approx 10 min walk)</li>
+                            <li>Parthala Khanjarpur</li>
+                            <li>Community Centre</li>
+                            <li>Vikas Marg Park</li>
+                            <li>Schools</li>
+                            <li>Metro Station</li>
+                        </ul>
+                    </div>
+                    <div class="emi-section">
+                        <h3>EMI Details:</h3>
+                        <div class="emi-details">EMI: ₹39,268/month</div>
+                        <p>Top banks offering home loans:</p>
+                        <ul class="emi-banks">
+                            <li>Axis Bank — 8.35% — <a href="https://www.axisbank.com/home-loan" target="_blank">Apply Now</a></li>
+                            <li>ICICI Bank — 8.75% — <a href="https://www.icicibank.com/home-loan" target="_blank">Apply Now</a></li>
+                            <li>SBI Bank — 8.50% — <a href="https://www.onlinesbi.sbi/home-loans" target="_blank">Apply Now</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="property-card">
+                <img src="https://imagecdn.99acres.com/media1/30523/16/610476139M-1750662387673.jpg" alt="Elegant Residency" class="property-image">
+                <div class="property-details">
+                    <div class="property-name">Elegant Residency</div>
+                    <div class="property-title">Furnished 2 BHK Apartment for Sale in Sector 122</div>
+                    <div class="info-item"><strong>City (Locality):</strong> Noida (Sector 122)</div>
+                    <div class="price">₹70 Lac</div>
+                    <div class="info-item"><strong>Configuration:</strong> 2 BHK (2 Baths)</div>
+                    <div class="info-item"><strong>Area:</strong> 1,100 sqft</div>
+                    <div class="info-item"><strong>Furnishing Details:</strong> 2 Beds, 2 Wardrobes, 2 ACs, Modular Kitchen</div>
+                    <div class="info-item"><strong>Available From:</strong> 2025-01-15</div>
+                    <div class="features">
+                        <h3>Features / Amenities:</h3>
+                        <ul>
+                            <li>Power Backup</li>
+                            <li>Lift</li>
+                            <li>Swimming Pool</li>
+                            <li>Gym</li>
+                            <li>24x7 Security</li>
+                        </ul>
+                    </div>
+                    <div class="nearby-amenities">
+                        <h3>Nearby Amenities:</h3>
+                        <ul>
+                            <li>Hospitals</li>
+                            <li>Schools</li>
+                            <li>Metro Station</li>
+                            <li>Parthala Khanjarpur</li>
+                            <li>Community Centre</li>
+                            <li>Vikas Marg Park</li>
+                            <li>Kondli Bazar (market)</li>
+                            <li>Restaurants</li>
+                        </ul>
+                    </div>
+                    <div class="emi-section">
+                        <h3>EMI Details:</h3>
+                        <div class="emi-details">EMI: ₹61,048/month</div>
+                        <p>Top banks offering home loans:</p>
+                        <ul class="emi-banks">
+                            <li>Axis Bank — 8.35% — <a href="https://www.axisbank.com/home-loan" target="_blank">Apply Now</a></li>
+                            <li>ICICI Bank — 8.75% — <a href="https://www.icicibank.com/home-loan" target="_blank">Apply Now</a></li>
+                            <li>SBI Bank — 8.50% — <a href="https://www.onlinesbi.sbi/home-loans" target="_blank">Apply Now</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="property-card">
+                <img src="https://imagecdn.99acres.com/media1/32528/11/650571881M-1758460577475.jpg" alt="Green Meadows Villa" class="property-image">
+                <div class="property-details">
+                    <div class="property-name">Green Meadows Villa</div>
+                    <div class="property-title">Furnished 4 BHK Villa for Sale in Sector 122</div>
+                    <div class="info-item"><strong>City (Locality):</strong> Noida (Sector 122)</div>
+                    <div class="price">₹95 Lac</div>
+                    <div class="info-item"><strong>Configuration:</strong> 4 BHK (4 Baths)</div>
+                    <div class="info-item"><strong>Area:</strong> 2,000 sqft</div>
+                    <div class="info-item"><strong>Furnishing Details:</strong> 3 Beds, 4 Wardrobes, 3 ACs, Modular Kitchen, Sofa Set, Dining Table</div>
+                    <div class="info-item"><strong>Available From:</strong> 2025-02-01</div>
+                    <div class="features">
+                        <h3>Features / Amenities:</h3>
+                        <ul>
+                            <li>Private Garden</li>
+                            <li>Power Backup</li>
+                            <li>24x7 Security</li>
+                            <li>Gated Community</li>
+                        </ul>
+                    </div>
+                    <div class="nearby-amenities">
+                        <h3>Nearby Amenities:</h3>
+                        <ul>
+                            <li>Hospitals</li>
+                            <li>Schools</li>
+                            <li>Metro Station</li>
+                            <li>Market</li>
+                            <li>Parks (Shyam Park, Bapu Ji Park, Khudiram Bosh Udyan)</li>
+                            <li>Gated community</li>
+                        </ul>
+                    </div>
+                    <div class="emi-section">
+                        <h3>EMI Details:</h3>
+                        <div class="emi-details">EMI: ₹82,912/month</div>
+                        <p>Top banks offering home loans:</p>
+                        <ul class="emi-banks">
+                            <li>Axis Bank — 8.35% — <a href="https://www.axisbank.com/home-loan" target="_blank">Apply Now</a></li>
+                            <li>ICICI Bank — 8.75% — <a href="https://www.icicibank.com/home-loan" target="_blank">Apply Now</a></li>
+                            <li>SBI Bank — 8.50% — <a href="https://www.onlinesbi.sbi/home-loans" target="_blank">Apply Now</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="property-card">
+                <img src="https://housing-images.n7net.in/01c16c28/621cd3f60a06467eb1183eeed4abd49f/v0/medium/3_bhk_independent_builder_floor-for-rent-sector_122-Noida-kitchen.jpg" alt="City View Heights" class="property-image">
+                <div class="property-details">
+                    <div class="property-name">City View Heights</div>
+                    <div class="property-title">Furnished 3 BHK Flat for Sale in Sector 122</div>
+                    <div class="info-item"><strong>City (Locality):</strong> Noida (Sector 122)</div>
+                    <div class="price">₹85 Lac</div>
+                    <div class="info-item"><strong>Configuration:</strong> 3 BHK (3 Baths)</div>
+                    <div class="info-item"><strong>Area:</strong> 1,600 sqft</div>
+                    <div class="info-item"><strong>Furnishing Details:</strong> 3 Beds, 3 Wardrobes, 3 ACs, Modular Kitchen, TV Unit</div>
+                    <div class="info-item"><strong>Available From:</strong> 2025-03-01</div>
+                    <div class="features">
+                        <h3>Features / Amenities:</h3>
+                        <ul>
+                            <li>Balcony</li>
+                            <li>Kids Play Area</li>
+                            <li>Community Hall</li>
+                            <li>Lift</li>
+                            <li>24x7 Security</li>
+                        </ul>
+                    </div>
+                    <div class="nearby-amenities">
+                        <h3>Nearby Amenities:</h3>
+                        <ul>
+                            <li>Hospitals</li>
+                            <li>Schools</li>
+                            <li>Metro Station</li>
+                            <li>Market</li>
+                            <li>Park</li>
+                            <li>Parthala Khanjarpur</li>
+                            <li>Community Centre</li>
+                        </ul>
+                    </div>
+                    <div class="emi-section">
+                        <h3>EMI Details:</h3>
+                        <div class="emi-details">EMI: ₹74,121/month</div>
+                        <p>Top banks offering home loans:</p>
+                        <ul class="emi-banks">
+                            <li>Axis Bank — 8.35% — <a href="https://www.axisbank.com/home-loan" target="_blank">Apply Now</a></li>
+                            <li>ICICI Bank — 8.75% — <a href="https://www.icicibank.com/home-loan" target="_blank">Apply Now</a></li>
+                            <li>SBI Bank — 8.50% — <a href="https://www.onlinesbi.sbi/home-loans" target="_blank">Apply Now</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="recommended">
+        <h2 class="section-title">🌟 Recommended for You</h2>
+        <div class="property-grid">
+            
+            <div class="property-card">
+                <img src="https://housing-images.n7net.in/01c16c28/2b7e80a0b173c4daf2158e374cd3dfa8/v0/medium/1_rk_independent_builder_floor-for-rent-sector_122-Noida-bedroom.jpg" alt="Harmony Apartments" class="property-image">
+                <div class="property-details">
+                    <div class="property-name">Harmony Apartments</div>
+                    <div class="property-title">Fully Furnished 2 BHK Apartment for Sale in Sector 122 (Near Hospital)</div>
+                    <div class="info-item"><strong>City (Locality):</strong> Noida (Sector 122)</div>
+                    <div class="price">₹65 Lac</div>
+                    <div class="info-item"><strong>Configuration:</strong> 2 BHK (2 Baths)</div>
+                    <div class="info-item"><strong>Area:</strong> 1,150 sqft</div>
+                    <div class="info-item"><strong>Furnishing Details:</strong> 2 Beds, 2 Wardrobes, 2 ACs, Modular Kitchen, Geysers</div>
+                    <div class="info-item"><strong>Available From:</strong> Ready To Move</div>
+                    <div class="features">
+                        <h3>Features / Amenities:</h3>
+                        <ul>
+                            <li>Close to Hospital</li>
+                            <li>Power Backup</li>
+                            <li>Lift</li>
+                            <li>Gym</li>
+                            <li>24x7 Security</li>
+                        </ul>
+                    </div>
+                    <div class="nearby-amenities">
+                        <h3>Nearby Amenities:</h3>
+                        <ul>
+                            <li>MD CITY HOSPITAL (within 1 km, 24 hours)</li>
+                            <li>Cleo County (apartment complex)</li>
+                            <li>Sunshine Apartment (apartment complex)</li>
+                            <li>Schools</li>
+                            <li>Metro Station</li>
+                            <li>Market</li>
+                        </ul>
+                    </div>
+                    <div class="emi-section">
+                        <h3>EMI Details:</h3>
+                        <div class="emi-details">EMI: ₹56,634/month</div>
+                        <p>Top banks offering home loans:</p>
+                        <ul class="emi-banks">
+                            <li>Axis Bank — 8.35% — <a href="https://www.axisbank.com/home-loan" target="_blank">Apply Now</a></li>
+                            <li>ICICI Bank — 8.75% — <a href="https://www.icicibank.com/home-loan" target="_blank">Apply Now</a></li>
+                            <li>SBI Bank — 8.50% — <a href="https://www.onlinesbi.sbi/home-loans" target="_blank">Apply Now</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="property-card">
+                <img src="https://imagecdn.99acres.com/media1/31075/18/621518801M-1753033588230.jpg" alt="Prime Location Residency" class="property-image">
+                <div class="property-details">
+                    <div class="property-name">Prime Location Residency</div>
+                    <div class="property-title">Fully Furnished 3 BHK Flat for Sale in Sector 122 (Near Hospital)</div>
+                    <div class="info-item"><strong>City (Locality):</strong> Noida (Sector 122)</div>
+                    <div class="price">₹90 Lac</div>
+                    <div class="info-item"><strong>Configuration:</strong> 3 BHK (3 Baths)</div>
+                    <div class="info-item"><strong>Area:</strong> 1,700 sqft</div>
+                    <div class="info-item"><strong>Furnishing Details:</strong> 3 Beds, 3 Wardrobes, 3 ACs, Modular Kitchen, Dining Table, Sofa Set, Washing Machine</div>
+                    <div class="info-item"><strong>Available From:</strong> 2025-04-01</div>
+                    <div class="features">
+                        <h3>Features / Amenities:</h3>
+                        <ul>
+                            <li>Proximity to Hospital</li>
+                            <li>Gated Community</li>
+                            <li>Reserved Parking</li>
+                            <li>Kids Play Area</li>
+                            <li>Power Backup</li>
+                            <li>24x7 Security</li>
+                        </ul>
+                    </div>
+                    <div class="nearby-amenities">
+                        <h3>Nearby Amenities:</h3>
+                        <ul>
+                            <li>Shri Ram Singh Multi Specialty Hospital (approx 950m)</li>
+                            <li>Schools</li>
+                            <li>Metro Station</li>
+                            <li>Market</li>
+                            <li>Parks</li>
+                        </ul>
+                    </div>
+                    <div class="emi-section">
+                        <h3>EMI Details:</h3>
+                        <div class="emi-details">EMI: ₹78,541/month</div>
+                        <p>Top banks offering home loans:</p>
+                        <ul class="emi-banks">
+                            <li>Axis Bank — 8.35% — <a href="https://www.axisbank.com/home-loan" target="_blank">Apply Now</a></li>
+                            <li>ICICI Bank — 8.75% — <a href="https://www.icicibank.com/home-loan" target="_blank">Apply Now</a></li>
+                            <li>SBI Bank — 8.50% — <a href="https://www.onlinesbi.sbi/home-loans" target="_blank">Apply Now</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+</div>
+</body>
+</html>
+```
