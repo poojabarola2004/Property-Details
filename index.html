@@ -1,0 +1,384 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Property Recommendations</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f7f6;
+            color: #333;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            border-radius: 10px;
+        }
+        h1, h2 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        h2 {
+            border-bottom: 2px solid #e0e0e0;
+            padding-bottom: 10px;
+            margin-top: 40px;
+        }
+        .property-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+        .property-card {
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            overflow: hidden;
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid #e0e0e0;
+        }
+        .property-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+        .property-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            display: block;
+        }
+        .property-content {
+            padding: 20px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .property-title {
+            font-size: 1.25em;
+            margin-top: 0;
+            margin-bottom: 10px;
+            color: #34495e;
+            line-height: 1.4;
+        }
+        .property-price {
+            font-size: 1.6em;
+            color: #27ae60;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        .property-detail {
+            font-size: 0.9em;
+            margin-bottom: 8px;
+            color: #555;
+            display: flex;
+            align-items: center;
+        }
+        .property-detail strong {
+            color: #333;
+            margin-right: 5px;
+        }
+        .property-detail i {
+            margin-right: 8px;
+            color: #7f8c8d;
+        }
+        .features-list, .amenities-list, .emi-details ul {
+            list-style: none;
+            padding: 0;
+            margin: 15px 0;
+        }
+        .features-list li, .amenities-list li, .emi-details ul li {
+            background-color: #ecf0f1;
+            border-left: 3px solid #3498db;
+            padding: 8px 12px;
+            margin-bottom: 5px;
+            border-radius: 4px;
+            font-size: 0.85em;
+            color: #444;
+        }
+        .features-list h3, .amenities-list h3, .emi-details h3 {
+            color: #34495e;
+            font-size: 1.1em;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+        .emi-details {
+            background-color: #f8fcf8;
+            border: 1px dashed #d0edd0;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+        .emi-details p {
+            margin: 5px 0;
+            font-size: 0.9em;
+        }
+        .emi-details a {
+            color: #2980b9;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .emi-details a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🏡 Your Property Recommendations in Noida</h1>
+
+        <section class="under-budget">
+            <h2>🏠 Under Budget Properties</h2>
+            <div class="property-grid">
+                <div class="property-card">
+                    <img src="https://is1-3.housingcdn.com/01c16c28/c71e290c36fead4af8595c8d863d1746/v0/medium/2_bhk_independent_builder_floor-for-rent-sector_122-Noida-hall.jpg" alt="Golden Residency 5" class="property-image">
+                    <div class="property-content">
+                        <h3 class="property-title">Golden Residency 5</h3>
+                        <p class="property-detail">2 BHK Independent Builder Floor for Sale in Sector 122, Noida</p>
+                        <p class="property-price">₹38 Lac</p>
+                        <p class="property-detail"><i class="fas fa-map-marker-alt"></i>Noida (Sector 122)</p>
+                        <p class="property-detail"><i class="fas fa-bed"></i>2 BHK (2 Baths)</p>
+                        <p class="property-detail"><i class="fas fa-ruler-combined"></i>1,000 sqft Built-up Area</p>
+                        <p class="property-detail"><i class="fas fa-couch"></i>Semi-Furnished (2 bedrooms, 2 bathrooms, 1 balcony)</p>
+                        <p class="property-detail"><i class="far fa-calendar-alt"></i>Available From: Ready To Move</p>
+
+                        <h3>✨ Features</h3>
+                        <ul class="features-list">
+                            <li>North-East Facing</li>
+                            <li>Fresh Construction</li>
+                            <li>1st floor of 4 floors building</li>
+                        </ul>
+
+                        <h3>📍 Nearby Amenities</h3>
+                        <ul class="amenities-list">
+                            <li>Hospitals: Max Super Speciality Hospital, Fortis Hospital, Kailash Hospital, SRS Multispeciality Hospital</li>
+                            <li>Schools: Noida International Public School, Sapphire International School</li>
+                            <li>Metro Stations: Sector 51 Metro, Sector 61 Noida Metro, Sector 52 Noida Metro</li>
+                            <li>Malls: Shopping Malls</li>
+                            <li>Parks: Parks</li>
+                        </ul>
+
+                        <div class="emi-details">
+                            <h3>💰 EMI Details</h3>
+                            <p>Estimated EMI (20 years @ 8.5% annual interest): ₹16,353</p>
+                            <p>Top Banks for Home Loan:</p>
+                            <ul>
+                                <li>Central Bank of India — 7.35% — <a href="#" target="_blank">Apply Now</a></li>
+                                <li>Canara Bank — 7.40% — <a href="#" target="_blank">Apply Now</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="property-card">
+                    <img src="https://housing-images.n7net.in/01c16c28/621cd3f60a06467eb1183eeed4abd49f/v0/medium/3_bhk_independent_builder_floor-for-rent-sector_122-Noida-kitchen.jpg" alt="Super Homes-2" class="property-image">
+                    <div class="property-content">
+                        <h3 class="property-title">Super Homes-2</h3>
+                        <p class="property-detail">3 BHK Flat for Sale in Sector 122, Noida</p>
+                        <p class="property-price">₹45 Lac</p>
+                        <p class="property-detail"><i class="fas fa-map-marker-alt"></i>Noida (Sector 122)</p>
+                        <p class="property-detail"><i class="fas fa-bed"></i>3 BHK (3 Baths)</p>
+                        <p class="property-detail"><i class="fas fa-ruler-combined"></i>1,500 sqft Carpet Area</p>
+                        <p class="property-detail"><i class="fas fa-couch"></i>Furnishing: Not specified</p>
+                        <p class="property-detail"><i class="far fa-calendar-alt"></i>Available From: Ready To Move</p>
+
+                        <h3>📍 Nearby Amenities</h3>
+                        <ul class="amenities-list">
+                            <li>Hospitals: Max Super Speciality Hospital, Fortis Hospital, Kailash Hospital, SRS Multispeciality Hospital</li>
+                            <li>Schools: Noida International Public School, Sapphire International School</li>
+                            <li>Metro Stations: Sector 51 Metro, Sector 61 Noida Metro, Sector 52 Noida Metro</li>
+                            <li>Malls: Shopping Malls</li>
+                            <li>Parks: Parks</li>
+                        </ul>
+
+                        <div class="emi-details">
+                            <h3>💰 EMI Details</h3>
+                            <p>Estimated EMI (20 years @ 8.5% annual interest): ₹20,349</p>
+                            <p>Top Banks for Home Loan:</p>
+                            <ul>
+                                <li>Central Bank of India — 7.35% — <a href="#" target="_blank">Apply Now</a></li>
+                                <li>Canara Bank — 7.40% — <a href="#" target="_blank">Apply Now</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="property-card">
+                    <img src="https://imagecdn.99acres.com/media1/32666/4/653324213M-1758967392822.jpg" alt="East Avenue" class="property-image">
+                    <div class="property-content">
+                        <h3 class="property-title">East Avenue</h3>
+                        <p class="property-detail">2 BHK Independent Builder Floor for Sale in Block D Sector 71, Noida</p>
+                        <p class="property-price">₹43.9 Lac</p>
+                        <p class="property-detail"><i class="fas fa-map-marker-alt"></i>Noida (Block D Sector 71)</p>
+                        <p class="property-detail"><i class="fas fa-bed"></i>2 BHK (2 Baths)</p>
+                        <p class="property-detail"><i class="fas fa-ruler-combined"></i>1,050 sqft Carpet Area</p>
+                        <p class="property-detail"><i class="fas fa-couch"></i>Semi-Furnished (Modular kitchen with RO and chimney, wooden almirah, fan, LED lights, plastic paint, wallpapers, geyser, adjust fan, calling fan, falls calling, LED TV panel)</p>
+                        <p class="property-detail"><i class="far fa-calendar-alt"></i>Available From: Ready To Move</p>
+
+                        <h3>✨ Features</h3>
+                        <ul class="features-list">
+                            <li>East Facing</li>
+                            <li>Private Garden</li>
+                            <li>Gated society with 24x7 security & CCTV surveillance</li>
+                            <li>Automatic Lift, Covered Parking</li>
+                            <li>24 hours common area power backup</li>
+                            <li>Earth resistant RCC frame structure</li>
+                        </ul>
+
+                        <h3>📍 Nearby Amenities</h3>
+                        <ul class="amenities-list">
+                            <li>Hospitals: Kailash Hospital & Neuro Institute, Metro Hospital and Heart Institute, Noida Sector-12</li>
+                            <li>Malls: DLF Mall of India, Spectrum Metro Mall, Gaur City Mall</li>
+                            <li>Metro Stations: Noida sector 61 metro station</li>
+                        </ul>
+
+                        <div class="emi-details">
+                            <h3>💰 EMI Details</h3>
+                            <p>Estimated EMI (20 years @ 8.5% annual interest): ₹19,842</p>
+                            <p>Top Banks for Home Loan:</p>
+                            <ul>
+                                <li>Central Bank of India — 7.35% — <a href="#" target="_blank">Apply Now</a></li>
+                                <li>Canara Bank — 7.40% — <a href="#" target="_blank">Apply Now</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="property-card">
+                    <img src="https://imagecdn.99acres.com/media1/32483/16/649676675M-1758278102267.jpg" alt="Global Homes" class="property-image">
+                    <div class="property-content">
+                        <h3 class="property-title">Global Homes</h3>
+                        <p class="property-detail">2 BHK Independent Builder Floor for Sale in C Block Sector 71, Noida</p>
+                        <p class="property-price">₹44.2 Lac</p>
+                        <p class="property-detail"><i class="fas fa-map-marker-alt"></i>Noida (C Block Sector 71)</p>
+                        <p class="property-detail"><i class="fas fa-bed"></i>2 BHK (2 Baths)</p>
+                        <p class="property-detail"><i class="fas fa-ruler-combined"></i>1,050 sqft Carpet Area</p>
+                        <p class="property-detail"><i class="fas fa-couch"></i>Semi-Furnished (Modular kitchen with RO and chimney, wooden almirah, fan, LED lights, plastic paint, wallpapers, geyser, adjust fan, calling fan, falls calling, LED TV panel)</p>
+                        <p class="property-detail"><i class="far fa-calendar-alt"></i>Available From: Ready To Move</p>
+
+                        <h3>✨ Features</h3>
+                        <ul class="features-list">
+                            <li>East Facing</li>
+                            <li>Private Garden</li>
+                            <li>Gated society with 24x7 security & CCTV surveillance</li>
+                            <li>Automatic Lift, Covered Parking</li>
+                            <li>24 hours common area power backup</li>
+                            <li>Earth resistant RCC frame structure</li>
+                        </ul>
+
+                        <h3>📍 Nearby Amenities</h3>
+                        <ul class="amenities-list">
+                            <li>Hospitals: Kailash Hospital & Neuro Institute</li>
+                            <li>Malls: DLF Mall of India, Spectrum Metro Mall, Shopprix mall, Asquare mall, Shipra mall, Spice world mall, Atta market</li>
+                            <li>Metro Stations: Noida sector 61 metro station, Noida sector 59 metro</li>
+                        </ul>
+
+                        <div class="emi-details">
+                            <h3>💰 EMI Details</h3>
+                            <p>Estimated EMI (20 years @ 8.5% annual interest): ₹19,975</p>
+                            <p>Top Banks for Home Loan:</p>
+                            <ul>
+                                <li>Central Bank of India — 7.35% — <a href="#" target="_blank">Apply Now</a></li>
+                                <li>Canara Bank — 7.40% — <a href="#" target="_blank">Apply Now</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="recommended">
+            <h2>🌟 Recommended for You</h2>
+            <div class="property-grid">
+                <div class="property-card">
+                    <img src="https://imagecdn.99acres.com/media1/32666/4/653324213M-1758967392822.jpg" alt="Sap Heights" class="property-image">
+                    <div class="property-content">
+                        <h3 class="property-title">Sap Heights</h3>
+                        <p class="property-detail">2 BHK Independent Builder Floor for Sale in Block D Sector 71, Noida</p>
+                        <p class="property-price">₹45.3 Lac</p>
+                        <p class="property-detail"><i class="fas fa-map-marker-alt"></i>Noida (Block D Sector 71)</p>
+                        <p class="property-detail"><i class="fas fa-bed"></i>2 BHK (2 Baths)</p>
+                        <p class="property-detail"><i class="fas fa-ruler-combined"></i>1,050 sqft Carpet Area</p>
+                        <p class="property-detail"><i class="fas fa-couch"></i>Semi-Furnished (Modular kitchen with RO and chimney, wooden almirah, fan, LED lights, plastic paint, wallpapers, geyser, adjust fan, calling fan, falls calling, LED TV panel)</p>
+                        <p class="property-detail"><i class="far fa-calendar-alt"></i>Available From: Ready To Move</p>
+
+                        <h3>✨ Features</h3>
+                        <ul class="features-list">
+                            <li>East Facing</li>
+                            <li>Private Garden</li>
+                            <li>Gated society with 24x7 security & CCTV surveillance</li>
+                            <li>Automatic Lift, Covered Parking</li>
+                            <li>24 hours common area power backup</li>
+                            <li>Earth resistant RCC frame structure</li>
+                        </ul>
+
+                        <h3>📍 Nearby Amenities</h3>
+                        <ul class="amenities-list">
+                            <li>Hospitals: Kailash Hospital & Neuro Institute, Metro Hospital and Heart Institute, Noida Sector-12</li>
+                            <li>Malls: DLF Mall of India, Spectrum Metro Mall, Gaur City Mall</li>
+                            <li>Metro Stations: Noida sector 61 metro station</li>
+                        </ul>
+
+                        <div class="emi-details">
+                            <h3>💰 EMI Details</h3>
+                            <p>Estimated EMI (20 years @ 8.5% annual interest): ₹20,482</p>
+                            <p>Top Banks for Home Loan:</p>
+                            <ul>
+                                <li>Central Bank of India — 7.35% — <a href="#" target="_blank">Apply Now</a></li>
+                                <li>Canara Bank — 7.40% — <a href="#" target="_blank">Apply Now</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="property-card">
+                    <img src="https://housing-images.n7net.in/01c16c28/a8e45c0934b2fed0b3029c8c95245818/v0/medium/2_bhk_independent_house-for-rent-sector_116-Noida-hall.jpg" alt="Sunset Tower" class="property-image">
+                    <div class="property-content">
+                        <h3 class="property-title">Sunset Tower</h3>
+                        <p class="property-detail">2 BHK Flat for Sale in Sector 116, Noida</p>
+                        <p class="property-price">₹39 Lac</p>
+                        <p class="property-detail"><i class="fas fa-map-marker-alt"></i>Noida (Sector 116)</p>
+                        <p class="property-detail"><i class="fas fa-bed"></i>2 BHK (2 Baths)</p>
+                        <p class="property-detail"><i class="fas fa-ruler-combined"></i>1,000 sqft Carpet Area</p>
+                        <p class="property-detail"><i class="fas fa-couch"></i>Furnishing: Not specified</p>
+                        <p class="property-detail"><i class="far fa-calendar-alt"></i>Available From: Ready To Move</p>
+
+                        <h3>✨ Features</h3>
+                        <ul class="features-list">
+                            <li>Prime location</li>
+                            <li>Near by metro</li>
+                        </ul>
+
+                        <h3>📍 Nearby Amenities</h3>
+                        <ul class="amenities-list">
+                            <li>Hospitals: Metro Multispeciality Hospital, Max Super Speciality Hospital, Manipal Hospital Ghaziabad</li>
+                            <li>Schools: Aptech Montana International Pre School</li>
+                            <li>Metro Stations: Sector 76 Metro Station, Sector 101 Metro Station, Sector 50 Metro Station</li>
+                            <li>Malls: Shopping mall (Grofers mentioned as shopping complex)</li>
+                        </ul>
+
+                        <div class="emi-details">
+                            <h3>💰 EMI Details</h3>
+                            <p>Estimated EMI (20 years @ 8.5% annual interest): ₹16,802</p>
+                            <p>Top Banks for Home Loan:</p>
+                            <ul>
+                                <li>Central Bank of India — 7.35% — <a href="#" target="_blank">Apply Now</a></li>
+                                <li>Canara Bank — 7.40% — <a href="#" target="_blank">Apply Now</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</body>
+</html>
+```
