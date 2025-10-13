@@ -1,47 +1,482 @@
-                    <img src="https://imagecdn.99acres.com/media1/32666/4/653324213M-1758967392822.jpg" alt="Sap Heights">
-                </div>
-                <div class="property-info">
-                    <h3>Sap Heights</h3>
-                    <p>2 BHK Independent Builder Floor</p>
-                    <p><strong>City & Locality:</strong> Noida, Block D Sector 71</p>
-                    <p><strong>Price:</strong> ₹45.3 Lac</p>
-                    <p><strong>Configuration:</strong> 2 BHK (2 Baths)</p>
-                    <p><strong>Area:</strong> 1,050 sqft (98 sqm) Carpet Area</p>
-                    <p><strong>Furnishing:</strong> Semi-Furnished</p>
-                    <p><strong>Available From:</strong> Ready To Move</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Property Recommendations</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #007bff;
+            --secondary-color: #6c757d;
+            --accent-color: #28a745;
+            --background-light: #f8f9fa;
+            --background-dark: #e9ecef;
+            --text-dark: #343a40;
+            --text-light: #ffffff;
+            --card-background: #ffffff;
+            --border-radius: 12px;
+            --shadow-light: rgba(0, 0, 0, 0.1);
+            --shadow-hover: rgba(0, 0, 0, 0.2);
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: var(--background-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        h1, h2 {
+            text-align: center;
+            color: var(--primary-color);
+            margin-bottom: 40px;
+            font-weight: 700;
+        }
+
+        h2 {
+            margin-top: 60px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--primary-color);
+            display: inline-block;
+            position: relative;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .property-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .property-card {
+            background-color: var(--card-background);
+            border-radius: var(--border-radius);
+            box-shadow: 0 4px 8px var(--shadow-light);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .property-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px var(--shadow-hover);
+        }
+
+        .property-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-bottom: 1px solid var(--background-dark);
+        }
+
+        .property-content {
+            padding: 20px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .property-content h3 {
+            color: var(--primary-color);
+            margin-top: 0;
+            margin-bottom: 10px;
+            font-size: 1.5em;
+            font-weight: 600;
+        }
+
+        .property-content h4 {
+            color: var(--secondary-color);
+            margin-top: 0;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+            font-weight: 400;
+        }
+
+        .property-content .location {
+            font-size: 0.95em;
+            color: var(--secondary-color);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+
+        .property-content .location svg {
+            margin-right: 8px;
+            color: var(--primary-color);
+        }
+
+        .price {
+            font-size: 1.6em;
+            font-weight: 700;
+            color: var(--accent-color);
+            margin-bottom: 15px;
+        }
+
+        .details-list {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 15px 0;
+            font-size: 0.9em;
+        }
+
+        .details-list li {
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+        }
+
+        .details-list li strong {
+            color: var(--text-dark);
+            min-width: 90px;
+            display: inline-block;
+        }
+
+        .features, .nearby-amenities {
+            margin-bottom: 15px;
+        }
+
+        .features h5, .nearby-amenities h5 {
+            margin-top: 0;
+            margin-bottom: 8px;
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        .feature-list, .amenity-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+
+        .feature-list li, .amenity-list li {
+            background-color: var(--background-dark);
+            border-radius: 5px;
+            padding: 5px 10px;
+            font-size: 0.85em;
+            color: var(--text-dark);
+        }
+
+        .emi-info {
+            background-color: #e0f7fa; /* Light blue for EMI */
+            padding: 10px 15px;
+            border-radius: var(--border-radius);
+            margin-top: 15px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 0.95em;
+            border: 1px solid #b2ebf2;
+        }
+
+        .emi-info span {
+            color: var(--primary-color);
+            font-size: 1.1em;
+        }
+
+        .bank-link {
+            display: block;
+            text-align: center;
+            margin-top: 15px;
+            padding: 10px 15px;
+            background-color: var(--primary-color);
+            color: var(--text-light);
+            text-decoration: none;
+            border-radius: 8px;
+            transition: background-color 0.3s ease;
+        }
+
+        .bank-link:hover {
+            background-color: #0056b3;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .property-grid {
+                grid-template-columns: 1fr;
+            }
+            h1 {
+                font-size: 2em;
+            }
+            h2 {
+                font-size: 1.5em;
+            }
+        }
+        @media (max-width: 480px) {
+            body {
+                padding: 10px;
+            }
+            .property-content h3 {
+                font-size: 1.3em;
+            }
+            .price {
+                font-size: 1.4em;
+            }
+            .details-list li strong {
+                min-width: 70px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Your Dream Home Awaits in Greater Noida!</h1>
+
+        <h2>🏠 Under Budget Properties</h2>
+        <div class="property-grid">
+            <!-- Property 1 -->
+            <div class="property-card">
+                <img src="https://images.unsplash.com/photo-1564013799907-f04d5d997ab1?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Elegant 2 BHK House" class="property-image">
+                <div class="property-content">
+                    <h3>Elegant 2 BHK House</h3>
+                    <h4>Spacious Living in Alpha 1</h4>
+                    <div class="location">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
+                            <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/>
+                        </svg>
+                        Greater Noida, Alpha 1
+                    </div>
+                    <div class="price">₹1.55 Cr</div>
+                    <ul class="details-list">
+                        <li><strong>Configuration:</strong> 2 BHK (2 Baths)</li>
+                        <li><strong>Area:</strong> 645 sqft Plot Area</li>
+                        <li><strong>Furnishing:</strong> Unfurnished</li>
+                        <li><strong>Available From:</strong> Ready To Move</li>
+                    </ul>
                     <div class="features">
-                        <h4>Features/Amenities</h4>
-                        <ul>
-                            <li>Modular Kitchen with RO and Chimney</li>
-                            <li>Wooden Almirah</li>
-                            <li>Fans & LED Lights</li>
-                            <li>Geyser</li>
-                            <li>Automatic Lift</li>
-                            <li>Covered Parking</li>
-                            <li>CCTV Surveillance</li>
-                            <li>24x7 Security</li>
-                            <li>Power Backup</li>
+                        <h5>Features:</h5>
+                        <ul class="feature-list">
+                            <li>Southeast Facing</li>
+                            <li>Two Bathrooms</li>
+                            <li>Plot Area</li>
                         </ul>
                     </div>
                     <div class="nearby-amenities">
-                        <h4>Nearby Amenities</h4>
-                        <ul>
-                            <li>Noida Sector 61 Metro Station</li>
-                            <li>Noida Sector 59 Metro Station</li>
-                            <li>Local Markets</li>
-                            <li>Hospitals</li>
-                            <li>Schools</li>
+                        <h5>Nearby Amenities:</h5>
+                        <ul class="amenity-list">
+                            <li>Alpha 1 Metro Station</li>
+                            <li>Pari Chowk Metro Station</li>
+                            <li>Local Market</li>
                         </ul>
                     </div>
-                    <div class="emi-details">
-                        <h4>💰 EMI Details</h4>
-                        <p>Estimated EMI: ₹31,655</p>
-                        <ul>
-                            <li>HDFC — 8.5% — <a href="https://www.hdfcbank.com" target="_blank">Apply Now</a></li>
-                            <li>SBI — 8.5% — <a href="https://www.sbi.co.in" target="_blank">Apply Now</a></li>
-                            <li>ICICI — 8.5% — <a href="https://www.icicibank.com" target="_blank">Apply Now</a></li>
+                    <div class="emi-info">Estimated EMI: <span>₹135,662/month</span></div>
+                    <a href="https://www.hdfcbank.com/personal/loans/home-loan" target="_blank" class="bank-link">Apply for Home Loan (HDFC Bank)</a>
+                </div>
+            </div>
+
+            <!-- Property 2 -->
+            <div class="property-card">
+                <img src="https://images.unsplash.com/photo-1570129477011-85b2e04f4796?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Cozy 2 BHK House" class="property-image">
+                <div class="property-content">
+                    <h3>Cozy 2 BHK House</h3>
+                    <h4>Prime Location in Block B, Alpha 1</h4>
+                    <div class="location">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
+                            <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/>
+                        </svg>
+                        Greater Noida, Block B Alpha 1
+                    </div>
+                    <div class="price">₹1.55 Cr</div>
+                    <ul class="details-list">
+                        <li><strong>Configuration:</strong> 2 BHK (1 Bath)</li>
+                        <li><strong>Area:</strong> 645 sqft Plot Area</li>
+                        <li><strong>Furnishing:</strong> Unfurnished</li>
+                        <li><strong>Available From:</strong> Ready To Move</li>
+                    </ul>
+                    <div class="features">
+                        <h5>Features:</h5>
+                        <ul class="feature-list">
+                            <li>Good Condition</li>
+                            <li>Near Metro Station</li>
+                            <li>Market Proximity</li>
                         </ul>
                     </div>
+                    <div class="nearby-amenities">
+                        <h5>Nearby Amenities:</h5>
+                        <ul class="amenity-list">
+                            <li>Alpha 1 Metro Station</li>
+                            <li>Pari Chowk Metro Station</li>
+                            <li>Daily Needs Market</li>
+                        </ul>
+                    </div>
+                    <div class="emi-info">Estimated EMI: <span>₹135,662/month</span></div>
+                    <a href="https://www.icicibank.com/personal/loans/home-loan" target="_blank" class="bank-link">Apply for Home Loan (ICICI Bank)</a>
+                </div>
+            </div>
+
+            <!-- Property 3 -->
+            <div class="property-card">
+                <img src="https://images.unsplash.com/photo-1580582932707-52c5df7ffb73?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Modern 2 BHK House" class="property-image">
+                <div class="property-content">
+                    <h3>Modern 2 BHK House</h3>
+                    <h4>Comfortable Living in Block G, Alpha 2</h4>
+                    <div class="location">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
+                            <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/>
+                        </svg>
+                        Greater Noida, Block G Alpha 2
+                    </div>
+                    <div class="price">₹1.6 Cr</div>
+                    <ul class="details-list">
+                        <li><strong>Configuration:</strong> 2 BHK (1 Bath)</li>
+                        <li><strong>Area:</strong> 645 sqft Plot Area</li>
+                        <li><strong>Furnishing:</strong> Unfurnished</li>
+                        <li><strong>Available From:</strong> Ready To Move</li>
+                    </ul>
+                    <div class="features">
+                        <h5>Features:</h5>
+                        <ul class="feature-list">
+                            <li>Individual House</li>
+                            <li>Good Condition</li>
+                            <li>Bank Loan Available</li>
+                        </ul>
+                    </div>
+                    <div class="nearby-amenities">
+                        <h5>Nearby Amenities:</h5>
+                        <ul class="amenity-list">
+                            <li>Alpha 1 Metro Station</li>
+                            <li>Delta 1 Metro Station</li>
+                            <li>Local Shops</li>
+                        </ul>
+                    </div>
+                    <div class="emi-info">Estimated EMI: <span>₹140,000/month</span></div>
+                    <a href="https://www.axisbank.com/retail/loans/home-loan" target="_blank" class="bank-link">Apply for Home Loan (Axis Bank)</a>
+                </div>
+            </div>
+
+            <!-- Property 4 -->
+            <div class="property-card">
+                <img src="https://images.unsplash.com/photo-1549488344-9333af7291a1?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Parsvnath Edens 2 BHK Flat" class="property-image">
+                <div class="property-content">
+                    <h3>Parsvnath Edens 2 BHK Flat</h3>
+                    <h4>Affordable Apartment in Alpha 2</h4>
+                    <div class="location">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
+                            <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/>
+                        </svg>
+                        Greater Noida, Alpha 2
+                    </div>
+                    <div class="price">₹90 Lac</div>
+                    <ul class="details-list">
+                        <li><strong>Configuration:</strong> 2 BHK Flat (2 Baths)</li>
+                        <li><strong>Area:</strong> 1186 sqft Super Built-up Area</li>
+                        <li><strong>Furnishing:</strong> Unfurnished</li>
+                        <li><strong>Available From:</strong> Ready To Move</li>
+                    </ul>
+                    <div class="features">
+                        <h5>Features:</h5>
+                        <ul class="feature-list">
+                            <li>Super Built-up Area</li>
+                            <li>Two Bathrooms</li>
+                            <li>Near Market</li>
+                        </ul>
+                    </div>
+                    <div class="nearby-amenities">
+                        <h5>Nearby Amenities:</h5>
+                        <ul class="amenity-list">
+                            <li>Alpha 1 Metro Station</li>
+                            <li>Delta 1 Metro Station</li>
+                            <li>Shopping Complex</li>
+                        </ul>
+                    </div>
+                    <div class="emi-info">Estimated EMI: <span>₹78,744/month</span></div>
+                    <a href="https://www.kotak.com/en/personal-banking/loans/home-loan.html" target="_blank" class="bank-link">Apply for Home Loan (Kotak Bank)</a>
+                </div>
+            </div>
+        </div>
+
+        <h2>🌟 Recommended Properties</h2>
+        <div class="property-grid">
+            <!-- Recommended Property 1 -->
+            <div class="property-card">
+                <img src="https://images.unsplash.com/photo-1582268710609-0268c2dd040b?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Family-Friendly 2 BHK House" class="property-image">
+                <div class="property-content">
+                    <h3>Family-Friendly 2 BHK House</h3>
+                    <h4>Ideal Home Near Schools in Alpha 2</h4>
+                    <div class="location">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
+                            <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/>
+                        </svg>
+                        Greater Noida, Alpha 2
+                    </div>
+                    <div class="price">₹1.45 Cr</div>
+                    <ul class="details-list">
+                        <li><strong>Configuration:</strong> 2 BHK (2 Baths)</li>
+                        <li><strong>Area:</strong> 645 sqft Plot Area</li>
+                        <li><strong>Furnishing:</strong> Unfurnished</li>
+                        <li><strong>Available From:</strong> Ready To Move</li>
+                    </ul>
+                    <div class="features">
+                        <h5>Features:</h5>
+                        <ul class="feature-list">
+                            <li>Two Bathrooms</li>
+                            <li>Proximity to Metro</li>
+                            <li>Family-Oriented Locality</li>
+                        </ul>
+                    </div>
+                    <div class="nearby-amenities">
+                        <h5>Nearby Amenities:</h5>
+                        <ul class="amenity-list">
+                            <li>Alpha 1 Metro Station</li>
+                            <li>Delta 1 Metro Station</li>
+                            <li>Close to School</li>
+                        </ul>
+                    </div>
+                    <div class="emi-info">Estimated EMI: <span>₹126,864/month</span></div>
+                    <a href="https://www.sbi.co.in/web/personal-banking/loans/home-loan" target="_blank" class="bank-link">Apply for Home Loan (SBI)</a>
+                </div>
+            </div>
+
+            <!-- Recommended Property 2 -->
+            <div class="property-card">
+                <img src="https://images.unsplash.com/photo-1580582932707-52c5df7ffb73?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Premium 2 BHK House" class="property-image">
+                <div class="property-content">
+                    <h3>Premium 2 BHK House</h3>
+                    <h4>Well-Connected in Block G, Alpha 2</h4>
+                    <div class="location">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
+                            <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/>
+                        </svg>
+                        Greater Noida, Block G Alpha 2
+                    </div>
+                    <div class="price">₹2.2 Cr</div>
+                    <ul class="details-list">
+                        <li><strong>Configuration:</strong> 2 BHK (2 Baths)</li>
+                        <li><strong>Area:</strong> 1076 sqft Super Built-up Area</li>
+                        <li><strong>Furnishing:</strong> Unfurnished</li>
+                        <li><strong>Available From:</strong> Ready To Move</li>
+                    </ul>
+                    <div class="features">
+                        <h5>Features:</h5>
+                        <ul class="feature-list">
+                            <li>Two Bathrooms</li>
+                            <li>Covered Parking</li>
+                            <li>Well-Built Structure</li>
+                        </ul>
+                    </div>
+                    <div class="nearby-amenities">
+                        <h5>Nearby Amenities:</h5>
+                        <ul class="amenity-list">
+                            <li>Metro Station (Alpha 1)</li>
+                            <li>Close to School</li>
+                            <li>Hospital & Market</li>
+                        </ul>
+                    </div>
+                    <div class="emi-info">Estimated EMI: <span>₹192,476/month</span></div>
+                    <a href="https://www.unionbankofindia.co.in/english/personal/loans/retail-loans/housing-loan" target="_blank" class="bank-link">Apply for Home Loan (Union Bank)</a>
                 </div>
             </div>
         </div>
