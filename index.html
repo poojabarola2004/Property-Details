@@ -1,10 +1,12 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Property Recommendations in Noida</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
             padding: 20px;
             background-color: #f4f7f6;
@@ -12,44 +14,54 @@
         }
         .container {
             max-width: 1200px;
-            margin: auto;
+            margin: 20px auto;
             padding: 20px;
             background-color: #fff;
             border-radius: 10px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
         }
-        h1, h2, h3 {
-            color: #2c3e50;
+        h1 {
             text-align: center;
-            margin-bottom: 20px;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            font-size: 2.5em;
         }
-        .property-section {
-            margin-bottom: 40px;
+        h2 {
+            color: #34495e;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+            margin-top: 40px;
+            font-size: 2em;
+        }
+        h3 {
+            color: #2980b9;
+            margin-top: 20px;
+            font-size: 1.5em;
         }
         .property-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 25px;
+            margin-top: 20px;
         }
         .property-card {
-            border: 1px solid #e0e0e0;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
             background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
             display: flex;
             flex-direction: column;
+            border: 1px solid #e0e0e0;
         }
         .property-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
         }
         .property-image-container {
             width: 100%;
             height: 200px;
             overflow: hidden;
-            border-bottom: 1px solid #eee;
         }
         .property-image {
             width: 100%;
@@ -58,108 +70,82 @@
             display: block;
         }
         .property-info {
-            padding: 20px;
+            padding: 15px;
             flex-grow: 1;
-            display: flex;
-            flex-direction: column;
         }
-        .property-info h3 {
-            margin-top: 0;
-            margin-bottom: 10px;
-            font-size: 1.4em;
-            color: #34495e;
-            text-align: left;
-        }
-        .property-info p {
-            margin-bottom: 8px;
-            font-size: 0.95em;
-            line-height: 1.5;
-        }
-        .property-info .price {
+        .property-name {
             font-size: 1.3em;
             font-weight: bold;
-            color: #27ae60;
-            margin-bottom: 15px;
-        }
-        .property-info ul {
-            list-style-type: none;
-            padding: 0;
-            margin-bottom: 15px;
-        }
-        .property-info ul li {
-            background-color: #ecf0f1;
-            padding: 6px 10px;
-            border-radius: 4px;
+            color: #2c3e50;
             margin-bottom: 5px;
-            font-size: 0.85em;
-            color: #555;
         }
-        .property-features, .nearby-amenities {
-            margin-top: 15px;
-            border-top: 1px solid #eee;
-            padding-top: 15px;
-        }
-        .property-features h4, .nearby-amenities h4 {
+        .property-title {
             font-size: 1.1em;
-            margin-bottom: 10px;
             color: #34495e;
-        }
-        .property-features ul, .nearby-amenities ul {
-            display: flex;
-            flex-wrap: wrap;
-            padding: 0;
-            margin: 0;
-            list-style: none;
-        }
-        .property-features ul li, .nearby-amenities ul li {
-            background-color: #e8f6f3;
-            color: #2196f3;
-            padding: 5px 10px;
-            border-radius: 15px;
-            margin-right: 8px;
-            margin-bottom: 8px;
-            font-size: 0.8em;
-        }
-        .emi-details {
-            margin-top: 20px;
-            border-top: 1px dashed #e0e0e0;
-            padding-top: 15px;
-        }
-        .emi-details h3 {
-            font-size: 1.2em;
             margin-bottom: 10px;
+        }
+        .price {
+            font-size: 1.4em;
+            color: #e74c3c;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .details ul {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 10px 0;
+        }
+        .details li {
+            margin-bottom: 5px;
+            color: #555;
+            font-size: 0.95em;
+        }
+        .details strong {
             color: #2c3e50;
         }
-        .emi-details p {
-            font-size: 1em;
-            margin-bottom: 5px;
-            color: #555;
-        }
-        .emi-details ul {
-            list-style-type: disc;
-            margin-left: 20px;
-            padding: 0;
-            margin-top: 10px;
-        }
-        .emi-details ul li {
-            margin-bottom: 5px;
+        .features, .nearby-amenities {
             font-size: 0.9em;
             color: #666;
+            margin-top: 10px;
         }
-        .emi-details ul li a {
+        .emi-section {
+            padding: 15px;
+            background-color: #ecf0f1;
+            border-top: 1px solid #dcdcdc;
+            border-radius: 0 0 10px 10px;
+            margin-top: auto;
+        }
+        .emi-section h3 {
+            color: #27ae60;
+            margin-top: 0;
+            margin-bottom: 10px;
+            font-size: 1.3em;
+        }
+        .emi-section p {
+            margin: 0 0 8px 0;
+            color: #444;
+            font-size: 0.95em;
+        }
+        .emi-section ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .emi-section li {
+            margin-bottom: 5px;
+            font-size: 0.9em;
+        }
+        .emi-section a {
             color: #3498db;
             text-decoration: none;
             font-weight: bold;
         }
-        .emi-details ul li a:hover {
+        .emi-section a:hover {
             text-decoration: underline;
         }
         @media (max-width: 768px) {
             .property-grid {
                 grid-template-columns: 1fr;
-            }
-            .container {
-                padding: 10px;
             }
         }
     </style>
@@ -168,276 +154,195 @@
     <div class="container">
         <h1>🏡 Property Recommendations in Noida</h1>
 
-        <div class="property-section">
-            <h2>🏠 Under Budget Properties</h2>
-            <div class="property-grid">
-
-                <div class="property-card">
-                    <div class="property-image-container">
-                        <img src="https://via.placeholder.com/600x400?text=A1+Tower+Image" alt="A1 Tower" class="property-image">
-                    </div>
-                    <div class="property-info">
-                        <h3>A1 Tower</h3>
-                        <p><strong>Title:</strong> 2 BHK Apartment</p>
-                        <p><strong>Location:</strong> Noida, Sector 73</p>
-                        <p class="price"><strong>Price:</strong> ₹40.00 L</p>
-                        <p><strong>Configuration:</strong> 2 BHK</p>
-                        <p><strong>Area:</strong> 550 - 1,750 sqft</p>
-                        <p><strong>Furnishing:</strong> Unfurnished (Not specified)</p>
-                        <p><strong>Available From:</strong> Under Construction (Completion in Dec, 2025)</p>
-                        <div class="property-features">
-                            <h4>Features/Amenities:</h4>
-                            <ul>
-                                <li>Power Backup</li>
-                                <li>Lift</li>
-                                <li>24/7 Security</li>
-                                <li>Parking</li>
-                            </ul>
-                        </div>
-                        <div class="nearby-amenities">
-                            <h4>Nearby Amenities:</h4>
-                            <ul>
-                                <li>Schools</li>
-                                <li>Hospitals</li>
-                                <li>Local Markets</li>
-                                <li>Parks</li>
-                            </ul>
-                        </div>
-                        <div class="emi-details">
-                            <h3>💰 EMI Details</h3>
-                            <p>Estimated EMI: ₹34,961</p>
-                            <ul>
-                                <li>State Bank of India — 8.70% — <a href="https://sbi.co.in/" target="_blank">Apply Now</a></li>
-                                <li>HDFC Bank — 8.75% — <a href="https://www.hdfcbank.com/" target="_blank">Apply Now</a></li>
-                                <li>ICICI Bank — 8.75% — <a href="https://www.icicibank.com/" target="_blank">Apply Now</a></li>
-                            </ul>
-                        </div>
-                    </div>
+        <h2>🏠 Under Budget Properties</h2>
+        <div class="property-grid">
+            <div class="property-card">
+                <div class="property-image-container">
+                    <img src="https://imagecdn.99acres.com/media1/27337/13/546753077M-1755662810581.webp" alt="Orchid Apartment" class="property-image">
                 </div>
-
-                <div class="property-card">
-                    <div class="property-image-container">
-                        <img src="https://via.placeholder.com/600x400?text=Capital+Hometech+Pride+Image" alt="Capital Hometech Pride" class="property-image">
+                <div class="property-info">
+                    <div class="property-name">Orchid Apartment</div>
+                    <div class="property-title">Spacious 2 BHK Flat</div>
+                    <p><strong>City & Locality:</strong> Noida, Sector 63</p>
+                    <p class="price">₹36 Lac</p>
+                    <div class="details">
+                        <ul>
+                            <li><strong>Configuration:</strong> 2 BHK (2 Baths)</li>
+                            <li><strong>Area:</strong> 1,000 sqft (93 sqm) Carpet Area</li>
+                            <li><strong>Furnishing:</strong> Unfurnished (as not specified in data)</li>
+                            <li><strong>Available From:</strong> Ready To Move</li>
+                        </ul>
                     </div>
-                    <div class="property-info">
-                        <h3>Capital Hometech Pride</h3>
-                        <p><strong>Title:</strong> 2 BHK Apartment</p>
-                        <p><strong>Location:</strong> Noida, Sector 74</p>
-                        <p class="price"><strong>Price:</strong> ₹42.00 L</p>
-                        <p><strong>Configuration:</strong> 2 BHK</p>
-                        <p><strong>Area:</strong> 650 - 1,450 sqft</p>
-                        <p><strong>Furnishing:</strong> Unfurnished (Not specified)</p>
-                        <p><strong>Available From:</strong> Under Construction (Completion in Aug, 2026)</p>
-                        <div class="property-features">
-                            <h4>Features/Amenities:</h4>
-                            <ul>
-                                <li>Power Backup</li>
-                                <li>Lift</li>
-                                <li>24/7 Security</li>
-                                <li>Parking</li>
-                            </ul>
-                        </div>
-                        <div class="nearby-amenities">
-                            <h4>Nearby Amenities:</h4>
-                            <ul>
-                                <li>Yadu Public School</li>
-                                <li>NEO Hospital</li>
-                                <li>Shopping Centers</li>
-                                <li>Parks</li>
-                            </ul>
-                        </div>
-                        <div class="emi-details">
-                            <h3>💰 EMI Details</h3>
-                            <p>Estimated EMI: ₹36,709</p>
-                            <ul>
-                                <li>State Bank of India — 8.70% — <a href="https://sbi.co.in/" target="_blank">Apply Now</a></li>
-                                <li>HDFC Bank — 8.75% — <a href="https://www.hdfcbank.com/" target="_blank">Apply Now</a></li>
-                                <li>ICICI Bank — 8.75% — <a href="https://www.icicibank.com/" target="_blank">Apply Now</a></li>
-                            </ul>
-                        </div>
-                    </div>
+                    <p class="features"><strong>Features/Amenities:</strong> Prime location, near by metro.</p>
+                    <p class="nearby-amenities"><strong>Nearby Amenities:</strong> Metro, school, hospital, market, shopping mall.</p>
                 </div>
-
-                <div class="property-card">
-                    <div class="property-image-container">
-                        <img src="https://via.placeholder.com/600x400?text=Lucky+Wow+Monk+Image" alt="Lucky Wow Monk" class="property-image">
-                    </div>
-                    <div class="property-info">
-                        <h3>Lucky Wow Monk</h3>
-                        <p><strong>Title:</strong> 2 BHK Independent Floor</p>
-                        <p><strong>Location:</strong> Noida, Noida Extension</p>
-                        <p class="price"><strong>Price:</strong> ₹52.88 L</p>
-                        <p><strong>Configuration:</strong> 2 BHK</p>
-                        <p><strong>Area:</strong> 1,175 - 2,200 sqft</p>
-                        <p><strong>Furnishing:</strong> Unfurnished (Not specified)</p>
-                        <p><strong>Available From:</strong> Under Construction (Completion in Jan, 2026)</p>
-                        <div class="property-features">
-                            <h4>Features/Amenities:</h4>
-                            <ul>
-                                <li>Car Parking</li>
-                                <li>CCTV Camera Security</li>
-                                <li>Lifts</li>
-                                <li>Power Backup</li>
-                            </ul>
-                        </div>
-                        <div class="nearby-amenities">
-                            <h4>Nearby Amenities:</h4>
-                            <ul>
-                                <li>Schools</li>
-                                <li>Hospitals</li>
-                                <li>Shopping Malls</li>
-                                <li>Restaurants</li>
-                            </ul>
-                        </div>
-                        <div class="emi-details">
-                            <h3>💰 EMI Details</h3>
-                            <p>Estimated EMI: ₹46,252</p>
-                            <ul>
-                                <li>State Bank of India — 8.70% — <a href="https://sbi.co.in/" target="_blank">Apply Now</a></li>
-                                <li>HDFC Bank — 8.75% — <a href="https://www.hdfcbank.com/" target="_blank">Apply Now</a></li>
-                                <li>ICICI Bank — 8.75% — <a href="https://www.icicibank.com/" target="_blank">Apply Now</a></li>
-                            </ul>
-                        </div>
-                    </div>
+                <div class="emi-section">
+                    <h3>💰 EMI Details</h3>
+                    <p>Estimated EMI: ₹31,431.14</p>
+                    <ul>
+                        <li>SBI — 8.50% — <a href="https://homeloans.sbi/" target="_blank">Apply Now</a></li>
+                        <li>HDFC Bank — 8.70% — <a href="https://www.hdfcbank.com/personal/borrow/popular-loans/home-loan" target="_blank">Apply Now</a></li>
+                        <li>ICICI Bank — 8.75% — <a href="https://www.icicibank.com/personal-banking/loans/home-loan" target="_blank">Apply Now</a></li>
+                    </ul>
                 </div>
+            </div>
 
-                <div class="property-card">
-                    <div class="property-image-container">
-                        <img src="https://via.placeholder.com/600x400?text=Paras+Tierea+Image" alt="Paras Tierea" class="property-image">
-                    </div>
-                    <div class="property-info">
-                        <h3>Paras Tierea</h3>
-                        <p><strong>Title:</strong> 2 BHK Apartment</p>
-                        <p><strong>Location:</strong> Noida, Sector 137</p>
-                        <p class="price"><strong>Price:</strong> ₹68.00 L</p>
-                        <p><strong>Configuration:</strong> 2 BHK</p>
-                        <p><strong>Area:</strong> 825 - 1,725 sqft</p>
-                        <p><strong>Furnishing:</strong> Unfurnished (Not specified)</p>
-                        <p><strong>Available From:</strong> Ready To Move</p>
-                        <div class="property-features">
-                            <h4>Features/Amenities:</h4>
-                            <ul>
-                                <li>Gated Community</li>
-                                <li>Club House</li>
-                                <li>Swimming Pool</li>
-                                <li>Gym</li>
-                            </ul>
-                        </div>
-                        <div class="nearby-amenities">
-                            <h4>Nearby Amenities:</h4>
-                            <ul>
-                                <li>Felix Hospital</li>
-                                <li>SKS World School, Sector 137 Noida</li>
-                                <li>Shopping Complexes</li>
-                                <li>Restaurants</li>
-                            </ul>
-                        </div>
-                        <div class="emi-details">
-                            <h3>💰 EMI Details</h3>
-                            <p>Estimated EMI: ₹59,481</p>
-                            <ul>
-                                <li>State Bank of India — 8.70% — <a href="https://sbi.co.in/" target="_blank">Apply Now</a></li>
-                                <li>HDFC Bank — 8.75% — <a href="https://www.hdfcbank.com/" target="_blank">Apply Now</a></li>
-                                <li>ICICI Bank — 8.75% — <a href="https://www.icicibank.com/" target="_blank">Apply Now</a></li>
-                            </ul>
-                        </div>
-                    </div>
+            <div class="property-card">
+                <div class="property-image-container">
+                    <img src="https://images.nobroker.in/images/8a9f94438ed18d21018ed19f115906ce/8a9f94438ed18d21018ed19f115906ce_55620_366310_medium.jpg" alt="Sanskriti apartment" class="property-image">
                 </div>
+                <div class="property-info">
+                    <div class="property-name">Sanskriti apartment</div>
+                    <div class="property-title">Well-maintained 3 BHK Flat</div>
+                    <p><strong>City & Locality:</strong> Noida, Sector 63</p>
+                    <p class="price">₹75 Lac</p>
+                    <div class="details">
+                        <ul>
+                            <li><strong>Configuration:</strong> 3 BHK (3 Baths)</li>
+                            <li><strong>Area:</strong> 1,495 sqft (139 sqm) Built-up Area</li>
+                            <li><strong>Furnishing:</strong> Unfurnished (as not specified in data)</li>
+                            <li><strong>Available From:</strong> Ready To Move</li>
+                        </ul>
+                    </div>
+                    <p class="features"><strong>Features/Amenities:</strong> East facing, 1st floor of a 4-storey building.</p>
+                    <p class="nearby-amenities"><strong>Nearby Amenities:</strong> Schools, markets, public transport (logically inferred for Sector 63).</p>
+                </div>
+                <div class="emi-section">
+                    <h3>💰 EMI Details</h3>
+                    <p>Estimated EMI: ₹65,496.06</p>
+                    <ul>
+                        <li>SBI — 8.50% — <a href="https://homeloans.sbi/" target="_blank">Apply Now</a></li>
+                        <li>HDFC Bank — 8.70% — <a href="https://www.hdfcbank.com/personal/borrow/popular-loans/home-loan" target="_blank">Apply Now</a></li>
+                        <li>ICICI Bank — 8.75% — <a href="https://www.icicibank.com/personal-banking/loans/home-loan" target="_blank">Apply Now</a></li>
+                    </ul>
+                </div>
+            </div>
 
+            <div class="property-card">
+                <div class="property-image-container">
+                    <img src="https://housing-images.n7net.in/01c16c28/8f3018fa0019de9c1500eb9173755121/v0/medium/3_bhk_apartment-for-sale-sector_63_noida-Noida-hall.jpg" alt="Amrapali Kingswood" class="property-image">
+                </div>
+                <div class="property-info">
+                    <div class="property-name">Amrapali Kingswood</div>
+                    <div class="property-title">Elegant 3 BHK Flat</div>
+                    <p><strong>City & Locality:</strong> Noida, Sector 63</p>
+                    <p class="price">₹94 Lac</p>
+                    <div class="details">
+                        <ul>
+                            <li><strong>Configuration:</strong> 3 BHK (2 Baths)</li>
+                            <li><strong>Area:</strong> 1,115 sqft (104 sqm) Super Built-up Area</li>
+                            <li><strong>Furnishing:</strong> Unfurnished (as not specified in data)</li>
+                            <li><strong>Available From:</strong> Ready To Move</li>
+                        </ul>
+                    </div>
+                    <p class="features"><strong>Features/Amenities:</strong> South east facing, completely lit, galaxy chowk facing, 1st tower from gate.</p>
+                    <p class="nearby-amenities"><strong>Nearby Amenities:</strong> Schools, markets, medical facilities (logically inferred for Sector 63).</p>
+                </div>
+                <div class="emi-section">
+                    <h3>💰 EMI Details</h3>
+                    <p>Estimated EMI: ₹82,109.11</p>
+                    <ul>
+                        <li>SBI — 8.50% — <a href="https://homeloans.sbi/" target="_blank">Apply Now</a></li>
+                        <li>HDFC Bank — 8.70% — <a href="https://www.hdfcbank.com/personal/borrow/popular-loans/home-loan" target="_blank">Apply Now</a></li>
+                        <li>ICICI Bank — 8.75% — <a href="https://www.icicibank.com/personal-banking/loans/home-loan" target="_blank">Apply Now</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="property-card">
+                <div class="property-image-container">
+                    <img src="https://via.placeholder.com/600x400?text=Property+Image" alt="Amrapali Kingswood" class="property-image">
+                </div>
+                <div class="property-info">
+                    <div class="property-name">Amrapali Kingswood</div>
+                    <div class="property-title">Modern 3 BHK Flat</div>
+                    <p><strong>City & Locality:</strong> Noida, Sector 63</p>
+                    <p class="price">₹95 Lac</p>
+                    <div class="details">
+                        <ul>
+                            <li><strong>Configuration:</strong> 3 BHK (2 Baths)</li>
+                            <li><strong>Area:</strong> 1,115 sqft (104 sqm) Carpet Area</li>
+                            <li><strong>Furnishing:</strong> Unfurnished (as not specified in data)</li>
+                            <li><strong>Available From:</strong> Ready To Move</li>
+                        </ul>
+                    </div>
+                    <p class="features"><strong>Features/Amenities:</strong> Spacious, modern, and affordable home, well-maintained.</p>
+                    <p class="nearby-amenities"><strong>Nearby Amenities:</strong> Prime location in Sector 63, close to schools and markets (logically inferred).</p>
+                </div>
+                <div class="emi-section">
+                    <h3>💰 EMI Details</h3>
+                    <p>Estimated EMI: ₹82,971.86</p>
+                    <ul>
+                        <li>SBI — 8.50% — <a href="https://homeloans.sbi/" target="_blank">Apply Now</a></li>
+                        <li>HDFC Bank — 8.70% — <a href="https://www.hdfcbank.com/personal/borrow/popular-loans/home-loan" target="_blank">Apply Now</a></li>
+                        <li>ICICI Bank — 8.75% — <a href="https://www.icicibank.com/personal-banking/loans/home-loan" target="_blank">Apply Now</a></li>
+                    </ul>
+                </div>
             </div>
         </div>
 
-        <div class="property-section">
-            <h2>🌟 Recommended for You</h2>
-            <div class="property-grid">
-
-                <div class="property-card">
-                    <div class="property-image-container">
-                        <img src="https://housing-images.n7net.in/4f2250e8/9a2debd58638b508491d7169c8817b86/v0/medium.jpeg" alt="Gardenia Grace" class="property-image">
-                    </div>
-                    <div class="property-info">
-                        <h3>Gardenia Grace</h3>
-                        <p><strong>Title:</strong> 2 BHK Flat</p>
-                        <p><strong>Location:</strong> Noida, Sector 61</p>
-                        <p class="price"><strong>Price:</strong> ₹1.25 Cr</p>
-                        <p><strong>Configuration:</strong> 2 BHK (2 Baths, 1 study room)</p>
-                        <p><strong>Area:</strong> 1,350 sqft</p>
-                        <p><strong>Furnishing:</strong> Semi-furnished (Complete wood work)</p>
-                        <p><strong>Available From:</strong> Ready To Move</p>
-                        <div class="property-features">
-                            <h4>Features/Amenities:</h4>
-                            <ul>
-                                <li>East Facing</li>
-                                <li>Ground Floor +2</li>
-                                <li>Complete Woodwork</li>
-                                <li>Sun Facing</li>
-                                <li>Park Facing</li>
-                            </ul>
-                        </div>
-                        <div class="nearby-amenities">
-                            <h4>Nearby Amenities:</h4>
-                            <ul>
-                                <li>Metro Station Sector 61 Noida</li>
-                                <li>Shopping Centers</li>
-                                <li>Schools</li>
-                                <li>Hospitals</li>
-                            </ul>
-                        </div>
-                        <div class="emi-details">
-                            <h3>💰 EMI Details</h3>
-                            <p>Estimated EMI: ₹1,09252</p>
-                            <ul>
-                                <li>State Bank of India — 8.70% — <a href="https://sbi.co.in/" target="_blank">Apply Now</a></li>
-                                <li>HDFC Bank — 8.75% — <a href="https://www.hdfcbank.com/" target="_blank">Apply Now</a></li>
-                                <li>ICICI Bank — 8.75% — <a href="https://www.icicibank.com/" target="_blank">Apply Now</a></li>
-                            </ul>
-                        </div>
-                    </div>
+        <h2>🌟 Recommended for You</h2>
+        <div class="property-grid">
+            <div class="property-card">
+                <div class="property-image-container">
+                    <img src="https://housing-images.n7net.in/01c16c28/349094a13ab805021eaf6fb0b3dd73f5/v0/medium/3_bhk_apartment-for-rent-sector_62_1-Noida-bedroom.jpg" alt="Radhey appartment" class="property-image">
                 </div>
-
-                <div class="property-card">
-                    <div class="property-image-container">
-                        <img src="https://newprojects.99acres.com/projects/amrapali/heart_beat_city/images/qfmtcsb_1745473076_589528371_med.webp" alt="Amrapali Silicon City" class="property-image">
+                <div class="property-info">
+                    <div class="property-name">Radhey appartment</div>
+                    <div class="property-title">Luxurious 3 BHK Furnished Flat</div>
+                    <p><strong>City & Locality:</strong> Noida, Sector 59</p>
+                    <p class="price">₹72 Lac</p>
+                    <div class="details">
+                        <ul>
+                            <li><strong>Configuration:</strong> 3 BHK (3 Baths)</li>
+                            <li><strong>Area:</strong> 1,525 sqft (142 sqm) Built-up Area</li>
+                            <li><strong>Furnishing:</strong> Furnished</li>
+                            <li><strong>Available From:</strong> Ready To Move</li>
+                        </ul>
                     </div>
-                    <div class="property-info">
-                        <h3>Amrapali Silicon City</h3>
-                        <p><strong>Title:</strong> 2 BHK Apartment</p>
-                        <p><strong>Location:</strong> Noida, Sector 76</p>
-                        <p class="price"><strong>Price:</strong> ₹95.06 L</p>
-                        <p><strong>Configuration:</strong> 2 BHK</p>
-                        <p><strong>Area:</strong> 815 - 2,410 sqft</p>
-                        <p><strong>Furnishing:</strong> Unfurnished (Not specified)</p>
-                        <p><strong>Available From:</strong> Ready To Move</p>
-                        <div class="property-features">
-                            <h4>Features/Amenities:</h4>
-                            <ul>
-                                <li>Gated Community</li>
-                                <li>Club House</li>
-                                <li>Power Backup</li>
-                                <li>Kids Play Area</li>
-                            </ul>
-                        </div>
-                        <div class="nearby-amenities">
-                            <h4>Nearby Amenities:</h4>
-                            <ul>
-                                <li>Noida Sector 76 Metro Station</li>
-                                <li>Hyde Park Crown</li>
-                                <li>Schools</li>
-                                <li>Hospitals</li>
-                            </ul>
-                        </div>
-                        <div class="emi-details">
-                            <h3>💰 EMI Details</h3>
-                            <p>Estimated EMI: ₹83,074</p>
-                            <ul>
-                                <li>State Bank of India — 8.70% — <a href="https://sbi.co.in/" target="_blank">Apply Now</a></li>
-                                <li>HDFC Bank — 8.75% — <a href="https://www.hdfcbank.com/" target="_blank">Apply Now</a></li>
-                                <li>ICICI Bank — 8.75% — <a href="https://www.icicibank.com/" target="_blank">Apply Now</a></li>
-                            </ul>
-                        </div>
-                    </div>
+                    <p class="features"><strong>Features/Amenities:</strong> Ready to move, furnished flats at the heart of Noida.</p>
+                    <p class="nearby-amenities"><strong>Nearby Amenities:</strong> Metro, school, hospital, walking distance market.</p>
                 </div>
+                <div class="emi-section">
+                    <h3>💰 EMI Details</h3>
+                    <p>Estimated EMI: ₹62,883.95</p>
+                    <ul>
+                        <li>SBI — 8.50% — <a href="https://homeloans.sbi/" target="_blank">Apply Now</a></li>
+                        <li>HDFC Bank — 8.70% — <a href="https://www.hdfcbank.com/personal/borrow/popular-loans/home-loan" target="_blank">Apply Now</a></li>
+                        <li>ICICI Bank — 8.75% — <a href="https://www.icicibank.com/personal-banking/loans/home-loan" target="_blank">Apply Now</a></li>
+                    </ul>
+                </div>
+            </div>
 
+            <div class="property-card">
+                <div class="property-image-container">
+                    <img src="https://images.nobroker.in/images/8a9f9a87978d0a7e01978d3f1fd91430/8a9f9a87978d0a7e01978d3f1fd91430_54564_39520_large.jpg" alt="Kings Tower" class="property-image">
+                </div>
+                <div class="property-info">
+                    <div class="property-name">Kings Tower</div>
+                    <div class="property-title">Beautiful 2 BHK Furnished Apartment</div>
+                    <p><strong>City & Locality:</strong> Noida, Hanuman Vihar</p>
+                    <p class="price">₹42 Lac</p>
+                    <div class="details">
+                        <ul>
+                            <li><strong>Configuration:</strong> 2 BHK (2 Baths)</li>
+                            <li><strong>Area:</strong> 950 sqft (88 sqm) Built-up Area</li>
+                            <li><strong>Furnishing:</strong> Fully furnished (Split AC, fridge, double bed, wardrobe, 9 seater sofa & center table, modular kitchen with chimney, power backup (inverter))</li>
+                            <li><strong>Available From:</strong> Ready To Move</li>
+                        </ul>
+                    </div>
+                    <p class="features"><strong>Features/Amenities:</strong> 1st floor in 5 floor building (Builders floor), building age: 2 years old, back covered balcony, lift, power backup.</p>
+                    <p class="nearby-amenities"><strong>Nearby Amenities:</strong> All major markets, malls, hospitals & schools. Nearest metro 76 aqua line & 52 blue line.</p>
+                </div>
+                <div class="emi-section">
+                    <h3>💰 EMI Details</h3>
+                    <p>Estimated EMI: ₹36,680.08</p>
+                    <ul>
+                        <li>SBI — 8.50% — <a href="https://homeloans.sbi/" target="_blank">Apply Now</a></li>
+                        <li>HDFC Bank — 8.70% — <a href="https://www.hdfcbank.com/personal/borrow/popular-loans/home-loan" target="_blank">Apply Now</a></li>
+                        <li>ICICI Bank — 8.75% — <a href="https://www.icicibank.com/personal-banking/loans/home-loan" target="_blank">Apply Now</a></li>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
