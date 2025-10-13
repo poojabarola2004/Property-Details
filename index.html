@@ -1,42 +1,38 @@
 <!doctype html>
 <html>
 <head>
-  <meta charset="UTF-8">
+  <title>Property Recommendations in Noida</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Property Recommendations - Noida</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
   <style>
     :root {
       --primary-color: #007bff;
       --secondary-color: #6c757d;
-      --accent-color: #28a745;
-      --background-color: #f8f9fa;
-      --card-bg: #ffffff;
       --text-color: #343a40;
-      --light-text: #666;
-      --border-color: #e9ecef;
-      --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-      --hover-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+      --light-bg: #f8f9fa;
+      --card-bg: #ffffff;
+      --shadow-light: rgba(0, 0, 0, 0.08);
+      --border-radius: 8px;
     }
 
     body {
-      font-family: 'Poppins', sans-serif;
+      font-family: 'Roboto', sans-serif;
+      line-height: 1.6;
       margin: 0;
       padding: 20px;
-      background-color: var(--background-color);
+      background-color: var(--light-bg);
       color: var(--text-color);
-      line-height: 1.6;
     }
 
     h1, h2 {
       text-align: center;
       color: var(--primary-color);
       margin-bottom: 30px;
-      font-weight: 600;
+      font-weight: 500;
     }
 
     section {
-      margin-bottom: 50px;
+      margin-bottom: 40px;
     }
 
     .property-grid {
@@ -49,164 +45,167 @@
 
     .property-card {
       background-color: var(--card-bg);
-      border-radius: 12px;
+      border-radius: var(--border-radius);
+      box-shadow: 0 4px 12px var(--shadow-light);
       overflow: hidden;
-      box-shadow: var(--shadow);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
       display: flex;
       flex-direction: column;
+      transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
     }
 
     .property-card:hover {
-      transform: translateY(-8px);
-      box-shadow: var(--hover-shadow);
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
     }
 
-    .property-card img {
+    .property-image-container {
       width: 100%;
-      height: 220px;
-      object-fit: cover;
-      display: block;
-      border-bottom: 1px solid var(--border-color);
+      padding-top: 60%; /* 5:3 aspect ratio */
+      position: relative;
+      overflow: hidden;
     }
 
-    .card-content {
+    .property-image-container img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease-in-out;
+    }
+
+    .property-card:hover img {
+      transform: scale(1.05);
+    }
+
+    .property-details {
       padding: 20px;
       flex-grow: 1;
       display: flex;
       flex-direction: column;
     }
 
-    .card-content h3 {
-      font-size: 1.35em;
-      margin-top: 0;
-      margin-bottom: 8px;
-      color: var(--primary-color);
-      font-weight: 600;
-    }
-
-    .card-content .title {
-      font-size: 1em;
-      color: var(--secondary-color);
-      margin-bottom: 15px;
-      font-weight: 400;
-    }
-
-    .card-price {
-      font-size: 1.5em;
-      font-weight: 700;
-      color: var(--accent-color);
-      margin-bottom: 15px;
-    }
-
-    .card-details {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-      gap: 10px;
-      margin-bottom: 20px;
-      font-size: 0.95em;
-      color: var(--light-text);
-      border-top: 1px solid var(--border-color);
-      padding-top: 15px;
-    }
-
-    .card-details div strong {
-      display: block;
-      color: var(--text-color);
-      font-weight: 500;
-      margin-bottom: 3px;
-    }
-
-    .features, .nearby-amenities {
-      margin-top: 15px;
-      border-top: 1px solid var(--border-color);
-      padding-top: 15px;
-    }
-
-    .features h4, .nearby-amenities h4, .emi-section h4 {
+    .property-details h3 {
+      font-size: 1.4em;
       margin-top: 0;
       margin-bottom: 10px;
       color: var(--primary-color);
-      font-weight: 500;
-      font-size: 1.1em;
     }
 
-    .features ul, .nearby-amenities ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-      gap: 8px;
-      font-size: 0.9em;
-      color: var(--light-text);
-    }
-
-    .features li::before, .nearby-amenities li::before {
-      content: "•";
-      color: var(--accent-color);
-      font-weight: bold;
-      display: inline-block;
-      width: 1em;
-      margin-left: -1em;
-    }
-
-    .emi-section {
-      margin-top: auto; /* Pushes EMI section to the bottom */
-      border-top: 1px solid var(--border-color);
-      padding-top: 15px;
-      background-color: #f0f8ff; /* Light blue background for EMI */
-      margin-left: -20px;
-      margin-right: -20px;
-      padding-left: 20px;
-      padding-right: 20px;
-      padding-bottom: 15px;
-      border-radius: 0 0 12px 12px;
-    }
-
-    .emi-section p {
+    .property-details p {
       margin: 5px 0;
-      font-size: 0.9em;
+      font-size: 0.95em;
       color: var(--text-color);
     }
 
-    .emi-section strong {
+    .property-details strong {
       color: var(--primary-color);
-      font-weight: 600;
     }
 
-    .bank-info {
+    .price {
+      font-size: 1.6em;
+      font-weight: 700;
+      color: var(--primary-color);
+      margin-top: 10px;
+      margin-bottom: 15px;
+    }
+
+    .price small {
+      font-size: 0.6em;
+      color: var(--secondary-color);
+      font-weight: 400;
+    }
+
+    .tag {
+      display: inline-block;
+      background-color: #e2f0ff;
+      color: #0056b3;
+      padding: 4px 10px;
+      border-radius: 5px;
+      font-size: 0.8em;
+      margin-right: 5px;
+      margin-bottom: 5px;
+    }
+
+    .details-section {
       margin-top: 15px;
+      padding-top: 15px;
+      border-top: 1px solid #eee;
     }
 
-    .bank-info h5 {
-      margin-bottom: 8px;
-      color: var(--primary-color);
-      font-size: 0.95em;
+    .details-section h4 {
+      font-size: 1.1em;
+      margin-top: 0;
+      margin-bottom: 10px;
+      color: var(--secondary-color);
     }
 
-    .bank-info ul {
+    .details-section ul {
       list-style: none;
       padding: 0;
       margin: 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
     }
 
-    .bank-info li {
-      margin-bottom: 5px;
+    .details-section ul li {
+      background-color: #f0f4f7;
+      border: 1px solid #e0e6eb;
+      padding: 5px 10px;
+      border-radius: 5px;
       font-size: 0.85em;
+      color: var(--text-color);
+    }
+
+    .emi-section {
+      background-color: #e6f7ff;
+      border-radius: var(--border-radius);
+      padding: 15px;
+      margin-top: 20px;
+      border: 1px solid #cceeff;
+    }
+
+    .emi-section h4 {
+      color: #0056b3;
+      margin-top: 0;
+      margin-bottom: 10px;
+      font-size: 1.1em;
+    }
+
+    .emi-banks {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      margin-top: 10px;
+    }
+
+    .bank-info {
+      background-color: #ffffff;
+      border: 1px solid #e0e6eb;
+      padding: 10px;
+      border-radius: 5px;
+      font-size: 0.85em;
+      flex: 1 1 calc(33% - 10px); /* Adjust for 3 banks */
+      box-sizing: border-box;
+      min-width: 150px; /* Ensure responsiveness */
     }
 
     .bank-info a {
+      display: block;
+      margin-top: 8px;
       color: var(--primary-color);
       text-decoration: none;
       font-weight: 500;
+      transition: color 0.2s ease;
     }
 
     .bank-info a:hover {
+      color: #0056b3;
       text-decoration: underline;
     }
 
-    /* Responsive adjustments */
     @media (max-width: 768px) {
       body {
         padding: 15px;
@@ -214,209 +213,244 @@
       .property-grid {
         grid-template-columns: 1fr;
       }
-      .card-details {
-        grid-template-columns: 1fr;
+      .bank-info {
+        flex: 1 1 calc(50% - 7.5px);
       }
-      .features ul, .nearby-amenities ul {
-        grid-template-columns: 1fr;
+    }
+
+    @media (max-width: 480px) {
+      .emi-banks {
+        flex-direction: column;
+      }
+      .bank-info {
+        flex: 1 1 100%;
       }
     }
   </style>
 </head>
 <body>
-  <h1>Property Recommendations in Noida</h1>
+  <h1>Noida Property Listings</h1>
 
   <section class="under-budget">
     <h2>🏠 Under Budget Properties</h2>
     <div class="property-grid">
 
+      <!-- Property Card 1: Golden Residency 5 -->
       <div class="property-card">
-        <img src="https://via.placeholder.com/400x220/007bff/ffffff?text=2BHK+Sector+122+Noida" alt="Golden Residency 5 in Sector 122, Noida">
-        <div class="card-content">
-          <h3>Golden Residency 5</h3>
-          <p class="title">2 BHK Independent Builder Floor</p>
-          <p>Noida, Sector 122</p>
-          <div class="card-price">₹38 Lac</div>
-          <div class="card-details">
-            <div><strong>Config:</strong> 2 BHK</div>
-            <div><strong>Area:</strong> 1,000 sqft</div>
-            <div><strong>Furnishing:</strong> Semi-Furnished</div>
-            <div><strong>Available From:</strong> Ready To Move</div>
-          </div>
-          <div class="features">
+        <div class="property-image-container">
+          <img src="https://source.unsplash.com/random/400x250/?2BHK,Builder Floor,Noida,Sector122,Semi-furnished" alt="2 BHK Builder Floor in Sector 122, Noida">
+        </div>
+        <div class="property-details">
+          <h3>Golden Residency</h3>
+          <p>2 BHK Independent Builder Floor for Sale</p>
+          <p><strong>Noida, Sector 122</strong></p>
+          <p class="price">₹38 Lac <small>(₹3,800 / sqft)</small></p>
+          <p><span class="tag">2 BHK</span> <span class="tag">1,000 sqft</span> <span class="tag">Semi-furnished</span></p>
+          <p>Available From: <strong>Immediate Possession</strong></p>
+
+          <div class="details-section">
             <h4>Features / Amenities</h4>
             <ul>
               <li>North-East Facing</li>
               <li>Fresh Construction</li>
               <li>Power Backup</li>
-              <li>Security</li>
             </ul>
           </div>
-          <div class="nearby-amenities">
+
+          <div class="details-section">
             <h4>Nearby Amenities</h4>
             <ul>
-              <li>Yatharth Hospital (3 km)</li>
-              <li>Felix Hospital (4.5 km)</li>
-              <li>Wave City Centre Metro (6 km)</li>
-              <li>Schools & Parks</li>
+              <li>Lotus Valley International School</li>
+              <li>Yatharth Super Speciality Hospital</li>
+              <li>Sector 122 Central Park</li>
+              <li>Proximity to Aqua Line Metro</li>
+              <li>Logix City Center Mall</li>
             </ul>
           </div>
+
           <div class="emi-section">
-            <h4>EMI Details</h4>
-            <p>Approx. EMI for 20 years (8.5% annual interest): <strong>₹33,086/month</strong></p>
-            <div class="bank-info">
-              <h5>Top Banks for Home Loans:</h5>
-              <ul>
-                <li>HDFC Bank (Approx. 8.45% onwards) - <a href="#" target="_blank">Apply Now</a></li>
-                <li>SBI (Approx. 8.40% onwards) - <a href="#" target="_blank">Apply Now</a></li>
-                <li>ICICI Bank (Approx. 8.50% onwards) - <a href="#" target="_blank">Apply Now</a></li>
-              </ul>
+            <h4>Estimated EMI: ₹32,909/month</h4>
+            <small>@8.5% annual interest for 20 years</small>
+            <div class="emi-banks">
+              <div class="bank-info">
+                <strong>HDFC Bank</strong> <br> @8.50% p.a. <a href="#" target="_blank">Apply Now</a>
+              </div>
+              <div class="bank-info">
+                <strong>SBI Bank</strong> <br> @8.60% p.a. <a href="#" target="_blank">Apply Now</a>
+              </div>
+              <div class="bank-info">
+                <strong>ICICI Bank</strong> <br> @8.70% p.a. <a href="#" target="_blank">Apply Now</a>
+              </div>
             </div>
           </div>
         </div>
       </div>
 
+      <!-- Property Card 2: East Avenue -->
       <div class="property-card">
-        <img src="https://via.placeholder.com/400x220/28a745/ffffff?text=3BHK+Sector+122+Noida" alt="Super Homes-2 in Sector 122, Noida">
-        <div class="card-content">
-          <h3>Super Homes-2</h3>
-          <p class="title">3 BHK Flat</p>
-          <p>Noida, Sector 122</p>
-          <div class="card-price">₹45 Lac</div>
-          <div class="card-details">
-            <div><strong>Config:</strong> 3 BHK</div>
-            <div><strong>Area:</strong> 1,500 sqft</div>
-            <div><strong>Furnishing:</strong> Semi-Furnished</div>
-            <div><strong>Available From:</strong> Ready To Move</div>
-          </div>
-          <div class="features">
-            <h4>Features / Amenities</h4>
-            <ul>
-              <li>Spacious Layout</li>
-              <li>Lift</li>
-              <li>Security</li>
-              <li>Power Backup</li>
-            </ul>
-          </div>
-          <div class="nearby-amenities">
-            <h4>Nearby Amenities</h4>
-            <ul>
-              <li>Yatharth Hospital (3 km)</li>
-              <li>Felix Hospital (4.5 km)</li>
-              <li>Schools & Local Markets</li>
-              <li>Wave City Centre Metro (6 km)</li>
-            </ul>
-          </div>
-          <div class="emi-section">
-            <h4>EMI Details</h4>
-            <p>Approx. EMI for 20 years (8.5% annual interest): <strong>₹39,121/month</strong></p>
-            <div class="bank-info">
-              <h5>Top Banks for Home Loans:</h5>
-              <ul>
-                <li>HDFC Bank (Approx. 8.45% onwards) - <a href="#" target="_blank">Apply Now</a></li>
-                <li>SBI (Approx. 8.40% onwards) - <a href="#" target="_blank">Apply Now</a></li>
-                <li>ICICI Bank (Approx. 8.50% onwards) - <a href="#" target="_blank">Apply Now</a></li>
-              </ul>
-            </div>
-          </div>
+        <div class="property-image-container">
+          <img src="https://source.unsplash.com/random/400x250/?2BHK,Builder Floor,Noida,Sector71,Semi-furnished,Private Garden" alt="2 BHK Builder Floor in Sector 71, Noida">
         </div>
-      </div>
-
-      <div class="property-card">
-        <img src="https://via.placeholder.com/400x220/ffc107/ffffff?text=2BHK+Sector+71+Noida" alt="Global Homes in Sector 71, Noida">
-        <div class="card-content">
-          <h3>Global Homes</h3>
-          <p class="title">2 BHK Independent Builder Floor</p>
-          <p>Noida, C Block Sector 71</p>
-          <div class="card-price">₹44.2 Lac</div>
-          <div class="card-details">
-            <div><strong>Config:</strong> 2 BHK</div>
-            <div><strong>Area:</strong> 1,050 sqft</div>
-            <div><strong>Furnishing:</strong> Semi-Furnished</div>
-            <div><strong>Available From:</strong> Ready To Move</div>
-          </div>
-          <div class="features">
-            <h4>Features / Amenities</h4>
-            <ul>
-              <li>East Facing</li>
-              <li>Private Garden</li>
-              <li>Modular Kitchen (RO, Chimney)</li>
-              <li>Automatic Lift</li>
-              <li>Covered Parking</li>
-              <li>CCTV & 24/7 Security</li>
-              <li>Power Backup</li>
-            </ul>
-          </div>
-          <div class="nearby-amenities">
-            <h4>Nearby Amenities</h4>
-            <ul>
-              <li>Fortis Hospital (3.5 km)</li>
-              <li>Kailash Hospital (4 km)</li>
-              <li>Sector 71 Metro Station (1 km)</li>
-              <li>DPS Noida (2 km)</li>
-              <li>Logix City Centre Mall (4 km)</li>
-            </ul>
-          </div>
-          <div class="emi-section">
-            <h4>EMI Details</h4>
-            <p>Approx. EMI for 20 years (8.5% annual interest): <strong>₹38,429/month</strong></p>
-            <div class="bank-info">
-              <h5>Top Banks for Home Loans:</h5>
-              <ul>
-                <li>HDFC Bank (Approx. 8.45% onwards) - <a href="#" target="_blank">Apply Now</a></li>
-                <li>SBI (Approx. 8.40% onwards) - <a href="#" target="_blank">Apply Now</a></li>
-                <li>ICICI Bank (Approx. 8.50% onwards) - <a href="#" target="_blank">Apply Now</a></li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="property-card">
-        <img src="https://via.placeholder.com/400x220/17a2b8/ffffff?text=2BHK+Sector+71+Noida" alt="East Avenue in Sector 71, Noida">
-        <div class="card-content">
+        <div class="property-details">
           <h3>East Avenue</h3>
-          <p class="title">2 BHK Independent Builder Floor</p>
-          <p>Noida, Block D Sector 71</p>
-          <div class="card-price">₹43.9 Lac</div>
-          <div class="card-details">
-            <div><strong>Config:</strong> 2 BHK</div>
-            <div><strong>Area:</strong> 1,050 sqft</div>
-            <div><strong>Furnishing:</strong> Semi-Furnished</div>
-            <div><strong>Available From:</strong> Ready To Move</div>
-          </div>
-          <div class="features">
+          <p>2 BHK Independent Builder Floor for Sale</p>
+          <p><strong>Noida, Block D Sector 71</strong></p>
+          <p class="price">₹43.9 Lac <small>(₹4,180 / sqft)</small></p>
+          <p><span class="tag">2 BHK</span> <span class="tag">1,050 sqft</span> <span class="tag">Semi-furnished</span></p>
+          <p>Available From: <strong>Immediate Possession</strong></p>
+
+          <div class="details-section">
             <h4>Features / Amenities</h4>
             <ul>
               <li>East Facing</li>
               <li>Private Garden</li>
-              <li>Modular Kitchen (RO, Chimney)</li>
+              <li>Gated Society</li>
+              <li>Modular Kitchen</li>
               <li>Automatic Lift</li>
               <li>Covered Parking</li>
-              <li>CCTV & 24/7 Security</li>
+              <li>24-hr Security</li>
               <li>Power Backup</li>
             </ul>
           </div>
-          <div class="nearby-amenities">
+
+          <div class="details-section">
             <h4>Nearby Amenities</h4>
             <ul>
-              <li>Fortis Hospital (3.5 km)</li>
-              <li>Kailash Hospital (4 km)</li>
-              <li>Sector 71 Metro Station (1 km)</li>
-              <li>Amity International School (3 km)</li>
-              <li>Logix City Centre Mall (4 km)</li>
+              <li>DPS Noida</li>
+              <li>Fortis Hospital Noida</li>
+              <li>Sector 71 Metro Station</li>
+              <li>Central Park Sector 71</li>
+              <li>Logix City Center Mall</li>
             </ul>
           </div>
+
           <div class="emi-section">
-            <h4>EMI Details</h4>
-            <p>Approx. EMI for 20 years (8.5% annual interest): <strong>₹38,168/month</strong></p>
-            <div class="bank-info">
-              <h5>Top Banks for Home Loans:</h5>
-              <ul>
-                <li>HDFC Bank (Approx. 8.45% onwards) - <a href="#" target="_blank">Apply Now</a></li>
-                <li>SBI (Approx. 8.40% onwards) - <a href="#" target="_blank">Apply Now</a></li>
-                <li>ICICI Bank (Approx. 8.50% onwards) - <a href="#" target="_blank">Apply Now</a></li>
-              </ul>
+            <h4>Estimated EMI: ₹38,018/month</h4>
+            <small>@8.5% annual interest for 20 years</small>
+            <div class="emi-banks">
+              <div class="bank-info">
+                <strong>HDFC Bank</strong> <br> @8.50% p.a. <a href="#" target="_blank">Apply Now</a>
+              </div>
+              <div class="bank-info">
+                <strong>SBI Bank</strong> <br> @8.60% p.a. <a href="#" target="_blank">Apply Now</a>
+              </div>
+              <div class="bank-info">
+                <strong>ICICI Bank</strong> <br> @8.70% p.a. <a href="#" target="_blank">Apply Now</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Property Card 3: Global Homes -->
+      <div class="property-card">
+        <div class="property-image-container">
+          <img src="https://source.unsplash.com/random/400x250/?2BHK,Builder Floor,Noida,Sector71,Semi-furnished,East Facing" alt="2 BHK Builder Floor in Sector 71, Noida">
+        </div>
+        <div class="property-details">
+          <h3>Global Homes</h3>
+          <p>2 BHK Independent Builder Floor for Sale</p>
+          <p><strong>Noida, C Block Sector 71</strong></p>
+          <p class="price">₹44.2 Lac <small>(₹4,209 / sqft)</small></p>
+          <p><span class="tag">2 BHK</span> <span class="tag">1,050 sqft</span> <span class="tag">Semi-furnished</span></p>
+          <p>Available From: <strong>Immediate Possession</strong></p>
+
+          <div class="details-section">
+            <h4>Features / Amenities</h4>
+            <ul>
+              <li>East Facing</li>
+              <li>Private Garden</li>
+              <li>Gated Society</li>
+              <li>Modular Kitchen</li>
+              <li>Automatic Lift</li>
+              <li>Covered Parking</li>
+              <li>CCTV Surveillance</li>
+              <li>24-hr Security</li>
+              <li>Power Backup</li>
+            </ul>
+          </div>
+
+          <div class="details-section">
+            <h4>Nearby Amenities</h4>
+            <ul>
+              <li>Kothari International School</li>
+              <li>Metro Hospital & Heart Institute</li>
+              <li>Sector 71 Metro Station</li>
+              <li>Shopprix Mall</li>
+              <li>Central Park Sector 71</li>
+            </ul>
+          </div>
+
+          <div class="emi-section">
+            <h4>Estimated EMI: ₹38,278/month</h4>
+            <small>@8.5% annual interest for 20 years</small>
+            <div class="emi-banks">
+              <div class="bank-info">
+                <strong>HDFC Bank</strong> <br> @8.50% p.a. <a href="#" target="_blank">Apply Now</a>
+              </div>
+              <div class="bank-info">
+                <strong>SBI Bank</strong> <br> @8.60% p.a. <a href="#" target="_blank">Apply Now</a>
+              </div>
+              <div class="bank-info">
+                <strong>ICICI Bank</strong> <br> @8.70% p.a. <a href="#" target="_blank">Apply Now</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Property Card 4: Super Homes-2 -->
+      <div class="property-card">
+        <div class="property-image-container">
+          <img src="https://source.unsplash.com/random/400x250/?3BHK,Apartment,Noida,Sector122,Semi-furnished,Gated Society" alt="3 BHK Flat in Sector 122, Noida">
+        </div>
+        <div class="property-details">
+          <h3>Super Homes-2</h3>
+          <p>3 BHK Flat for Sale</p>
+          <p><strong>Noida, Sector 122</strong></p>
+          <p class="price">₹45 Lac <small>(₹3,000 / sqft)</small></p>
+          <p><span class="tag">3 BHK</span> <span class="tag">1,500 sqft</span> <span class="tag">Semi-furnished</span></p>
+          <p>Available From: <strong>Immediate Possession</strong></p>
+
+          <div class="details-section">
+            <h4>Features / Amenities</h4>
+            <ul>
+              <li>Gated Society</li>
+              <li>Modular Kitchen</li>
+              <li>RO & Chimney</li>
+              <li>Wooden Almirah</li>
+              <li>False Ceiling</li>
+              <li>Automatic Lift</li>
+              <li>Covered Parking</li>
+              <li>24-hr Security</li>
+              <li>Power Backup</li>
+            </ul>
+          </div>
+
+          <div class="details-section">
+            <h4>Nearby Amenities</h4>
+            <ul>
+              <li>SKS World School</li>
+              <li>Yatharth Super Speciality Hospital</li>
+              <li>Proximity to Aqua Line Metro</li>
+              <li>Sector 122 Central Park</li>
+              <li>Grand Venice Mall</li>
+            </ul>
+          </div>
+
+          <div class="emi-section">
+            <h4>Estimated EMI: ₹38,947/month</h4>
+            <small>@8.5% annual interest for 20 years</small>
+            <div class="emi-banks">
+              <div class="bank-info">
+                <strong>HDFC Bank</strong> <br> @8.50% p.a. <a href="#" target="_blank">Apply Now</a>
+              </div>
+              <div class="bank-info">
+                <strong>SBI Bank</strong> <br> @8.60% p.a. <a href="#" target="_blank">Apply Now</a>
+              </div>
+              <div class="bank-info">
+                <strong>ICICI Bank</strong> <br> @8.70% p.a. <a href="#" target="_blank">Apply Now</a>
+              </div>
             </div>
           </div>
         </div>
@@ -429,97 +463,108 @@
     <h2>🌟 Recommended for You</h2>
     <div class="property-grid">
 
+      <!-- Property Card 5: Sunset Tower -->
       <div class="property-card">
-        <img src="https://via.placeholder.com/400x220/dc3545/ffffff?text=2BHK+Sector+116+Noida" alt="Sunset Tower in Sector 116, Noida">
-        <div class="card-content">
+        <div class="property-image-container">
+          <img src="https://source.unsplash.com/random/400x250/?2BHK,Apartment,Noida,Sector116,Metro,Hospital" alt="2 BHK Flat in Sector 116, Noida">
+        </div>
+        <div class="property-details">
           <h3>Sunset Tower</h3>
-          <p class="title">2 BHK Flat</p>
-          <p>Noida, Sector 116</p>
-          <div class="card-price">₹39 Lac</div>
-          <div class="card-details">
-            <div><strong>Config:</strong> 2 BHK</div>
-            <div><strong>Area:</strong> 1,000 sqft</div>
-            <div><strong>Furnishing:</strong> Semi-Furnished</div>
-            <div><strong>Available From:</strong> Ready To Move</div>
-          </div>
-          <div class="features">
+          <p>2 BHK Flat for Sale</p>
+          <p><strong>Noida, Sector 116</strong></p>
+          <p class="price">₹39 Lac <small>(₹3,900 / sqft)</small></p>
+          <p><span class="tag">2 BHK</span> <span class="tag">1,000 sqft</span> <span class="tag">Unfurnished</span></p>
+          <p>Available From: <strong>Immediate Possession</strong></p>
+
+          <div class="details-section">
             <h4>Features / Amenities</h4>
             <ul>
-              <li>Prime Location</li>
-              <li>Near Metro</li>
-              <li>Lift</li>
-              <li>Security</li>
+              <li>Prime location</li>
+              <li>Near by metro</li>
             </ul>
           </div>
-          <div class="nearby-amenities">
+
+          <div class="details-section">
             <h4>Nearby Amenities</h4>
             <ul>
-              <li>Max Hospital (6 km)</li>
-              <li>Schools & Markets</li>
-              <li>Sector 52 Metro Station (4 km)</li>
-              <li>Shopping Malls & Parks</li>
+              <li>Metro Station</li>
+              <li>School</li>
+              <li>Hospital</li>
+              <li>Market</li>
+              <li>Shopping Mall</li>
             </ul>
           </div>
+
           <div class="emi-section">
-            <h4>EMI Details</h4>
-            <p>Approx. EMI for 20 years (8.5% annual interest): <strong>₹33,957/month</strong></p>
-            <div class="bank-info">
-              <h5>Top Banks for Home Loans:</h5>
-              <ul>
-                <li>HDFC Bank (Approx. 8.45% onwards) - <a href="#" target="_blank">Apply Now</a></li>
-                <li>SBI (Approx. 8.40% onwards) - <a href="#" target="_blank">Apply Now</a></li>
-                <li>ICICI Bank (Approx. 8.50% onwards) - <a href="#" target="_blank">Apply Now</a></li>
-              </ul>
+            <h4>Estimated EMI: ₹33,777/month</h4>
+            <small>@8.5% annual interest for 20 years</small>
+            <div class="emi-banks">
+              <div class="bank-info">
+                <strong>HDFC Bank</strong> <br> @8.50% p.a. <a href="#" target="_blank">Apply Now</a>
+              </div>
+              <div class="bank-info">
+                <strong>SBI Bank</strong> <br> @8.60% p.a. <a href="#" target="_blank">Apply Now</a>
+              </div>
+              <div class="bank-info">
+                <strong>ICICI Bank</strong> <br> @8.70% p.a. <a href="#" target="_blank">Apply Now</a>
+              </div>
             </div>
           </div>
         </div>
       </div>
 
+      <!-- Property Card 6: Sap Heights -->
       <div class="property-card">
-        <img src="https://via.placeholder.com/400x220/6f42c1/ffffff?text=2BHK+Sector+71+Noida" alt="Sap Heights in Sector 71, Noida">
-        <div class="card-content">
+        <div class="property-image-container">
+          <img src="https://source.unsplash.com/random/400x250/?2BHK,Builder Floor,Noida,Sector71,Semi-furnished,Hospital proximity" alt="2 BHK Builder Floor in Sector 71, Noida">
+        </div>
+        <div class="property-details">
           <h3>Sap Heights</h3>
-          <p class="title">2 BHK Independent Builder Floor</p>
-          <p>Noida, Block D Sector 71</p>
-          <div class="card-price">₹45.3 Lac</div>
-          <div class="card-details">
-            <div><strong>Config:</strong> 2 BHK</div>
-            <div><strong>Area:</strong> 1,050 sqft</div>
-            <div><strong>Furnishing:</strong> Semi-Furnished</div>
-            <div><strong>Available From:</strong> Ready To Move</div>
-          </div>
-          <div class="features">
+          <p>2 BHK Independent Builder Floor for Sale</p>
+          <p><strong>Noida, Block D Sector 71</strong></p>
+          <p class="price">₹45.3 Lac <small>(₹4,314 / sqft)</small></p>
+          <p><span class="tag">2 BHK</span> <span class="tag">1,050 sqft</span> <span class="tag">Semi-furnished</span></p>
+          <p>Available From: <strong>Immediate Possession</strong></p>
+
+          <div class="details-section">
             <h4>Features / Amenities</h4>
             <ul>
               <li>East Facing</li>
               <li>Private Garden</li>
-              <li>Modular Kitchen (RO, Chimney)</li>
+              <li>Gated Society</li>
+              <li>Modular Kitchen</li>
               <li>Automatic Lift</li>
               <li>Covered Parking</li>
-              <li>CCTV & 24/7 Security</li>
+              <li>CCTV Surveillance</li>
+              <li>24-hr Security</li>
               <li>Power Backup</li>
             </ul>
           </div>
-          <div class="nearby-amenities">
+
+          <div class="details-section">
             <h4>Nearby Amenities</h4>
             <ul>
-              <li>Fortis Hospital (3.5 km)</li>
-              <li>Kailash Hospital (4 km)</li>
-              <li>Sector 71 Metro Station (1 km)</li>
-              <li>Schools & Shopping Centers</li>
-              <li>Logix City Centre Mall (4 km)</li>
+              <li>Amity International School</li>
+              <li>Kailash Hospital</li>
+              <li>Sector 71 Metro Station</li>
+              <li>Central Park Sector 71</li>
+              <li>Shopprix Mall</li>
             </ul>
           </div>
+
           <div class="emi-section">
-            <h4>EMI Details</h4>
-            <p>Approx. EMI for 20 years (8.5% annual interest): <strong>₹39,382/month</strong></p>
-            <div class="bank-info">
-              <h5>Top Banks for Home Loans:</h5>
-              <ul>
-                <li>HDFC Bank (Approx. 8.45% onwards) - <a href="#" target="_blank">Apply Now</a></li>
-                <li>SBI (Approx. 8.40% onwards) - <a href="#" target="_blank">Apply Now</a></li>
-                <li>ICICI Bank (Approx. 8.50% onwards) - <a href="#" target="_blank">Apply Now</a></li>
-              </ul>
+            <h4>Estimated EMI: ₹39,207/month</h4>
+            <small>@8.5% annual interest for 20 years</small>
+            <div class="emi-banks">
+              <div class="bank-info">
+                <strong>HDFC Bank</strong> <br> @8.50% p.a. <a href="#" target="_blank">Apply Now</a>
+              </div>
+              <div class="bank-info">
+                <strong>SBI Bank</strong> <br> @8.60% p.a. <a href="#" target="_blank">Apply Now</a>
+              </div>
+              <div class="bank-info">
+                <strong>ICICI Bank</strong> <br> @8.70% p.a. <a href="#" target="_blank">Apply Now</a>
+              </div>
             </div>
           </div>
         </div>
@@ -527,5 +572,6 @@
 
     </div>
   </section>
+
 </body>
 </html>
