@@ -5,183 +5,167 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Property Recommendations</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
-
         body {
-            font-family: 'Poppins', sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
             padding: 20px;
             background-color: #f4f7f6;
             color: #333;
         }
-
         .container {
             max-width: 1200px;
             margin: 0 auto;
         }
-
-        h1, h2 {
+        h1 {
             text-align: center;
             color: #2c3e50;
-            margin-bottom: 30px;
-            font-weight: 600;
+            margin-bottom: 40px;
+            font-size: 2.5em;
         }
-
-        .section-title {
-            font-size: 1.8em;
-            border-bottom: 3px solid #3498db;
+        h2 {
+            color: #34495e;
+            border-bottom: 2px solid #e0e0e0;
             padding-bottom: 10px;
-            margin-top: 40px;
-            margin-bottom: 30px;
-            display: inline-block;
+            margin-top: 50px;
+            font-size: 1.8em;
         }
-
         .property-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 30px;
+            margin-top: 30px;
         }
-
         .property-card {
             background-color: #ffffff;
-            border-radius: 15px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
             overflow: hidden;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             display: flex;
             flex-direction: column;
         }
-
         .property-card:hover {
             transform: translateY(-8px);
-            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
         }
-
-        .property-image {
+        .property-image-container {
             width: 100%;
             height: 200px;
-            object-fit: cover;
-            border-bottom: 1px solid #eee;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #e0e0e0;
         }
-
+        .property-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
         .property-content {
             padding: 20px;
             flex-grow: 1;
             display: flex;
             flex-direction: column;
         }
-
         .property-title {
             font-size: 1.4em;
-            color: #2980b9;
-            margin-top: 0;
+            font-weight: 600;
+            color: #2c3e50;
             margin-bottom: 10px;
-            line-height: 1.3;
         }
-
         .property-location {
-            font-size: 0.9em;
             color: #7f8c8d;
+            font-size: 0.9em;
             margin-bottom: 15px;
+            display: flex;
+            align-items: center;
         }
-
+        .property-location svg {
+            margin-right: 5px;
+        }
         .property-details {
             display: grid;
-            grid-template-columns: 1fr;
-            gap: 8px;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
             margin-bottom: 15px;
+        }
+        .detail-item {
             font-size: 0.9em;
             color: #555;
         }
-
-        .property-details strong {
-            color: #34495e;
+        .detail-item strong {
+            color: #333;
         }
-
-        .price-emi {
-            margin-top: auto; /* Pushes price and EMI to the bottom */
-            padding-top: 15px;
-            border-top: 1px dashed #eee;
-        }
-
-        .property-price {
-            font-size: 1.3em;
-            color: #e74c3c;
-            font-weight: 600;
-            margin-bottom: 5px;
-        }
-
-        .property-emi {
-            font-size: 1em;
-            color: #27ae60;
-            font-weight: 500;
-            margin-bottom: 10px;
-        }
-
-        .bank-link {
-            display: inline-block;
-            background-color: #3498db;
-            color: #ffffff;
-            padding: 8px 15px;
+        .emi-section {
+            background-color: #e8f5e9;
+            padding: 10px;
             border-radius: 8px;
-            text-decoration: none;
-            font-size: 0.9em;
-            transition: background-color 0.3s ease;
+            margin-top: 15px;
+            margin-bottom: 15px;
+            font-size: 0.95em;
+            color: #2e7d32;
+            font-weight: 500;
             text-align: center;
         }
-
-        .bank-link:hover {
-            background-color: #2980b9;
-        }
-
-        .features-list, .nearby-list {
-            list-style-type: none;
-            padding: 0;
-            margin-top: 5px;
-            margin-bottom: 10px;
-        }
-
-        .features-list li, .nearby-list li {
-            background-color: #ecf0f1;
-            border-left: 3px solid #95a5a6;
-            padding: 5px 10px;
-            margin-bottom: 5px;
-            border-radius: 5px;
-            font-size: 0.85em;
-            color: #444;
-        }
-
-        .features-list li:before {
-            content: '✔️ ';
-            color: #27ae60;
-            font-weight: bold;
-        }
-        .nearby-list li:before {
-            content: '📍 ';
-            color: #e67e22;
-            font-weight: bold;
-        }
-
-
-        .property-url-link {
-            margin-top: 15px;
+        .bank-link {
             display: block;
             text-align: center;
-            color: #3498db;
-            text-decoration: none;
-            font-size: 0.9em;
-            transition: color 0.3s ease;
-        }
-
-        .property-url-link:hover {
+            margin-top: 10px;
             color: #2980b9;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s ease;
+        }
+        .bank-link:hover {
+            color: #3498db;
             text-decoration: underline;
         }
-
-        @media (max-width: 768px) {
-            .property-grid {
-                grid-template-columns: 1fr;
-            }
+        .features, .nearby-amenities, .furnishing-details {
+            margin-top: 15px;
+            border-top: 1px solid #eee;
+            padding-top: 15px;
+        }
+        .features h3, .nearby-amenities h3, .furnishing-details h3 {
+            font-size: 1.1em;
+            color: #34495e;
+            margin-top: 0;
+            margin-bottom: 8px;
+        }
+        .features ul, .nearby-amenities ul, .furnishing-details ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .features li, .nearby-amenities li, .furnishing-details li {
+            background-color: #ecf0f1;
+            border-radius: 5px;
+            padding: 5px 10px;
+            margin-bottom: 5px;
+            font-size: 0.85em;
+            color: #555;
+            display: inline-block;
+            margin-right: 8px;
+            margin-top: 5px;
+        }
+        .property-link-wrapper {
+            margin-top: auto; /* Pushes the link to the bottom */
+            padding-top: 15px;
+            border-top: 1px solid #eee;
+            text-align: center;
+        }
+        .property-link {
+            display: inline-block;
+            background-color: #3498db;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background-color 0.2s ease;
+        }
+        .property-link:hover {
+            background-color: #2980b9;
         }
     </style>
 </head>
@@ -189,196 +173,326 @@
     <div class="container">
         <h1>Property Recommendations for You</h1>
 
-        <h2 class="section-title">🏠 Under Budget Properties</h2>
+        <h2>🏠 Under Budget</h2>
         <div class="property-grid">
+            
             <div class="property-card">
-                <img src="https://via.placeholder.com/400x250?text=No+Image+Available" alt="Property Image" class="property-image">
+                <div class="property-image-container">
+                    <img src="https://via.placeholder.com/400x300.png?text=Property+Image+Unavailable" alt="2 BHK Flat in Sector 62, Noida" class="property-image">
+                </div>
                 <div class="property-content">
-                    <h3 class="property-title">golden residency 7</h3>
-                    <p class="property-location">Sector 62, Noida</p>
-                    <div class="property-details">
-                        <span><strong>Configuration:</strong> 2 BHK</span>
-                        <span><strong>Area:</strong> 1,150 sqft</span>
-                        <span><strong>Furnishing:</strong> Semi-furnished (Wardrobes, Modular Kitchen, Lights & Fans)</span>
-                        <span><strong>Available From:</strong> Today</span>
+                    <div class="property-title">2 BHK Flat</div>
+                    <div class="property-location">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
+                            <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/>
+                        </svg>
+                        Sector 62, Noida
                     </div>
-                    <strong>Features:</strong>
-                    <ul class="features-list">
-                        <li>RESALE</li>
-                        <li>Ready To Move</li>
-                    </ul>
-                    <strong>Nearby Amenities:</strong>
-                    <ul class="nearby-list">
-                        <li>Supreme loketion sector 62 nearby metro</li>
-                        <li>Shopping Complex</li>
-                        <li>Local Market</li>
-                    </ul>
-                    <div class="price-emi">
-                        <p class="property-price">Price: ₹ 42 L</p>
-                        <p class="property-emi">EMI: ₹ 36,803/month</p>
-                        <a href="https://www.hdfcbank.com/personal/borrow/home-loan" target="_blank" class="bank-link">Get Home Loan</a>
-                        <a href="https://www.99acres.com/2-bhk-bedroom-apartment-flat-for-sale-in-sector-62-noida-1150-sq-ft-spid-Z85913342" target="_blank" class="property-url-link">View Details</a>
+                    <div class="property-details">
+                        <div class="detail-item"><strong>Price:</strong> ₹42 Lac</div>
+                        <div class="detail-item"><strong>Config:</strong> 2 BHK</div>
+                        <div class="detail-item"><strong>Area:</strong> 1,150 sqft</div>
+                        <div class="detail-item"><strong>Available:</strong> Today</div>
+                    </div>
+                    <div class="emi-section">
+                        EMI: ₹30,103/month
+                    </div>
+                    <a href="https://www.hdfcbank.com/personal/borrow/home-loan" target="_blank" class="bank-link">Get Home Loan (HDFC)</a>
+                    <div class="furnishing-details">
+                        <h3>Furnishing: Semi-Furnished</h3>
+                        <ul>
+                            <li>Wardrobes in all bedrooms</li>
+                            <li>Modular kitchen</li>
+                            <li>Light fittings &amp; fans</li>
+                        </ul>
+                    </div>
+                    <div class="features">
+                        <h3>Features</h3>
+                        <ul>
+                            <li>RESALE</li>
+                            <li>Ready To Move</li>
+                            <li>Community Hall</li>
+                        </ul>
+                    </div>
+                    <div class="nearby-amenities">
+                        <h3>Nearby Amenities</h3>
+                        <ul>
+                            <li>Supreme loketion sector 62</li>
+                            <li>nearby metro</li>
+                            <li>Local Market</li>
+                        </ul>
+                    </div>
+                    <div class="property-link-wrapper">
+                        <a href="https://www.99acres.com/2-bhk-bedroom-apartment-flat-for-sale-in-sector-62-noida-1150-sq-ft-spid-Z85913342" target="_blank" class="property-link">View Details</a>
                     </div>
                 </div>
             </div>
-
+            
             <div class="property-card">
-                <img src="https://via.placeholder.com/400x250?text=No+Image+Available" alt="Property Image" class="property-image">
+                <div class="property-image-container">
+                    <img src="https://via.placeholder.com/400x300.png?text=Property+Image+Unavailable" alt="2 Bedroom House in Sector 62, Noida" class="property-image">
+                </div>
                 <div class="property-content">
-                    <h3 class="property-title">khoda colony</h3>
-                    <p class="property-location">Sector 62, Noida</p>
-                    <div class="property-details">
-                        <span><strong>Configuration:</strong> 2 BHK</span>
-                        <span><strong>Area:</strong> 450 sqft</span>
-                        <span><strong>Furnishing:</strong> Semi-furnished (Wardrobes, Modular Kitchen, Lights & Fans)</span>
-                        <span><strong>Available From:</strong> 1w ago</span>
+                    <div class="property-title">2 Bedroom House</div>
+                    <div class="property-location">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
+                            <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/>
+                        </svg>
+                        Sector 62, Noida
                     </div>
-                    <strong>Features:</strong>
-                    <ul class="features-list">
-                        <li>RESALE</li>
-                        <li>Ready To Move</li>
-                    </ul>
-                    <strong>Nearby Amenities:</strong>
-                    <ul class="nearby-list">
-                        <li>Sector 62 Metro Station</li>
-                        <li>Shopping Mall</li>
-                        <li>Public Park</li>
-                    </ul>
-                    <div class="price-emi">
-                        <p class="property-price">Price: ₹ 55 Lac</p>
-                        <p class="property-emi">EMI: ₹ 48,173/month</p>
-                        <a href="https://www.hdfcbank.com/personal/borrow/home-loan" target="_blank" class="bank-link">Get Home Loan</a>
-                        <a href="https://www.99acres.com/2-bhk-bedroom-independent-house-villa-for-sale-in-sector-62-noida-450-sq-ft-spid-Y85704008" target="_blank" class="property-url-link">View Details</a>
+                    <div class="property-details">
+                        <div class="detail-item"><strong>Price:</strong> ₹55 Lac</div>
+                        <div class="detail-item"><strong>Config:</strong> 2 BHK</div>
+                        <div class="detail-item"><strong>Area:</strong> 450 sqft</div>
+                        <div class="detail-item"><strong>Available:</strong> 1w ago</div>
+                    </div>
+                    <div class="emi-section">
+                        EMI: ₹39,268/month
+                    </div>
+                    <a href="https://www.hdfcbank.com/personal/borrow/home-loan" target="_blank" class="bank-link">Get Home Loan (HDFC)</a>
+                    <div class="furnishing-details">
+                        <h3>Furnishing: Semi-Furnished</h3>
+                        <ul>
+                            <li>Wardrobes in all bedrooms</li>
+                            <li>Modular kitchen</li>
+                            <li>Light fittings &amp; fans</li>
+                        </ul>
+                    </div>
+                    <div class="features">
+                        <h3>Features</h3>
+                        <ul>
+                            <li>RESALE</li>
+                            <li>Ready To Move</li>
+                            <li>Community Hall</li>
+                        </ul>
+                    </div>
+                    <div class="nearby-amenities">
+                        <h3>Nearby Amenities</h3>
+                        <ul>
+                            <li>Local Market</li>
+                            <li>Park</li>
+                            <li>School</li>
+                        </ul>
+                    </div>
+                    <div class="property-link-wrapper">
+                        <a href="https://www.99acres.com/2-bhk-bedroom-independent-house-villa-for-sale-in-sector-62-noida-450-sq-ft-spid-Y85704008" target="_blank" class="property-link">View Details</a>
                     </div>
                 </div>
             </div>
-
+            
             <div class="property-card">
-                <img src="https://via.placeholder.com/400x250?text=No+Image+Available" alt="Property Image" class="property-image">
+                <div class="property-image-container">
+                    <img src="https://via.placeholder.com/400x300.png?text=Property+Image+Unavailable" alt="2 BHK Flat in Sector 62, Noida" class="property-image">
+                </div>
                 <div class="property-content">
-                    <h3 class="property-title">golden residency 10</h3>
-                    <p class="property-location">Sector 62, Noida</p>
-                    <div class="property-details">
-                        <span><strong>Configuration:</strong> 2 BHK</span>
-                        <span><strong>Area:</strong> 1,200 sqft</span>
-                        <span><strong>Furnishing:</strong> Semi-furnished (Wardrobes, Modular Kitchen, Lights & Fans)</span>
-                        <span><strong>Available From:</strong> 2w ago</span>
+                    <div class="property-title">2 BHK Flat</div>
+                    <div class="property-location">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
+                            <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/>
+                        </svg>
+                        Sector 62, Noida
                     </div>
-                    <strong>Features:</strong>
-                    <ul class="features-list">
-                        <li>RESALE</li>
-                        <li>Ready To Move</li>
-                    </ul>
-                    <strong>Nearby Amenities:</strong>
-                    <ul class="nearby-list">
-                        <li>Sector 62 Nearby</li>
-                        <li>Metro Station</li>
-                        <li>Reputed School</li>
-                    </ul>
-                    <div class="price-emi">
-                        <p class="property-price">Price: ₹ 55 Lac</p>
-                        <p class="property-emi">EMI: ₹ 48,173/month</p>
-                        <a href="https://www.hdfcbank.com/personal/borrow/home-loan" target="_blank" class="bank-link">Get Home Loan</a>
-                        <a href="https://www.99acres.com/2-bhk-bedroom-apartment-flat-for-sale-in-sector-62-noida-1200-sq-ft-spid-U85588912" target="_blank" class="property-url-link">View Details</a>
+                    <div class="property-details">
+                        <div class="detail-item"><strong>Price:</strong> ₹55 Lac</div>
+                        <div class="detail-item"><strong>Config:</strong> 2 BHK</div>
+                        <div class="detail-item"><strong>Area:</strong> 1,200 sqft</div>
+                        <div class="detail-item"><strong>Available:</strong> 2w ago</div>
+                    </div>
+                    <div class="emi-section">
+                        EMI: ₹39,268/month
+                    </div>
+                    <a href="https://www.hdfcbank.com/personal/borrow/home-loan" target="_blank" class="bank-link">Get Home Loan (HDFC)</a>
+                    <div class="furnishing-details">
+                        <h3>Furnishing: Semi-Furnished</h3>
+                        <ul>
+                            <li>Wardrobes in all bedrooms</li>
+                            <li>Modular kitchen</li>
+                            <li>Light fittings &amp; fans</li>
+                        </ul>
+                    </div>
+                    <div class="features">
+                        <h3>Features</h3>
+                        <ul>
+                            <li>RESALE</li>
+                            <li>Ready To Move</li>
+                            <li>Community Hall</li>
+                        </ul>
+                    </div>
+                    <div class="nearby-amenities">
+                        <h3>Nearby Amenities</h3>
+                        <ul>
+                            <li>Sector 62 Nearby</li>
+                            <li>Local Market</li>
+                            <li>Park</li>
+                        </ul>
+                    </div>
+                    <div class="property-link-wrapper">
+                        <a href="https://www.99acres.com/2-bhk-bedroom-apartment-flat-for-sale-in-sector-62-noida-1200-sq-ft-spid-U85588912" target="_blank" class="property-link">View Details</a>
                     </div>
                 </div>
             </div>
-
+            
             <div class="property-card">
-                <img src="https://via.placeholder.com/400x250?text=No+Image+Available" alt="Property Image" class="property-image">
+                <div class="property-image-container">
+                    <img src="https://via.placeholder.com/400x300.png?text=Property+Image+Unavailable" alt="2 BHK Flat in Sector 62, Noida" class="property-image">
+                </div>
                 <div class="property-content">
-                    <h3 class="property-title">sai appartment</h3>
-                    <p class="property-location">Sector 62, Noida</p>
-                    <div class="property-details">
-                        <span><strong>Configuration:</strong> 2 BHK</span>
-                        <span><strong>Area:</strong> 1,050 sqft</span>
-                        <span><strong>Furnishing:</strong> Semi-furnished (Wardrobes, Modular Kitchen, Lights & Fans)</span>
-                        <span><strong>Available From:</strong> 1w ago</span>
+                    <div class="property-title">2 BHK Flat</div>
+                    <div class="property-location">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
+                            <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/>
+                        </svg>
+                        Sector 62, Noida
                     </div>
-                    <strong>Features:</strong>
-                    <ul class="features-list">
-                        <li>RESALE</li>
-                        <li>Ready To Move</li>
-                    </ul>
-                    <strong>Nearby Amenities:</strong>
-                    <ul class="nearby-list">
-                        <li>Noida sector 62 metro station</li>
-                        <li>Noida electronic city metro station</li>
-                        <li>Grocery Stores</li>
-                    </ul>
-                    <div class="price-emi">
-                        <p class="property-price">Price: ₹ 58 Lac</p>
-                        <p class="property-emi">EMI: ₹ 50,799/month</p>
-                        <a href="https://www.hdfcbank.com/personal/borrow/home-loan" target="_blank" class="bank-link">Get Home Loan</a>
-                        <a href="https://www.99acres.com/2-bhk-bedroom-apartment-flat-for-sale-in-sector-62-noida-1050-sq-ft-spid-X85672588" target="_blank" class="property-url-link">View Details</a>
+                    <div class="property-details">
+                        <div class="detail-item"><strong>Price:</strong> ₹58 Lac</div>
+                        <div class="detail-item"><strong>Config:</strong> 2 BHK</div>
+                        <div class="detail-item"><strong>Area:</strong> 1,050 sqft</div>
+                        <div class="detail-item"><strong>Available:</strong> 1w ago</div>
+                    </div>
+                    <div class="emi-section">
+                        EMI: ₹41,407/month
+                    </div>
+                    <a href="https://www.hdfcbank.com/personal/borrow/home-loan" target="_blank" class="bank-link">Get Home Loan (HDFC)</a>
+                    <div class="furnishing-details">
+                        <h3>Furnishing: Semi-Furnished</h3>
+                        <ul>
+                            <li>Wardrobes in all bedrooms</li>
+                            <li>Modular kitchen</li>
+                            <li>Light fittings &amp; fans</li>
+                        </ul>
+                    </div>
+                    <div class="features">
+                        <h3>Features</h3>
+                        <ul>
+                            <li>RESALE</li>
+                            <li>Ready To Move</li>
+                            <li>Community Hall</li>
+                        </ul>
+                    </div>
+                    <div class="nearby-amenities">
+                        <h3>Nearby Amenities</h3>
+                        <ul>
+                            <li>Noida sector 62 metro station</li>
+                            <li>Noida sector electronic city metro station</li>
+                            <li>Local Market</li>
+                        </ul>
+                    </div>
+                    <div class="property-link-wrapper">
+                        <a href="https://www.99acres.com/2-bhk-bedroom-apartment-flat-for-sale-in-sector-62-noida-1050-sq-ft-spid-X85672588" target="_blank" class="property-link">View Details</a>
                     </div>
                 </div>
             </div>
+            
         </div>
 
-        <h2 class="section-title">🌟 Recommended Properties</h2>
+        <h2>🌟 Recommended</h2>
         <div class="property-grid">
+            
             <div class="property-card">
-                <img src="https://imagecdn.99acres.com/media1/32850/12/657012601M-1759740079309.webp" alt="Property Image" class="property-image">
+                <div class="property-image-container">
+                    <img src="https://via.placeholder.com/400x300.png?text=Property+Image+Unavailable" alt="3 BHK Flat in Sector 62, Noida" class="property-image">
+                </div>
                 <div class="property-content">
-                    <h3 class="property-title">Purvanchal PMO Apartments</h3>
-                    <p class="property-location">Sector 62, Noida</p>
-                    <div class="property-details">
-                        <span><strong>Configuration:</strong> 2 BHK</span>
-                        <span><strong>Area:</strong> 950 sqft</span>
-                        <span><strong>Furnishing:</strong> Semi-furnished (Wardrobes, Modular Kitchen, Lights & Fans)</span>
-                        <span><strong>Available From:</strong> 5d ago</span>
+                    <div class="property-title">3 BHK Flat</div>
+                    <div class="property-location">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
+                            <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/>
+                        </svg>
+                        Sector 62, Noida
                     </div>
-                    <strong>Features:</strong>
-                    <ul class="features-list">
-                        <li>RESALE</li>
-                        <li>Ready To Move</li>
-                    </ul>
-                    <strong>Nearby Amenities:</strong>
-                    <ul class="nearby-list">
-                        <li>Noida sector 62 metro station</li>
-                        <li>Max Hospital Noida</li>
-                        <li>Shopping Mall</li>
-                    </ul>
-                    <div class="price-emi">
-                        <p class="property-price">Price: ₹ 95 L</p>
-                        <p class="property-emi">EMI: ₹ 83,221/month</p>
-                        <a href="https://www.hdfcbank.com/personal/borrow/home-loan" target="_blank" class="bank-link">Get Home Loan</a>
-                        <a href="https://www.99acres.com/2-bhk-bedroom-apartment-flat-for-sale-in-purvanchal-pmo-apartments-sector-62-noida-950-sq-ft-r1-spid-D82486574" target="_blank" class="property-url-link">View Details</a>
+                    <div class="property-details">
+                        <div class="detail-item"><strong>Price:</strong> ₹2.1 Cr</div>
+                        <div class="detail-item"><strong>Config:</strong> 3 BHK</div>
+                        <div class="detail-item"><strong>Area:</strong> 1,380 sqft</div>
+                        <div class="detail-item"><strong>Available:</strong> 1w ago</div>
+                    </div>
+                    <div class="emi-section">
+                        EMI: ₹150,511/month
+                    </div>
+                    <a href="https://www.hdfcbank.com/personal/borrow/home-loan" target="_blank" class="bank-link">Get Home Loan (HDFC)</a>
+                    <div class="furnishing-details">
+                        <h3>Furnishing: Semi-Furnished</h3>
+                        <ul>
+                            <li>Wardrobes in all bedrooms</li>
+                            <li>Modular kitchen</li>
+                            <li>Light fittings &amp; fans</li>
+                        </ul>
+                    </div>
+                    <div class="features">
+                        <h3>Features</h3>
+                        <ul>
+                            <li>RESALE</li>
+                            <li>Ready To Move</li>
+                            <li>Community Hall</li>
+                        </ul>
+                    </div>
+                    <div class="nearby-amenities">
+                        <h3>Nearby Amenities</h3>
+                        <ul>
+                            <li>Noida sector 62 metro station</li>
+                            <li>Fortis hospital</li>
+                            <li>Local Market</li>
+                        </ul>
+                    </div>
+                    <div class="property-link-wrapper">
+                        <a href="https://www.99acres.com/3-bhk-bedroom-apartment-flat-for-sale-in-shatabdi-rail-vihar-sector-62-noida-1380-sq-ft-spid-V85645382" target="_blank" class="property-link">View Details</a>
                     </div>
                 </div>
             </div>
-
+            
             <div class="property-card">
-                <img src="https://imagecdn.99acres.com/media1/32909/19/658199993M-1759983583608.webp" alt="Property Image" class="property-image">
+                <div class="property-image-container">
+                    <img src="https://imagecdn.99acres.com/media1/32850/12/657012601M-1759740079309.webp" alt="2 BHK Flat in Sector 62, Noida" class="property-image">
+                </div>
                 <div class="property-content">
-                    <h3 class="property-title">Varun Apartments</h3>
-                    <p class="property-location">Sector 62, Noida</p>
-                    <div class="property-details">
-                        <span><strong>Configuration:</strong> 2 BHK</span>
-                        <span><strong>Area:</strong> 1,260 sqft</span>
-                        <span><strong>Furnishing:</strong> Semi-furnished (Wardrobes, Modular Kitchen, Lights & Fans)</span>
-                        <span><strong>Available From:</strong> 5d ago</span>
+                    <div class="property-title">2 BHK Flat</div>
+                    <div class="property-location">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
+                            <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/>
+                        </svg>
+                        Sector 62, Noida
                     </div>
-                    <strong>Features:</strong>
-                    <ul class="features-list">
-                        <li>RESALE</li>
-                        <li>Ready To Move</li>
-                    </ul>
-                    <strong>Nearby Amenities:</strong>
-                    <ul class="nearby-list">
-                        <li>Sector 62 Noida</li>
-                        <li>Shopprix Mall</li>
-                        <li>Fortis Hospital Noida</li>
-                    </ul>
-                    <div class="price-emi">
-                        <p class="property-price">Price: ₹ 1.3 Cr</p>
-                        <p class="property-emi">EMI: ₹ 113,892/month</p>
-                        <a href="https://www.hdfcbank.com/personal/borrow/home-loan" target="_blank" class="bank-link">Get Home Loan</a>
-                        <a href="https://www.99acres.com/2-bhk-bedroom-apartment-flat-for-sale-in-varun-apartments-sector-62-noida-1260-sq-ft-spid-T85786612" target="_blank" class="property-url-link">View Details</a>
+                    <div class="property-details">
+                        <div class="detail-item"><strong>Price:</strong> ₹95 Lac</div>
+                        <div class="detail-item"><strong>Config:</strong> 2 BHK</div>
+                        <div class="detail-item"><strong>Area:</strong> 950 sqft</div>
+                        <div class="detail-item"><strong>Available:</strong> 5d ago</div>
+                    </div>
+                    <div class="emi-section">
+                        EMI: ₹67,935/month
+                    </div>
+                    <a href="https://www.hdfcbank.com/personal/borrow/home-loan" target="_blank" class="bank-link">Get Home Loan (HDFC)</a>
+                    <div class="furnishing-details">
+                        <h3>Furnishing: Semi-Furnished</h3>
+                        <ul>
+                            <li>Wardrobes in all bedrooms</li>
+                            <li>Modular kitchen</li>
+                            <li>Light fittings &amp; fans</li>
+                        </ul>
+                    </div>
+                    <div class="features">
+                        <h3>Features</h3>
+                        <ul>
+                            <li>RESALE</li>
+                            <li>Ready To Move</li>
+                            <li>Community Hall</li>
+                        </ul>
+                    </div>
+                    <div class="nearby-amenities">
+                        <h3>Nearby Amenities</h3>
+                        <ul>
+                            <li>Noida sector 62 metro station</li>
+                            <li>Noida sector 59 metro station</li>
+                            <li>Local Market</li>
+                        </ul>
+                    </div>
+                    <div class="property-link-wrapper">
+                        <a href="https://www.99acres.com/2-bhk-bedroom-apartment-flat-for-sale-in-purvanchal-pmo-apartments-sector-62-noida-950-sq-ft-r1-spid-D82486574" target="_blank" class="property-link">View Details</a>
                     </div>
                 </div>
             </div>
+            
         </div>
     </div>
 </body>
