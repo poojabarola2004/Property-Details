@@ -1,68 +1,67 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Property Recommendations in Greater Noida</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <title>Property Recommendations</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary-color: #2c3e50;
-            --secondary-color: #3498db;
-            --accent-color: #e74c3c;
-            --background-color: #f4f7f6;
-            --card-background: #ffffff;
-            --text-color: #333;
-            --light-text-color: #777;
-            --border-radius: 12px;
-            --shadow-light: 0 4px 8px rgba(0, 0, 0, 0.05);
-            --shadow-hover: 0 8px 16px rgba(0, 0, 0, 0.15);
+            --primary-color: #007bff;
+            --secondary-color: #6c757d;
+            --accent-color: #28a745;
+            --text-color: #343a40;
+            --bg-color: #f8f9fa;
+            --card-bg: #ffffff;
+            --border-color: #e0e0e0;
+            --shadow-light: rgba(0, 0, 0, 0.08);
+            --shadow-hover: rgba(0, 0, 0, 0.15);
         }
 
         body {
-            font-family: 'Poppins', sans-serif;
+            font-family: 'Roboto', sans-serif;
             margin: 0;
-            padding: 0;
-            background-color: var(--background-color);
+            padding: 20px;
+            background-color: var(--bg-color);
             color: var(--text-color);
             line-height: 1.6;
         }
 
         .container {
             max-width: 1200px;
-            margin: 20px auto;
-            padding: 0 15px;
+            margin: 0 auto;
+            padding: 20px;
         }
 
         h1, h2 {
-            color: var(--primary-color);
             text-align: center;
-            margin-bottom: 30px;
+            color: var(--primary-color);
+            margin-bottom: 40px;
             font-weight: 700;
         }
 
         h2 {
             font-size: 1.8em;
-            border-bottom: 2px solid var(--secondary-color);
-            padding-bottom: 10px;
+            color: var(--text-color);
+            border-bottom: 2px solid var(--primary-color);
             display: inline-block;
-            margin-left: 15px;
-        }
-
-        section {
-            margin-bottom: 40px;
+            padding-bottom: 5px;
+            margin-bottom: 30px;
+            margin-left: 20px; /* Adjust for grid padding */
         }
 
         .property-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
+            gap: 30px;
+            margin-bottom: 60px;
         }
 
         .property-card {
-            background-color: var(--card-background);
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow-light);
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            box-shadow: 0 4px 12px var(--shadow-light);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             overflow: hidden;
             display: flex;
@@ -71,16 +70,14 @@
 
         .property-card:hover {
             transform: translateY(-8px);
-            box-shadow: var(--shadow-hover);
+            box-shadow: 0 8px 20px var(--shadow-hover);
         }
 
         .property-card img {
             width: 100%;
             height: 220px;
             object-fit: cover;
-            border-top-left-radius: var(--border-radius);
-            border-top-right-radius: var(--border-radius);
-            display: block;
+            border-bottom: 1px solid var(--border-color);
         }
 
         .card-content {
@@ -90,880 +87,326 @@
             flex-direction: column;
         }
 
-        .card-content h3 {
-            margin-top: 0;
-            margin-bottom: 10px;
+        .card-title {
+            font-size: 1.4em;
+            font-weight: 700;
             color: var(--primary-color);
-            font-size: 1.3em;
-            font-weight: 600;
+            margin-bottom: 10px;
         }
 
-        .card-content h4 {
-            margin-top: 0;
-            margin-bottom: 15px;
-            color: var(--light-text-color);
+        .card-subtitle {
             font-size: 1em;
-            font-weight: 400;
+            color: var(--secondary-color);
+            margin-bottom: 15px;
         }
 
-        .details-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-            margin-bottom: 15px;
-            font-size: 0.9em;
+        .detail-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 0.95em;
         }
 
         .detail-item strong {
-            color: var(--primary-color);
-            margin-right: 5px;
+            color: var(--text-color);
+            font-weight: 400;
         }
 
-        .features, .nearby-amenities {
-            margin-top: 15px;
-            margin-bottom: 15px;
+        .detail-item span {
+            color: var(--secondary-color);
+            text-align: right;
+        }
+
+        .features-list, .amenities-list, .furnishing-list {
+            list-style: none;
+            padding: 0;
+            margin-top: 10px;
             font-size: 0.9em;
+            color: var(--text-color);
         }
 
-        .features h5, .nearby-amenities h5 {
-            margin-top: 0;
-            margin-bottom: 8px;
-            color: var(--primary-color);
-            font-size: 1em;
-            font-weight: 600;
-        }
-
-        .features ul, .nearby-amenities ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        .features li, .nearby-amenities li {
-            background-color: #ecf0f1;
-            padding: 5px 10px;
-            border-radius: 6px;
-            margin-bottom: 5px;
-            display: inline-block;
-            margin-right: 8px;
-            color: #555;
-            font-size: 0.85em;
-        }
-        
-        .furnishing-details ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin-bottom: 15px;
-            font-size: 0.85em;
-        }
-        
-        .furnishing-details li {
-            background-color: #d1ecf1;
-            padding: 4px 8px;
+        .features-list li, .amenities-list li, .furnishing-list li {
+            background-color: #e9ecef;
             border-radius: 5px;
-            color: #247b8f;
-        }
-
-        .emi-details {
-            margin-top: auto; /* Pushes EMI details to the bottom */
-            padding-top: 15px;
-            border-top: 1px solid #eee;
-            text-align: center;
-        }
-
-        .emi-details p {
-            margin: 0 0 10px 0;
-            font-weight: 600;
-            color: var(--accent-color);
-        }
-
-        .loan-link {
+            padding: 5px 10px;
+            margin: 5px 5px 5px 0;
             display: inline-block;
-            background-color: var(--secondary-color);
-            color: white;
+            color: var(--secondary-color);
+        }
+
+        .emi-info {
+            background-color: #eaf6ee;
+            border-left: 5px solid var(--accent-color);
             padding: 10px 15px;
+            margin-top: 20px;
+            border-radius: 6px;
+            font-size: 0.95em;
+        }
+
+        .emi-info a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 700;
+        }
+
+        .emi-info a:hover {
+            text-decoration: underline;
+        }
+
+        .view-details-btn {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 10px 20px;
             border-radius: 8px;
             text-decoration: none;
-            font-weight: 600;
-            font-size: 0.9em;
+            text-align: center;
+            margin-top: 20px;
+            font-weight: 700;
             transition: background-color 0.3s ease;
         }
 
-        .loan-link:hover {
-            background-color: #2980b9;
+        .view-details-btn:hover {
+            background-color: #0056b3;
         }
         
-        .property-link {
-            display: block;
-            margin-top: 15px;
-            text-align: center;
-        }
-
-        .property-link a {
-            color: var(--secondary-color);
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 0.95em;
-            transition: color 0.3s ease;
-        }
-
-        .property-link a:hover {
-            color: var(--primary-color);
-        }
-
-        /* Responsive Adjustments */
         @media (max-width: 768px) {
             .property-grid {
                 grid-template-columns: 1fr;
             }
-            .container {
-                margin: 10px auto;
-            }
-            h1 {
-                font-size: 2em;
-            }
             h2 {
-                font-size: 1.5em;
                 margin-left: 0;
-            }
-            .card-content {
-                padding: 15px;
-            }
-            .details-grid {
-                grid-template-columns: 1fr;
-            }
-            .features li, .nearby-amenities li {
-                font-size: 0.8em;
-                margin-right: 5px;
-                margin-bottom: 5px;
+                text-align: center;
             }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>🏡 Property Recommendations in Greater Noida</h1>
+        <h1>Property Recommendations for You</h1>
 
-        <section>
-            <h2>🏠 Under Budget</h2>
-            <div class="property-grid">
-                <!-- Under Budget Properties will be inserted here -->
-            </div>
-        </section>
-
-        <section>
-            <h2>🌟 Recommended for you</h2>
-            <div class="property-grid">
-                <!-- Recommended Properties will be inserted here -->
-            </div>
-        </section>
-    </div>
-
-    <script>
-        const propertyData = [
-  {
-    "location_name": "Alpha 1, Greater Noida",
-    "title": "2 Bedroom House in Alpha 1, Greater Noida",
-    "price": "₹1.55 Cr",
-    "area": "645 sqft",
-    "config": "2 BHK",
-    "available_from": "1mo ago",
-    "id": null,
-    "features": null,
-    "Places_Nearby": null,
-    "image": "https://imagecdn.99acres.com/media1/32105/16/642116093M-1756890606515.webp",
-    "url": "https://www.99acres.com/2-bhk-bedroom-independent-house-villa-for-sale-in-alpha-1-greater-noida-646-sq-ft-spid-U84897408"
-  },
-  {
-    "location_name": "Block C, Alpha 1, Greater Noida",
-    "title": "2 Bedroom House in Block C, Alpha 1, Greater Noida",
-    "price": "₹2.5 Cr",
-    "area": "1,076 sqft",
-    "config": "2 BHK",
-    "available_from": "3w ago",
-    "id": null,
-    "features": null,
-    "Places_Nearby": null,
-    "image": "https://imagecdn.99acres.com/media1/29411/3/588223321M-1755454094536.webp",
-    "url": "https://www.99acres.com/2-bhk-bedroom-independent-house-villa-for-sale-in-block-c-alpha-1-greater-noida-969-sq-ft-r1-spid-C81418079"
-  },
-  {
-    "location_name": "Alpha 1, Greater Noida",
-    "title": "2 Bedroom House in Alpha 1, Greater Noida",
-    "price": "₹3.25 Cr",
-    "area": "1,205 sqft",
-    "config": "2 BHK",
-    "available_from": "1w ago",
-    "id": null,
-    "features": null,
-    "Places_Nearby": null,
-    "image": "https://www.99acres.com/universalapp/img/noImageBg.svg",
-    "url": "https://www.99acres.com/2-bhk-bedroom-independent-house-villa-for-sale-in-alpha-1-greater-noida-1206-sq-ft-spid-M85663098"
-  },
-  {
-    "location_name": "Parsvnath Edens Alpha 2, Greater Noida",
-    "title": "2 BHK Flat in Alpha 2, Greater Noida",
-    "price": "₹96 Lac",
-    "area": "1,186 sqft",
-    "config": "2 BHK",
-    "available_from": "1w ago",
-    "id": null,
-    "features": [
-      "Recently Renovated",
-      "Gated Society"
-    ],
-    "Places_Nearby": null,
-    "image": "https://www.99acres.com/universalapp/img/noImageBgPremium.svg",
-    "url": "https://www.99acres.com/2-bhk-bedroom-apartment-flat-for-sale-in-parsvnath-edens-alpha-2-greater-noida-1186-sq-ft-spid-U85734840"
-  },
-  {
-    "location_name": "Parsvnath Edens Alpha 2, Greater Noida",
-    "title": "2 BHK Flat in Alpha 2, Greater Noida",
-    "price": "₹95 Lac",
-    "area": "1,186 sqft",
-    "config": "2 BHK",
-    "available_from": "1mo ago",
-    "id": null,
-    "features": [
-      "Gated Society",
-      "Fitness Center/ Gym"
-    ],
-    "Places_Nearby": null,
-    "image": "https://www.99acres.com/universalapp/img/noImageBgPremium.svg",
-    "url": "https://www.99acres.com/2-bhk-bedroom-apartment-flat-for-sale-in-parsvnath-edens-alpha-2-greater-noida-1186-sq-ft-spid-V84956130"
-  },
-  {
-    "location_name": "Block C, Alpha 1, Greater Noida",
-    "title": "2 Bedroom House in Block C, Alpha 1, Greater Noida",
-    "price": "₹2.5 Cr",
-    "area": "1,076 sqft",
-    "config": "2 BHK",
-    "available_from": "3w ago",
-    "id": null,
-    "features": [
-      "Alpha 1 within 250m",
-      "Happy Hours School within 500m"
-    ],
-    "Places_Nearby": null,
-    "image": "https://www.99acres.com/universalapp/img/noImageBg.svg",
-    "url": "https://www.99acres.com/2-bhk-bedroom-independent-house-villa-for-sale-in-block-c-alpha-1-greater-noida-1076-sq-ft-spid-J83848312"
-  },
-  {
-    "location_name": "Noida Extension",
-    "title": "2 BHK Flat in Noida Extension",
-    "price": "₹80.5 Lac",
-    "area": "1,175 sqft",
-    "config": "2 BHK",
-    "available_from": "Today",
-    "id": null,
-    "features": null,
-    "Places_Nearby": null,
-    "image": "https://www.99acres.com/universalapp/img/noImageBg.svg",
-    "url": "https://www.99acres.com/2-bhk-bedroom-apartment-flat-for-sale-in-gaur-city-10th-avenue-noida-extension-noida-1175-sq-ft-spid-M85906372"
-  },
-  {
-    "location_name": "Alpha 2, Greater Noida",
-    "title": "2 Bedroom House in Alpha 2, Greater Noida",
-    "price": "₹1 Cr",
-    "area": "750 sqft",
-    "config": "2 BHK",
-    "available_from": "5mo ago",
-    "id": null,
-    "features": null,
-    "Places_Nearby": null,
-    "image": "https://www.99acres.com/universalapp/img/noImageBg.svg",
-    "url": "https://www.99acres.com/2-bhk-bedroom-independent-house-villa-for-sale-in-alpha-2-greater-noida-750-sq-ft-spid-A82269330"
-  },
-  {
-    "location_name": "Parsvnath Edens Alpha 2, Greater Noida",
-    "title": "2 BHK Flat in Alpha 2, Greater Noida",
-    "price": "₹93 Lac",
-    "area": "1,186 sqft",
-    "config": "2 BHK",
-    "available_from": "1mo ago",
-    "id": null,
-    "features": [
-      "Gated Society",
-      "Fitness Center/ Gym"
-    ],
-    "Places_Nearby": null,
-    "image": "https://www.99acres.com/universalapp/img/noImageBgPremium.svg",
-    "url": "https://www.99acres.com/2-bhk-bedroom-apartment-flat-for-sale-in-parsvnath-edens-alpha-2-greater-noida-1186-sq-ft-spid-Y84956386"
-  },
-  {
-    "location_name": "Parsvnath Edens Alpha 2, Greater Noida",
-    "title": "2 BHK Flat in Alpha 2, Greater Noida",
-    "price": "₹90 Lac",
-    "area": "1,186 sqft",
-    "config": "2 BHK",
-    "available_from": "1mo ago",
-    "id": null,
-    "features": [
-      "alpha-1 metro Nearby",
-      "Gated Society"
-    ],
-    "Places_Nearby": null,
-    "image": "https://www.99acres.com/universalapp/img/noImageBgPremium.svg",
-    "url": "https://www.99acres.com/2-bhk-bedroom-apartment-flat-for-sale-in-parsvnath-edens-alpha-2-greater-noida-1186-sq-ft-spid-H84955360"
-  },
-  {
-    "location_name": "Parsvnath Edens Alpha 2, Greater Noida",
-    "title": "2 BHK Flat in Alpha 2, Greater Noida",
-    "price": "₹92 Lac",
-    "area": "1,186 sqft",
-    "config": "2 BHK",
-    "available_from": "1mo ago",
-    "id": null,
-    "features": [
-      "North-East Facing",
-      "Private Garden"
-    ],
-    "Places_Nearby": null,
-    "image": "https://www.99acres.com/universalapp/img/noImageBgPremium.svg",
-    "url": "https://www.99acres.com/2-bhk-bedroom-apartment-flat-for-sale-in-parsvnath-edens-alpha-2-greater-noida-1186-sq-ft-spid-G83553016"
-  },
-  {
-    "location_name": "Alpha 2, Greater Noida",
-    "title": "2 Bedroom House in Alpha 2, Greater Noida",
-    "price": "₹2.2 Cr",
-    "area": "1,076 sqft",
-    "config": "2 BHK",
-    "available_from": "2w ago",
-    "id": null,
-    "features": null,
-    "Places_Nearby": null,
-    "image": "https://www.99acres.com/universalapp/img/noImageBg.svg",
-    "url": "https://www.99acres.com/2-bhk-bedroom-independent-house-villa-for-sale-in-alpha-2-greater-noida-1076-sq-ft-spid-L85560526"
-  },
-  {
-    "location_name": "Alpha 2, Greater Noida",
-    "title": "2 Bedroom House in Alpha 2, Greater Noida",
-    "price": "₹2.15 Cr",
-    "area": "1,076 sqft",
-    "config": "2 BHK",
-    "available_from": "1mo ago",
-    "id": null,
-    "features": [
-      "North-East Facing",
-      "Private Garden"
-    ],
-    "Places_Nearby": null,
-    "image": "https://www.99acres.com/universalapp/img/noImageBg.svg",
-    "url": "https://www.99acres.com/2-bhk-bedroom-independent-house-villa-for-sale-in-alpha-2-greater-noida-1076-sq-ft-spid-R84653584"
-  },
-  {
-    "location_name": "Alpha 2, Greater Noida",
-    "title": "2 Bedroom House in Alpha 2, Greater Noida",
-    "price": "₹2.15 Cr",
-    "area": "1,076 sqft",
-    "config": "2 BHK",
-    "available_from": "1mo ago",
-    "id": null,
-    "features": [
-      "East Facing",
-      "Recently Renovated"
-    ],
-    "Places_Nearby": null,
-    "image": "https://www.99acres.com/universalapp/img/noImageBg.svg",
-    "url": "https://www.99acres.com/2-bhk-bedroom-independent-house-villa-for-sale-in-alpha-2-greater-noida-1076-sq-ft-spid-B84509486"
-  },
-  {
-    "location_name": "Spacetech Edana Alpha 1, Greater Noida",
-    "title": "2 BHK Flat in Alpha 1, Greater Noida",
-    "price": "₹94 Lac",
-    "area": "1,100 sqft",
-    "config": "2 BHK",
-    "available_from": "5mo ago",
-    "id": null,
-    "features": null,
-    "Places_Nearby": null,
-    "image": "https://www.99acres.com/universalapp/img/noImageBg.svg",
-    "url": "https://www.99acres.com/2-bhk-bedroom-apartment-flat-for-sale-in-spacetech-edana-alpha-1-greater-noida-1100-sq-ft-spid-I82379562"
-  },
-  {
-    "location_name": "Spacetech Edana Block B Alpha 1, Greater Noida",
-    "title": "2 BHK Flat in Block B Alpha 1, Greater Noida",
-    "price": "₹90 Lac",
-    "area": "1,100 sqft",
-    "config": "2 BHK",
-    "available_from": "1mo ago",
-    "id": null,
-    "features": [
-      "Private Garden",
-      "Recently Renovated"
-    ],
-    "Places_Nearby": null,
-    "image": "https://www.99acres.com/universalapp/img/noImageBg.svg",
-    "url": "https://www.99acres.com/2-bhk-bedroom-apartment-flat-for-sale-in-spacetech-edana-block-b-alpha-1-greater-noida-1100-sq-ft-spid-S85122796"
-  },
-  {
-    "location_name": "Block G Alpha 2, Greater Noida",
-    "title": "2 Bedroom House in Block G Alpha 2, Greater Noida",
-    "price": "₹2.2 Cr",
-    "area": "1,076 sqft",
-    "config": "2 BHK",
-    "available_from": "1w ago",
-    "id": null,
-    "features": [
-      "North-East Facing",
-      "ALPHA.1 METRO STATION Nearby"
-    ],
-    "Places_Nearby": null,
-    "image": "https://www.99acres.com/universalapp/img/noImageBgPremium.svg",
-    "url": "https://www.99acres.com/2-bhk-bedroom-independent-house-villa-for-sale-in-block-g-alpha-2-greater-noida-1076-sq-ft-spid-J85677184"
-  },
-  {
-    "location_name": "Block G Alpha 2, Greater Noida",
-    "title": "2 Bedroom House in Block G Alpha 2, Greater Noida",
-    "price": "₹2.1 Cr",
-    "area": "1,076 sqft",
-    "config": "2 BHK",
-    "available_from": "3w ago",
-    "id": null,
-    "features": null,
-    "Places_Nearby": null,
-    "image": "https://www.99acres.com/universalapp/img/noImageBg.svg",
-    "url": "https://www.99acres.com/2-bhk-bedroom-independent-house-villa-for-sale-in-block-g-alpha-2-greater-noida-1076-sq-ft-spid-T85263762"
-  },
-  {
-    "location_name": "Alpha 1, Greater Noida",
-    "title": "2 Bedroom House in Alpha 1, Greater Noida",
-    "price": "₹2.85 Cr",
-    "area": "2,152 sqft",
-    "config": "2 BHK",
-    "available_from": "1w ago",
-    "id": null,
-    "features": null,
-    "Places_Nearby": null,
-    "image": "https://www.99acres.com/universalapp/img/noImageBg.svg",
-    "url": "https://www.99acres.com/2-bhk-bedroom-independent-house-villa-for-sale-in-alpha-1-greater-noida-2153-sq-ft-spid-V85728184"
-  },
-  {
-    "location_name": "Parsvnath Edens Alpha 2, Greater Noida",
-    "title": "2 Bedroom House in Alpha 2, Greater Noida",
-    "price": "₹1.45 Cr",
-    "area": "645 sqft",
-    "config": "2 BHK",
-    "available_from": "1mo ago",
-    "id": null,
-    "features": [
-      "ALPHA 2 Nearby",
-      "MODERN SCHOOL Nearby"
-    ],
-    "Places_Nearby": null,
-    "image": "https://www.99acres.com/universalapp/img/noImageBgPremium.svg",
-    "url": "https://www.99acres.com/2-bhk-bedroom-independent-house-villa-for-sale-in-parsvnath-edens-alpha-2-greater-noida-645-sq-ft-spid-F83340736"
-  },
-  {
-    "location_name": "Rail Vihar Alpha 1, Greater Noida",
-    "title": "2 BHK Flat in Alpha 1, Greater Noida",
-    "price": "₹75 Lac",
-    "area": "850 sqft",
-    "config": "2 BHK",
-    "available_from": "1mo ago",
-    "id": null,
-    "features": null,
-    "Places_Nearby": null,
-    "image": "https://www.99acres.com/universalapp/img/noImageBg.svg",
-    "url": "https://www.99acres.com/2-bhk-bedroom-apartment-flat-for-sale-in-rail-vihar-alpha-1-greater-noida-850-sq-ft-r4-spid-J74631355"
-  },
-  {
-    "location_name": "Alpha 2, Greater Noida",
-    "title": "2 Bedroom House in Alpha 2, Greater Noida",
-    "price": "₹1.25 Cr",
-    "area": "559 sqft",
-    "config": "2 BHK",
-    "available_from": "1mo ago",
-    "id": null,
-    "features": [
-      "Private Garden",
-      "Gated Society"
-    ],
-    "Places_Nearby": null,
-    "image": "https://www.99acres.com/universalapp/img/noImageBg.svg",
-    "url": "https://www.99acres.com/2-bhk-bedroom-independent-house-villa-for-sale-in-alpha-2-greater-noida-560-sq-ft-spid-Z84567960"
-  },
-  {
-    "location_name": "Assotech Golf Vista Apartments Alpha 2, Greater Noida",
-    "title": "2 BHK Flat in Alpha 2, Greater Noida",
-    "price": "₹1.1 Cr",
-    "area": "1,330 sqft",
-    "config": "2 BHK",
-    "available_from": "1mo ago",
-    "id": null,
-    "features": [
-      "Gated Society",
-      "Overlooking Park/Garden"
-    ],
-    "Places_Nearby": null,
-    "image": "https://www.99acres.com/universalapp/img/noImageBgPremium.svg",
-    "url": "https://www.99acres.com/2-bhk-bedroom-apartment-flat-for-sale-in-assotech-golf-vista-apartments-alpha-2-greater-noida-1330-sq-ft-r1-spid-H82577462"
-  },
-  {
-    "location_name": "Parsvnath Edens Alpha 2, Greater Noida",
-    "title": "2 BHK Flat in Alpha 2, Greater Noida",
-    "price": "₹88 Lac",
-    "area": "1,120 sqft",
-    "config": "2 BHK",
-    "available_from": "1mo ago",
-    "id": null,
-    "features": [
-      "Gated Society",
-      "Overlooking Park/Garden"
-    ],
-    "Places_Nearby": null,
-    "image": "https://www.99acres.com/universalapp/img/noImageBgPremium.svg",
-    "url": "https://www.99acres.com/2-bhk-bedroom-apartment-flat-for-sale-in-parsvnath-edens-alpha-2-greater-noida-1120-sq-ft-spid-T84956884"
-  },
-  {
-    "location_name": "Alpha 1 RWA Alpha 1, Greater Noida",
-    "title": "2 Bedroom House in Alpha 1, Greater Noida",
-    "price": "₹1.95 Cr",
-    "area": "1,076 sqft",
-    "config": "2 BHK",
-    "available_from": "1mo ago",
-    "id": null,
-    "features": [
-      "North-East Facing",
-      "alpha 1 metro Nearby"
-    ],
-    "Places_Nearby": null,
-    "image": "https://www.99acres.com/universalapp/img/noImageBg.svg",
-    "url": "https://www.99acres.com/2-bhk-bedroom-independent-house-villa-for-sale-in-alpha-1-rwa-alpha-1-greater-noida-1075-sq-ft-r1-spid-O82199454"
-  },
-  {
-    "location_name": "Block G Alpha 2, Greater Noida",
-    "title": "2 Bedroom House in Block G Alpha 2, Greater Noida",
-    "price": "₹1.6 Cr",
-    "area": "645 sqft",
-    "config": "2 BHK",
-    "available_from": "4w ago",
-    "id": null,
-    "features": null,
-    "Places_Nearby": null,
-    "image": "https://www.99acres.com/universalapp/img/noImageBg.svg",
-    "url": "https://www.99acres.com/2-bhk-bedroom-independent-house-villa-for-sale-in-block-g-alpha-2-greater-noida-646-sq-ft-spid-O85224016"
-  },
-  {
-    "location_name": "Alpha 2, Greater Noida",
-    "title": "2 Bedroom House in Alpha 2, Greater Noida",
-    "price": "₹1.3 Cr",
-    "area": "645 sqft",
-    "config": "2 BHK",
-    "available_from": "2d ago",
-    "id": null,
-    "features": [
-      "Gated Society",
-      "Marble Flooring"
-    ],
-    "Places_Nearby": null,
-    "image": "https://www.99acres.com/universalapp/img/noImageBg.svg",
-    "url": "https://www.99acres.com/2-bhk-bedroom-independent-house-villa-for-sale-in-alpha-2-greater-noida-484-sq-ft-r1-spid-T84414814"
-  },
-  {
-    "location_name": "Parsvnath Edens Alpha 2, Greater Noida",
-    "title": "2 BHK Flat in Alpha 2, Greater Noida",
-    "price": "₹93 Lac",
-    "area": "1,186 sqft",
-    "config": "2 BHK",
-    "available_from": "1mo ago",
-    "id": null,
-    "features": [
-      "Gated Society",
-      "Fitness Center/ Gym"
-    ],
-    "Places_Nearby": null,
-    "image": "https://www.99acres.com/universalapp/img/noImageBgPremium.svg",
-    "url": "https://www.99acres.com/2-bhk-bedroom-apartment-flat-for-sale-in-parsvnath-edens-alpha-2-greater-noida-1186-sq-ft-spid-Y84956386"
-  },
-  {
-    "location_name": "Parsvnath Edens Alpha 2, Greater Noida",
-    "title": "2 BHK Flat in Alpha 2, Greater Noida",
-    "price": "₹90 Lac",
-    "area": "1,186 sqft",
-    "config": "2 BHK",
-    "available_from": "1mo ago",
-    "id": null,
-    "features": [
-      "alpha-1 metro Nearby",
-      "Gated Society"
-    ],
-    "Places_Nearby": null,
-    "image": "https://www.99acres.com/universalapp/img/noImageBgPremium.svg",
-    "url": "https://www.99acres.com/2-bhk-bedroom-apartment-flat-for-sale-in-parsvnath-edens-alpha-2-greater-noida-1186-sq-ft-spid-H84955360"
-  },
-  {
-    "location_name": "Parsvnath Edens Alpha 2, Greater Noida",
-    "title": "2 BHK Flat in Alpha 2, Greater Noida",
-    "price": "₹92 Lac",
-    "area": "1,186 sqft",
-    "config": "2 BHK",
-    "available_from": "1mo ago",
-    "id": null,
-    "features": [
-      "North-East Facing",
-      "Private Garden"
-    ],
-    "Places_Nearby": null,
-    "image": "https://www.99acres.com/universalapp/img/noImageBgPremium.svg",
-    "url": "https://www.99acres.com/2-bhk-bedroom-apartment-flat-for-sale-in-parsvnath-edens-alpha-2-greater-noida-1186-sq-ft-spid-G83553016"
-  }
-];
-
-        const userBudget = 40000000; // 4 Cr
-        const userCity = "Greater Noida";
-        const userLocality = "alpha"; // Broadly covers Alpha 1, Alpha 2
-        const propertyType = "Buy";
-        const userRecommendationKeyword = "schools";
-        const userFurnishing = "furnished"; // Note: Dataset lacks specific furnishing details. Will display "Not specified" or default to "Semi-furnished"
-
-        const DEFAULT_IMAGE = "https://example.com/default-property.jpg";
-        const DEFAULT_URL = "https://example.com/property-details";
-
-        function parsePrice(priceStr) {
-            priceStr = priceStr.replace(/₹|,/g, '').trim();
-            if (priceStr.endsWith('Cr')) {
-                return parseFloat(priceStr.replace('Cr', '')) * 10000000;
-            } else if (priceStr.endsWith('Lac')) {
-                return parseFloat(priceStr.replace('Lac', '')) * 100000;
-            }
-            return parseFloat(priceStr);
-        }
-
-        function calculateEMI(principal) {
-            const R = 8.5 / 12 / 100; // Monthly interest rate (8.5% annual)
-            const N = 240; // Total number of payments (20 years * 12 months)
-
-            if (R === 0) return principal / N; // Handle zero interest rate
-            
-            const emi = (principal * R * Math.pow((1 + R), N)) / (Math.pow((1 + R), N) - 1);
-            return Math.round(emi);
-        }
-
-        function getBankLoanLink() {
-            const banks = [
-                "https://www.hdfcbank.com/personal/loans/home-loan",
-                "https://www.icicibank.com/personal-banking/loans/home-loan",
-                "https://homeloans.sbi/",
-                "https://www.axisbank.com/retail/loans/home-loan"
-            ];
-            return banks[Math.floor(Math.random() * banks.length)];
-        }
-
-        function getNearbyAmenities(property) {
-            if (property.Places_Nearby && property.Places_Nearby.length > 0) {
-                return property.Places_Nearby;
-            }
-            if (property.features && property.features.some(f => f.toLowerCase().includes('school') || f.toLowerCase().includes('metro'))) {
-                 // Prioritize features that sound like nearby amenities
-                 const relevantFeatures = property.features.filter(f => f.toLowerCase().includes('school') || f.toLowerCase().includes('metro') || f.toLowerCase().includes('hospital'));
-                 if (relevantFeatures.length > 0) {
-                     return relevantFeatures.slice(0, 3);
-                 }
-            }
-
-            // Fallback to logical generation
-            const generalAmenities = [
-                "Local Market", "Pharmacy", "Public Park", "Shopping Mall", "Hospital", "Metro Station", "Bus Stop"
-            ];
-            const uniqueAmenities = new Set();
-            while (uniqueAmenities.size < 3) {
-                uniqueAmenities.add(generalAmenities[Math.floor(Math.random() * generalAmenities.length)]);
-            }
-            return Array.from(uniqueAmenities);
-        }
-
-        function getPropertyFeatures(property) {
-            if (property.features && property.features.length > 0) {
-                return property.features.slice(0, 5); // Max 5 features
-            }
-            // Generate some common features if none are specified
-            const defaultFeatures = ["Spacious rooms", "24/7 Security", "Power Backup", "Good Ventilation", "Modern Kitchen"];
-            const selectedFeatures = [];
-            while (selectedFeatures.length < 3) {
-                const feature = defaultFeatures[Math.floor(Math.random() * defaultFeatures.length)];
-                if (!selectedFeatures.includes(feature)) {
-                    selectedFeatures.push(feature);
-                }
-            }
-            return selectedFeatures;
-        }
-
-        function createPropertyCard(property, type) {
-            const parsedPrice = parsePrice(property.price);
-            const emi = calculateEMI(parsedPrice);
-            const loanLink = getBankLoanLink();
-            const imageUrl = property.image && !property.image.includes('noImageBg') ? property.image : DEFAULT_IMAGE;
-            const propertyUrl = property.url || DEFAULT_URL;
-            const furnishingDetails = "Not Specified"; // As per dataset limitation for a common field
-
-            const card = document.createElement('div');
-            card.classList.add('property-card');
-
-            const featuresList = getPropertyFeatures(property);
-            const nearbyAmenitiesList = getNearbyAmenities(property);
-
-            card.innerHTML = `
-                <a href="${propertyUrl}" target="_blank" rel="noopener noreferrer">
-                    <img src="${imageUrl}" alt="${property.title || 'Property Image'}">
-                </a>
+        <h2>🏠 Under Budget</h2>
+        <div class="property-grid">
+            <!-- Property 1 -->
+            <div class="property-card">
+                <img src="https://imagecdn.99acres.com/media1/32850/12/657012601M-1759740079309.webp" alt="2 BHK Flat in Sector 62, Noida">
                 <div class="card-content">
-                    <h3>${property.title || 'Property for Sale'}</h3>
-                    <h4>${property.location_name || 'Greater Noida, India'}</h4>
-                    <div class="details-grid">
-                        <div class="detail-item"><strong>Price:</strong> ${property.price}</div>
-                        <div class="detail-item"><strong>Configuration:</strong> ${property.config || '2 BHK'}</div>
-                        <div class="detail-item"><strong>Area:</strong> ${property.area || 'N/A'}</div>
-                        <div class="detail-item"><strong>Furnishing:</strong> ${furnishingDetails}</div>
-                        <div class="detail-item"><strong>Available From:</strong> ${property.available_from || 'Immediately'}</div>
+                    <h3 class="card-title">2 BHK Flat in Purvanchal PMO Apartments</h3>
+                    <p class="card-subtitle">Sector 62, Noida</p>
+                    <div class="detail-item"><strong>Price:</strong> <span>₹95 Lac</span></div>
+                    <div class="detail-item"><strong>Configuration:</strong> <span>2 BHK (2 Baths)</span></div>
+                    <div class="detail-item"><strong>Area:</strong> <span>950 sqft</span></div>
+                    <div class="detail-item"><strong>Furnishing:</strong> <span>Semi-furnished</span></div>
+                    <div class="detail-item"><strong>Available From:</strong> <span>5d ago</span></div>
+                    <p><strong>Features:</strong></p>
+                    <ul class="features-list">
+                        <li>RESALE</li>
+                        <li>Ready To Move</li>
+                    </ul>
+                    <p><strong>Furnishing Details:</strong></p>
+                    <ul class="furnishing-list">
+                        <li>Wardrobes</li>
+                        <li>Modular Kitchen</li>
+                        <li>Light Fittings</li>
+                    </ul>
+                    <p><strong>Nearby Amenities:</strong></p>
+                    <ul class="amenities-list">
+                        <li>Noida sector 62 metro station</li>
+                        <li>Noida sector 59 metro station</li>
+                        <li>Local Market</li>
+                    </ul>
+                    <div class="emi-info">
+                        <strong>EMI Starts:</strong> ₹82,956/month (20 yrs @ 8.5%) <br>
+                        <a href="https://homeloans.sbi/" target="_blank">Get Home Loan from SBI</a>
                     </div>
-                    ${featuresList.length > 0 ? `
-                        <div class="features">
-                            <h5>Features:</h5>
-                            <ul>
-                                ${featuresList.map(f => `<li>${f}</li>`).join('')}
-                            </ul>
-                        </div>` : ''}
-                    <div class="nearby-amenities">
-                        <h5>Nearby:</h5>
-                        <ul>
-                            ${nearbyAmenitiesList.map(a => `<li>${a}</li>`).join('')}
-                        </ul>
-                    </div>
-                    <div class="emi-details">
-                        <p>EMI starts from: ₹${emi.toLocaleString('en-IN')}/month</p>
-                        <a href="${loanLink}" target="_blank" rel="noopener noreferrer" class="loan-link">Get Loan from Bank</a>
-                    </div>
-                    <div class="property-link">
-                        <a href="${propertyUrl}" target="_blank" rel="noopener noreferrer">View Details</a>
-                    </div>
+                    <a href="https://www.99acres.com/2-bhk-bedroom-apartment-flat-for-sale-in-purvanchal-pmo-apartments-sector-62-noida-950-sq-ft-r1-spid-D82486574" target="_blank" class="view-details-btn">View Details</a>
                 </div>
-            `;
-            return card;
-        }
+            </div>
 
-        function initializeRecommendations() {
-            let filteredProperties = propertyData.filter(p => {
-                const locationLower = p.location_name ? p.location_name.toLowerCase() : '';
-                const titleLower = p.title ? p.title.toLowerCase() : '';
-                const priceValue = parsePrice(p.price);
+            <!-- Property 2 -->
+            <div class="property-card">
+                <img src="https://imagecdn.99acres.com/media1/32909/19/658199993M-1759983583608.webp" alt="2 BHK Flat in Sector 62, Noida">
+                <div class="card-content">
+                    <h3 class="card-title">2 BHK Flat in Varun Apartments</h3>
+                    <p class="card-subtitle">Sector 62, Noida</p>
+                    <div class="detail-item"><strong>Price:</strong> <span>₹1.3 Cr</span></div>
+                    <div class="detail-item"><strong>Configuration:</strong> <span>2 BHK (2 Baths)</span></div>
+                    <div class="detail-item"><strong>Area:</strong> <span>1,260 sqft</span></div>
+                    <div class="detail-item"><strong>Furnishing:</strong> <span>Semi-furnished</span></div>
+                    <div class="detail-item"><strong>Available From:</strong> <span>5d ago</span></div>
+                    <p><strong>Features:</strong></p>
+                    <ul class="features-list">
+                        <li>RESALE</li>
+                        <li>Ready To Move</li>
+                    </ul>
+                    <p><strong>Furnishing Details:</strong></p>
+                    <ul class="furnishing-list">
+                        <li>Wardrobes</li>
+                        <li>Modular Kitchen</li>
+                        <li>Light Fittings</li>
+                    </ul>
+                    <p><strong>Nearby Amenities:</strong></p>
+                    <ul class="amenities-list">
+                        <li>Sector 62 Noida</li>
+                        <li>Shopprix Mall</li>
+                        <li>Public Transport</li>
+                    </ul>
+                    <div class="emi-info">
+                        <strong>EMI Starts:</strong> ₹113,562/month (20 yrs @ 8.5%) <br>
+                        <a href="https://www.hdfcbank.com/personal/home-loan" target="_blank">Get Home Loan from HDFC</a>
+                    </div>
+                    <a href="https://www.99acres.com/2-bhk-bedroom-apartment-flat-for-sale-in-varun-apartments-sector-62-noida-1260-sq-ft-spid-T85786612" target="_blank" class="view-details-btn">View Details</a>
+                </div>
+            </div>
 
-                return p.config === "2 BHK" &&
-                       locationLower.includes(userCity.toLowerCase()) &&
-                       locationLower.includes(userLocality.toLowerCase()) &&
-                       priceValue <= userBudget;
-            });
+            <!-- Property 3 -->
+            <div class="property-card">
+                <img src="https://example.com/default-property.jpg" alt="2 BHK Flat in Sector 62, Noida">
+                <div class="card-content">
+                    <h3 class="card-title">2 BHK Flat in Ushma Urja Apartments</h3>
+                    <p class="card-subtitle">Sector 62, Noida</p>
+                    <div class="detail-item"><strong>Price:</strong> <span>₹1.42 Cr</span></div>
+                    <div class="detail-item"><strong>Configuration:</strong> <span>2 BHK (2 Baths)</span></div>
+                    <div class="detail-item"><strong>Area:</strong> <span>1,650 sqft</span></div>
+                    <div class="detail-item"><strong>Furnishing:</strong> <span>Semi-furnished</span></div>
+                    <div class="detail-item"><strong>Available From:</strong> <span>3w ago</span></div>
+                    <p><strong>Features:</strong></p>
+                    <ul class="features-list">
+                        <li>RESALE</li>
+                        <li>Ready To Move</li>
+                    </ul>
+                    <p><strong>Furnishing Details:</strong></p>
+                    <ul class="furnishing-list">
+                        <li>Wardrobes</li>
+                        <li>Modular Kitchen</li>
+                        <li>Light Fittings</li>
+                    </ul>
+                    <p><strong>Nearby Amenities:</strong></p>
+                    <ul class="amenities-list">
+                        <li>Noida sector 62 metro station</li>
+                        <li>Noida sector 59 metro station</li>
+                        <li>School</li>
+                    </ul>
+                    <div class="emi-info">
+                        <strong>EMI Starts:</strong> ₹123,948/month (20 yrs @ 8.5%) <br>
+                        <a href="https://www.icicibank.com/personal-banking/loans/home-loan" target="_blank">Get Home Loan from ICICI</a>
+                    </div>
+                    <a href="https://www.99acres.com/2-bhk-bedroom-apartment-flat-for-sale-in-ushma-urja-apartments-sector-62-noida-1650-sq-ft-spid-V85406242" target="_blank" class="view-details-btn">View Details</a>
+                </div>
+            </div>
 
-            // Remove duplicates based on title and area to ensure unique properties
-            const uniqueProperties = [];
-            const seen = new Set();
-            for (const prop of filteredProperties) {
-                const identifier = (prop.title || '') + (prop.area || '') + (prop.price || '');
-                if (!seen.has(identifier)) {
-                    uniqueProperties.push(prop);
-                    seen.add(identifier);
-                }
-            }
-            filteredProperties = uniqueProperties;
+            <!-- Property 4 -->
+            <div class="property-card">
+                <img src="https://example.com/default-property.jpg" alt="2 BHK Flat in Sector 62, Noida">
+                <div class="card-content">
+                    <h3 class="card-title">2 BHK Flat in Ushma Urja Apartments</h3>
+                    <p class="card-subtitle">Sector 62, Noida</p>
+                    <div class="detail-item"><strong>Price:</strong> <span>₹1.42 Cr</span></div>
+                    <div class="detail-item"><strong>Configuration:</strong> <span>2 BHK (2 Baths)</span></div>
+                    <div class="detail-item"><strong>Area:</strong> <span>1,375 sqft</span></div>
+                    <div class="detail-item"><strong>Furnishing:</strong> <span>Semi-furnished</span></div>
+                    <div class="detail-item"><strong>Available From:</strong> <span>1mo ago</span></div>
+                    <p><strong>Features:</strong></p>
+                    <ul class="features-list">
+                        <li>RESALE</li>
+                        <li>Ready To Move</li>
+                    </ul>
+                    <p><strong>Furnishing Details:</strong></p>
+                    <ul class="furnishing-list">
+                        <li>Wardrobes</li>
+                        <li>Modular Kitchen</li>
+                        <li>Light Fittings</li>
+                    </ul>
+                    <p><strong>Nearby Amenities:</strong></p>
+                    <ul class="amenities-list">
+                        <li>Noida sector 62 metro station</li>
+                        <li>Noida sector 59 metro station</li>
+                        <li>Park</li>
+                    </ul>
+                    <div class="emi-info">
+                        <strong>EMI Starts:</strong> ₹123,948/month (20 yrs @ 8.5%) <br>
+                        <a href="https://www.axisbank.com/retail/loans/home-loan" target="_blank">Get Home Loan from Axis Bank</a>
+                    </div>
+                    <a href="https://www.99acres.com/2-bhk-bedroom-apartment-flat-for-sale-in-ushma-urja-apartments-sector-62-noida-1375-sq-ft-spid-F84737434" target="_blank" class="view-details-btn">View Details</a>
+                </div>
+            </div>
+        </div>
 
+        <h2>🌟 Recommended</h2>
+        <div class="property-grid">
+            <!-- Recommended Property 1 -->
+            <div class="property-card">
+                <img src="https://example.com/default-property.jpg" alt="2 BHK Flat in Sector 62, Noida">
+                <div class="card-content">
+                    <h3 class="card-title">2 BHK Flat in CGHS Jeevan Ashray</h3>
+                    <p class="card-subtitle">Sector 62, Noida</p>
+                    <div class="detail-item"><strong>Price:</strong> <span>₹1.25 Cr</span></div>
+                    <div class="detail-item"><strong>Configuration:</strong> <span>2 BHK (2 Baths)</span></div>
+                    <div class="detail-item"><strong>Area:</strong> <span>1,032 sqft</span></div>
+                    <div class="detail-item"><strong>Furnishing:</strong> <span>Semi-furnished</span></div>
+                    <div class="detail-item"><strong>Available From:</strong> <span>1mo ago</span></div>
+                    <p><strong>Features:</strong></p>
+                    <ul class="features-list">
+                        <li>RESALE</li>
+                        <li>Ready To Move</li>
+                    </ul>
+                    <p><strong>Furnishing Details:</strong></p>
+                    <ul class="furnishing-list">
+                        <li>Wardrobes</li>
+                        <li>Modular Kitchen</li>
+                        <li>Light Fittings</li>
+                    </ul>
+                    <p><strong>Nearby Amenities:</strong></p>
+                    <ul class="amenities-list">
+                        <li>sec 62 metro station</li>
+                        <li>fortis hospital</li>
+                        <li>Shopping Complex</li>
+                    </ul>
+                    <div class="emi-info">
+                        <strong>EMI Starts:</strong> ₹109,206/month (20 yrs @ 8.5%) <br>
+                        <a href="https://homeloans.sbi/" target="_blank">Get Home Loan from SBI</a>
+                    </div>
+                    <a href="https://www.99acres.com/2-bhk-bedroom-apartment-flat-for-sale-in-cghs-jeevan-ashray-sector-62-noida-1032-sq-ft-spid-Z84713886" target="_blank" class="view-details-btn">View Details</a>
+                </div>
+            </div>
 
-            let underBudgetProperties = [];
-            let recommendedProperties = [];
-            const selectedPropertyIds = new Set(); // To ensure exactly 6 unique properties
-
-            // First, select recommended properties based on "schools"
-            const schoolProperties = filteredProperties.filter(p => 
-                (p.features && p.features.some(f => f.toLowerCase().includes(userRecommendationKeyword))) ||
-                (p.Places_Nearby && p.Places_Nearby.some(pl => pl.toLowerCase().includes(userRecommendationKeyword)))
-            );
-
-            // Prioritize selecting 2 unique recommended properties
-            for (const prop of schoolProperties) {
-                if (recommendedProperties.length < 2) {
-                    const propId = prop.url || prop.title + prop.price; // Unique identifier for selection
-                    if (!selectedPropertyIds.has(propId)) {
-                        recommendedProperties.push(prop);
-                        selectedPropertyIds.add(propId);
-                    }
-                }
-            }
-            
-            // If less than 2 recommended properties found, pick remaining from general pool (sorted by features count for better appeal)
-            if (recommendedProperties.length < 2) {
-                const sortedByFeatures = [...filteredProperties].sort((a, b) => 
-                    (b.features ? b.features.length : 0) - (a.features ? a.features.length : 0)
-                );
-                for (const prop of sortedByFeatures) {
-                    const propId = prop.url || prop.title + prop.price;
-                    if (!selectedPropertyIds.has(propId)) {
-                        recommendedProperties.push(prop);
-                        selectedPropertyIds.add(propId);
-                    }
-                    if (recommendedProperties.length >= 2) break;
-                }
-            }
-
-            // Then, select 4 "Under Budget" properties that are not already in recommended
-            const availableForUnderBudget = filteredProperties.filter(p => {
-                const propId = p.url || p.title + p.price;
-                return !selectedPropertyIds.has(propId);
-            });
-
-            // Sort by price ascending to pick cheaper options first for "Under Budget"
-            availableForUnderBudget.sort((a, b) => parsePrice(a.price) - parsePrice(b.price));
-
-            for (const prop of availableForUnderBudget) {
-                if (underBudgetProperties.length < 4) {
-                    underBudgetProperties.push(prop);
-                    selectedPropertyIds.add(prop.url || prop.title + prop.price);
-                }
-                if (underBudgetProperties.length >= 4) break;
-            }
-
-            // Fallback: If we still don't have enough properties for either section, fill from remaining
-            let allSelected = [...underBudgetProperties, ...recommendedProperties];
-            let remainingProperties = filteredProperties.filter(p => {
-                const propId = p.url || p.title + p.price;
-                return !selectedPropertyIds.has(propId);
-            });
-
-            // If underBudgetProperties has less than 4, fill from remaining
-            for (const prop of remainingProperties) {
-                if (underBudgetProperties.length < 4) {
-                    underBudgetProperties.push(prop);
-                    selectedPropertyIds.add(prop.url || prop.title + prop.price);
-                }
-            }
-            
-            // If recommendedProperties has less than 2, fill from remaining (filtered again)
-            remainingProperties = filteredProperties.filter(p => {
-                const propId = p.url || p.title + p.price;
-                return !selectedPropertyIds.has(propId);
-            });
-            for (const prop of remainingProperties) {
-                if (recommendedProperties.length < 2) {
-                    recommendedProperties.push(prop);
-                    selectedPropertyIds.add(prop.url || prop.title + prop.price);
-                }
-            }
-
-            // Ensure we only display exactly 4 under budget and 2 recommended
-            underBudgetProperties = underBudgetProperties.slice(0, 4);
-            recommendedProperties = recommendedProperties.slice(0, 2);
-
-
-            const underBudgetGrid = document.querySelector('section:nth-of-type(1) .property-grid');
-            underBudgetProperties.forEach(p => underBudgetGrid.appendChild(createPropertyCard(p, 'under-budget')));
-
-            const recommendedGrid = document.querySelector('section:nth-of-type(2) .property-grid');
-            recommendedProperties.forEach(p => recommendedGrid.appendChild(createPropertyCard(p, 'recommended')));
-        }
-
-        document.addEventListener('DOMContentLoaded', initializeRecommendations);
-    </script>
+            <!-- Recommended Property 2 -->
+            <div class="property-card">
+                <img src="https://example.com/default-property.jpg" alt="2 BHK Independent Builder Floor in Sector 62, Noida">
+                <div class="card-content">
+                    <h3 class="card-title">2 BHK Independent Builder Floor in Brickland Residency</h3>
+                    <p class="card-subtitle">Sector 62, Noida</p>
+                    <div class="detail-item"><strong>Price:</strong> <span>₹51.5 Lac</span></div>
+                    <div class="detail-item"><strong>Configuration:</strong> <span>2 BHK (2 Baths)</span></div>
+                    <div class="detail-item"><strong>Area:</strong> <span>900 sqft</span></div>
+                    <div class="detail-item"><strong>Furnishing:</strong> <span>Semi-furnished</span></div>
+                    <div class="detail-item"><strong>Available From:</strong> <span>1mo ago</span></div>
+                    <p><strong>Features:</strong></p>
+                    <ul class="features-list">
+                        <li>RESALE</li>
+                        <li>Ready To Move</li>
+                    </ul>
+                    <p><strong>Furnishing Details:</strong></p>
+                    <ul class="furnishing-list">
+                        <li>Wardrobes</li>
+                        <li>Modular Kitchen</li>
+                        <li>Light Fittings</li>
+                    </ul>
+                    <p><strong>Nearby Amenities:</strong></p>
+                    <ul class="amenities-list">
+                        <li>father agnel school sector-62 noida</li>
+                        <li>Fortis hospital</li>
+                        <li>Grocery Store</li>
+                    </ul>
+                    <div class="emi-info">
+                        <strong>EMI Starts:</strong> ₹45,005/month (20 yrs @ 8.5%) <br>
+                        <a href="https://www.hdfcbank.com/personal/home-loan" target="_blank">Get Home Loan from HDFC</a>
+                    </div>
+                    <a href="https://www.99acres.com/2-bhk-bedroom-independent-builder-floor-for-sale-in-brickland-residency-sector-62-noida-900-sq-ft-r2-spid-R78578889" target="_blank" class="view-details-btn">View Details</a>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
+```
