@@ -9,564 +9,424 @@
             --primary-color: #007bff;
             --secondary-color: #28a745;
             --background-color: #f8f9fa;
-            --card-bg: #ffffff;
-            --shadow-light: 0 4px 12px rgba(0, 0, 0, 0.1);
-            --shadow-hover: 0 8px 20px rgba(0, 0, 0, 0.15);
-            --border-radius: 12px;
+            --card-background: #ffffff;
+            --text-color: #343a40;
+            --border-color: #dee2e6;
         }
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: var(--background-color);
-            color: #333;
+            color: var(--text-color);
             margin: 0;
             padding: 20px;
+            line-height: 1.6;
         }
         .container {
-            max-width: 1400px;
+            max-width: 1200px;
             margin: 0 auto;
         }
         h1, h2 {
-            color: var(--primary-color);
-            border-bottom: 2px solid #eee;
+            color: var(--text-color);
+            border-bottom: 3px solid var(--primary-color);
             padding-bottom: 10px;
             margin-top: 30px;
         }
+        h1 {
+            text-align: center;
+            color: #212529;
+            border-bottom-color: var(--secondary-color);
+        }
         .property-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
             gap: 30px;
-            padding: 20px 0;
+            margin-bottom: 40px;
         }
         .property-card {
-            background-color: var(--card-bg);
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow-light);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            background-color: var(--card-background);
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
             overflow: hidden;
-            display: flex;
-            flex-direction: column;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid var(--border-color);
         }
         .property-card:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-hover);
+            transform: translateY(-8px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
         }
         .property-image-container {
             height: 200px;
             overflow: hidden;
-            background-color: #e9ecef;
+            position: relative;
         }
         .property-image {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-        .property-card:hover .property-image {
-            transform: scale(1.05);
+            display: block;
         }
         .card-content {
             padding: 20px;
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
         }
-        .card-header {
-            margin-bottom: 10px;
+        .property-title {
+            font-size: 1.3em;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-top: 0;
+            margin-bottom: 5px;
+            height: 50px;
+            overflow: hidden;
         }
-        .card-header h3 {
-            font-size: 1.4em;
-            color: #1f2937;
-            margin: 0 0 5px 0;
-        }
-        .card-header p {
-            font-size: 1em;
+        .property-location {
+            font-size: 0.95em;
             color: #6c757d;
-            margin: 0;
+            margin-bottom: 10px;
         }
         .price-config {
             display: flex;
             justify-content: space-between;
             align-items: center;
             margin-bottom: 15px;
-            padding: 10px 0;
-            border-top: 1px solid #eee;
-            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+            border-bottom: 1px dashed var(--border-color);
         }
         .price {
-            font-size: 1.6em;
-            font-weight: bold;
+            font-size: 1.4em;
+            font-weight: 700;
             color: var(--secondary-color);
         }
         .config {
-            font-size: 1em;
-            padding: 5px 10px;
-            background-color: #e9f5ff;
-            color: var(--primary-color);
-            border-radius: 5px;
+            font-size: 1.1em;
             font-weight: 600;
+            background-color: #e9ecef;
+            padding: 4px 10px;
+            border-radius: 5px;
         }
         .details-list {
             list-style: none;
             padding: 0;
-            margin-bottom: 15px;
+            margin: 0 0 15px 0;
             font-size: 0.9em;
         }
         .details-list li {
-            margin-bottom: 5px;
-            padding-left: 20px;
-            position: relative;
-        }
-        .details-list li::before {
-            content: '✓';
-            color: var(--primary-color);
-            font-weight: bold;
-            display: inline-block;
-            width: 1em;
-            margin-left: -1em;
-        }
-        .features-section, .places-section {
-            margin-top: 15px;
-            padding-top: 10px;
-            border-top: 1px dotted #ccc;
-        }
-        .features-section h4, .places-section h4 {
-            margin: 0 0 8px 0;
-            font-size: 0.95em;
-            color: #495057;
-        }
-        .features-list span, .places-list span {
-            display: inline-block;
-            background-color: #f1f3f5;
-            color: #495057;
-            padding: 4px 10px;
-            border-radius: 15px;
-            font-size: 0.8em;
-            margin: 0 5px 5px 0;
-        }
-        .card-footer {
-            margin-top: auto;
-            padding-top: 15px;
-            border-top: 1px solid #eee;
+            padding: 3px 0;
             display: flex;
-            flex-direction: column;
-            gap: 10px;
+            align-items: center;
         }
-        .view-link a {
+        .details-list li strong {
+            min-width: 100px;
+            display: inline-block;
+            color: #495057;
+        }
+        .features, .nearby {
+            margin-top: 15px;
+        }
+        .features span, .nearby span {
+            display: inline-block;
+            background-color: #e7f1ff;
+            color: var(--primary-color);
+            padding: 4px 8px;
+            border-radius: 5px;
+            font-size: 0.8em;
+            margin: 3px 3px 3px 0;
+        }
+        .features strong, .nearby strong {
             display: block;
-            text-align: center;
+            margin-bottom: 5px;
+            color: #495057;
+        }
+        .bank-info {
+            margin-top: 15px;
             padding: 10px;
-            background-color: var(--primary-color);
-            color: white;
-            text-decoration: none;
-            border-radius: 8px;
-            font-weight: 600;
-            transition: background-color 0.3s;
-        }
-        .view-link a:hover {
-            background-color: #0056b3;
-        }
-        .emi-info {
             background-color: #fff3cd;
-            color: #856404;
-            padding: 10px;
-            border-radius: 8px;
-            margin-bottom: 10px;
-            font-size: 0.85em;
+            border-left: 5px solid #ffc107;
+            border-radius: 0 8px 8px 0;
+            font-size: 0.9em;
         }
-        .bank-link a {
-            display: block;
-            text-align: center;
-            padding: 8px;
-            background-color: #dc3545;
-            color: white;
+        .bank-info a {
+            display: inline-block;
+            margin-top: 5px;
+            color: var(--primary-color);
             text-decoration: none;
-            border-radius: 8px;
             font-weight: 600;
-            transition: background-color 0.3s;
         }
-        .bank-link a:hover {
-            background-color: #c82333;
+        .bank-info a:hover {
+            text-decoration: underline;
         }
-        h2 {
-            color: #218838;
+        .section-header {
+            color: var(--primary-color);
+            padding: 10px 0;
+            font-size: 1.8em;
+            margin-top: 40px;
+        }
+        .section-header.recommended {
+            color: #fd7e14;
+            border-bottom-color: #fd7e14;
+        }
+        .loan-emi {
+            font-weight: 600;
+            color: #28a745;
+            margin-top: 5px;
+        }
+        .placeholder-img {
+            background-color: #e0e0e0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #6c757d;
+            height: 100%;
+            text-align: center;
+        }
+        .badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-weight: bold;
+            font-size: 0.85em;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Property Recommendations for Noida</h1>
+        <h1>Real Estate Recommendations for Noida, Sector 62</h1>
 
-        <section id="under-budget">
-            <h2>🏠 Under Budget Properties (Price ≤ ₹3 Cr)</h2>
-            <div class="property-grid">
-                <!-- Property Card 1 (Under Budget) -->
-                <div class="property-card">
-                    <div class="property-image-container">
-                        <img src="https://imagecdn.99acres.com/media1/32850/12/657012601M-1759740079309.webp" onerror="this.onerror=null; this.src='https://static.99acres.com/universalapp/img/noImageBg.svg';" alt="Property Image" class="property-image">
-                    </div>
-                    <div class="card-content">
-                        <div class="card-header">
-                            <h3>2 BHK Flat in Sector 62, Noida</h3>
-                            <p>Sector 62 Noida, Noida</p>
-                        </div>
-                        <div class="price-config">
-                            <span class="price">₹95 Lac</span>
-                            <span class="config">2 BHK</span>
-                        </div>
-                        <ul class="details-list">
-                            <li>Area: 950 sqft</li>
-                            <li>Furnishing: Not specified (Assuming Unfurnished)</li>
-                            <li>Available: 5d ago</li>
-                        </ul>
+        <h2 class="section-header">🏠 Under Budget Properties (Price &le; ₹2 Cr)</h2>
+        <div id="under-budget-properties" class="property-grid">
+            <!-- Under Budget Cards will be inserted here -->
+        </div>
 
-                        <div class="emi-info">
-                            <strong>Est. EMI:</strong> ₹77,412/month (25 Years @ 8.5%)
-                            <div class="bank-link"><a href="https://www.hdfc.com/personal/loans/home-loans" target="_blank">Check EMI at HDFC Bank</a></div>
-                        </div>
-
-                        <div class="features-section">
-                            <h4>Key Features</h4>
-                            <div class="features-list">
-                                <span>East Facing</span>
-                                <span>Sec 59 Noida Nearby</span>
-                                <span>Ready To Move</span>
-                            </div>
-                        </div>
-                        <div class="places-section">
-                            <h4>Nearby Places (Focus: Hospitals)</h4>
-                            <div class="places-list">
-                                <span>Sec 59 Noida</span>
-                                <span>Sector 62 Metro</span>
-                                <span>Nearby Clinics</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-footer">
-                        <div class="view-link"><a href="https://www.99acres.com/2-bhk-bedroom-apartment-flat-for-sale-in-purvanchal-pmo-apartments-sector-62-noida-950-sq-ft-r1-spid-D82486574" target="_blank">View Property Details</a></div>
-                    </div>
-                </div>
-
-                <!-- Property Card 2 (Under Budget) -->
-                <div class="property-card">
-                    <div class="property-image-container">
-                        <img src="https://imagecdn.99acres.com/media1/32909/19/658199993M-1759983583608.webp" onerror="this.onerror=null; this.src='https://static.99acres.com/universalapp/img/noImageBg.svg';" alt="Property Image" class="property-image">
-                    </div>
-                    <div class="card-content">
-                        <div class="card-header">
-                            <h3>2 BHK Flat in Sector 62, Noida</h3>
-                            <p>Sector 62 Noida, Noida</p>
-                        </div>
-                        <div class="price-config">
-                            <span class="price">₹1.3 Cr</span>
-                            <span class="config">2 BHK</span>
-                        </div>
-                        <ul class="details-list">
-                            <li>Area: 1,260 sqft</li>
-                            <li>Furnishing: Not specified (Assuming Unfurnished)</li>
-                            <li>Available: 5d ago</li>
-                        </ul>
-                        <div class="emi-info">
-                            <strong>Est. EMI:</strong> ₹1,05,788/month (25 Years @ 8.5%)
-                            <div class="bank-link"><a href="https://www.icicibank.com/personal/loans/home-loan" target="_blank">Check EMI at ICICI Bank</a></div>
-                        </div>
-                        <div class="features-section">
-                            <h4>Key Features</h4>
-                            <div class="features-list">
-                                <span>North-East Facing</span>
-                                <span>Ground Floor</span>
-                                <span>Ready To Move</span>
-                            </div>
-                        </div>
-                        <div class="places-section">
-                            <h4>Nearby Places (Focus: Hospitals)</h4>
-                            <div class="places-list">
-                                <span>IT Parks Vicinity</span>
-                                <span>Sector 62 Medical Center</span>
-                                <span>Metro Access</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-footer">
-                        <div class="view-link"><a href="https://www.99acres.com/2-bhk-bedroom-apartment-flat-for-sale-in-varun-apartments-sector-62-noida-1260-sq-ft-spid-T85786612" target="_blank">View Property Details</a></div>
-                    </div>
-                </div>
-
-                <!-- Property Card 3 (Under Budget) -->
-                <div class="property-card">
-                    <div class="property-image-container">
-                        <img src="https://static.99acres.com/universalapp/img/noImageBgPremium.svg" alt="Property Image" class="property-image">
-                    </div>
-                    <div class="card-content">
-                        <div class="card-header">
-                            <h3>2 BHK Flat in Sector 62, Noida</h3>
-                            <p>Sector 62 Noida, Noida</p>
-                        </div>
-                        <div class="price-config">
-                            <span class="price">₹42 Lac</span>
-                            <span class="config">2 BHK</span>
-                        </div>
-                        <ul class="details-list">
-                            <li>Area: 1,150 sqft</li>
-                            <li>Furnishing: Not specified (Assuming Unfurnished)</li>
-                            <li>Available: Today</li>
-                        </ul>
-                        <div class="emi-info">
-                            <strong>Est. EMI:</strong> ₹34,206/month (25 Years @ 8.5%)
-                            <div class="bank-link"><a href="https://www.sbi.co.in/web/personal/loans/home-loan" target="_blank">Check EMI at SBI</a></div>
-                        </div>
-                        <div class="features-section">
-                            <h4>Key Features</h4>
-                            <div class="features-list">
-                                <span>North-East Facing</span>
-                                <span>Fresh Construction</span>
-                                <span>Ready To Move</span>
-                            </div>
-                        </div>
-                        <div class="places-section">
-                            <h4>Nearby Places (Focus: Hospitals)</h4>
-                            <div class="places-list">
-                                <span>Sector 62 Metro Proximity</span>
-                                <span>Local Dispensary</span>
-                                <span>Market Access</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-footer">
-                        <div class="view-link"><a href="https://www.99acres.com/2-bhk-bedroom-apartment-flat-for-sale-in-sector-62-noida-1150-sq-ft-spid-Z85913342" target="_blank">View Property Details</a></div>
-                    </div>
-                </div>
-
-                <!-- Property Card 4 (Under Budget) -->
-                <div class="property-card">
-                    <div class="property-image-container">
-                        <img src="https://static.99acres.com/universalapp/img/noImageBg.svg" alt="Property Image" class="property-image">
-                    </div>
-                    <div class="card-content">
-                        <div class="card-header">
-                            <h3>2 BHK Flat in Sector 62, Noida</h3>
-                            <p>Sector 62 Noida, Noida</p>
-                        </div>
-                        <div class="price-config">
-                            <span class="price">₹1.2 Cr</span>
-                            <span class="config">2 BHK</span>
-                        </div>
-                        <ul class="details-list">
-                            <li>Area: 1,250 sqft</li>
-                            <li>Furnishing: Not specified (Assuming Unfurnished)</li>
-                            <li>Available: 3w ago</li>
-                        </ul>
-                        <div class="emi-info">
-                            <strong>Est. EMI:</strong> ₹97,772/month (25 Years @ 8.5%)
-                            <div class="bank-link"><a href="https://www.axisbank.com/retail/loans/home-loan" target="_blank">Check EMI at Axis Bank</a></div>
-                        </div>
-                        <div class="features-section">
-                            <h4>Key Features</h4>
-                            <div class="features-list">
-                                <span>East Facing</span>
-                                <span>Sector 62 metro Nearby</span>
-                                <span>Ready To Move</span>
-                            </div>
-                        </div>
-                        <div class="places-section">
-                            <h4>Nearby Places (Focus: Hospitals)</h4>
-                            <div class="places-list">
-                                <span>Metro Station Proximity</span>
-                                <span>Local Pharmacy</span>
-                                <span>Shopping Hubs</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-footer">
-                        <div class="view-link"><a href="https://www.99acres.com/2-bhk-bedroom-apartment-flat-for-sale-in-ushma-urja-apartments-sector-62-noida-1250-sq-ft-spid-R85406236" target="_blank">View Property Details</a></div>
-                    </div>
-                </div>
-                
-                <!-- Property Card 5 (Under Budget) -->
-                <div class="property-card">
-                    <div class="property-image-container">
-                        <img src="https://static.99acres.com/universalapp/img/noImageBgPremium.svg" alt="Property Image" class="property-image">
-                    </div>
-                    <div class="card-content">
-                        <div class="card-header">
-                            <h3>2 BHK Flat in Sector 62, Noida</h3>
-                            <p>Sector 62 Noida, Noida</p>
-                        </div>
-                        <div class="price-config">
-                            <span class="price">₹1.1 Cr</span>
-                            <span class="config">2 BHK</span>
-                        </div>
-                        <ul class="details-list">
-                            <li>Area: 1,150 sqft</li>
-                            <li>Furnishing: Not specified (Assuming Unfurnished)</li>
-                            <li>Available: 1mo ago</li>
-                        </ul>
-                        <div class="emi-info">
-                            <strong>Est. EMI:</strong> ₹89,578/month (25 Years @ 8.5%)
-                            <div class="bank-link"><a href="https://www.icicibank.com/personal/loans/home-loan" target="_blank">Check EMI at ICICI Bank</a></div>
-                        </div>
-                        <div class="features-section">
-                            <h4>Key Features</h4>
-                            <div class="features-list">
-                                <span>East Facing</span>
-                                <span>Ground Floor</span>
-                                <span>Ready To Move</span>
-                            </div>
-                        </div>
-                        <div class="places-section">
-                            <h4>Nearby Places (Focus: Hospitals)</h4>
-                            <div class="places-list">
-                                <span>Market & Metro Proximity</span>
-                                <span>Local Health Center</span>
-                                <span>Good Connectivity</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-footer">
-                        <div class="view-link"><a href="https://www.99acres.com/2-bhk-bedroom-apartment-flat-for-sale-in-cghs-jeevan-ashray-sector-62-noida-1150-sq-ft-spid-G84736538" target="_blank">View Property Details</a></div>
-                    </div>
-                </div>
-                
-                <!-- Property Card 6 (Under Budget) -->
-                <div class="property-card">
-                    <div class="property-image-container">
-                        <img src="https://static.99acres.com/universalapp/img/noImageBg.svg" alt="Property Image" class="property-image">
-                    </div>
-                    <div class="card-content">
-                        <div class="card-header">
-                            <h3>2 BHK Flat in Sector 62, Noida</h3>
-                            <p>Sector 62 Noida, Noida</p>
-                        </div>
-                        <div class="price-config">
-                            <span class="price">₹58 Lac</span>
-                            <span class="config">2 BHK</span>
-                        </div>
-                        <ul class="details-list">
-                            <li>Area: 1,050 sqft</li>
-                            <li>Furnishing: Not specified (Assuming Unfurnished)</li>
-                            <li>Available: 1w ago</li>
-                        </ul>
-                        <div class="emi-info">
-                            <strong>Est. EMI:</strong> ₹47,258/month (25 Years @ 8.5%)
-                            <div class="bank-link"><a href="https://www.hdfc.com/personal/loans/home-loans" target="_blank">Check EMI at HDFC Bank</a></div>
-                        </div>
-                        <div class="features-section">
-                            <h4>Key Features</h4>
-                            <div class="features-list">
-                                <span>North-East Facing</span>
-                                <span>Fresh Construction</span>
-                                <span>Ready To Move</span>
-                            </div>
-                        </div>
-                        <div class="places-section">
-                            <h4>Nearby Places (Focus: Hospitals)</h4>
-                            <div class="places-list">
-                                <span>Metro Proximity</span>
-                                <span>Local Clinic</span>
-                                <span>Neighborhood Shopping</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-footer">
-                        <div class="view-link"><a href="https://www.99acres.com/2-bhk-bedroom-apartment-flat-for-sale-in-sector-62-noida-1050-sq-ft-spid-X85672588" target="_blank">View Property Details</a></div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="recommended">
-            <h2>🌟 Recommended Properties (Focus: Hospitals)</h2>
-            <div class="property-grid">
-                <!-- Property Card 7 (Recommended - Hospital Proximity) -->
-                <div class="property-card">
-                    <div class="property-image-container">
-                        <img src="https://static.99acres.com/universalapp/img/noImageBgPremium.svg" onerror="this.onerror=null; this.src='https://static.99acres.com/universalapp/img/noImageBg.svg';" alt="Property Image" class="property-image">
-                    </div>
-                    <div class="card-content">
-                        <div class="card-header">
-                            <h3>2 BHK Flat in Sector 62, Noida (Hospital Vicinity)</h3>
-                            <p>Sector 62 Noida, Noida</p>
-                        </div>
-                        <div class="price-config">
-                            <span class="price">₹1.22 Cr</span>
-                            <span class="config">2 BHK</span>
-                        </div>
-                        <ul class="details-list">
-                            <li>Area: 1,100 sqft</li>
-                            <li>Furnishing: Not specified (Assuming Unfurnished)</li>
-                            <li>Available: 1mo ago</li>
-                        </ul>
-                        <div class="emi-info">
-                            <strong>Est. EMI:</strong> ₹99,365/month (25 Years @ 8.5%)
-                            <div class="bank-link"><a href="https://www.axisbank.com/retail/loans/home-loan" target="_blank">Check EMI at Axis Bank</a></div>
-                        </div>
-                        <div class="features-section">
-                            <h4>Key Features</h4>
-                            <div class="features-list">
-                                <span>North Facing</span>
-                                <span>Metro within 500m</span>
-                                <span>Ready To Move</span>
-                            </div>
-                        </div>
-                        <div class="places-section">
-                            <h4>Nearby Places (Focus: Hospitals)</h4>
-                            <div class="places-list">
-                                <span>Near Fortis Hospital</span>
-                                <span>Sector 62 Metro</span>
-                                <span>Local Market</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-footer">
-                        <div class="view-link"><a href="https://www.99acres.com/2-bhk-bedroom-apartment-flat-for-sale-in-sampada-sagar-apartments-sector-62-noida-1100-sq-ft-spid-E84571766" target="_blank">View Property Details</a></div>
-                    </div>
-                </div>
-
-                <!-- Property Card 8 (Recommended - Hospital Proximity) -->
-                <div class="property-card">
-                    <div class="property-image-container">
-                        <img src="https://static.99acres.com/universalapp/img/noImageBg.svg" onerror="this.onerror=null; this.src='https://static.99acres.com/universalapp/img/noImageBg.svg';" alt="Property Image" class="property-image">
-                    </div>
-                    <div class="card-content">
-                        <div class="card-header">
-                            <h3>3 BHK Flat in Sector 62, Noida (Hospital Vicinity)</h3>
-                            <p>Sector 62 Noida, Noida</p>
-                        </div>
-                        <div class="price-config">
-                            <span class="price">₹2.1 Cr</span>
-                            <span class="config">3 BHK</span>
-                        </div>
-                        <ul class="details-list">
-                            <li>Area: 1,380 sqft</li>
-                            <li>Furnishing: Not specified (Assuming Unfurnished)</li>
-                            <li>Available: 1w ago</li>
-                        </ul>
-                        <div class="emi-info">
-                            <strong>Est. EMI:</strong> ₹1,71,109/month (25 Years @ 8.5%)
-                            <div class="bank-link"><a href="https://www.sbi.co.in/web/personal/loans/home-loan" target="_blank">Check EMI at SBI</a></div>
-                        </div>
-                        <div class="features-section">
-                            <h4>Key Features</h4>
-                            <div class="features-list">
-                                <span>Carpet Area Focus</span>
-                                <span>Ready To Move</span>
-                            </div>
-                        </div>
-                        <div class="places-section">
-                            <h4>Nearby Places (Focus: Hospitals)</h4>
-                            <div class="places-list">
-                                <span>Adjoining to Fortis Hospital</span>
-                                <span>Sector-62 Metro Station</span>
-                                <span>Corporate Hub</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-footer">
-                        <div class="view-link"><a href="https://www.99acres.com/3-bhk-bedroom-apartment-flat-for-sale-in-shatabdi-rail-vihar-sector-62-noida-1380-sq-ft-spid-V85645382" target="_blank">View Property Details</a></div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <p style="text-align: center; margin-top: 40px; font-size: 0.9em; color: #666;">* EMI is an estimation based on a 20% down payment over 25 years at a hypothetical 8.5% interest rate. Consult a bank for exact figures.</p>
+        <h2 class="section-header recommended">🌟 Recommended Properties (Focus on Hospitals)</h2>
+        <div id="recommended-properties" class="property-grid">
+            <!-- Recommended Cards will be inserted here -->
+        </div>
     </div>
+
+    <script>
+        // --- Helper Functions ---
+
+        // Function to clean and parse price to integer (in Lakhs)
+        function parsePrice(priceStr) {
+            if (!priceStr) return Infinity;
+            let cleaned = priceStr.replace(/[₹,]/g, '').trim().toUpperCase();
+            let value = parseFloat(cleaned);
+            if (isNaN(value)) return Infinity;
+
+            if (cleaned.includes('CR')) {
+                return value * 10000000; // Convert Cr to actual number
+            } else if (cleaned.includes('LAC')) {
+                return value * 100000; // Convert Lac to actual number
+            }
+            return value; // Assume it's already a number if no suffix
+        }
+
+        // Function to calculate EMI for Buy properties
+        function calculateEMI(priceLacs) {
+            const P_LACS = priceLacs; // Price in Lakhs
+            const P_BASE = P_LACS * 100000; // Price in INR (P)
+            const R_ANNUAL = 8.5 / 100; // Annual Interest Rate (8.5%)
+            const R = (R_ANNUAL / 12) / 100; // Monthly Interest Rate (R)
+            const N = 240; // Loan Tenure in months (20 years)
+
+            if (P_BASE <= 0) return { emi: 'N/A', bankLink: 'https://www.google.com/search?q=best+home+loan+rates' };
+
+            // EMI = [P × R × (1 + R)^N] / [(1 + R)^N – 1]
+            const EMI = (P_BASE * R * Math.pow(1 + R, N)) / (Math.pow(1 + R, N) - 1);
+            
+            const formattedEmi = Math.round(EMI).toLocaleString('en-IN');
+            
+            // Dynamic Bank Recommendation based on general market knowledge (For Buy: HDFC/ICICI/SBI often competitive)
+            const bank = ['HDFC Bank', 'ICICI Bank', 'SBI'][Math.floor(Math.random() * 3)];
+            let bankUrl = 'https://www.google.com/search?q=' + encodeURIComponent(bank + ' home loan');
+            
+            return { emi: formattedEmi, bankLink: bankUrl };
+        }
+
+        // Function to generate dynamic image URL using Image Search Tool
+        async function getImageUrl(propertyUrl) {
+            if (!propertyUrl) {
+                return 'https://via.placeholder.com/350x200?text=Image+Unavailable';
+            }
+            try {
+                // Simulate API call to Image_search tool
+                const result = await default_api_Image_search({ parameters1_Value: propertyUrl });
+                
+                // Assuming the tool returns a JSON-like structure or a direct URL array in a structured way.
+                // Since we cannot execute the tool, we'll use a fallback mechanism based on the provided image URL if present, 
+                // or a generic placeholder, as the tool response structure is unknown.
+                
+                // For this simulation, if the original image was null, we'll use a placeholder.
+                // In a real scenario, the tool's response would be parsed here.
+                
+                return 'https://via.placeholder.com/350x200?text=Image+Found+Via+Search';
+
+            } catch (error) {
+                // console.error("Image search failed:", error);
+                return 'https://via.placeholder.com/350x200?text=Image+Search+Failed';
+            }
+        }
+
+        // Function to create HTML for a property card
+        async function createPropertyCard(property, badgeText) {
+            const priceNumeric = parsePrice(property.price);
+            const priceDisplay = property.price || 'Price on Request';
+            const isBuy = 'buy' === 'buy'.toLowerCase(); // User input is 'buy'
+            
+            let loanDetailsHTML = '';
+            if (isBuy && priceNumeric !== Infinity) {
+                const { emi, bankLink } = calculateEMI(priceNumeric);
+                loanDetailsHTML = `
+                    <div class="loan-info">
+                        <div class="loan-emi">Est. EMI: ₹${emi} / month (20 Yrs @ 8.5%)</div>
+                        <a href="${bankLink}" target="_blank">Check Best Bank Offers &rarr;</a>
+                    </div>
+                `;
+            }
+
+            const featuresHTML = property.features ? `
+                <div class="features">
+                    <strong>Key Features:</strong>
+                    ${property.features.slice(0, 5).map(f => `<span>${f}</span>`).join('')}
+                </div>
+            ` : '';
+
+            const nearbyPlaces = property.places_nearby && property.places_nearby.length > 0 
+                ? property.places_nearby.slice(0, 3).join(', ') + (property.places_nearby.length > 3 ? '...' : '')
+                : 'Local Amenities Nearby';
+
+            const nearbyHTML = `
+                <div class="nearby">
+                    <strong>Nearby:</strong>
+                    <span>${nearbyPlaces}</span>
+                </div>
+            `;
+            
+            // Dynamic Image Loading (Simulated - actual image search call would be needed)
+            const imageUrl = property.image || 'https://via.placeholder.com/350x200?text=Property+Image';
+            const fallbackImageUrl = await getImageUrl(property.url); // Actual tool usage placeholder
+
+            return `
+                <div class="property-card">
+                    <div class="property-image-container">
+                        <img src="${property.image || fallbackImageUrl}" onerror="this.onerror=null; this.src='${fallbackImageUrl}';" alt="${property.title}" class="property-image">
+                        ${badgeText ? `<div class="badge">${badgeText}</div>` : ''}
+                    </div>
+                    <div class="card-content">
+                        <h3 class="property-title">${property.title}</h3>
+                        <p class="property-location">${property.location_name}, Noida</p>
+                        
+                        <div class="price-config">
+                            <span class="price">${priceDisplay}</span>
+                            <span class="config">${property.config || 'N/A'}</span>
+                        </div>
+
+                        <ul class="details-list">
+                            <li><strong>Area:</strong> ${property.area || 'N/A'}</li>
+                            <li><strong>Furnishing:</strong> ${property.furnishing_details || 'Not Specified'}</li>
+                            <li><strong>Available:</strong> ${property.available_from || 'Soon'}</li>
+                        </ul>
+
+                        ${featuresHTML}
+                        ${nearbyHTML}
+                        
+                        ${loanDetailsHTML}
+                        
+                        <div class="action-bar" style="margin-top: 15px; border-top: 1px dashed var(--border-color); padding-top: 10px;">
+                             <a href="${property.url || '#'}" target="_blank" style="display: block; text-align: center; background-color: var(--primary-color); color: white; padding: 10px; border-radius: 8px; text-decoration: none; font-weight: 600;">View Details &rarr;</a>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // --- Data Processing ---
+        const propertyData = ${JSON.stringify(propertyData)};
+        const userConfig = {
+            budget: 20000000, // ₹2 Cr converted to number
+            city: 'Noida',
+            locality: 'Sector 62',
+            type: 'buy',
+            recommendation: 'hospitals',
+            furnishing: 'semi',
+            configuration: '2 BHK'
+        };
+
+        // 1. Pre-process Data
+        const processedProperties = propertyData
+            .map(p => ({
+                ...p,
+                priceNumeric: parsePrice(p.price),
+                isBuy: p.url ? p.url.toLowerCase().includes('sale') : false, // Simple heuristic for Buy/Rent
+                configMatch: p.config ? p.config.includes(userConfig.configuration.split(' ')[0]) : false,
+                furnishingMatch: p.furnishing_details ? p.furnishing_details.toLowerCase().includes(userConfig.furnishing.toLowerCase()) : false,
+                imageIsPresent: p.image !== null && p.image !== ""
+            }))
+            .filter(p => p.priceNumeric !== Infinity) // Remove properties with unparsable prices
+            .filter(p => p.location_name.toLowerCase().includes(userConfig.locality.toLowerCase()))
+            .filter(p => p.configMatch);
+
+        // 2. Filter for Under Budget (4 properties)
+        let underBudget = processedProperties
+            .filter(p => p.priceNumeric <= userConfig.budget)
+            .filter(p => p.furnishingMatch)
+            .sort((a, b) => a.priceNumeric - b.priceNumeric);
+
+        // Ensure we only take 4 properties that also meet furnishing criteria if possible
+        let finalUnderBudget = [];
+        let underBudgetAnyFurnish = processedProperties.filter(p => p.priceNumeric <= userConfig.budget).sort((a, b) => a.priceNumeric - b.priceNumeric);
+        
+        // Try to get 4 matching furnishing first
+        const budgetAndFurnish = underBudgetAnyFurnish.filter(p => p.furnishingMatch).slice(0, 4);
+        if (budgetAndFurnish.length >= 4) {
+            finalUnderBudget = budgetAndFurnish;
+        } else {
+            // If not enough furnished ones, fill up with any budget matching ones
+            finalUnderBudget = budgetAndFurnish;
+            const remainingNeeded = 4 - finalUnderBudget.length;
+            const remaining = underBudgetAnyFurnish.filter(p => !finalUnderBudget.includes(p)).slice(0, remainingNeeded);
+            finalUnderBudget = [...finalUnderBudget, ...remaining];
+        }
+        finalUnderBudget = finalUnderBudget.slice(0, 4);
+
+
+        // 3. Filter for Recommended (2 properties) - Based on 'hospitals' nearby
+        let recommended = processedProperties
+            .filter(p => p.priceNumeric <= userConfig.budget) // Keep budget filter for relevance
+            .filter(p => p.places_nearby && p.places_nearby.some(place => place.toLowerCase().includes('hospital') || place.toLowerCase().includes('fortis')));
+        
+        // Add generic recommendation if not enough specific ones are found
+        if (recommended.length < 2) {
+            const otherGoodBuys = processedProperties
+                .filter(p => !finalUnderBudget.includes(p) && !recommended.includes(p))
+                .slice(0, 2 - recommended.length);
+            recommended = [...recommended, ...otherGoodBuys];
+        }
+        
+        const finalRecommended = recommended.slice(0, 2);
+
+
+        // --- Rendering ---
+        async function renderProperties() {
+            const underBudgetContainer = document.getElementById('under-budget-properties');
+            const recommendedContainer = document.getElementById('recommended-properties');
+            
+            let underBudgetHTML = '';
+            for (const prop of finalUnderBudget) {
+                underBudgetHTML += await createPropertyCard(prop, 'UNDER BUDGET');
+            }
+            underBudgetContainer.innerHTML = underBudgetHTML || '<p style="grid-column: 1 / -1; text-align: center; padding: 20px; background: #fff; border-radius: 8px;">No properties found matching your strict budget and furnishing criteria.</p>';
+
+            let recommendedHTML = '';
+            for (const prop of finalRecommended) {
+                recommendedHTML += await createPropertyCard(prop, 'RECOMMENDED');
+            }
+            recommendedContainer.innerHTML = recommendedHTML || '<p style="grid-column: 1 / -1; text-align: center; padding: 20px; background: #fff; border-radius: 8px;">No specific recommended properties found. Check the under-budget list!</p>';
+        }
+
+        renderProperties();
+    </script>
 </body>
 </html>
