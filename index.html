@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Property Recommendations</title>
     <style>
         body {
@@ -11,31 +11,43 @@
             margin: 0;
             padding: 20px;
             display: flex;
+            justify-content: center;
             flex-direction: column;
             align-items: center;
         }
 
-        .section-header {
-            width: 100%;
+        .main-container {
             max-width: 1200px;
-            text-align: left;
-            margin: 30px 0 20px;
-            color: #333;
-            font-size: 1.8rem;
-            font-weight: 700;
-            padding-left: 10px;
-            border-bottom: 2px solid #e0e0e0;
-            padding-bottom: 10px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
         }
 
-        .properties-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 20px;
+        h1 {
+            color: #333;
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        h2 {
+            color: #444;
+            font-size: 1.8rem;
+            margin-bottom: 25px;
+            border-bottom: 3px solid #007bff;
+            padding-bottom: 10px;
+            display: inline-block;
+            align-self: flex-start;
             width: 100%;
-            max-width: 1200px;
-            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .properties-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            justify-content: center;
         }
 
         .property-card {
@@ -43,9 +55,10 @@
             border-radius: 16px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
             overflow: hidden;
-            width: 340px; /* Fixed width for consistency */
-            flex-shrink: 0;
             transition: transform 0.2s ease, box-shadow 0.2s ease;
+            display: flex;
+            flex-direction: column;
+            height: 100%; /* Ensures cards in the same row have similar height */
         }
 
         .property-card:hover {
@@ -61,6 +74,9 @@
 
         .property-content {
             padding: 16px;
+            flex-grow: 1; /* Allows content to grow and fill available space */
+            display: flex;
+            flex-direction: column;
         }
 
         .property-title {
@@ -68,6 +84,7 @@
             font-weight: 600;
             color: #222;
             margin: 6px 0;
+            line-height: 1.3;
         }
 
         .property-location {
@@ -94,19 +111,13 @@
             display: flex;
             justify-content: space-between;
             border-top: 1px solid #e0e0e0;
-            border-bottom: 1px solid #e0e0e0;
             padding: 10px 0;
             font-size: 0.9rem;
             color: #333;
         }
 
-        .property-info > div {
-            flex: 1;
-            text-align: center;
-        }
-
-        .property-info > div:first-child {
-            border-right: 1px solid #e0e0e0;
+        .property-info:last-of-type {
+            border-bottom: 1px solid #e0e0e0;
         }
 
         .info-label {
@@ -125,7 +136,7 @@
             display: flex;
             flex-wrap: wrap;
             gap: 6px;
-            margin-bottom: 10px;
+            margin-bottom: 5px;
         }
 
         .tag {
@@ -149,7 +160,8 @@
         .emi {
             font-size: 0.9rem;
             margin-top: 10px;
-            line-height: 1.4;
+            padding-top: 10px;
+            border-top: 1px solid #e0e0e0;
         }
 
         .emi span {
@@ -169,7 +181,7 @@
             color: #fff;
             text-align: center;
             padding: 10px;
-            margin-top: 12px;
+            margin-top: auto; /* Pushes the button to the bottom */
             border-radius: 8px;
             text-decoration: none;
             font-weight: 600;
@@ -180,283 +192,308 @@
             background-color: #0056cc;
         }
 
+        /* Responsive adjustments */
         @media (max-width: 768px) {
-            .section-header {
+            body {
+                padding: 15px;
+            }
+            h1 {
+                font-size: 1.8rem;
+            }
+            h2 {
                 font-size: 1.5rem;
-                text-align: center;
-                padding-left: 0;
+            }
+            .properties-grid {
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+                gap: 20px;
+            }
+            .property-card {
+                max-width: 100%;
             }
         }
     </style>
 </head>
 <body>
-    <h1 class="section-header">🏠 Under Budget Properties</h1>
-    <div class="properties-container">
-        
-        <div class="property-card">
-            <img src="https://imagecdn.99acres.com/media1/31852/2/637042073M-1755847239998.webp" alt="Property Image" class="property-image" />
-            <div class="property-content">
-                <h2 class="property-title">3 BHK Flat in Alpha 1, Greater Noida</h2>
-                <p class="property-location">Alpha 1, Greater Noida</p>
-                <div class="property-price">₹98 Lac</div>
-                <div class="property-info">
-                    <div>
-                        <div class="info-label">Area</div>
-                        <div>1000 sqft</div>
-                    </div>
-                    <div>
-                        <div class="info-label">Config</div>
-                        <div>3 BHK</div>
-                    </div>
-                </div>
-                <div class="property-info" style="border-top:none;">
-                    <div>
-                        <div class="info-label">Furnishing</div>
-                        <div>Not Specified</div>
-                    </div>
-                    <div>
-                        <div class="info-label">Available</div>
-                        <div>Dealer·2w ago</div>
-                    </div>
-                </div>
-                <div class="section-title">Key Features:</div>
-                <div class="tags">
-                    <span class="tag">Top Floor</span>
-                </div>
-                <div class="section-title">Nearby Places:</div>
-                <div class="tags">
-                    <span class="nearby-tag">Top Floor</span>
-                </div>
-                <div class="emi">
-                    EMI from: <span>₹85.04K/month</span><br>
-                    (via <a href="https://www.hdfcbank.com/personal/borrow/popular-loans/home-loan" target="_blank">HDFC (Competitive Rate)</a>)
-                </div>
-                <a href="https://www.99acres.com/3-bhk-bedroom-apartment-flat-for-sale-in-gharonda-apartments-alpha-1-greater-noida-1000-sq-ft-spid-E85523950" class="view-btn" target="_blank">View Details</a>
-            </div>
-        </div>
-        
-        <div class="property-card">
-            <img src="https://images.pexels.com/photos/1571450/pexels-photo-1571450.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Property Image" class="property-image" />
-            <div class="property-content">
-                <h2 class="property-title">3 BHK Independent House in Alpha 1, Greater Noida</h2>
-                <p class="property-location">Alpha 1, Greater Noida</p>
-                <div class="property-price">₹1.45 Cr</div>
-                <div class="property-info">
-                    <div>
-                        <div class="info-label">Area</div>
-                        <div>645 sqft</div>
-                    </div>
-                    <div>
-                        <div class="info-label">Config</div>
-                        <div>3 BHK</div>
-                    </div>
-                </div>
-                <div class="property-info" style="border-top:none;">
-                    <div>
-                        <div class="info-label">Furnishing</div>
-                        <div>Not Specified</div>
-                    </div>
-                    <div>
-                        <div class="info-label">Available</div>
-                        <div>FEATURED DEALER·1mo ago</div>
-                    </div>
-                </div>
-                <div class="section-title">Key Features:</div>
-                <div class="tags">
-                    <span class="tag">Private Garden</span>
-                    <span class="tag">Gated Society</span>
-                </div>
-                <div class="section-title">Nearby Places:</div>
-                <div class="tags">
-                    <span class="nearby-tag">No specific nearby places listed.</span>
-                </div>
-                <div class="emi">
-                    EMI from: <span>₹125.96K/month</span><br>
-                    (via <a href="https://www.hdfcbank.com/personal/borrow/popular-loans/home-loan" target="_blank">HDFC (Competitive Rate)</a>)
-                </div>
-                <a href="https://www.99acres.com/3-bhk-bedroom-independent-house-villa-for-sale-in-alpha-1-greater-noida-645-sq-ft-spid-C83346740" class="view-btn" target="_blank">View Details</a>
-            </div>
-        </div>
-        
-        <div class="property-card">
-            <img src="https://images.pexels.com/photos/1571450/pexels-photo-1571450.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Property Image" class="property-image" />
-            <div class="property-content">
-                <h2 class="property-title">3 BHK Independent House in Alpha 1, Greater Noida</h2>
-                <p class="property-location">Alpha 1, Greater Noida</p>
-                <div class="property-price">₹1.55 Cr</div>
-                <div class="property-info">
-                    <div>
-                        <div class="info-label">Area</div>
-                        <div>645 sqft</div>
-                    </div>
-                    <div>
-                        <div class="info-label">Config</div>
-                        <div>3 BHK</div>
-                    </div>
-                </div>
-                <div class="property-info" style="border-top:none;">
-                    <div>
-                        <div class="info-label">Furnishing</div>
-                        <div>Not Specified</div>
-                    </div>
-                    <div>
-                        <div class="info-label">Available</div>
-                        <div>FEATURED DEALER·2w ago</div>
-                    </div>
-                </div>
-                <div class="section-title">Key Features:</div>
-                <div class="tags">
-                    <span class="nearby-tag">No specific features listed.</span>
-                </div>
-                <div class="section-title">Nearby Places:</div>
-                <div class="tags">
-                    <span class="nearby-tag">No specific nearby places listed.</span>
-                </div>
-                <div class="emi">
-                    EMI from: <span>₹134.65K/month</span><br>
-                    (via <a href="https://www.hdfcbank.com/personal/borrow/popular-loans/home-loan" target="_blank">HDFC (Competitive Rate)</a>)
-                </div>
-                <a href="https://www.99acres.com/3-bhk-bedroom-independent-house-villa-for-sale-in-alpha-1-greater-noida-646-sq-ft-spid-P85546394" class="view-btn" target="_blank">View Details</a>
-            </div>
-        </div>
-        
-        <div class="property-card">
-            <img src="https://images.pexels.com/photos/1571450/pexels-photo-1571450.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Property Image" class="property-image" />
-            <div class="property-content">
-                <h2 class="property-title">3 BHK Independent House in Block C, Alpha 1, Greater Noida</h2>
-                <p class="property-location">Block C, Alpha 1, Greater Noida</p>
-                <div class="property-price">₹2.15 Cr</div>
-                <div class="property-info">
-                    <div>
-                        <div class="info-label">Area</div>
-                        <div>1076 sqft</div>
-                    </div>
-                    <div>
-                        <div class="info-label">Config</div>
-                        <div>3 BHK</div>
-                    </div>
-                </div>
-                <div class="property-info" style="border-top:none;">
-                    <div>
-                        <div class="info-label">Furnishing</div>
-                        <div>Not Specified</div>
-                    </div>
-                    <div>
-                        <div class="info-label">Available</div>
-                        <div>FEATURED DEALER·Today</div>
-                    </div>
-                </div>
-                <div class="section-title">Key Features:</div>
-                <div class="tags">
-                    <span class="tag">North Facing</span>
-                </div>
-                <div class="section-title">Nearby Places:</div>
-                <div class="tags">
-                    <span class="nearby-tag">Alpha 1 Metro Station Nearby</span>
-                    <span class="nearby-tag">close to metro station</span>
-                </div>
-                <div class="emi">
-                    EMI from: <span>₹186.58K/month</span><br>
-                    (via <a href="https://www.hdfcbank.com/personal/borrow/popular-loans/home-loan" target="_blank">HDFC (Competitive Rate)</a>)
-                </div>
-                <a href="https://www.99acres.com/3-bhk-bedroom-independent-house-villa-for-sale-in-block-c-alpha-1-greater-noida-1075-sq-ft-r1-spid-O81734822" class="view-btn" target="_blank">View Details</a>
-            </div>
-        </div>
-        
-    </div>
+    <div class="main-container">
+        <h1>Your Personalized Property Recommendations</h1>
 
-    <h1 class="section-header">🌟 Recommended Properties</h1>
-    <div class="properties-container">
-        
-        <div class="property-card">
-            <img src="https://images.pexels.com/photos/1571450/pexels-photo-1571450.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Property Image" class="property-image" />
-            <div class="property-content">
-                <h2 class="property-title">3 BHK Independent House in Block D Alpha 1, Greater Noida</h2>
-                <p class="property-location">Block D Alpha 1, Greater Noida</p>
-                <div class="property-price">₹2.95 Cr</div>
-                <div class="property-info">
-                    <div>
-                        <div class="info-label">Area</div>
-                        <div>1614 sqft</div>
+        <h2>🏠 Under-Budget Properties</h2>
+        <div class="properties-grid">
+            
+            <div class="property-card">
+                <img src="https://static.99acres.com/universalapp/img/projectnoimage.webp" alt="3 BHK Flat in Gharonda apartments, Alpha 1, Greater Noida" class="property-image" />
+                <div class="property-content">
+                    <h2 class="property-title">3 BHK Flat in Gharonda apartments, Alpha 1, Greater Noida</h2>
+                    <p class="property-location">Alpha 1, Greater Noida</p>
+                    <div class="property-price">₹98 Lac</div>
+                    <div class="property-info">
+                        <div>
+                            <div class="info-label">Area</div>
+                            <div>1,000 sqft</div>
+                        </div>
+                        <div>
+                            <div class="info-label">Config</div>
+                            <div>3 BHK</div>
+                        </div>
                     </div>
-                    <div>
-                        <div class="info-label">Config</div>
-                        <div>3 BHK</div>
+                    <div class="property-info" style="border-top:none;">
+                        <div>
+                            <div class="info-label">Furnishing</div>
+                            <div>Not specified</div>
+                        </div>
+                        <div>
+                            <div class="info-label">Available</div>
+                            <div>2w ago</div>
+                        </div>
                     </div>
-                </div>
-                <div class="property-info" style="border-top:none;">
-                    <div>
-                        <div class="info-label">Furnishing</div>
-                        <div>Not Specified</div>
+                    <div class="section-title">Key Features:</div>
+                    <div class="tags">
+                        <span class="tag">North-East Facing</span>
+                        <span class="tag">Top Floor</span>
                     </div>
-                    <div>
-                        <div class="info-label">Available</div>
-                        <div>FEATURED DEALER·Today</div>
+                    <div class="section-title">Nearby Places:</div>
+                    <div class="tags">
+                        <span class="nearby-tag">No specific nearby places listed.</span>
                     </div>
+                    <div class="emi">
+                        EMI from: <span>₹85.75K/month</span><br />
+                        (via <a href="#">HDFC (Competitive Rate)</a>)
+                    </div>
+                    <a href="https://www.99acres.com/3-bhk-bedroom-apartment-flat-for-sale-in-gharonda-apartments-alpha-1-greater-noida-1000-sq-ft-spid-E85523950" class="view-btn">Visit Property</a>
                 </div>
-                <div class="section-title">Key Features:</div>
-                <div class="tags">
-                    <span class="tag">North Facing</span>
-                </div>
-                <div class="section-title">Nearby Places:</div>
-                <div class="tags">
-                    <span class="nearby-tag">Alpha-1 metro Station Nearby</span>
-                    <span class="nearby-tag">close to metro station</span>
-                    <span class="nearby-tag">close to hospital</span>
-                    <span class="nearby-tag">close to highway</span>
-                    <span class="nearby-tag">close to airport</span>
-                </div>
-                <div class="emi">
-                    EMI from: <span>₹255.77K/month</span><br>
-                    (via <a href="https://www.hdfcbank.com/personal/borrow/popular-loans/home-loan" target="_blank">HDFC (Competitive Rate)</a>)
-                </div>
-                <a href="https://www.99acres.com/3-bhk-bedroom-independent-house-villa-for-sale-in-block-d-alpha-1-greater-noida-1615-sq-ft-r1-spid-P84277218" class="view-btn" target="_blank">View Details</a>
             </div>
-        </div>
-        
-        <div class="property-card">
-            <img src="https://images.pexels.com/photos/1571450/pexels-photo-1571450.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Property Image" class="property-image" />
-            <div class="property-content">
-                <h2 class="property-title">3 BHK Independent House in Alpha 1, Greater Noida</h2>
-                <p class="property-location">Alpha 1, Greater Noida</p>
-                <div class="property-price">₹3.8 Cr</div>
-                <div class="property-info">
-                    <div>
-                        <div class="info-label">Area</div>
-                        <div>2152 sqft</div>
+            
+            <div class="property-card">
+                <img src="https://static.99acres.com/universalapp/img/noImageBg.svg" alt="3 Bedroom House in Alpha 1, Greater Noida" class="property-image" />
+                <div class="property-content">
+                    <h2 class="property-title">3 Bedroom House in Alpha 1, Greater Noida</h2>
+                    <p class="property-location">Alpha 1, Greater Noida</p>
+                    <div class="property-price">₹1.45 Cr</div>
+                    <div class="property-info">
+                        <div>
+                            <div class="info-label">Area</div>
+                            <div>645 sqft</div>
+                        </div>
+                        <div>
+                            <div class="info-label">Config</div>
+                            <div>3 BHK</div>
+                        </div>
                     </div>
-                    <div>
-                        <div class="info-label">Config</div>
-                        <div>3 BHK</div>
+                    <div class="property-info" style="border-top:none;">
+                        <div>
+                            <div class="info-label">Furnishing</div>
+                            <div>Not specified</div>
+                        </div>
+                        <div>
+                            <div class="info-label">Available</div>
+                            <div>1mo ago</div>
+                        </div>
                     </div>
-                </div>
-                <div class="property-info" style="border-top:none;">
-                    <div>
-                        <div class="info-label">Furnishing</div>
-                        <div>Not Specified</div>
+                    <div class="section-title">Key Features:</div>
+                    <div class="tags">
+                        <span class="tag">Private Garden</span>
+                        <span class="tag">Gated Society</span>
                     </div>
-                    <div>
-                        <div class="info-label">Available</div>
-                        <div>FEATURED DEALER·6d ago</div>
+                    <div class="section-title">Nearby Places:</div>
+                    <div class="tags">
+                        <span class="nearby-tag">No specific nearby places listed.</span>
                     </div>
+                    <div class="emi">
+                        EMI from: <span>₹1.27L/month</span><br />
+                        (via <a href="#">ICICI (Competitive Rate)</a>)
+                    </div>
+                    <a href="https://www.99acres.com/3-bhk-bedroom-independent-house-villa-for-sale-in-alpha-1-greater-noida-645-sq-ft-spid-C83346740" class="view-btn">Visit Property</a>
                 </div>
-                <div class="section-title">Key Features:</div>
-                <div class="tags">
-                    <span class="tag">METRO Nearby</span>
-                    <span class="tag">Gated Society</span>
-                </div>
-                <div class="section-title">Nearby Places:</div>
-                <div class="tags">
-                    <span class="nearby-tag">No specific nearby places listed.</span>
-                </div>
-                <div class="emi">
-                    EMI from: <span>₹329.98K/month</span><br>
-                    (via <a href="https://www.hdfcbank.com/personal/borrow/popular-loans/home-loan" target="_blank">HDFC (Competitive Rate)</a>)
-                </div>
-                <a href="https://www.99acres.com/3-bhk-bedroom-independent-house-villa-for-sale-in-alpha-1-greater-noida-2151-sq-ft-r2-spid-V82699706" class="view-btn" target="_blank">View Details</a>
             </div>
+            
+            <div class="property-card">
+                <img src="https://static.99acres.com/universalapp/img/projectnoimage.webp" alt="3 Bedroom House in Alpha 1, Greater Noida" class="property-image" />
+                <div class="property-content">
+                    <h2 class="property-title">3 Bedroom House in Alpha 1, Greater Noida</h2>
+                    <p class="property-location">Alpha 1, Greater Noida</p>
+                    <div class="property-price">₹1.55 Cr</div>
+                    <div class="property-info">
+                        <div>
+                            <div class="info-label">Area</div>
+                            <div>645 sqft</div>
+                        </div>
+                        <div>
+                            <div class="info-label">Config</div>
+                            <div>3 BHK</div>
+                        </div>
+                    </div>
+                    <div class="property-info" style="border-top:none;">
+                        <div>
+                            <div class="info-label">Furnishing</div>
+                            <div>Not specified</div>
+                        </div>
+                        <div>
+                            <div class="info-label">Available</div>
+                            <div>2w ago</div>
+                        </div>
+                    </div>
+                    <div class="section-title">Key Features:</div>
+                    <div class="tags">
+                        <span class="tag">Northwest Facing</span>
+                    </div>
+                    <div class="section-title">Nearby Places:</div>
+                    <div class="tags">
+                        <span class="nearby-tag">No specific nearby places listed.</span>
+                    </div>
+                    <div class="emi">
+                        EMI from: <span>₹1.36L/month</span><br />
+                        (via <a href="#">SBI (Competitive Rate)</a>)
+                    </div>
+                    <a href="https://www.99acres.com/3-bhk-bedroom-independent-house-villa-for-sale-in-alpha-1-greater-noida-646-sq-ft-spid-P85546394" class="view-btn">Visit Property</a>
+                </div>
+            </div>
+            
+            <div class="property-card">
+                <img src="https://static.99acres.com/universalapp/img/noImageBg.svg" alt="3 Bedroom House in Block C, Alpha 1, Greater Noida" class="property-image" />
+                <div class="property-content">
+                    <h2 class="property-title">3 Bedroom House in Block C, Alpha 1, Greater Noida</h2>
+                    <p class="property-location">Alpha 1, Greater Noida</p>
+                    <div class="property-price">₹1.75 Cr</div>
+                    <div class="property-info">
+                        <div>
+                            <div class="info-label">Area</div>
+                            <div>645 sqft</div>
+                        </div>
+                        <div>
+                            <div class="info-label">Config</div>
+                            <div>3 BHK</div>
+                        </div>
+                    </div>
+                    <div class="property-info" style="border-top:none;">
+                        <div>
+                            <div class="info-label">Furnishing</div>
+                            <div>Not specified</div>
+                        </div>
+                        <div>
+                            <div class="info-label">Available</div>
+                            <div>1mo ago</div>
+                        </div>
+                    </div>
+                    <div class="section-title">Key Features:</div>
+                    <div class="tags">
+                        <span class="tag">Private Garden</span>
+                        <span class="tag">Gated Society</span>
+                    </div>
+                    <div class="section-title">Nearby Places:</div>
+                    <div class="tags">
+                        <span class="nearby-tag">No specific nearby places listed.</span>
+                    </div>
+                    <div class="emi">
+                        EMI from: <span>₹1.53L/month</span><br />
+                        (via <a href="#">Axis (Competitive Rate)</a>)
+                    </div>
+                    <a href="https://www.99acres.com/3-bhk-bedroom-independent-house-villa-for-sale-in-block-c-alpha-1-greater-noida-646-sq-ft-spid-R84568108" class="view-btn">Visit Property</a>
+                </div>
+            </div>
+            
         </div>
-        
+
+        <h2>🌟 Recommended Properties</h2>
+        <div class="properties-grid">
+            
+            <div class="property-card">
+                <img src="https://static.99acres.com/universalapp/img/projectnoimage.webp" alt="3 Bedroom House in Block D Alpha 1, Greater Noida" class="property-image" />
+                <div class="property-content">
+                    <h2 class="property-title">3 Bedroom House in Block D Alpha 1, Greater Noida</h2>
+                    <p class="property-location">Alpha 1, Greater Noida</p>
+                    <div class="property-price">₹2.95 Cr</div>
+                    <div class="property-info">
+                        <div>
+                            <div class="info-label">Area</div>
+                            <div>1,614 sqft</div>
+                        </div>
+                        <div>
+                            <div class="info-label">Config</div>
+                            <div>3 BHK</div>
+                        </div>
+                    </div>
+                    <div class="property-info" style="border-top:none;">
+                        <div>
+                            <div class="info-label">Furnishing</div>
+                            <div>Not specified</div>
+                        </div>
+                        <div>
+                            <div class="info-label">Available</div>
+                            <div>Today</div>
+                        </div>
+                    </div>
+                    <div class="section-title">Key Features:</div>
+                    <div class="tags">
+                        <span class="tag">North Facing</span>
+                        <span class="tag">Alpha-1 metro Station Nearby</span>
+                        <span class="tag">Close to Hospital</span>
+                        <span class="tag">Close to Highway</span>
+                        <span class="tag">Close to Airport</span>
+                    </div>
+                    <div class="section-title">Nearby Places:</div>
+                    <div class="tags">
+                        <span class="nearby-tag">Alpha-1 metro Station</span>
+                        <span class="nearby-tag">Hospital</span>
+                        <span class="nearby-tag">Highway</span>
+                        <span class="nearby-tag">Airport</span>
+                    </div>
+                    <div class="emi">
+                        EMI from: <span>₹2.58L/month</span><br />
+                        (via <a href="#">HDFC (Competitive Rate)</a>)
+                    </div>
+                    <a href="https://www.99acres.com/3-bhk-bedroom-independent-house-villa-for-sale-in-block-d-alpha-1-greater-noida-1615-sq-ft-r1-spid-P84277218" class="view-btn">Visit Property</a>
+                </div>
+            </div>
+            
+            <div class="property-card">
+                <img src="https://static.99acres.com/universalapp/img/noImageBgPremium.svg" alt="3 BHK Flat in Spacetech Edana, Alpha 1, Greater Noida" class="property-image" />
+                <div class="property-content">
+                    <h2 class="property-title">3 BHK Flat in Spacetech Edana, Alpha 1, Greater Noida</h2>
+                    <p class="property-location">Alpha 1, Greater Noida</p>
+                    <div class="property-price">₹1.4 Cr</div>
+                    <div class="property-info">
+                        <div>
+                            <div class="info-label">Area</div>
+                            <div>1,715 sqft</div>
+                        </div>
+                        <div>
+                            <div class="info-label">Config</div>
+                            <div>3 BHK</div>
+                        </div>
+                    </div>
+                    <div class="property-info" style="border-top:none;">
+                        <div>
+                            <div class="info-label">Furnishing</div>
+                            <div>Not specified</div>
+                        </div>
+                        <div>
+                            <div class="info-label">Available</div>
+                            <div>Today</div>
+                        </div>
+                    </div>
+                    <div class="section-title">Key Features:</div>
+                    <div class="tags">
+                        <span class="tag">North-East Facing</span>
+                        <span class="tag">Private Garden</span>
+                        <span class="tag">Rooftop swimming pool</span>
+                        <span class="tag">Kids pool</span>
+                        <span class="tag">Health spa</span>
+                    </div>
+                    <div class="section-title">Nearby Places:</div>
+                    <div class="tags">
+                        <span class="nearby-tag">Health spa</span>
+                        <span class="nearby-tag">Kids play area</span>
+                        <span class="nearby-tag">Jogging & walking track</span>
+                    </div>
+                    <div class="emi">
+                        EMI from: <span>₹1.22L/month</span><br />
+                        (via <a href="#">ICICI (Competitive Rate)</a>)
+                    </div>
+                    <a href="https://www.99acres.com/3-bhk-bedroom-apartment-flat-for-sale-in-spacetech-edana-alpha-1-greater-noida-1715-sq-ft-r7-spid-V72642921" class="view-btn">Visit Property</a>
+                </div>
+            </div>
+            
+        </div>
     </div>
 </body>
 </html>
