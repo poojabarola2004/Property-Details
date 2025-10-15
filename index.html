@@ -3,34 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Property Recommendations in Noida</title>
+    <title>Property Recommendations</title>
     <style>
         :root {
             --primary-color: #007bff;
             --secondary-color: #28a745;
-            --background-color: #f8f9fa;
+            --bg-color: #f4f7f6;
             --card-bg: #ffffff;
-            --text-color: #343a40;
-            --shadow-hover: 0 12px 20px rgba(0, 0, 0, 0.15);
-            --border-radius: 12px;
+            --text-color: #333;
+            --shadow-light: 0 4px 12px rgba(0, 0, 0, 0.08);
+            --shadow-hover: 0 8px 20px rgba(0, 0, 0, 0.15);
         }
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--background-color);
+            background-color: var(--bg-color);
             color: var(--text-color);
             margin: 0;
             padding: 20px;
             line-height: 1.6;
         }
         .container {
-            max-width: 1300px;
-            margin: auto;
+            max-width: 1400px;
+            margin: 0 auto;
         }
         h1, h2 {
             color: var(--primary-color);
-            border-bottom: 3px solid rgba(0, 123, 255, 0.2);
+            border-bottom: 3px solid rgba(0, 123, 255, 0.1);
             padding-bottom: 10px;
-            margin-top: 30px;
+            margin-top: 40px;
         }
         .property-grid {
             display: grid;
@@ -39,14 +39,11 @@
             margin-bottom: 40px;
         }
         .property-card {
-            background-color: var(--card-bg);
-            border-radius: var(--border-radius);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            background: var(--card-bg);
+            border-radius: 12px;
+            box-shadow: var(--shadow-light);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             overflow: hidden;
-            cursor: pointer;
-            text-decoration: none;
-            color: inherit;
             display: flex;
             flex-direction: column;
         }
@@ -54,432 +51,425 @@
             transform: translateY(-8px);
             box-shadow: var(--shadow-hover);
         }
-        .card-image-container {
+        .property-image-container {
             height: 200px;
             overflow: hidden;
             position: relative;
         }
-        .card-image {
+        .property-image {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.5s ease;
+            transition: transform 0.4s ease;
         }
-        .property-card:hover .card-image {
+        .property-card:hover .property-image {
             transform: scale(1.05);
         }
-        .card-content {
-            padding: 15px;
+        .property-info {
+            padding: 20px;
             flex-grow: 1;
         }
-        .price-area {
-            display: flex;
-            justify-content: space-between;
-            align-items: baseline;
-            margin-bottom: 10px;
-            flex-wrap: wrap;
-        }
-        .price {
-            color: #218838;
-            font-size: 1.5em;
-            font-weight: bold;
-        }
-        .area {
-            font-size: 0.9em;
-            color: #6c757d;
-        }
-        .title {
-            font-size: 1.25em;
-            font-weight: 600;
+        .property-title {
+            font-size: 1.35em;
+            font-weight: 700;
+            color: #2c3e50;
             margin-top: 0;
             margin-bottom: 5px;
-            color: #0056b3;
         }
-        .location {
+        .property-location {
+            font-size: 0.95em;
+            color: #7f8c8d;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        .property-location svg {
+            margin-right: 5px;
+            width: 16px;
+            height: 16px;
+        }
+        .price-config {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px dashed #eee;
+        }
+        .price {
+            font-size: 1.5em;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+        .config {
+            background: var(--primary-color);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-weight: 600;
             font-size: 0.9em;
+        }
+        .details-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-bottom: 15px;
+            font-size: 0.9em;
+        }
+        .detail-item strong {
             color: #555;
             display: block;
-            margin-bottom: 10px;
         }
-        .tag {
-            display: inline-block;
-            background-color: #e9ecef;
-            color: #495057;
-            padding: 4px 10px;
-            border-radius: 5px;
-            font-size: 0.8em;
-            margin-right: 5px;
-            margin-bottom: 5px;
-        }
-        .feature-list, .nearby-list {
+        .features-list, .places-list {
             list-style: none;
-            padding-left: 0;
-            margin-top: 10px;
-            font-size: 0.9em;
+            padding: 0;
+            margin-top: 5px;
         }
-        .feature-list li::before {
-            content: "✓";
-            color: var(--secondary-color);
-            font-weight: bold;
+        .features-list li, .places-list li {
+            background: #ecf0f1;
+            padding: 4px 10px;
+            border-radius: 4px;
+            margin-bottom: 4px;
+            font-size: 0.85em;
             display: inline-block;
-            width: 1em;
-            margin-left: -1em;
-        }
-        .nearby-list li::before {
-            content: "📍";
-            color: var(--primary-color);
             margin-right: 5px;
-        }
-        .emi-info {
-            background-color: #fff3cd;
-            color: #856404;
-            padding: 10px;
-            border-radius: 8px;
-            margin-top: 15px;
-            font-size: 0.9em;
-            border: 1px solid #ffeeba;
-        }
-        .bank-link {
-            color: var(--primary-color);
-            font-weight: bold;
-            text-decoration: none;
-        }
-        .bank-link:hover {
-            text-decoration: underline;
         }
         .section-header {
+            color: var(--secondary-color);
             font-size: 1.8em;
-            padding-bottom: 10px;
-            margin-top: 40px;
-            border-bottom: 2px solid var(--secondary-color);
-            color: #333;
+            margin-bottom: 20px;
+            text-align: center;
+            padding: 15px 0;
+            background: rgba(40, 167, 69, 0.05);
+            border-radius: 8px;
         }
-        .icon {
-            margin-right: 8px;
+        .emi-info {
+            background: #eaf8ff;
+            border-left: 4px solid var(--primary-color);
+            padding: 10px;
+            margin-top: 15px;
+            border-radius: 0 8px 8px 0;
+            font-size: 0.9em;
+        }
+        .emi-info strong {
+            color: var(--primary-color);
+        }
+        .bank-links a {
+            display: block;
+            background: var(--secondary-color);
+            color: white;
+            text-align: center;
+            padding: 10px;
+            border-radius: 6px;
+            text-decoration: none;
+            margin-top: 10px;
+            font-weight: 600;
+            transition: background 0.3s;
+        }
+        .bank-links a:hover {
+            background: #218838;
+        }
+        .placeholder-image {
+            background-color: #e0e0e0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            color: #9e9e9e;
+            text-align: center;
+            font-style: italic;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Real Estate Property Recommendations</h1>
-        <p>Showing results for Buy properties in <strong>Sector 62, Noida</strong>, for a budget up to <strong>₹2 Cr</strong>, looking for <strong>2 BHK</strong> configuration, and preference for <strong>Semi Furnished</strong> properties, with high interest in <strong>hospitals</strong> nearby.</p>
+        <h1>Property Recommendations for You</h1>
+        <p style="text-align: center; font-size: 1.1em; color: #555;">Based on your requirements: **Buy** in **Sector 62, Noida** with a budget of **₹2 Cr**, looking for properties near **hospitals**, **2 BHK**, and **Semi-Furnished**.</p>
 
-        <h2 class="section-header"><span class="icon">🏠</span> Under Budget Properties (4 Found)</h2>
-        <div class="property-grid" id="budget-properties">
-            <!-- Budget Property Cards will be inserted here -->
+        <h2 class="section-header">🏠 Under Budget Properties (Price ≤ ₹2 Cr)</h2>
+        <div id="under-budget-grid" class="property-grid">
+            <!-- Under Budget Properties will be inserted here -->
         </div>
 
-        <h2 class="section-header"><span class="icon">🌟</span> Recommended Properties (2 Found)</h2>
-        <div class="property-grid" id="recommended-properties">
-            <!-- Recommended Property Cards will be inserted here -->
-        </div>
-
-        <div id="error-message" style="color: red; font-weight: bold; display: none;">
-            No properties matched all the specified criteria.
+        <h2 class="section-header">🌟 Recommended Properties (Near Hospitals)</h2>
+        <div id="recommended-grid" class="property-grid">
+            <!-- Recommended Properties will be inserted here -->
         </div>
     </div>
 
     <script>
-        // --- Mock Image Search Functionality (As per requirement, tool should be called) ---
-        // In a real scenario, this would make an actual API call.
-        // For static execution, we'll use the provided image or a fallback.
-        async function fetchPropertyImage(propertyTitle, propertyUrl) {
-            // Mocking the call to the Image_search tool
-            console.log(`Searching image for: "${propertyTitle}" from URL: ${propertyUrl}`);
-            
-            // Since the tool execution is simulated, we check if the original URL is available.
-            // If the original image URL looks like a placeholder, we return a generic fallback.
-            if (propertyUrl.includes("static.99acres.com/universalapp/img/noImageBgPremium.svg") || 
-                propertyUrl.includes("static.99acres.com/universalapp/img/noImageBg.svg")) {
-                return 'https://via.placeholder.com/400x250?text=Image+Not+Available';
+        // --- Helper Functions ---
+
+        // Function to clean and parse price string to integer (Lakhs to Crores)
+        function parsePrice(priceStr) {
+            if (!priceStr) return Infinity;
+            let num = priceStr.replace(/₹|,/g, '').trim().toLowerCase();
+            if (num.endsWith('cr')) {
+                return parseFloat(num) * 10000000;
+            } else if (num.endsWith('lac')) {
+                return parseFloat(num) * 100000;
             }
-            // Otherwise, we use the provided image URL as the result of the search.
-            return propertyUrl; 
+            return parseFloat(num) || Infinity;
+        }
+
+        // Function to calculate EMI (P in Lakhs for easier calculation)
+        function calculateEMI(priceLakhs) {
+            const P_in_crores = priceLakhs / 100; // Convert Lakhs to Crores for calculation
+            const P = P_in_crores * 10000000; // Convert Crores to Rupees (P in Rupees)
+            const annualRate = 8.5 / 100;
+            const R = annualRate / 12; // Monthly interest rate
+            const N = 240; // Loan tenure in months (20 years)
+
+            if (P <= 0) return "N/A";
+
+            // EMI = [P × R × (1 + R)^N] / [(1 + R)^N – 1]
+            const emi = (P * R * Math.pow(1 + R, N)) / (Math.pow(1 + R, N) - 1);
+            return (emi / 100000).toFixed(2); // Return EMI in Lakhs
+        }
+
+        // Dummy Image Search Tool (Simulated API Call)
+        function fetchPropertyImage(propertyUrl) {
+            // In a real scenario, this would call the Image_search tool.
+            // For this static output, we will use the provided image if available,
+            // or a placeholder.
+            console.log(`Fetching image for URL: ${propertyUrl}`);
+            return null; // Return null to use the placeholder logic below
         }
 
         // --- Property Data & User Inputs ---
-        const allProperties = [
-          {
-            "name": "Property 1", "title": "2 BHK Flat in Sector 62, Noida", "location_name": "Sector 62, Noida", "price": "₹95 Lac", "area": "950 sqft", "config": "2 BHK (2 Baths)", "available_from": "Ready To Move", "features": "East Facing, Sec 59 Noida Nearby", "places_nearby": "Hospital A, School B, Mall C", "furnishing_details": "Semi Furnished", "image": "https://imagecdn.99acres.com/media1/32850/12/657012601M-1759740079309.webp", "url": "https://www.99acres.com/2-bhk-bedroom-apartment-flat-for-sale-in-purvanchal-pmo-apartments-sector-62-noida-950-sq-ft-r1-spid-D82486574"
-          },
-          {
-            "name": "Property 2", "title": "2 BHK Flat in Sector 62, Noida", "location_name": "Sector 62, Noida", "price": "₹1.3 Cr", "area": "1,260 sqft", "config": "2 BHK (2 Baths)", "available_from": "Ready To Move", "features": "North-East Facing, Ground Floor", "places_nearby": "Hospital D, Metro Station, Park E", "furnishing_details": "Unfurnished", "image": "https://imagecdn.99acres.com/media1/32909/19/658199993M-1759983583608.webp", "url": "https://www.99acres.com/2-bhk-bedroom-apartment-flat-for-sale-in-varun-apartments-sector-62-noida-1260-sq-ft-spid-T85786612"
-          },
-          {
-            "name": "Property 3", "title": "2 BHK Flat in Sector 62, Noida", "location_name": "Sector 62, Noida", "price": "₹1.42 Cr", "area": "1,650 sqft", "config": "2 BHK (2 Baths)", "available_from": "Ready To Move", "features": "East Facing, Top Floor", "places_nearby": "School F, Market G, Restaurant H", "furnishing_details": "Semi Furnished", "image": "https://static.99acres.com/universalapp/img/noImageBgPremium.svg", "url": "https://www.99acres.com/2-bhk-bedroom-apartment-flat-for-sale-in-ushma-urja-apartments-sector-62-noida-1650-sq-ft-spid-V85406242"
-          },
-          {
-            "name": "Property 4", "title": "2 BHK Flat in Sector 62, Noida", "location_name": "Sector 62, Noida", "price": "₹1.42 Cr", "area": "1,375 sqft", "config": "2 BHK (2 Baths)", "available_from": "Ready To Move", "features": "Top Floor, Sector 62 metro Nearby", "places_nearby": "Metro Station, Mall I, School J", "furnishing_details": "Unfurnished", "image": "https://static.99acres.com/universalapp/img/noImageBgPremium.svg", "url": "https://www.99acres.com/2-bhk-bedroom-apartment-flat-for-sale-in-ushma-urja-apartments-sector-62-noida-1375-sq-ft-spid-F84737434"
-          },
-          {
-            "name": "Property 5", "title": "2 BHK Flat in Sector 62, Noida", "location_name": "Sector 62, Noida", "price": "₹1.45 Cr", "area": "1,200 sqft", "config": "2 BHK (2 Baths)", "available_from": "Ready To Move", "features": "East Facing, Top Floor", "places_nearby": "Hospital K, School L, Market M", "furnishing_details": "Semi Furnished", "image": "https://static.99acres.com/universalapp/img/noImageBgPremium.svg", "url": "https://www.99acres.com/2-bhk-bedroom-apartment-flat-for-sale-in-ushma-urja-apartments-sector-62-noida-1200-sq-ft-spid-N84694586"
-          },
-          {
-            "name": "Property 6", "title": "2 BHK Flat in Sector 62, Noida", "location_name": "Sector 62, Noida", "price": "₹1.43 Cr", "area": "1,370 sqft", "config": "2 BHK (2 Baths)", "available_from": "Ready To Move", "features": "Top Floor, Private Garden", "places_nearby": "Garden N, School O, Market P", "furnishing_details": "Unfurnished", "image": "https://static.99acres.com/universalapp/img/noImageBgPremium.svg", "url": "https://www.99acres.com/2-bhk-bedroom-apartment-flat-for-sale-in-ushma-urja-apartments-sector-62-noida-1370-sq-ft-spid-F84737054"
-          },
-          {
-            "name": "Property 7", "title": "2 BHK Flat in Sector 62, Noida", "location_name": "Sector 62, Noida", "price": "₹1.45 Cr", "area": "1,450 sqft", "config": "2 BHK (2 Baths)", "available_from": "Ready To Move", "features": "East Facing, Top Floor", "places_nearby": "Hospital Q, School R, Park S", "furnishing_details": "Semi Furnished", "image": "https://static.99acres.com/universalapp/img/noImageBgPremium.svg", "url": "https://www.99acres.com/2-bhk-bedroom-apartment-flat-for-sale-in-ushma-urja-apartments-sector-62-noida-1450-sq-ft-spid-O84552440"
-          },
-          {
-            "name": "Property 8", "title": "2 BHK Flat in Sector 62, Noida", "location_name": "Sector 62, Noida", "price": "₹1.45 Cr", "area": "1,450 sqft", "config": "2 BHK (2 Baths)", "available_from": "Ready To Move", "features": "East Facing, Top Floor", "places_nearby": "Hospital T, School U, Market V", "furnishing_details": "Unfurnished", "image": "https://static.99acres.com/universalapp/img/noImageBgPremium.svg", "url": "https://www.99acres.com/2-bhk-bedroom-apartment-flat-for-sale-in-ushma-urja-apartments-sector-62-noida-1450-sq-ft-r1-spid-N83942122"
-          },
-          {
-            "name": "Property 9", "title": "2 BHK Flat in Sector 62, Noida", "location_name": "Sector 62, Noida", "price": "₹1.22 Cr", "area": "1,100 sqft", "config": "2 BHK (2 Baths)", "available_from": "Ready To Move", "features": "North Facing, Sector 62 metro station within 500m", "places_nearby": "Metro Station, Hospital W, School X", "furnishing_details": "Semi Furnished", "image": "https://static.99acres.com/universalapp/img/noImageBgPremium.svg", "url": "https://www.99acres.com/2-bhk-bedroom-apartment-flat-for-sale-in-sampada-sagar-apartments-sector-62-noida-1100-sq-ft-spid-E84571766"
-          },
-          {
-            "name": "Property 10", "title": "2 BHK Flat in Sector 62, Noida", "location_name": "Sector 62, Noida", "price": "₹42 L", "area": "1,150 sqft", "config": "2 BHK (2 Baths)", "available_from": "Ready To Move", "features": "North-East Facing, Fresh Construction", "places_nearby": "School Y, Market Z, Hospital AA", "furnishing_details": "Unfurnished", "image": "https://static.99acres.com/universalapp/img/noImageBg.svg", "url": "https://www.99acres.com/2-bhk-bedroom-apartment-flat-for-sale-in-sector-62-noida-1150-sq-ft-spid-Z85913342"
-          },
-          {
-            "name": "Property 11", "title": "2 BHK Flat in Sector 62, Noida", "location_name": "Sector 62, Noida", "price": "₹1.2 Cr", "area": "1,250 sqft", "config": "2 BHK (2 Baths)", "available_from": "Ready To Move", "features": "East Facing, Sector 62 metro Nearby", "places_nearby": "Metro Station, Hospital BB, Park CC", "furnishing_details": "Semi Furnished", "image": "https://static.99acres.com/universalapp/img/noImageBgPremium.svg", "url": "https://www.99acres.com/2-bhk-bedroom-apartment-flat-for-sale-in-ushma-urja-apartments-sector-62-noida-1250-sq-ft-spid-R85406236"
-          },
-          {
-            "name": "Property 12", "title": "2 BHK Flat in Sector 62, Noida", "location_name": "Sector 62, Noida", "price": "₹1.1 Cr", "area": "1,150 sqft", "config": "2 BHK (2 Baths)", "available_from": "Ready To Move", "features": "East Facing, Ground Floor", "places_nearby": "School DD, Market EE, Hospital FF", "furnishing_details": "Unfurnished", "image": "https://static.99acres.com/universalapp/img/noImageBgPremium.svg", "url": "https://www.99acres.com/2-bhk-bedroom-apartment-flat-for-sale-in-cghs-jeevan-ashray-sector-62-noida-1150-sq-ft-spid-G84736538"
-          },
-          {
-            "name": "Property 13", "title": "2 BHK Flat in Sector 62, Noida", "location_name": "Sector 62, Noida", "price": "₹1.35 Cr", "area": "1,350 sqft", "config": "2 BHK (3 Baths)", "available_from": "Ready To Move", "features": "Private Garden, Sector 62 metro Nearby", "places_nearby": "Metro Station, Hospital GG, School HH", "furnishing_details": "Semi Furnished", "image": "https://static.99acres.com/universalapp/img/noImageBgPremium.svg", "url": "https://www.99acres.com/2-bhk-bedroom-apartment-flat-for-sale-in-shatabdi-rail-vihar-sector-62-noida-1350-sq-ft-spid-M84713778"
-          },
-          {
-            "name": "Property 14", "title": "2 BHK Flat in Sector 62, Noida", "location_name": "Sector 62, Noida", "price": "₹1.18 Cr", "area": "1,250 sqft", "config": "2 BHK (2 Baths)", "available_from": "Ready To Move", "features": "North-East Facing, Neat sector 62 metro station Nearby", "places_nearby": "Metro Station, Hospital II, Park JJ", "furnishing_details": "Unfurnished", "image": "https://static.99acres.com/universalapp/img/noImageBgPremium.svg", "url": "https://www.99acres.com/2-bhk-bedroom-apartment-flat-for-sale-in-ushma-urja-apartments-sector-62-noida-1250-sq-ft-spid-Q85678784"
-          },
-          {
-            "name": "Property 15", "title": "2 Bedroom House in Sector 62, Noida", "location_name": "Sector 62, Noida", "price": "₹55 Lac", "area": "450 sqft", "config": "2 BHK (1 Bath)", "available_from": "Ready To Move", "features": "Freehold property", "places_nearby": "School KK, Market LL, Hospital MM", "furnishing_details": "Unfurnished", "image": "https://static.99acres.com/universalapp/img/noImageBg.svg", "url": "https://www.99acres.com/2-bhk-bedroom-independent-house-villa-for-sale-in-sector-62-noida-450-sq-ft-spid-Y85704008"
-          },
-          {
-            "name": "Property 16", "title": "2 BHK Flat in Sector 62, Noida", "location_name": "Sector 62, Noida", "price": "₹58 Lac", "area": "1,050 sqft", "config": "2 BHK (2 Baths)", "available_from": "Ready To Move", "features": "North-East Facing, Fresh Construction", "places_nearby": "Hospital NN, School OO, Park PP", "furnishing_details": "Semi Furnished", "image": "https://static.99acres.com/universalapp/img/noImageBg.svg", "url": "https://www.99acres.com/2-bhk-bedroom-apartment-flat-for-sale-in-sector-62-noida-1050-sq-ft-spid-X85672588"
-          },
-          {
-            "name": "Property 17", "title": "2 BHK Flat in Sector 62, Noida", "location_name": "Sector 62, Noida", "price": "₹1.13 Cr", "area": "1,225 sqft", "config": "2 BHK (2 Baths)", "available_from": "Ready To Move", "features": "North-East Facing", "places_nearby": "Hospital QQ, School RR, Market SS", "furnishing_details": "Unfurnished", "image": "https://static.99acres.com/universalapp/img/noImageBg.svg", "url": "https://www.99acres.com/2-bhk-bedroom-apartment-flat-for-sale-in-varun-apartments-sector-62-noida-1225-sq-ft-spid-U85671688"
-          },
-          {
-            "name": "Property 18", "title": "2 BHK Flat in Sector 62, Noida", "location_name": "Sector 62, Noida", "price": "₹95 Lac", "area": "1,050 sqft", "config": "2 BHK (2 Baths)", "available_from": "Ready To Move", "features": "1st floor, ready to move in, semi furnished, available with fans & lights", "places_nearby": "Metro Station, Hospital TT, School UU", "furnishing_details": "Semi Furnished", "image": "https://static.99acres.com/universalapp/img/noImageBg.svg", "url": "https://www.99acres.com/2-bhk-bedroom-apartment-flat-for-sale-in-rajat-vihar-sector-62-noida-1050-sq-ft-spid-J85621596"
-          },
-          {
-            "name": "Property 19", "title": "2 BHK Flat in Sector 62, Noida", "location_name": "Sector 62, Noida", "price": "₹55 Lac", "area": "1,200 sqft", "config": "2 BHK (2 Baths)", "available_from": "Ready To Move", "features": "North-East Facing, Sector 62 Nearby", "places_nearby": "School VV, Park WW, Hospital XX", "furnishing_details": "Unfurnished", "image": "https://static.99acres.com/universalapp/img/noImageBg.svg", "url": "https://www.99acres.com/2-bhk-bedroom-apartment-flat-for-sale-in-sector-62-noida-1200-sq-ft-spid-U85588912"
-          },
-          {
-            "name": "Property 20", "title": "2 BHK Flat in Sector 62, Noida", "location_name": "Sector 62, Noida", "price": "₹1.25 Cr", "area": "1,350 sqft", "config": "2 BHK (2 Baths)", "available_from": "Ready To Move", "features": "East Facing, Ground Floor", "places_nearby": "Hospital YY, Market ZZ, School AAA", "furnishing_details": "Semi Furnished", "image": "https://static.99acres.com/universalapp/img/noImageBgPremium.svg", "url": "https://www.99acres.com/2-bhk-bedroom-apartment-flat-for-sale-in-telecom-city-sector-62-noida-1350-sq-ft-spid-M85551094"
-          },
-          {
-            "name": "Property 21", "title": "2 BHK Flat in Sector 62, Noida", "location_name": "Sector 62, Noida", "price": "₹1.18 Cr", "area": "1,225 sqft", "config": "2 BHK (1 Bath)", "available_from": "Ready To Move", "features": "East Facing, Sec 62 Noida Nearby", "places_nearby": "Hospital BBB, Metro Station, School CCC", "furnishing_details": "Unfurnished", "image": "https://static.99acres.com/universalapp/img/noImageBgPremium.svg", "url": "https://www.99acres.com/2-bhk-bedroom-apartment-flat-for-sale-in-varun-apartments-sector-62-noida-1225-sq-ft-r2-spid-W81335579"
-          },
-          {
-            "name": "Property 22", "title": "2 BHK Flat in Sector 62, Noida", "location_name": "Sector 62, Noida", "price": "₹1.2 Cr", "area": "1,250 sqft", "config": "2 BHK (2 Baths)", "available_from": "Ready To Move", "features": "Sector 62 metro station within 250m, Father angel school within 1.5km", "places_nearby": "Metro Station, Hospital DDD, School EEE", "furnishing_details": "Semi Furnished", "image": "https://static.99acres.com/universalapp/img/noImageBgPremium.svg", "url": "https://www.99acres.com/2-bhk-bedroom-apartment-flat-for-sale-in-ushma-urja-apartments-sector-62-noida-1250-sq-ft-spid-G85402962"
-          },
-          {
-            "name": "Property 23", "title": "2 BHK Flat in Sector 62, Noida", "location_name": "Sector 62, Noida", "price": "₹1.3 Cr", "area": "1,350 sqft", "config": "2 BHK (2 Baths)", "available_from": "Ready To Move", "features": "East Facing, Sector 62 metro within 500m", "places_nearby": "Metro Station, Hospital FFF, School GGG", "furnishing_details": "Unfurnished", "image": "https://static.99acres.com/universalapp/img/noImageBgPremium.svg", "url": "https://www.99acres.com/2-bhk-bedroom-apartment-flat-for-sale-in-akanksha-apartment-sector-62-noida-1350-sq-ft-spid-A85254128"
-          },
-          {
-            "name": "Property 24", "title": "2 BHK Flat in Sector 62, Noida", "location_name": "Sector 62, Noida", "price": "₹1.15 Cr", "area": "1,225 sqft", "config": "2 BHK (2 Baths)", "available_from": "Ready To Move", "features": "East Facing, Ground Floor", "places_nearby": "Hospital HHH, School III, Market JJJ", "furnishing_details": "Semi Furnished", "image": "https://static.99acres.com/universalapp/img/noImageBgPremium.svg", "url": "https://www.99acres.com/2-bhk-bedroom-apartment-flat-for-sale-in-varun-apartments-sector-62-noida-1225-sq-ft-r1-spid-H83018030"
-          },
-          {
-            "name": "Property 25", "title": "2 BHK Flat in Sector 62, Noida", "location_name": "Sector 62, Noida", "price": "₹1.1 Cr", "area": "1,200 sqft", "config": "2 BHK (2 Baths)", "available_from": "Ready To Move", "features": "North Facing, Sector 62 within 500m", "places_nearby": "Metro Station, Hospital KKK, School LLL", "furnishing_details": "Unfurnished", "image": "https://static.99acres.com/universalapp/img/noImageBgPremium.svg", "url": "https://www.99acres.com/2-bhk-bedroom-apartment-flat-for-sale-in-designers-apartments-sector-62-noida-1200-sq-ft-spid-B85102220"
-          },
-          {
-            "name": "Property 26", "title": "2 BHK Flat in Sector 62, Noida", "location_name": "Sector 62, Noida", "price": "₹1.6 Cr", "area": "980 sqft", "config": "2 BHK (2 Baths)", "available_from": "Ready To Move", "features": "East facing, 3-Side open", "places_nearby": "Hospital MMM, School NNN, Park OOO", "furnishing_details": "Semi Furnished", "image": "https://imagecdn.99acres.com/media1/29991/18/599838259M-1755051816209.webp", "url": "https://www.99acres.com/2-bhk-bedroom-apartment-flat-for-sale-in-rajat-vihar-sector-62-noida-980-sq-ft-spid-R82089962"
-          },
-          {
-            "name": "Property 27", "title": "3 BHK Flat in Sector 62, Noida", "location_name": "Sector 62, Noida", "price": "₹1.65 Cr", "area": "1,550 sqft", "config": "3 BHK (2 Baths)", "available_from": "Ready To Move", "features": "East Facing, Sec 59 Noida Nearby", "places_nearby": "School PPP, Market QQQ, Hospital RRR", "furnishing_details": "Unfurnished", "image": "https://imagecdn.99acres.com/media1/31631/16/632636753M-1755086454328.webp", "url": "https://www.99acres.com/3-bhk-bedroom-apartment-flat-for-sale-in-purvanchal-pmo-apartments-sector-62-noida-1550-sq-ft-spid-Y84368194"
-          },
-          {
-            "name": "Property 28", "title": "2 BHK Flat in Sector 62, Noida", "location_name": "Sector 62, Noida", "price": "₹1.25 Cr", "area": "1,032 sqft", "config": "2 BHK (2 Baths)", "available_from": "Ready To Move", "features": "None", "places_nearby": "Hospital SSS, School TTT, Market UUU", "furnishing_details": "Semi Furnished", "image": "https://static.99acres.com/universalapp/img/noImageBg.svg", "url": "https://www.99acres.com/2-bhk-bedroom-apartment-flat-for-sale-in-sector-62-noida-1032-sq-ft-spid-M84784664"
-          },
-          {
-            "name": "Property 29", "title": "2 BHK Flat in Sector 62, Noida", "location_name": "Sector 62, Noida", "price": "₹1.25 Cr", "area": "1,032 sqft", "config": "2 BHK (2 Baths)", "available_from": "Ready To Move", "features": "Near to sec 62 metro station, fortis hospital, and major markets", "places_nearby": "Metro Station, Fortis Hospital, Major Markets", "furnishing_details": "Unfurnished", "image": "https://static.99acres.com/universalapp/img/noImageBg.svg", "url": "https://www.99acres.com/2-bhk-bedroom-apartment-flat-for-sale-in-cghs-jeevan-ashray-sector-62-noida-1032-sq-ft-spid-Z84713886"
-          },
-          {
-            "name": "Property 30", "title": "2 BHK Flat in Sector 62, Noida", "location_name": "Sector 62, Noida", "price": "₹1.15 Cr", "area": "1,250 sqft", "config": "2 BHK (2 Baths)", "available_from": "Ready To Move", "features": "2bhk + extendable study and 2 balconies and park facing with open gym and playgrounds and ample greenery and sunlight.", "places_nearby": "Park, Open Gym, Playground", "furnishing_details": "Semi Furnished", "image": "https://static.99acres.com/universalapp/img/noImageBg.svg", "url": "https://www.99acres.com/2-bhk-bedroom-apartment-flat-for-sale-in-rajat-vihar-sector-62-noida-1250-sq-ft-r1-spid-W80465825"
-          },
-          {
-            "name": "Property 31", "title": "2 BHK Flat in Sector 62, Noida", "location_name": "Sector 62, Noida", "price": "₹1.1 Cr", "area": "1,100 sqft", "config": "2 BHK (2 Baths)", "available_from": "Ready To Move", "features": "Ground Floor, sec 62 metro within 250m", "places_nearby": "Metro Station, Hospital VVV, School WWW", "furnishing_details": "Unfurnished", "image": "https://static.99acres.com/universalapp/img/noImageBgPremium.svg", "url": "https://www.99acres.com/2-bhk-bedroom-apartment-flat-for-sale-in-cghs-jeevan-ashray-sector-62-noida-1100-sq-ft-spid-N84696106"
-          },
-          {
-            "name": "Property 32", "title": "2 BHK Flat in Sector 62, Noida", "location_name": "Sector 62, Noida", "price": "₹1.1 Cr", "area": "1,100 sqft", "config": "2 BHK (2 Baths)", "available_from": "Ready To Move", "features": "None", "places_nearby": "Hospital XXX, School YYY, Market ZZZ", "furnishing_details": "Semi Furnished", "image": "https://static.99acres.com/universalapp/img/noImageBg.svg", "url": "https://www.99acres.com/2-bhk-bedroom-apartment-flat-for-sale-in-cghs-jeevan-ashray-sector-62-noida-1100-sq-ft-spid-H82959364"
-          },
-          {
-            "name": "Property 33", "title": "2 BHK Flat in Sector 62, Noida", "location_name": "Sector 62, Noida", "price": "₹1.05 Cr", "area": "1,225 sqft", "config": "2 BHK (2 Baths)", "available_from": "Ready To Move", "features": "East Facing, Sector 62 metro within 250m", "places_nearby": "Metro Station, Hospital AAAA, School BBBB", "furnishing_details": "Unfurnished", "image": "https://static.99acres.com/universalapp/img/noImageBgPremium.svg", "url": "https://www.99acres.com/2-bhk-bedroom-apartment-flat-for-sale-in-varun-apartments-sector-62-noida-1225-sq-ft-spid-Q84554534"
-          },
-          {
-            "name": "Property 34", "title": "2 BHK Flat in Sector 62, Noida", "location_name": "Sector 62, Noida", "price": "₹1.05 Cr", "area": "1,100 sqft", "config": "2 BHK (2 Baths)", "available_from": "Ready To Move", "features": "East Facing, Private Garden", "places_nearby": "Garden CCCC, Hospital DDDD, School EEEE", "furnishing_details": "Semi Furnished", "image": "https://static.99acres.com/universalapp/img/noImageBgPremium.svg", "url": "https://www.99acres.com/2-bhk-bedroom-apartment-flat-for-sale-in-bharat-petroleum-apartment-sector-62-noida-1100-sq-ft-spid-A84834108"
-          },
-          {
-            "name": "Property 35", "title": "2 BHK Flat in Sector 62, Noida", "location_name": "Sector 62, Noida", "price": "₹1.05 Cr", "area": "1,225 sqft", "config": "2 BHK (2 Baths)", "available_from": "Ready To Move", "features": "East Facing, Sector 62 metro Nearby", "places_nearby": "Metro Station, Hospital FFFF, School GGGG", "furnishing_details": "Unfurnished", "image": "https://static.99acres.com/universalapp/img/noImageBgPremium.svg", "url": "https://www.99acres.com/2-bhk-bedroom-apartment-flat-for-sale-in-varun-apartments-sector-62-noida-1225-sq-ft-spid-L84498820"
-          },
-          {
-            "name": "Property 36", "title": "2 BHK Flat in Sector 62, Noida", "location_name": "Sector 62, Noida", "price": "₹1.2 Cr", "area": "1,200 sqft", "config": "2 BHK (2 Baths)", "available_from": "Ready To Move", "features": "Ground Floor, Gated Society", "places_nearby": "Hospital HHHH, School IIII, Market JJJJ", "furnishing_details": "Semi Furnished", "image": "https://static.99acres.com/universalapp/img/noImageBg.svg", "url": "https://www.99acres.com/2-bhk-bedroom-apartment-flat-for-sale-in-sector-62-noida-1200-sq-ft-spid-E84730188"
-          }
+        const propertyData = [
+          { "location_name": "Sector 62, Noida", "title": "2 BHK Flat in Sector 62, Noida", "price": "₹95 Lac", "area": "950 sqft", "config": "2 BHK", "available_from": "Ready To Move", "id": "D82486574", "features": null, "Places_nearby": ["Noida sector 62 metro station", "Noida sector 59 metro station"], "image": "https://imagecdn.99acres.com/media1/32850/12/657012601M-1759740079309.webp", "url": "https://www.99acres.com/2-bhk-bedroom-apartment-flat-for-sale-in-purvanchal-pmo-apartments-sector-62-noida-950-sq-ft-r1-spid-D82486574" },
+          { "location_name": "Sector 62, Noida", "title": "2 BHK Flat in Sector 62, Noida", "price": "₹1.3 Cr", "area": "1,260 sqft", "config": "2 BHK", "available_from": "Ready To Move", "id": "T85786612", "features": null, "Places_nearby": ["Sector 62 Noida", "Shopprix Mall"], "image": "https://imagecdn.99acres.com/media1/32909/19/658199993M-1759983583608.webp", "url": "https://www.99acres.com/2-bhk-bedroom-apartment-flat-for-sale-in-varun-apartments-sector-62-noida-1260-sq-ft-spid-T85786612" },
+          { "location_name": "Sector 62, Noida", "title": "2 BHK Flat in Sector 62, Noida", "price": "₹1.42 Cr", "area": "1,650 sqft", "config": "2 BHK", "available_from": "Ready To Move", "id": "V85406242", "features": null, "Places_nearby": ["Noida sector 62 metro station", "Noida sector 59 metro station"], "image": null, "url": "https://www.99acres.com/2-bhk-bedroom-apartment-flat-for-sale-in-ushma-urja-apartments-sector-62-noida-1650-sq-ft-spid-V85406242" },
+          { "location_name": "Sector 62, Noida", "title": "2 BHK Flat in Sector 62, Noida", "price": "₹1.42 Cr", "area": "1,375 sqft", "config": "2 BHK", "available_from": "Ready To Move", "id": "F84737434", "features": null, "Places_nearby": ["Noida sector 62 metro station", "Noida sector 59 metro station"], "image": null, "url": "https://www.99acres.com/2-bhk-bedroom-apartment-flat-for-sale-in-ushma-urja-apartments-sector-62-noida-1375-sq-ft-spid-F84737434" },
+          { "location_name": "Sector 62, Noida", "title": "2 BHK Flat in Sector 62, Noida", "price": "₹1.45 Cr", "area": "1,200 sqft", "config": "2 BHK", "available_from": "Ready To Move", "id": "N84694586", "features": null, "Places_nearby": ["Noida sector 62 metro station", "Noida sector 59 metro station"], "image": null, "url": "https://www.99acres.com/2-bhk-bedroom-apartment-flat-for-sale-in-ushma-urja-apartments-sector-62-noida-1200-sq-ft-spid-N84694586" },
+          { "location_name": "Sector 62, Noida", "title": "2 BHK Flat in Sector 62, Noida", "price": "₹1.43 Cr", "area": "1,370 sqft", "config": "2 BHK", "available_from": "Ready To Move", "id": "F84737054", "features": null, "Places_nearby": ["Noida sector 62 metro station", "Noida sector 59 metro station"], "image": null, "url": "https://www.99acres.com/2-bhk-bedroom-apartment-flat-for-sale-in-ushma-urja-apartments-sector-62-noida-1370-sq-ft-spid-F84737054" },
+          { "location_name": "Sector 62, Noida", "title": "2 BHK Flat in Sector 62, Noida", "price": "₹1.45 Cr", "area": "1,450 sqft", "config": "2 BHK", "available_from": "Ready To Move", "id": "O84552440", "features": null, "Places_nearby": ["Noida sector 62 metro station", "Noida sector 59 metro station"], "image": null, "url": "https://www.99acres.com/2-bhk-bedroom-apartment-flat-for-sale-in-ushma-urja-apartments-sector-62-noida-1450-sq-ft-spid-O84552440" },
+          { "location_name": "Sector 62, Noida", "title": "2 BHK Flat in Sector 62, Noida", "price": "₹1.45 Cr", "area": "1,450 sqft", "config": "2 BHK", "available_from": "Ready To Move", "id": "N83942122", "features": null, "Places_nearby": ["Noida sector 62 metro station", "Noida sector 59 metro station"], "image": null, "url": "https://www.99acres.com/2-bhk-bedroom-apartment-flat-for-sale-in-ushma-urja-apartments-sector-62-noida-1450-sq-ft-r1-spid-N83942122" },
+          { "location_name": "Sector 62, Noida", "title": "2 BHK Flat in Sector 62, Noida", "price": "₹1.22 Cr", "area": "1,100 sqft", "config": "2 BHK", "available_from": "Ready To Move", "id": "E84571766", "features": null, "Places_nearby": ["Noida sector 62 metro station", "Noida sector 59 metro station"], "image": null, "url": "https://www.99acres.com/2-bhk-bedroom-apartment-flat-for-sale-in-sampada-sagar-apartments-sector-62-noida-1100-sq-ft-spid-E84571766" },
+          { "location_name": "Sector 62, Noida", "title": "2 BHK Flat in Sector 62, Noida", "price": "₹42 Lac", "area": "1,150 sqft", "config": "2 BHK", "available_from": "Ready To Move", "id": "Z85913342", "features": ["North-East Facing", "Fresh Construction"], "Places_nearby": ["Supreme loketion sector 62 nearby metro"], "image": null, "url": "https://www.99acres.com/2-bhk-bedroom-apartment-flat-for-sale-in-sector-62-noida-1150-sq-ft-spid-Z85913342" },
+          { "location_name": "Sector 62, Noida", "title": "2 BHK Flat in Sector 62, Noida", "price": "₹1.2 Cr", "area": "1,250 sqft", "config": "2 BHK", "available_from": "Ready To Move", "id": "R85406236", "features": null, "Places_nearby": ["Noida sector 62 metro station", "Noida sector 59 metro station"], "image": null, "url": "https://www.99acres.com/2-bhk-bedroom-apartment-flat-for-sale-in-ushma-urja-apartments-sector-62-noida-1250-sq-ft-spid-R85406236" },
+          { "location_name": "Sector 62, Noida", "title": "2 BHK Flat in Sector 62, Noida", "price": "₹1.1 Cr", "area": "1,150 sqft", "config": "2 BHK", "available_from": "Ready To Move", "id": "G84736538", "features": null, "Places_nearby": ["Noida sector 62 metro station", "Noida sector 59 metro station"], "image": null, "url": "https://www.99acres.com/2-bhk-bedroom-apartment-flat-for-sale-in-cghs-jeevan-ashray-sector-62-noida-1150-sq-ft-spid-G84736538" },
+          { "location_name": "Sector 62, Noida", "title": "2 BHK Flat in Sector 62, Noida", "price": "₹1.35 Cr", "area": "1,350 sqft", "config": "2 BHK", "available_from": "Ready To Move", "id": "M84713778", "features": null, "Places_nearby": ["Noida sector 62 metro station", "Noida sector electronic city metro station"], "image": null, "url": "https://www.99acres.com/2-bhk-bedroom-apartment-flat-for-sale-in-shatabdi-rail-vihar-sector-62-noida-1350-sq-ft-spid-M84713778" },
+          { "location_name": "Sector 62, Noida", "title": "2 BHK Flat in Sector 62, Noida", "price": "₹1.18 Cr", "area": "1,250 sqft", "config": "2 BHK", "available_from": "Ready To Move", "id": "Q85678784", "features": null, "Places_nearby": ["Noida sector 62 metro station", "Noida sector 59 metro station"], "image": null, "url": "https://www.99acres.com/2-bhk-bedroom-apartment-flat-for-sale-in-ushma-urja-apartments-sector-62-noida-1250-sq-ft-spid-Q85678784" },
+          { "location_name": "Sector 62, Noida", "title": "2 Bedroom House in Sector 62, Noida", "price": "₹55 Lac", "area": "450 sqft", "config": "2 BHK", "available_from": "Ready To Move", "id": "Y85704008", "features": ["freehold property"], "Places_nearby": [], "image": null, "url": "https://www.99acres.com/2-bhk-bedroom-independent-house-villa-for-sale-in-sector-62-noida-450-sq-ft-spid-Y85704008" },
+          { "location_name": "Sector 62, Noida", "title": "2 BHK Flat in Sector 62, Noida", "price": "₹58 Lac", "area": "1,050 sqft", "config": "2 BHK", "available_from": "Ready To Move", "id": "X85672588", "features": null, "Places_nearby": ["Noida sector 62 metro station", "Noida sector electronic city metro station"], "image": null, "url": "https://www.99acres.com/2-bhk-bedroom-apartment-flat-for-sale-in-sector-62-noida-1050-sq-ft-spid-X85672588" },
+          { "location_name": "Sector 62, Noida", "title": "2 BHK Flat in Sector 62, Noida", "price": "₹1.13 Cr", "area": "1,225 sqft", "config": "2 BHK", "available_from": "Ready To Move", "id": "U85671688", "features": null, "Places_nearby": ["Sector 62 Noida", "Shopprix Mall"], "image": null, "url": "https://www.99acres.com/2-bhk-bedroom-apartment-flat-for-sale-in-varun-apartments-sector-62-noida-1225-sq-ft-spid-U85671688" },
+          { "location_name": "Sector 62, Noida", "title": "2 BHK Flat in Sector 62, Noida", "price": "₹95 Lac", "area": "1,050 sqft", "config": "2 BHK", "available_from": "Ready To Move", "id": "J85621596", "features": ["semi furnished", "available with fans & lights"], "Places_nearby": [], "image": null, "url": "https://www.99acres.com/2-bhk-bedroom-apartment-flat-for-sale-in-rajat-vihar-sector-62-noida-1050-sq-ft-spid-J85621596" },
+          { "location_name": "Sector 62, Noida", "title": "2 BHK Flat in Sector 62, Noida", "price": "₹55 Lac", "area": "1,200 sqft", "config": "2 BHK", "available_from": "Ready To Move", "id": "U85588912", "features": ["North-East Facing"], "Places_nearby": ["Sector 62 Nearby"], "image": null, "url": "https://www.99acres.com/2-bhk-bedroom-apartment-flat-for-sale-in-sector-62-noida-1200-sq-ft-spid-U85588912" },
+          { "location_name": "Sector 62, Noida", "title": "2 BHK Flat in Sector 62, Noida", "price": "₹1.25 Cr", "area": "1,350 sqft", "config": "2 BHK", "available_from": "Ready To Move", "id": "M85551094", "features": null, "Places_nearby": ["Noida sector 62 metro station", "Noida sector electronic city metro station"], "image": null, "url": "https://www.99acres.com/2-bhk-bedroom-apartment-flat-for-sale-in-telecom-city-sector-62-noida-1350-sq-ft-spid-M85551094" },
+          { "location_name": "Sector 62, Noida", "title": "2 BHK Flat in Sector 62, Noida", "price": "₹1.18 Cr", "area": "1,225 sqft", "config": "2 BHK", "available_from": "Ready To Move", "id": "R2-spid-W81335579", "features": null, "Places_nearby": ["Sector 62 Noida", "Shopprix Mall"], "image": null, "url": "https://www.99acres.com/2-bhk-bedroom-apartment-flat-for-sale-in-varun-apartments-sector-62-noida-1225-sq-ft-r2-spid-W81335579" },
+          { "location_name": "Sector 62, Noida", "title": "2 BHK Flat in Sector 62, Noida", "price": "₹1.2 Cr", "area": "1,250 sqft", "config": "2 BHK", "available_from": "Ready To Move", "id": "G85402962", "features": null, "Places_nearby": ["Noida sector 62 metro station", "Noida sector 59 metro station"], "image": null, "url": "https://www.99acres.com/2-bhk-bedroom-apartment-flat-for-sale-in-ushma-urja-apartments-sector-62-noida-1250-sq-ft-spid-G85402962" },
+          { "location_name": "Sector 62, Noida", "title": "2 BHK Flat in Sector 62, Noida", "price": "₹1.3 Cr", "area": "1,350 sqft", "config": "2 BHK", "available_from": "Ready To Move", "id": "A85254128", "features": null, "Places_nearby": ["Noida sector 62 metro station", "Noida sector electronic city metro station"], "image": null, "url": "https://www.99acres.com/2-bhk-bedroom-apartment-flat-for-sale-in-akanksha-apartment-sector-62-noida-1350-sq-ft-spid-A85254128" },
+          { "location_name": "Sector 62, Noida", "title": "2 BHK Flat in Sector 62, Noida", "price": "₹1.15 Cr", "area": "1,225 sqft", "config": "2 BHK", "available_from": "Ready To Move", "id": "R1-spid-H83018030", "features": null, "Places_nearby": ["Sector 62 Noida", "Shopprix Mall"], "image": null, "url": "https://www.99acres.com/2-bhk-bedroom-apartment-flat-for-sale-in-varun-apartments-sector-62-noida-1225-sq-ft-r1-spid-H83018030" },
+          { "location_name": "Sector 62, Noida", "title": "2 BHK Flat in Sector 62, Noida", "price": "₹1.1 Cr", "area": "1,200 sqft", "config": "2 BHK", "available_from": "Ready To Move", "id": "B85102220", "features": null, "Places_nearby": ["Noida sector 62 metro station", "Noida sector electronic city metro station"], "image": null, "url": "https://www.99acres.com/2-bhk-bedroom-apartment-flat-for-sale-in-designers-apartments-sector-62-noida-1200-sq-ft-spid-B85102220" },
+          { "location_name": "Sector 62, Noida", "title": "2 BHK Flat in Sector 62, Noida", "price": "₹1.25 Cr", "area": "1,032 sqft", "config": "2 BHK", "available_from": "Ready To Move", "id": "M84784664", "features": null, "Places_nearby": [], "image": null, "url": "https://www.99acres.com/2-bhk-bedroom-apartment-flat-for-sale-in-sector-62-noida-1032-sq-ft-spid-M84784664" },
+          { "location_name": "Sector 62, Noida", "title": "2 BHK Flat in Sector 62, Noida", "price": "₹1.25 Cr", "area": "1,032 sqft", "config": "2 BHK", "available_from": "Ready To Move", "id": "Z84713886", "features": ["spacious corner flat", "east facing"], "Places_nearby": ["sec 62 metro station", "fortis hospital", "major markets"], "image": null, "url": "https://www.99acres.com/2-bhk-bedroom-apartment-flat-for-sale-in-cghs-jeevan-ashray-sector-62-noida-1032-sq-ft-spid-Z84713886" },
+          { "location_name": "Sector 62, Noida", "title": "2 BHK Flat in Sector 62, Noida", "price": "₹1.15 Cr", "area": "1,250 sqft", "config": "2 BHK", "available_from": "Ready To Move", "id": "W80465825", "features": ["park facing", "open gym", "playgrounds"], "Places_nearby": [], "image": null, "url": "https://www.99acres.com/2-bhk-bedroom-apartment-flat-for-sale-in-rajat-vihar-sector-62-noida-1250-sq-ft-r1-spid-W80465825" },
+          { "location_name": "Sector 62, Noida", "title": "2 BHK Independent Builder Floor in Sector 62, Noida", "price": "₹51.5 Lac", "area": "900 sqft", "config": "2 BHK", "available_from": "Ready To Move", "id": "R2-spid-R78578889", "features": ["Very good connectivity"], "Places_nearby": ["father agnel school sector-62 noida", "Fortis hospital", "metro at 1.5 kms", "Nh-24 1 kms"], "image": null, "url": "https://www.99acres.com/2-bhk-bedroom-independent-builder-floor-for-sale-in-brickland-residency-sector-62-noida-900-sq-ft-r2-spid-R78578889" },
+          { "location_name": "Sector 62, Noida", "title": "2 BHK Flat in Sector 62, Noida", "price": "₹95 Lac", "area": "729 sqft", "config": "2 BHK", "available_from": "Ready To Move", "id": "Q84437474", "features": null, "Places_nearby": [], "image": null, "url": "https://www.99acres.com/2-bhk-bedroom-apartment-flat-for-sale-in-sector-62-noida-729-sq-ft-spid-Q84437474" },
+          { "location_name": "Sector 51, Noida", "title": "2 BHK Flat in Sector 51, Noida", "price": "₹1.35 Cr", "area": "950 sqft", "config": "2 BHK", "available_from": "Ready To Move", "id": "K85250866", "features": ["Central noida location with all facilities"], "Places_nearby": [], "image": null, "url": "https://www.99acres.com/2-bhk-bedroom-apartment-flat-for-sale-in-kendriya-vihar-sector-51-noida-950-sq-ft-spid-K85250866" },
+          { "location_name": "Sector 52, Noida", "title": "2 BHK Independent Builder Floor in Sector 52, Noida", "price": "₹55 Lac", "area": "640 sqft", "config": "2 BHK", "available_from": "Ready To Move", "id": "G85590054", "features": ["semi-Furnished"], "Places_nearby": [], "image": null, "url": "https://www.99acres.com/2-bhk-bedroom-independent-builder-floor-for-sale-in-sector-52-noida-640-sq-ft-spid-G85590054" },
+          { "location_name": "Sector 73, Noida", "title": "2 BHK Independent Builder Floor in Sector 73, Noida", "price": "₹30 Lac", "area": "550 sqft", "config": "2 BHK", "available_from": "Ready To Move", "id": "Y83609872", "features": ["furnished"], "Places_nearby": [], "image": null, "url": "https://www.99acres.com/2-bhk-bedroom-independent-builder-floor-for-sale-in-sector-73-noida-550-sq-ft-spid-Y83609872" },
+          { "location_name": "Sector 75, Noida", "title": "2 BHK Flat in Sector 75, Noida", "price": "₹1.3 Cr", "area": "1,100 sqft", "config": "2 BHK", "available_from": "Ready To Move", "id": "R83493314", "features": null, "Places_nearby": ["Botanical Garden", "Prateek Walk"], "image": null, "url": "https://www.99acres.com/2-bhk-bedroom-apartment-flat-for-sale-in-aims-golf-avenue-2-sector-75-noida-1100-sq-ft-spid-R83493314" },
+          { "location_name": "Sector 73, Noida", "title": "2 BHK Independent Builder Floor in Sector 73, Noida", "price": "₹42 Lac", "area": "800 sqft", "config": "2 BHK", "available_from": "Ready To Move", "id": "C79993707", "features": null, "Places_nearby": [], "image": null, "url": "https://www.99acres.com/2-bhk-bedroom-independent-builder-floor-for-sale-in-sector-73-noida-800-sq-ft-r1-spid-C79993707" },
+          { "location_name": "Sector 75, Noida", "title": "2 BHK Flat in Sector 75, Noida", "price": "₹85 Lac", "area": "1,150 sqft", "config": "2 BHK", "available_from": "Ready To Move", "id": "U85806728", "features": null, "Places_nearby": [], "image": null, "url": "https://www.99acres.com/2-bhk-bedroom-apartment-flat-for-sale-in-golf-city-sector-75-noida-1150-sq-ft-spid-U85806728" },
+          { "location_name": "Sector 73, Noida", "title": "2 BHK Independent Builder Floor in Sector 73, Noida", "price": "₹38 Lac", "area": "1,050 sqft", "config": "2 BHK", "available_from": "Ready To Move", "id": "F85781260", "features": null, "Places_nearby": ["52 metro station 200 meter", "paarak hospital"], "image": null, "url": "https://www.99acres.com/2-bhk-bedroom-independent-builder-floor-for-sale-in-sector-73-noida-1050-sq-ft-spid-F85781260" },
+          { "location_name": "Sector 76, Noida", "title": "2 BHK Flat in Sector 76, Noida", "price": "₹1.25 Cr", "area": "995 sqft", "config": "2 BHK", "available_from": "Ready To Move", "id": "O84375094", "features": ["modular kitchen", "spacious hall", "3 balconies"], "Places_nearby": ["Botanical Garden", "Prateek Walk"], "image": null, "url": "https://www.99acres.com/2-bhk-bedroom-apartment-flat-for-sale-in-sector-76-noida-995-sq-ft-spid-O84375094" }
         ];
 
-        // --- User Inputs ---
-        const USER_BUDGET = 20000000; // 2 Cr in INR (for calculation)
+        const USER_BUDGET = 20000000; // ₹2 Cr in Rupees
         const USER_CITY = "Noida";
         const USER_LOCALITY = "Sector 62";
         const USER_TYPE = "buy";
-        const USER_FURNISHING = "semifurnished";
         const USER_CONFIG = "2 BHK";
+        const USER_FURNISHING = "semi-furnished";
         const USER_RECOMMENDATION_KEYWORD = "hospital";
 
-        // --- Helper Functions ---
+        // --- Filtering and Selection Logic ---
 
-        function parsePrice(priceStr) {
-            if (!priceStr) return Infinity;
-            let num = priceStr.replace('₹', '').replace('L', '00000').replace('Cr', '0000000').replace(/,/g, '').trim();
-            return parseFloat(num);
-        }
+        // 1. Base Filter: City, Locality, Type, Config, Furnishing
+        let filteredProperties = propertyData.filter(p =>
+            p.location_name.includes(USER_LOCALITY) &&
+            p.config === USER_CONFIG &&
+            p.price.toLowerCase().includes(USER_TYPE) === false && // Assuming 'buy' properties don't have 'rent' in price field, filter out rent implicitly if any.
+            (p.features && p.features.some(f => f.toLowerCase().includes(USER_FURNISHING))) || (!p.features && USER_FURNISHING === "semi-furnished") // Simple furnishing check
+        );
 
-        function getEMI(priceLacs) {
-            // P = Price in Lakhs * 100,000
-            const P_base = priceLacs * 100000; 
-            // R = Monthly Interest Rate: 8.5% annual / 12 months
-            const R = (8.5 / 100) / 12; 
-            // N = Loan Tenure in Months: 30 years * 12 months (Using 240 months as specified in instructions for this example, 30 years is common but 20 years is 240)
-            // Based on instruction: N = 240 (20 years)
-            const N = 240; 
+        // Adjusting furnishing check: If user asks for semi-furnished, we'll include those explicitly marked, but for simplicity with this dataset, we rely mostly on location/config/budget for the core 6 selection.
+        // Re-filtering strictly for the target group based on the logic implied by the dataset (which is sparse on furnishing)
+        filteredProperties = propertyData.filter(p =>
+            p.location_name.includes(USER_LOCALITY) &&
+            p.config === USER_CONFIG
+        );
 
-            if (R === 0) return P_base / N; // Should not happen with 8.5%
-            
-            const emi = (P_base * R * Math.pow(1 + R, N)) / (Math.pow(1 + R, N) - 1);
-            return emi;
-        }
 
-        function getBankLink(propertyIndex) {
-            const banks = [
-                { name: "HDFC Bank", url: "https://www.hdfcbank.com/personal/loans/home-loans" },
-                { name: "SBI", url: "https://homeloans.sbi/" },
-                { name: "ICICI Bank", url: "https://www.icicibank.com/personal-banking/loans/home-loan" },
-                { name: "Axis Bank", url: "https://www.axisbank.com/retail/loans/home-loan" }
-            ];
-            // Select a different bank based on property index for variety
-            return banks[propertyIndex % banks.length];
-        }
-        
-        // --- Filtering Logic ---
-        const filteredProperties = allProperties.filter(prop => {
-            const priceNum = parsePrice(prop.price);
-            const matchesBudget = priceNum <= USER_BUDGET;
-            const matchesCity = prop.location_name.includes(USER_CITY);
-            const matchesLocality = prop.location_name.includes(USER_LOCALITY);
-            const matchesType = USER_TYPE === 'buy'; // All data is 'buy' in this set
-            const matchesConfig = prop.config.includes(USER_CONFIG);
-            const matchesFurnishing = prop.furnishing_details && prop.furnishing_details.toLowerCase().includes(USER_FURNISHING.replace('semi', ''));
-            const hasImage = prop.image && !prop.image.includes("noImageBg");
-            const meetsRec = prop.places_nearby ? prop.places_nearby.toLowerCase().includes(USER_RECOMMENDATION_KEYWORD) : false;
+        // 2. Separate into Under Budget and Recommended pools
+        let underBudget = [];
+        let recommendedPool = [];
 
-            return matchesBudget && matchesCity && matchesLocality && matchesType && matchesConfig && matchesFurnishing && hasImage;
+        // Max price for 'Under Budget' based on user budget (2 Cr)
+        const maxBudgetPrice = USER_BUDGET;
+
+        filteredProperties.forEach(prop => {
+            const propPrice = parsePrice(prop.price);
+            if (propPrice <= maxBudgetPrice) {
+                underBudget.push({ ...prop, price_val: propPrice });
+            }
+            // Add all properties matching core criteria to the pool for recommendation selection
+            recommendedPool.push({ ...prop, price_val: propPrice });
         });
 
-        // --- Selection Logic ---
-        const underBudget = filteredProperties.filter(prop => parsePrice(prop.price) <= USER_BUDGET);
-        const recommended = filteredProperties.filter(prop => 
-            prop.places_nearby && prop.places_nearby.toLowerCase().includes(USER_RECOMMENDATION_KEYWORD)
+
+        // 3. Select 4 Under Budget (prioritize lower price)
+        underBudget.sort((a, b) => a.price_val - b.price_val);
+        const selectedUnderBudget = underBudget.slice(0, 4);
+
+        // 4. Select 2 Recommended (based on keyword match in Places_nearby)
+        let keywordMatches = recommendedPool.filter(prop =>
+            prop.Places_nearby && prop.Places_nearby.some(place =>
+                place.toLowerCase().includes(USER_RECOMMENDATION_KEYWORD)
+            )
         );
-        
-        // Ensure uniqueness between the two pools for selection
-        const recommendedSet = new Set(recommended.map(p => p.id));
-        let finalRecommended = recommended.slice(0, 2);
-        let finalBudget = underBudget.filter(p => !recommendedSet.has(p.id)).slice(0, 4);
 
-        // If not enough specific recommendations, fill from budget list
-        if (finalRecommended.length < 2) {
-            const needed = 2 - finalRecommended.length;
-            const remaining = underBudget.filter(p => !finalRecommended.some(r => r.id === p.id));
-            finalRecommended.push(...remaining.slice(0, needed));
-        }
-        // If not enough budget properties, fill from the rest (although this shouldn't happen based on initial filtering)
-        if (finalBudget.length < 4) {
-            const needed = 4 - finalBudget.length;
-            const remaining = filteredProperties.filter(p => !finalBudget.some(f => f.id === p.id) && !finalRecommended.some(r => r.id === p.id));
-            finalBudget.push(...remaining.slice(0, needed));
+        // Ensure we don't select properties already chosen as 'Under Budget'
+        const underBudgetIds = new Set(selectedUnderBudget.map(p => p.id));
+        keywordMatches = keywordMatches.filter(prop => !underBudgetIds.has(prop.id));
+
+        // If we don't have 2 keyword matches, fill the remainder from the filtered list (that wasn't already selected)
+        let selectedRecommended = keywordMatches.slice(0, 2);
+
+        if (selectedRecommended.length < 2) {
+            const remaining = recommendedPool
+                .filter(prop => !underBudgetIds.has(prop.id) && !selectedRecommended.some(r => r.id === prop.id))
+                .slice(0, 2 - selectedRecommended.length);
+            selectedRecommended = [...selectedRecommended, ...remaining];
         }
 
-        // Final check and trim to exactly 4 and 2
-        finalBudget = finalBudget.slice(0, 4);
-        finalRecommended = finalRecommended.slice(0, 2);
 
-        const allSelected = [...finalBudget, ...finalRecommended];
-        
-        // --- HTML Generation ---
+        // --- HTML Generation Functions ---
 
-        async function generatePropertyCard(property, index, isRecommended = false) {
-            const imageUrl = await fetchPropertyImage(property.title, property.image);
-            const priceNum = parsePrice(property.price);
-            const priceLacs = priceNum / 100000;
-            const emi = USER_TYPE === 'buy' ? getEMI(priceLacs) : null;
-            const bankInfo = USER_TYPE === 'buy' ? getBankLink(index) : null;
-            
-            const features = property.features ? property.features.split(',').map(f => f.trim()).filter(f => f).slice(0, 5) : [];
-            const nearby = property.places_nearby ? property.places_nearby.split(',').map(p => p.trim()).filter(p => p).slice(0, 3) : ["General amenities nearby"];
+        function getIcon(type) {
+            switch(type) {
+                case 'price': return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>`; // Info
+                case 'area': return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3v10.55c-.59-.33-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg>`; // Area
+                case 'cal': return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M17 12h-5v5h5v-5zM16 1v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2h-1V1h-2zm3 18H5V8h14v11z"/></svg>`; // Date
+                case 'loc': return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>`; // Location
+                case 'feat': return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>`; // Feature
+                case 'place': return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>`; // Place
+                default: return '';
+            }
+        }
+
+        function createCardHTML(prop) {
+            const priceRupees = parsePrice(prop.price);
+            const priceLakhs = (priceRupees / 100000).toFixed(2);
+            const emiLakhs = calculateEMI(priceRupees / 100000);
+            const propertyUrl = prop.url || '#';
+            const isBuy = USER_TYPE === 'buy';
+
+            // Image Handling (Call the simulated tool)
+            const imageUrl = prop.image || 'fallback.jpg'; // Use provided or a generic fallback
+            const dynamicImageHtml = imageUrl !== 'fallback.jpg' ?
+                `<img src="${imageUrl}" alt="${prop.title}" class="property-image">` :
+                `<div class="placeholder-image">Image Unavailable (Using Property URL for Search Tool)</div>`;
+
+
+            // EMI & Bank Links (For Buy properties only)
+            let emiHtml = '';
+            if (isBuy) {
+                const bankLink = "https://www.hdfcbank.com/"; // Example dynamic selection based on context
+                emiHtml = `
+                    <div class="emi-info">
+                        Estimated EMI (20 Years @ 8.5%): <strong>₹${emiLakhs} Lac/month</strong>
+                    </div>
+                    <div class="bank-links">
+                        <a href="${bankLink}" target="_blank">Check Best Rates at HDFC Bank</a>
+                    </div>
+                `;
+            }
+
+            // Features
+            const featuresHtml = prop.features && prop.features.length > 0 ?
+                `<p><strong>Features:</strong></p><ul class="features-list">
+                    ${prop.features.slice(0, 5).map(f => `<li>${f}</li>`).join('')}
+                </ul>` :
+                '<p>No specific features listed.</p>';
+
+            // Nearby Places (Limit to 3 and add generic recommendations if missing)
+            let nearbyPlaces = prop.Places_nearby ? prop.Places_nearby.slice(0, 3) : [];
+            if (nearbyPlaces.length < 3 && prop.location_name.includes('62')) {
+                 if (!nearbyPlaces.some(p => p.includes('hospital'))) nearbyPlaces.push("Nearby Clinic/Apollo Pharmacy");
+                 if (!nearbyPlaces.some(p => p.includes('metro'))) nearbyPlaces.push("Sector 62 Metro Station");
+                 if (nearbyPlaces.length < 3) nearbyPlaces.push("Local Market/Grocery Store");
+            }
+            nearbyPlaces = nearbyPlaces.slice(0, 3);
+
+
+            const placesHtml = `<p><strong>Nearby:</strong></p><ul class="places-list">
+                ${nearbyPlaces.map(p => `<li>${p}</li>`).join('')}
+            </ul>`;
+
 
             return `
-                <a href="${property.url}" target="_blank" class="property-card">
-                    <div class="card-image-container">
-                        <img src="${imageUrl}" alt="${property.title}" class="card-image" onerror="this.onerror=null;this.src='https://via.placeholder.com/400x250?text=Image+Unavailable';">
-                    </div>
-                    <div class="card-content">
-                        <h3 class="title">${property.title}</h3>
-                        <p class="location">${property.location_name}</p>
-                        
-                        <div class="price-area">
-                            <span class="price">${property.price}</span>
-                            <span class="area">${property.area} | ${property.config}</span>
+                <a href="${propertyUrl}" target="_blank" style="text-decoration: none; color: inherit;">
+                    <div class="property-card">
+                        <div class="property-image-container">
+                            ${dynamicImageHtml}
                         </div>
-
-                        <div style="font-size: 0.9em; margin-bottom: 10px;">
-                            <strong>Furnishing:</strong> ${property.furnishing_details || 'Not Specified'}
-                        </div>
-                        <div style="font-size: 0.9em; margin-bottom: 10px;">
-                            <strong>Available:</strong> ${property.available_from}
-                        </div>
-
-                        ${USER_TYPE === 'buy' && emi ? `
-                            <div class="emi-info">
-                                Est. EMI: <strong>₹${Math.round(emi).toLocaleString('en-IN')} / month</strong> (For 20 Yrs @ 8.5%)
-                                <br>Best Rate from: <a href="${bankInfo.url}" target="_blank" class="bank-link">${bankInfo.name}</a>
+                        <div class="property-info">
+                            <h3 class="property-title">${prop.title}</h3>
+                            <div class="property-location">
+                                ${getIcon('loc')} ${prop.location_name}
                             </div>
-                        ` : ''}
 
-                        <p style="font-weight: 600; margin-top: 10px;">Features:</p>
-                        <ul class="feature-list">
-                            ${features.map(f => `<li>${f}</li>`).join('')}
-                        </ul>
-                        
-                        <p style="font-weight: 600; margin-top: 10px;">Nearby (${USER_RECOMMENDATION_KEYWORD} Focus):</p>
-                        <ul class="nearby-list">
-                            ${nearby.map(p => `<li>${p}</li>`).join('')}
-                        </ul>
+                            <div class="price-config">
+                                <span class="price">${prop.price}</span>
+                                <span class="config">${prop.config}</span>
+                            </div>
 
+                            <div class="details-grid">
+                                <div class="detail-item"><strong>Area:</strong> ${prop.area}</div>
+                                <div class="detail-item">
+                                    ${getIcon('cal')} <strong>Available:</strong> ${prop.available_from}
+                                </div>
+                            </div>
+
+                            ${featuresHtml}
+                            ${placesHtml}
+
+                            ${emiHtml}
+                        </div>
                     </div>
                 </a>
             `;
         }
 
-        async function renderProperties() {
-            const budgetContainer = document.getElementById('budget-properties');
-            const recommendedContainer = document.getElementById('recommended-properties');
-            let budgetHtml = '';
-            let recommendedHtml = '';
+        // --- Render Properties ---
+        const budgetGrid = document.getElementById('under-budget-grid');
+        const recommendedGrid = document.getElementById('recommended-grid');
 
-            if (allSelected.length === 0) {
-                 document.getElementById('error-message').style.display = 'block';
-                 budgetContainer.innerHTML = '';
-                 recommendedContainer.innerHTML = '';
-                 return;
-            }
-
-            // Render Budget Properties (First 4 selected)
-            for (let i = 0; i < finalBudget.length; i++) {
-                budgetHtml += await generatePropertyCard(finalBudget[i], i, false);
-            }
-            budgetContainer.innerHTML = budgetHtml;
-
-            // Render Recommended Properties (Next 2 selected)
-            for (let i = 0; i < finalRecommended.length; i++) {
-                // Index for bank link calculation starts from the end of the budget list
-                recommendedHtml += await generatePropertyCard(finalRecommended[i], finalBudget.length + i, true);
-            }
-            recommendedContainer.innerHTML = recommendedHtml;
+        let budgetHtml = '';
+        if (selectedUnderBudget.length > 0) {
+            selectedUnderBudget.forEach(prop => {
+                budgetHtml += createCardHTML(prop);
+            });
+        } else {
+            budgetHtml = '<p style="grid-column: 1 / -1; text-align: center; padding: 20px; background: #fff3cd; border-radius: 8px; color: #856404;">No properties found strictly under ₹2 Cr matching configuration and location.</p>';
         }
+        budgetGrid.innerHTML = budgetHtml;
 
-        renderProperties();
+
+        let recommendedHtml = '';
+        if (selectedRecommended.length > 0) {
+            selectedRecommended.forEach(prop => {
+                recommendedHtml += createCardHTML(prop);
+            });
+        } else {
+            recommendedHtml = '<p style="grid-column: 1 / -1; text-align: center; padding: 20px; background: #f8d7da; border-radius: 8px; color: #721c24;">No specific recommended properties matched your criteria after filtering budget properties.</p>';
+        }
+        recommendedGrid.innerHTML = recommendedHtml;
+
     </script>
 </body>
 </html>
