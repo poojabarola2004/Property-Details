@@ -5,168 +5,254 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Property Recommendations</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+        :root {
+            --primary-color: #0056b3;
+            --secondary-color: #f8f9fa;
+            --text-color: #343a40;
+            --light-text-color: #6c757d;
+            --border-color: #e0e0e0;
+            --card-bg: #ffffff;
+            --shadow-light: rgba(0, 0, 0, 0.08);
+            --shadow-hover: rgba(0, 0, 0, 0.15);
+            --border-radius-lg: 12px;
+            --border-radius-md: 8px;
+            --button-bg: #28a745;
+            --button-hover-bg: #218838;
+        }
+
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 20px;
-            background-color: #f0f2f5;
-            color: #333;
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: var(--secondary-color);
+            color: var(--text-color);
             line-height: 1.6;
         }
+
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
+            background-color: var(--card-bg);
+            border-radius: var(--border-radius-lg);
+            box-shadow: 0 4px 20px var(--shadow-light);
         }
+
         h1, h2 {
             text-align: center;
-            color: #2c3e50;
+            color: var(--primary-color);
             margin-bottom: 30px;
             font-weight: 600;
         }
-        .section-title {
-            font-size: 2em;
-            color: #34495e;
-            border-bottom: 3px solid #3498db;
+
+        h2 {
+            margin-top: 40px;
             padding-bottom: 10px;
-            margin-top: 50px;
-            margin-bottom: 30px;
-            text-align: left;
+            border-bottom: 2px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            font-size: 1.8em;
         }
+        
+        h2 span {
+            font-size: 1.1em; /* Icon size relative to heading */
+        }
+
         .property-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 25px;
+            margin-top: 30px;
+            margin-bottom: 50px;
         }
+
         .property-card {
-            background-color: #ffffff;
-            border-radius: 12px;
+            background-color: var(--card-bg);
+            border-radius: var(--border-radius-lg);
+            box-shadow: 0 4px 15px var(--shadow-light);
             overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             display: flex;
             flex-direction: column;
+            cursor: pointer;
         }
+
         .property-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px var(--shadow-hover);
         }
+
         .property-image {
             width: 100%;
             height: 220px;
             object-fit: cover;
-            border-bottom: 1px solid #eee;
+            border-bottom: 1px solid var(--border-color);
         }
+
         .property-content {
             padding: 20px;
             flex-grow: 1;
             display: flex;
             flex-direction: column;
         }
-        .property-title {
-            font-size: 1.4em;
-            margin-top: 0;
-            margin-bottom: 10px;
-            color: #34495e;
-            font-weight: 700;
-        }
-        .property-location {
-            font-size: 1em;
-            color: #7f8c8d;
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-        }
-        .property-location svg {
-            margin-right: 5px;
-            color: #3498db;
-        }
-        .property-details {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 15px;
-            flex-wrap: wrap;
-        }
-        .detail-item {
-            display: flex;
-            align-items: center;
-            font-size: 0.9em;
-            color: #555;
-            margin-right: 15px;
+
+        .property-name {
+            font-size: 1.1em;
+            font-weight: 500;
+            color: var(--text-color);
             margin-bottom: 5px;
         }
-        .detail-item svg {
-            margin-right: 5px;
-            color: #2ecc71;
-        }
-        .property-price {
-            font-size: 1.8em;
-            color: #e74c3c;
-            font-weight: 700;
-            margin-top: auto; /* Pushes price to the bottom if content above varies */
-            margin-bottom: 10px;
-        }
-        .property-emi {
-            font-size: 1.1em;
-            color: #2980b9;
-            margin-bottom: 10px;
-        }
-        .emi-link {
-            display: inline-block;
-            background-color: #3498db;
-            color: white;
-            padding: 8px 15px;
-            border-radius: 5px;
-            text-decoration: none;
-            font-size: 0.9em;
-            transition: background-color 0.3s ease;
-        }
-        .emi-link:hover {
-            background-color: #2980b9;
-        }
-        .property-features, .property-nearby {
-            font-size: 0.9em;
-            color: #555;
-            margin-bottom: 10px;
-        }
-        .property-description {
-            font-size: 0.9em;
-            color: #666;
-            margin-bottom: 15px;
-            flex-grow: 1;
-        }
-        .property-link {
-            display: inline-block;
-            background-color: #27ae60;
-            color: white;
-            padding: 10px 20px;
-            border-radius: 8px;
-            text-decoration: none;
-            text-align: center;
-            margin-top: 15px;
-            transition: background-color 0.3s ease;
+
+        .property-title {
+            font-size: 1.3em;
             font-weight: 600;
-        }
-        .property-link:hover {
-            background-color: #219d54;
-        }
-        .note {
-            background-color: #ecf0f1;
-            padding: 15px;
-            border-left: 5px solid #3498db;
-            margin-top: 20px;
-            margin-bottom: 30px;
-            color: #34495e;
-            border-radius: 8px;
+            color: var(--primary-color);
+            margin-bottom: 10px;
         }
 
-        /* Responsive adjustments */
+        .property-location {
+            font-size: 0.95em;
+            color: var(--light-text-color);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .property-location svg {
+            color: #d10000;
+        }
+
+        .property-details {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .property-detail-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--light-text-color);
+            font-size: 0.9em;
+        }
+
+        .property-detail-item strong {
+            color: var(--text-color);
+            font-weight: 500;
+        }
+
+        .price-emi {
+            margin-top: auto; /* Pushes price and EMI to bottom */
+            padding-top: 15px;
+            border-top: 1px dashed var(--border-color);
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .price-emi .price {
+            font-size: 1.4em;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+        .price-emi .emi {
+            font-size: 0.9em;
+            color: var(--light-text-color);
+        }
+        .price-emi .emi a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .price-emi .emi a:hover {
+            text-decoration: underline;
+        }
+
+        .features-nearby {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 1px dashed var(--border-color);
+        }
+
+        .features-nearby h4 {
+            margin: 0 0 10px 0;
+            color: var(--primary-color);
+            font-weight: 600;
+            font-size: 1em;
+        }
+
+        .features-nearby ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .features-nearby li {
+            background-color: var(--secondary-color);
+            color: var(--text-color);
+            padding: 6px 12px;
+            border-radius: var(--border-radius-md);
+            font-size: 0.85em;
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            border: 1px solid var(--border-color);
+        }
+        
+        .features-nearby li svg {
+            color: var(--primary-color);
+        }
+
+        .visit-button {
+            display: block;
+            width: fit-content;
+            margin-top: 20px;
+            padding: 12px 25px;
+            background-color: var(--button-bg);
+            color: white;
+            text-align: center;
+            border-radius: var(--border-radius-md);
+            text-decoration: none;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+            align-self: flex-start;
+        }
+
+        .visit-button:hover {
+            background-color: var(--button-hover-bg);
+        }
+
         @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+                border-radius: 0;
+            }
+            body {
+                padding: 0;
+            }
+            h2 {
+                font-size: 1.5em;
+            }
             .property-grid {
                 grid-template-columns: 1fr;
             }
-            .section-title {
-                font-size: 1.8em;
-                text-align: center;
+            .property-card {
+                margin: 0;
+            }
+            .property-title {
+                font-size: 1.1em;
             }
         }
     </style>
@@ -174,195 +260,345 @@
 <body>
     <div class="container">
         <h1>Your Personalized Property Recommendations</h1>
-        <div class="note">
-            <strong>Note:</strong> You searched for 3 BHK properties in Alpha 1, Greater Noida, under ₹6 Crore, preferably semi-furnished and near a hospital.
-            <br>
-            <br>
-            We found one property explicitly mentioning "close to hospital". For furnishing, none of the available properties explicitly stated "semi-furnished"; these details might be available upon inquiry.
-            <br>
-            <br>
-            EMI calculations are based on a 7.5% annual interest rate over 20 years.
+
+        <h2>🏠 Under-Budget Properties</h2>
+        <div class="property-grid">
+            
+  <div class="property-card">
+    <img src="https://static.99acres.com/universalapp/img/noImageBgPremium.svg" alt="Gharonda apartments" class="property-image">
+    <div class="property-content">
+      <div class="property-name">Gharonda apartments</div>
+      <div class="property-title">This 3 bhk flat is located in gharonda apartments, which houses some of the most spacious flats in alpha 1 greater noida.</div>
+      <div class="property-location">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="1em" height="1em"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+        Alpha 1, Greater Noida
+      </div>
+      <div class="property-details">
+        <div class="property-detail-item">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="1em" height="1em"><path d="M12 5C10.34 5 9 6.34 9 8s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3zm7 5.5V19c0 1.1-.9 2-2 2H7c-1.1 0-2-.9-2-2v-8.5c-.6-.4-1-.9-1-1.5V6c0-1.1.9-2 2-2h14c1.1 0 2 .9 2 2v3c0 .6-.4 1.1-1 1.5z"/></svg>
+          <strong>1,000 sqft(93 sqm)</strong>
+        </div>
+        <div class="property-detail-item">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="1em" height="1em"><path d="M21 10V6c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v4c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zm-9 7c-1.38 0-2.5-1.12-2.5-2.5S10.62 12 12 12s2.5 1.12 2.5 2.5S13.38 17 12 17zm9-5c0 1.1-.9 2-2 2H5c-1.1 0-2-.9-2-2v-.5c.6-.4 1.2-.6 1.9-.7V9c0-.6.4-1 1-1h12c.6 0 1 .4 1 1v2.5c.7.1 1.3.3 1.9.7V12z"/></svg>
+          <strong>3 BHK (2 Baths)</strong>
+        </div>
+        <div class="property-detail-item">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="1em" height="1em"><path d="M19 12h-2V7h-4V4H7v3H5v5H3V6c0-1.1.9-2 2-2h6V3c0-1.1-.9-2-2-2H7C5.9 1 5 1.9 5 3v1H3v2h2v5H3v3h2v-2h2v5h2v-5h4v5h2v-5h2v2h2v-3h-2v-5zm-6-8h4v3h-4V4zM5 13v-2h2v2H5z"/></svg>
+          <strong>Unfurnished</strong>
+        </div>
+        <div class="property-detail-item">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="1em" height="1em"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z"/></svg>
+          <strong>2w ago</strong>
+        </div>
+      </div>
+      <div class="price-emi">
+        <div class="price">₹98 Lac</div>
+        <div class="emi">EMI: ₹55,078/month. Check <a href="#" onclick="alert('Please visit the bank\'s official website for current loan rates and applications.')">Axis Bank</a> for best rates.</div>
+      </div>
+      <div class="features-nearby">
+        <h4>Features</h4>
+        <ul>
+          <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="1em" height="1em"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>Ready To Move</li>
+        </ul>
+        <h4>Places Nearby</h4>
+        <ul>
+          <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="1em" height="1em"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>Alpha 1 metro station</li>
+          <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="1em" height="1em"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>Pari chowk metro station</li>
+          <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="1em" height="1em"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>+3</li>
+        </ul>
+      </div>
+      <a href="https://www.99acres.com/3-bhk-bedroom-apartment-flat-for-sale-in-gharonda-apartments-alpha-1-greater-noida-1000-sq-ft-spid-E85523950" class="visit-button" target="_blank">Visit Property</a>
+    </div>
+  </div>
+
+  <div class="property-card">
+    <img src="https://static.99acres.com/universalapp/img/noImageBgPremium.svg" alt="Parsvnath Edens" class="property-image">
+    <div class="property-content">
+      <div class="property-name">Parsvnath Edens</div>
+      <div class="property-title">This 3 bhk apartment/flat in alpha 2 greater noida is available for sale in one of greater noida's most popular projects, parsvnath edens.</div>
+      <div class="property-location">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="1em" height="1em"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+        Alpha 2, Greater Noida
+      </div>
+      <div class="property-details">
+        <div class="property-detail-item">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="1em" height="1em"><path d="M12 5C10.34 5 9 6.34 9 8s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3zm7 5.5V19c0 1.1-.9 2-2 2H7c-1.1 0-2-.9-2-2v-8.5c-.6-.4-1-.9-1-1.5V6c0-1.1.9-2 2-2h14c1.1 0 2 .9 2 2v3c0 .6-.4 1.1-1 1.5z"/></svg>
+          <strong>1,500 sqft(139 sqm)</strong>
+        </div>
+        <div class="property-detail-item">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="1em" height="1em"><path d="M21 10V6c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v4c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zm-9 7c-1.38 0-2.5-1.12-2.5-2.5S10.62 12 12 12s2.5 1.12 2.5 2.5S13.38 17 12 17zm9-5c0 1.1-.9 2-2 2H5c-1.1 0-2-.9-2-2v-.5c.6-.4 1.2-.6 1.9-.7V9c0-.6.4-1 1-1h12c.6 0 1 .4 1 1v2.5c.7.1 1.3.3 1.9.7V12z"/></svg>
+          <strong>3 BHK (3 Baths)</strong>
+        </div>
+        <div class="property-detail-item">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="1em" height="1em"><path d="M19 12h-2V7h-4V4H7v3H5v5H3V6c0-1.1.9-2 2-2h6V3c0-1.1-.9-2-2-2H7C5.9 1 5 1.9 5 3v1H3v2h2v5H3v3h2v-2h2v5h2v-5h4v5h2v-5h2v2h2v-3h-2v-5zm-6-8h4v3h-4V4zM5 13v-2h2v2H5z"/></svg>
+          <strong>Unfurnished</strong>
+        </div>
+        <div class="property-detail-item">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="1em" height="1em"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z"/></svg>
+          <strong>1w ago</strong>
+        </div>
+      </div>
+      <div class="price-emi">
+        <div class="price">₹1.35 Cr</div>
+        <div class="emi">EMI: ₹75,888/month. Check <a href="#" onclick="alert('Please visit the bank\'s official website for current loan rates and applications.')">Kotak Mahindra Bank</a> for best rates.</div>
+      </div>
+      <div class="features-nearby">
+        <h4>Features</h4>
+        <ul>
+          <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="1em" height="1em"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>Ready To Move</li>
+        </ul>
+        <h4>Places Nearby</h4>
+        <ul>
+          <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="1em" height="1em"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>Alpha 1 metro station</li>
+          <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="1em" height="1em"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>Delta 1 metro station</li>
+          <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="1em" height="1em"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>+3</li>
+        </ul>
+      </div>
+      <a href="https://www.99acres.com/3-bhk-bedroom-apartment-flat-for-sale-in-parsvnath-edens-alpha-2-greater-noida-1500-sq-ft-spid-W85734920" class="visit-button" target="_blank">Visit Property</a>
+    </div>
+  </div>
+
+  <div class="property-card">
+    <img src="https://static.99acres.com/universalapp/img/noImageBg.svg" alt="Alpha 1" class="property-image">
+    <div class="property-content">
+      <div class="property-name">Alpha 1</div>
+      <div class="property-title">60 mtr house available for sale in sector alpha -1.</div>
+      <div class="property-location">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="1em" height="1em"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+        Alpha 1, Greater Noida
+      </div>
+      <div class="property-details">
+        <div class="property-detail-item">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="1em" height="1em"><path d="M12 5C10.34 5 9 6.34 9 8s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3zm7 5.5V19c0 1.1-.9 2-2 2H7c-1.1 0-2-.9-2-2v-8.5c-.6-.4-1-.9-1-1.5V6c0-1.1.9-2 2-2h14c1.1 0 2 .9 2 2v3c0 .6-.4 1.1-1 1.5z"/></svg>
+          <strong>645 sqft(60 sqm)</strong>
+        </div>
+        <div class="property-detail-item">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="1em" height="1em"><path d="M21 10V6c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v4c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zm-9 7c-1.38 0-2.5-1.12-2.5-2.5S10.62 12 12 12s2.5 1.12 2.5 2.5S13.38 17 12 17zm9-5c0 1.1-.9 2-2 2H5c-1.1 0-2-.9-2-2v-.5c.6-.4 1.2-.6 1.9-.7V9c0-.6.4-1 1-1h12c.6 0 1 .4 1 1v2.5c.7.1 1.3.3 1.9.7V12z"/></svg>
+          <strong>3 BHK (3 Baths)</strong>
+        </div>
+        <div class="property-detail-item">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="1em" height="1em"><path d="M19 12h-2V7h-4V4H7v3H5v5H3V6c0-1.1.9-2 2-2h6V3c0-1.1-.9-2-2-2H7C5.9 1 5 1.9 5 3v1H3v2h2v5H3v3h2v-2h2v5h2v-5h4v5h2v-5h2v2h2v-3h-2v-5zm-6-8h4v3h-4V4zM5 13v-2h2v2H5z"/></svg>
+          <strong>Unfurnished</strong>
+        </div>
+        <div class="property-detail-item">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="1em" height="1em"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z"/></svg>
+          <strong>1mo ago</strong>
+        </div>
+      </div>
+      <div class="price-emi">
+        <div class="price">₹1.45 Cr</div>
+        <div class="emi">EMI: ₹81,496/month. Check <a href="#" onclick="alert('Please visit the bank\'s official website for current loan rates and applications.')">Axis Bank</a> for best rates.</div>
+      </div>
+      <div class="features-nearby">
+        <h4>Features</h4>
+        <ul>
+          <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="1em" height="1em"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>Ready To Move</li>
+        </ul>
+        <h4>Places Nearby</h4>
+        <ul>
+          <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="1em" height="1em"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>Alpha 1 metro station</li>
+          <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="1em" height="1em"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>Pari chowk metro station</li>
+          <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="1em" height="1em"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>+3</li>
+        </ul>
+      </div>
+      <a href="https://www.99acres.com/3-bhk-bedroom-independent-house-villa-for-sale-in-alpha-1-greater-noida-645-sq-ft-spid-C83346740" class="visit-button" target="_blank">Visit Property</a>
+    </div>
+  </div>
+
+  <div class="property-card">
+    <img src="https://imagecdn.99acres.com/media1/32105/14/642114963M-1756890487055.webp" alt="Alpha 2" class="property-image">
+    <div class="property-content">
+      <div class="property-name">Alpha 2</div>
+      <div class="property-title">This residential house is for sale in greater noida, sector alpha 2.</div>
+      <div class="property-location">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="1em" height="1em"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+        Alpha 2, Greater Noida
+      </div>
+      <div class="property-details">
+        <div class="property-detail-item">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="1em" height="1em"><path d="M12 5C10.34 5 9 6.34 9 8s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3zm7 5.5V19c0 1.1-.9 2-2 2H7c-1.1 0-2-.9-2-2v-8.5c-.6-.4-1-.9-1-1.5V6c0-1.1.9-2 2-2h14c1.1 0 2 .9 2 2v3c0 .6-.4 1.1-1 1.5z"/></svg>
+          <strong>645 sqft(60 sqm)</strong>
+        </div>
+        <div class="property-detail-item">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="1em" height="1em"><path d="M21 10V6c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v4c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zm-9 7c-1.38 0-2.5-1.12-2.5-2.5S10.62 12 12 12s2.5 1.12 2.5 2.5S13.38 17 12 17zm9-5c0 1.1-.9 2-2 2H5c-1.1 0-2-.9-2-2v-.5c.6-.4 1.2-.6 1.9-.7V9c0-.6.4-1 1-1h12c.6 0 1 .4 1 1v2.5c.7.1 1.3.3 1.9.7V12z"/></svg>
+          <strong>3 BHK (3 Baths)</strong>
+        </div>
+        <div class="property-detail-item">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="1em" height="1em"><path d="M19 12h-2V7h-4V4H7v3H5v5H3V6c0-1.1.9-2 2-2h6V3c0-1.1-.9-2-2-2H7C5.9 1 5 1.9 5 3v1H3v2h2v5H3v3h2v-2h2v5h2v-5h4v5h2v-5h2v2h2v-3h-2v-5zm-6-8h4v3h-4V4zM5 13v-2h2v2H5z"/></svg>
+          <strong>Unfurnished</strong>
+        </div>
+        <div class="property-detail-item">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="1em" height="1em"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z"/></svg>
+          <strong>1mo ago</strong>
+        </div>
+      </div>
+      <div class="price-emi">
+        <div class="price">₹1.55 Cr</div>
+        <div class="emi">EMI: ₹87,105/month. Check <a href="#" onclick="alert('Please visit the bank\'s official website for current loan rates and applications.')">HDFC Bank</a> for best rates.</div>
+      </div>
+      <div class="features-nearby">
+        <h4>Features</h4>
+        <ul>
+          <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="1em" height="1em"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>Ready To Move</li>
+        </ul>
+        <h4>Places Nearby</h4>
+        <ul>
+          <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="1em" height="1em"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>Alpha 1 metro station</li>
+          <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="1em" height="1em"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>Delta 1 metro station</li>
+          <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="1em" height="1em"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>+3</li>
+        </ul>
+      </div>
+      <a href="https://www.99acres.com/3-bhk-bedroom-independent-house-villa-for-sale-in-alpha-2-greater-noida-646-sq-ft-spid-L84897590" class="visit-button" target="_blank">Visit Property</a>
+    </div>
+  </div>
+
+  <div class="property-card">
+    <img src="https://static.99acres.com/universalapp/img/noImageBg.svg" alt="Block C" class="property-image">
+    <div class="property-content">
+      <div class="property-name">Block C</div>
+      <div class="property-title">Do you wish to buy an independent house in block c, alpha 1, greater noida.</div>
+      <div class="property-location">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="1em" height="1em"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+        Alpha 1, Greater Noida
+      </div>
+      <div class="property-details">
+        <div class="property-detail-item">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="1em" height="1em"><path d="M12 5C10.34 5 9 6.34 9 8s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3zm7 5.5V19c0 1.1-.9 2-2 2H7c-1.1 0-2-.9-2-2v-8.5c-.6-.4-1-.9-1-1.5V6c0-1.1.9-2 2-2h14c1.1 0 2 .9 2 2v3c0 .6-.4 1.1-1 1.5z"/></svg>
+          <strong>1,076 sqft(100 sqm)</strong>
+        </div>
+        <div class="property-detail-item">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="1em" height="1em"><path d="M21 10V6c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v4c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zm-9 7c-1.38 0-2.5-1.12-2.5-2.5S10.62 12 12 12s2.5 1.12 2.5 2.5S13.38 17 12 17zm9-5c0 1.1-.9 2-2 2H5c-1.1 0-2-.9-2-2v-.5c.6-.4 1.2-.6 1.9-.7V9c0-.6.4-1 1-1h12c.6 0 1 .4 1 1v2.5c.7.1 1.3.3 1.9.7V12z"/></svg>
+          <strong>3 BHK (3 Baths)</strong>
+        </div>
+        <div class="property-detail-item">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="1em" height="1em"><path d="M19 12h-2V7h-4V4H7v3H5v5H3V6c0-1.1.9-2 2-2h6V3c0-1.1-.9-2-2-2H7C5.9 1 5 1.9 5 3v1H3v2h2v5H3v3h2v-2h2v5h2v-5h4v5h2v-5h2v2h2v-3h-2v-5zm-6-8h4v3h-4V4zM5 13v-2h2v2H5z"/></svg>
+          <strong>Unfurnished</strong>
+        </div>
+        <div class="property-detail-item">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="1em" height="1em"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z"/></svg>
+          <strong>Today</strong>
+        </div>
+      </div>
+      <div class="price-emi">
+        <div class="price">₹2.15 Cr</div>
+        <div class="emi">EMI: ₹120,707/month. Check <a href="#" onclick="alert('Please visit the bank\'s official website for current loan rates and applications.')">HDFC Bank</a> for best rates.</div>
+      </div>
+      <div class="features-nearby">
+        <h4>Features</h4>
+        <ul>
+          <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="1em" height="1em"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>Ready To Move</li>
+        </ul>
+        <h4>Places Nearby</h4>
+        <ul>
+          <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="1em" height="1em"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>Alpha 1 metro station</li>
+          <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="1em" height="1em"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>Pari chowk metro station</li>
+          <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="1em" height="1em"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>+3</li>
+        </ul>
+      </div>
+      <a href="https://www.99acres.com/3-bhk-bedroom-independent-house-villa-for-sale-in-block-c-alpha-1-greater-noida-1075-sq-ft-r1-spid-O81734822" class="visit-button" target="_blank">Visit Property</a>
+    </div>
+  </div>
+
         </div>
 
-        <h2 class="section-title">🏠 Under Budget Properties</h2>
+        <h2>🌟 Recommended Properties</h2>
         <div class="property-grid">
-
-            <div class="property-card">
-                <img src="https://static.99acres.com/universalapp/img/noImageBg.svg" alt="Property Image" class="property-image">
-                <div class="property-content">
-                    <h3 class="property-title">3 BHK Apartment</h3>
-                    <div class="property-location">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
-                            <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/>
-                        </svg>
-                        Alpha 1, Greater Noida
-                    </div>
-                    <p class="property-description">This 3 bhk flat is located in gharonda apartments, which houses some of the most spacious flats in alpha 1 greater noida. The flat is north-East-Facing. Constructed on a super built up area of 1000 sq.Ft., the flat comprises 3 bedroom(s), 2 bathrooms and 3 balconies. The residential building has 5 floors in total and the flat for sale is located on the top floor. Being a ready to move project, ...</p>
-                    <div class="property-details">
-                        <span class="detail-item"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-rulers" viewBox="0 0 16 16"><path d="M1 0a1 1 0 0 0-1 1v14a1 1 0 0 0 1 1h5v-1H2v-1h4v-1H3v-1h3v-1H4v-1h2v-1H5v-1h2v-1H6v-1h2v-1H7v-1h2v-1H8v-1h2v-1H9v-1h2v-1H10v-1h2v-1h1V1a1 1 0 0 0-1-1H1zM0 16a1 1 0 0 1 1-1h5.903a1 1 0 0 1 .74-.33l.913.255a1 1 0 0 1 .451.697v-.003L12 15h3a1 1 0 0 1 1 1H0zm13-1.5h2v-1h-2v1z"/></svg>1,000 sqft</span>
-                        <span class="detail-item"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-columns-gap" viewBox="0 0 16 16"><path d="M6 1v3H1V1h5zM1 0a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h5a1 1 0 0 0 1-1V1a1 1 0 0 0-1-1H1zm10 0a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h5a1 1 0 0 0 1-1V1a1 1 0 0 0-1-1h-5zm0 1h5v3h-5V1zM1 7a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h5a1 1 0 0 0 1-1V8a1 1 0 0 0-1-1H1zm0 1h5v3H1V8zm10-1a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h5a1 1 0 0 0 1-1V8a1 1 0 0 0-1-1h-5zm0 1h5v3h-5V8z"/></svg>3 BHK (2 Baths)</span>
-                        <span class="detail-item"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clock-fill" viewBox="0 0 16 16"><path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z"/></svg>2w ago</span>
-                    </div>
-                    <p class="property-features"><strong>Features:</strong> Owner, Verified, Ready To Move, With Photos, With Videos</p>
-                    <p class="property-nearby"><strong>Nearby:</strong> Alpha 1 metro station, Pari chowk metro station, +3</p>
-                    <div class="property-price">₹98 Lac</div>
-                    <div class="property-emi">EMI: ₹78,820/month <a href="https://homeloans.sbi/" target="_blank" class="emi-link">Get Loan</a></div>
-                    <a href="https://www.99acres.com/3-bhk-bedroom-apartment-flat-for-sale-in-gharonda-apartments-alpha-1-greater-noida-1000-sq-ft-spid-E85523950" target="_blank" class="property-link">View Property</a>
-                </div>
-            </div>
-
-            <div class="property-card">
-                <img src="https://static.99acres.com/universalapp/img/noImageBg.svg" alt="Property Image" class="property-image">
-                <div class="property-content">
-                    <h3 class="property-title">3 BHK Independent House</h3>
-                    <div class="property-location">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
-                            <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/>
-                        </svg>
-                        Alpha 1, Greater Noida
-                    </div>
-                    <p class="property-description">60 mtr house available for sale in sector alpha -1. For more information please contact greno estates.</p>
-                    <div class="property-details">
-                        <span class="detail-item"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-rulers" viewBox="0 0 16 16"><path d="M1 0a1 1 0 0 0-1 1v14a1 1 0 0 0 1 1h5v-1H2v-1h4v-1H3v-1h3v-1H4v-1h2v-1H5v-1h2v-1H6v-1h2v-1H7v-1h2v-1H8v-1h2v-1H9v-1h2v-1H10v-1h2v-1h1V1a1 1 0 0 0-1-1H1zM0 16a1 1 0 0 1 1-1h5.903a1 1 0 0 1 .74-.33l.913.255a1 1 0 0 1 .451.697v-.003L12 15h3a1 1 0 0 1 1 1H0zm13-1.5h2v-1h-2v1z"/></svg>645 sqft</span>
-                        <span class="detail-item"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-columns-gap" viewBox="0 0 16 16"><path d="M6 1v3H1V1h5zM1 0a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h5a1 1 0 0 0 1-1V1a1 1 0 0 0-1-1H1zm10 0a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h5a1 1 0 0 0 1-1V1a1 1 0 0 0-1-1h-5zm0 1h5v3h-5V1zM1 7a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h5a1 1 0 0 0 1-1V8a1 1 0 0 0-1-1H1zm0 1h5v3H1V8zm10-1a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h5a1 1 0 0 0 1-1V8a1 1 0 0 0-1-1h-5zm0 1h5v3h-5V8z"/></svg>3 BHK (3 Baths)</span>
-                        <span class="detail-item"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clock-fill" viewBox="0 0 16 16"><path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z"/></svg>1mo ago</span>
-                    </div>
-                    <p class="property-features"><strong>Features:</strong> Owner, Verified, Under construction, Ready To Move, With Photos, With Videos</p>
-                    <p class="property-nearby"><strong>Nearby:</strong> Alpha 1 metro station, Pari chowk metro station, +3</p>
-                    <div class="property-price">₹1.45 Cr</div>
-                    <div class="property-emi">EMI: ₹1,16,634/month <a href="https://homeloans.sbi/" target="_blank" class="emi-link">Get Loan</a></div>
-                    <a href="https://www.99acres.com/3-bhk-bedroom-independent-house-villa-for-sale-in-alpha-1-greater-noida-645-sq-ft-spid-C83346740" target="_blank" class="property-link">View Property</a>
-                </div>
-            </div>
-
-            <div class="property-card">
-                <img src="https://static.99acres.com/universalapp/img/noImageBg.svg" alt="Property Image" class="property-image">
-                <div class="property-content">
-                    <h3 class="property-title">3 BHK Independent House</h3>
-                    <div class="property-location">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
-                            <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/>
-                        </svg>
-                        Alpha 1, Greater Noida
-                    </div>
-                    <p class="property-description">This residential house is for sale in greater noida, sector alpha 1. The property has an area of 60 square meters. The property is facing northwest. The property is priced at rs. 1.55 crore. Consider this property in sector alpha 1 and make it your new address. Shiva associates.</p>
-                    <div class="property-details">
-                        <span class="detail-item"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-rulers" viewBox="0 0 16 16"><path d="M1 0a1 1 0 0 0-1 1v14a1 1 0 0 0 1 1h5v-1H2v-1h4v-1H3v-1h3v-1H4v-1h2v-1H5v-1h2v-1H6v-1h2v-1H7v-1h2v-1H8v-1h2v-1H9v-1h2v-1H10v-1h2v-1h1V1a1 1 0 0 0-1-1H1zM0 16a1 1 0 0 1 1-1h5.903a1 1 0 0 1 .74-.33l.913.255a1 1 0 0 1 .451.697v-.003L12 15h3a1 1 0 0 1 1 1H0zm13-1.5h2v-1h-2v1z"/></svg>645 sqft</span>
-                        <span class="detail-item"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-columns-gap" viewBox="0 0 16 16"><path d="M6 1v3H1V1h5zM1 0a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h5a1 1 0 0 0 1-1V1a1 1 0 0 0-1-1H1zm10 0a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h5a1 1 0 0 0 1-1V1a1 1 0 0 0-1-1h-5zm0 1h5v3h-5V1zM1 7a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h5a1 1 0 0 0 1-1V8a1 1 0 0 0-1-1H1zm0 1h5v3H1V8zm10-1a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h5a1 1 0 0 0 1-1V8a1 1 0 0 0-1-1h-5zm0 1h5v3h-5V8z"/></svg>3 BHK (3 Baths)</span>
-                        <span class="detail-item"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clock-fill" viewBox="0 0 16 16"><path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z"/></svg>2w ago</span>
-                    </div>
-                    <p class="property-features"><strong>Features:</strong> Owner, Verified, Under construction, Ready To Move, With Photos, With Videos</p>
-                    <p class="property-nearby"><strong>Nearby:</strong> Alpha 1 metro station, Pari chowk metro station, +3</p>
-                    <div class="property-price">₹1.55 Cr</div>
-                    <div class="property-emi">EMI: ₹1,24,679/month <a href="https://homeloans.sbi/" target="_blank" class="emi-link">Get Loan</a></div>
-                    <a href="https://www.99acres.com/3-bhk-bedroom-independent-house-villa-for-sale-in-alpha-1-greater-noida-646-sq-ft-spid-P85546394" target="_blank" class="property-link">View Property</a>
-                </div>
-            </div>
-
-            <div class="property-card">
-                <img src="https://static.99acres.com/universalapp/img/noImageBg.svg" alt="Property Image" class="property-image">
-                <div class="property-content">
-                    <h3 class="property-title">3 BHK Independent House</h3>
-                    <div class="property-location">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
-                            <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/>
-                        </svg>
-                        Block C, Alpha 1, Greater Noida
-                    </div>
-                    <p class="property-description">G block, alpha 2, greater noida 60 sq meter residential build up house available on sale in alpha - 1, greater noida. This is located with south west facing ground floor build up house on 12 meter road in c -Block. This is very prime location for your investment purpose or personal house purpose. Alpha - 2 is a very prime location. All connectivity nearby, we have many option in alpha - 2 in an...</p>
-                    <div class="property-details">
-                        <span class="detail-item"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-rulers" viewBox="0 0 16 16"><path d="M1 0a1 1 0 0 0-1 1v14a1 1 0 0 0 1 1h5v-1H2v-1h4v-1H3v-1h3v-1H4v-1h2v-1H5v-1h2v-1H6v-1h2v-1H7v-1h2v-1H8v-1h2v-1H9v-1h2v-1H10v-1h2v-1h1V1a1 1 0 0 0-1-1H1zM0 16a1 1 0 0 1 1-1h5.903a1 1 0 0 1 .74-.33l.913.255a1 1 0 0 1 .451.697v-.003L12 15h3a1 1 0 0 1 1 1H0zm13-1.5h2v-1h-2v1z"/></svg>645 sqft</span>
-                        <span class="detail-item"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-columns-gap" viewBox="0 0 16 16"><path d="M6 1v3H1V1h5zM1 0a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h5a1 1 0 0 0 1-1V1a1 1 0 0 0-1-1H1zm10 0a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h5a1 1 0 0 0 1-1V1a1 1 0 0 0-1-1h-5zm0 1h5v3h-5V1zM1 7a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h5a1 1 0 0 0 1-1V8a1 1 0 0 0-1-1H1zm0 1h5v3H1V8zm10-1a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h5a1 1 0 0 0 1-1V8a1 1 0 0 0-1-1h-5zm0 1h5v3h-5V8z"/></svg>3 BHK (3 Baths)</span>
-                        <span class="detail-item"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clock-fill" viewBox="0 0 16 16"><path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z"/></svg>1mo ago</span>
-                    </div>
-                    <p class="property-features"><strong>Features:</strong> Owner, Verified, Under construction, Ready To Move, With Photos, With Videos</p>
-                    <p class="property-nearby"><strong>Nearby:</strong> Alpha 1 metro station, Pari chowk metro station, +3</p>
-                    <div class="property-price">₹1.75 Cr</div>
-                    <div class="property-emi">EMI: ₹1,40,841/month <a href="https://homeloans.sbi/" target="_blank" class="emi-link">Get Loan</a></div>
-                    <a href="https://www.99acres.com/3-bhk-bedroom-independent-house-villa-for-sale-in-block-c-alpha-1-greater-noida-646-sq-ft-spid-R84568108" target="_blank" class="property-link">View Property</a>
-                </div>
-            </div>
-
+            
+  <div class="property-card">
+    <img src="https://static.99acres.com/universalapp/img/noImageBgPremium.svg" alt="Alpha 1 RWA" class="property-image">
+    <div class="property-content">
+      <div class="property-name">Alpha 1 RWA</div>
+      <div class="property-title">Check out this 3 bhk builder floor in alpha 1 greater noida.</div>
+      <div class="property-location">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="1em" height="1em"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+        Alpha 1, Greater Noida
+      </div>
+      <div class="property-details">
+        <div class="property-detail-item">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="1em" height="1em"><path d="M12 5C10.34 5 9 6.34 9 8s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3zm7 5.5V19c0 1.1-.9 2-2 2H7c-1.1 0-2-.9-2-2v-8.5c-.6-.4-1-.9-1-1.5V6c0-1.1.9-2 2-2h14c1.1 0 2 .9 2 2v3c0 .6-.4 1.1-1 1.5z"/></svg>
+          <strong>1,614 sqft(150 sqm)</strong>
         </div>
+        <div class="property-detail-item">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="1em" height="1em"><path d="M21 10V6c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v4c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zm-9 7c-1.38 0-2.5-1.12-2.5-2.5S10.62 12 12 12s2.5 1.12 2.5 2.5S13.38 17 12 17zm9-5c0 1.1-.9 2-2 2H5c-1.1 0-2-.9-2-2v-.5c.6-.4 1.2-.6 1.9-.7V9c0-.6.4-1 1-1h12c.6 0 1 .4 1 1v2.5c.7.1 1.3.3 1.9.7V12z"/></svg>
+          <strong>3 BHK (2 Baths)</strong>
+        </div>
+        <div class="property-detail-item">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="1em" height="1em"><path d="M19 12h-2V7h-4V4H7v3H5v5H3V6c0-1.1.9-2 2-2h6V3c0-1.1-.9-2-2-2H7C5.9 1 5 1.9 5 3v1H3v2h2v5H3v3h2v-2h2v5h2v-5h4v5h2v-5h2v2h2v-3h-2v-5zm-6-8h4v3h-4V4zM5 13v-2h2v2H5z"/></svg>
+          <strong>Semi-Furnished</strong>
+        </div>
+        <div class="property-detail-item">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="1em" height="1em"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z"/></svg>
+          <strong>3w ago</strong>
+        </div>
+      </div>
+      <div class="price-emi">
+        <div class="price">₹3.5 Cr</div>
+        <div class="emi">EMI: ₹196,736/month. Check <a href="#" onclick="alert('Please visit the bank\'s official website for current loan rates and applications.')">SBI Bank</a> for best rates.</div>
+      </div>
+      <div class="features-nearby">
+        <h4>Features</h4>
+        <ul>
+          <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="1em" height="1em"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>Ready To Move</li>
+        </ul>
+        <h4>Places Nearby</h4>
+        <ul>
+          <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="1em" height="1em"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>Alpha 1 metro station</li>
+          <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="1em" height="1em"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>Pari chowk metro station</li>
+          <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="1em" height="1em"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>+3</li>
+        </ul>
+      </div>
+      <a href="https://www.99acres.com/3-bhk-bedroom-independent-builder-floor-for-sale-in-alpha-1-rwa-alpha-1-greater-noida-1615-sq-ft-spid-D85384956" class="visit-button" target="_blank">Visit Property</a>
+    </div>
+  </div>
 
-        <h2 class="section-title">🌟 Recommended Properties</h2>
-        <div class="property-grid">
-
-            <div class="property-card">
-                <img src="https://static.99acres.com/universalapp/img/noImageBg.svg" alt="Property Image" class="property-image">
-                <div class="property-content">
-                    <h3 class="property-title">3 BHK Independent House</h3>
-                    <div class="property-location">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
-                            <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/>
-                        </svg>
-                        Block D Alpha 1, Greater Noida
-                    </div>
-                    <p class="property-description">Are you planning to buy your dream home? You can consider this well-Built 3 bhk house for sale in block d alpha 1, greater noida and make it your new address. This residential house is located close to close to metro station, <strong>close to hospital</strong>, close to highway and close to airport. Containing 3 bedrooms, 3 bathrooms and 3 balconies, this independent house is spread over a super built up area o...</p>
-                    <div class="property-details">
-                        <span class="detail-item"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-rulers" viewBox="0 0 16 16"><path d="M1 0a1 1 0 0 0-1 1v14a1 1 0 0 0 1 1h5v-1H2v-1h4v-1H3v-1h3v-1H4v-1h2v-1H5v-1h2v-1H6v-1h2v-1H7v-1h2v-1H8v-1h2v-1H9v-1h2v-1H10v-1h2v-1h1V1a1 1 0 0 0-1-1H1zM0 16a1 1 0 0 1 1-1h5.903a1 1 0 0 1 .74-.33l.913.255a1 1 0 0 1 .451.697v-.003L12 15h3a1 1 0 0 1 1 1H0zm13-1.5h2v-1h-2v1z"/></svg>1,614 sqft</span>
-                        <span class="detail-item"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-columns-gap" viewBox="0 0 16 16"><path d="M6 1v3H1V1h5zM1 0a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h5a1 1 0 0 0 1-1V1a1 1 0 0 0-1-1H1zm10 0a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h5a1 1 0 0 0 1-1V1a1 1 0 0 0-1-1h-5zm0 1h5v3h-5V1zM1 7a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h5a1 1 0 0 0 1-1V8a1 1 0 0 0-1-1H1zm0 1h5v3H1V8zm10-1a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h5a1 1 0 0 0 1-1V8a1 1 0 0 0-1-1h-5zm0 1h5v3h-5V8z"/></svg>3 BHK (3 Baths)</span>
-                        <span class="detail-item"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clock-fill" viewBox="0 0 16 16"><path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z"/></svg>Today</span>
-                    </div>
-                    <p class="property-features"><strong>Features:</strong> Owner, Verified, Under construction, Ready To Move, With Photos, With Videos</p>
-                    <p class="property-nearby"><strong>Nearby:</strong> Alpha 1 metro station, Delta 1 metro station, +3</p>
-                    <div class="property-price">₹2.95 Cr</div>
-                    <div class="property-emi">EMI: ₹2,37,341/month <a href="https://homeloans.sbi/" target="_blank" class="emi-link">Get Loan</a></div>
-                    <a href="https://www.99acres.com/3-bhk-bedroom-independent-house-villa-for-sale-in-block-d-alpha-1-greater-noida-1615-sq-ft-r1-spid-P84277218" target="_blank" class="property-link">View Property</a>
-                </div>
-            </div>
-
-            <div class="property-card">
-                <img src="https://static.99acres.com/universalapp/img/noImageBg.svg" alt="Property Image" class="property-image">
-                <div class="property-content">
-                    <h3 class="property-title">3 BHK Independent House</h3>
-                    <div class="property-location">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
-                            <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/>
-                        </svg>
-                        Alpha 1 Commercial Belt, Greater Noida
-                    </div>
-                    <p class="property-description">Best location, park facing, near to commercial belt, near to metro station, near to pari-Chock, airport, 2+ open car parking, 24 hr water supply.</p>
-                    <div class="property-details">
-                        <span class="detail-item"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-rulers" viewBox="0 0 16 16"><path d="M1 0a1 1 0 0 0-1 1v14a1 1 0 0 0 1 1h5v-1H2v-1h4v-1H3v-1h3v-1H4v-1h2v-1H5v-1h2v-1H6v-1h2v-1H7v-1h2v-1H8v-1h2v-1H9v-1h2v-1H10v-1h2v-1h1V1a1 1 0 0 0-1-1H1zM0 16a1 1 0 0 1 1-1h5.903a1 1 0 0 1 .74-.33l.913.255a1 1 0 0 1 .451.697v-.003L12 15h3a1 1 0 0 1 1 1H0zm13-1.5h2v-1h-2v1z"/></svg>100 sqft</span>
-                        <span class="detail-item"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-columns-gap" viewBox="0 0 16 16"><path d="M6 1v3H1V1h5zM1 0a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h5a1 1 0 0 0 1-1V1a1 1 0 0 0-1-1H1zm10 0a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h5a1 1 0 0 0 1-1V1a1 1 0 0 0-1-1h-5zm0 1h5v3h-5V1zM1 7a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h5a1 1 0 0 0 1-1V8a1 1 0 0 0-1-1H1zm0 1h5v3H1V8zm10-1a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h5a1 1 0 0 0 1-1V8a1 1 0 0 0-1-1h-5zm0 1h5v3h-5V8z"/></svg>3 BHK (3 Baths)</span>
-                        <span class="detail-item"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clock-fill" viewBox="0 0 16 16"><path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z"/></svg>3w ago</span>
-                    </div>
-                    <p class="property-features"><strong>Features:</strong> Owner, Verified, Under construction, Ready To Move, With Photos, With Videos</p>
-                    <p class="property-nearby"><strong>Nearby:</strong> (No specific places listed)</p>
-                    <div class="property-price">₹3.25 Cr</div>
-                    <div class="property-emi">EMI: ₹2,61,388/month <a href="https://homeloans.sbi/" target="_blank" class="emi-link">Get Loan</a></div>
-                    <a href="https://www.99acres.com/3-bhk-bedroom-independent-house-villa-for-sale-in-alpha-1-commercial-belt-greater-noida-100-sq-ft-spid-Q85398650" target="_blank" class="property-link">View Property</a>
-                </div>
-            </div>
+  <div class="property-card">
+    <img src="https://static.99acres.com/universalapp/img/noImageBg.svg" alt="Block D Alpha 1" class="property-image">
+    <div class="property-content">
+      <div class="property-name">Block D Alpha 1</div>
+      <div class="property-title">Are you planning to buy your dream home?</div>
+      <div class="property-location">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="1em" height="1em"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+        Alpha 1, Greater Noida
+      </div>
+      <div class="property-details">
+        <div class="property-detail-item">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="1em" height="1em"><path d="M12 5C10.34 5 9 6.34 9 8s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3zm7 5.5V19c0 1.1-.9 2-2 2H7c-1.1 0-2-.9-2-2v-8.5c-.6-.4-1-.9-1-1.5V6c0-1.1.9-2 2-2h14c1.1 0 2 .9 2 2v3c0 .6-.4 1.1-1 1.5z"/></svg>
+          <strong>1,614 sqft(150 sqm)</strong>
+        </div>
+        <div class="property-detail-item">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="1em" height="1em"><path d="M21 10V6c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v4c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zm-9 7c-1.38 0-2.5-1.12-2.5-2.5S10.62 12 12 12s2.5 1.12 2.5 2.5S13.38 17 12 17zm9-5c0 1.1-.9 2-2 2H5c-1.1 0-2-.9-2-2v-.5c.6-.4 1.2-.6 1.9-.7V9c0-.6.4-1 1-1h12c.6 0 1 .4 1 1v2.5c.7.1 1.3.3 1.9.7V12z"/></svg>
+          <strong>3 BHK (3 Baths)</strong>
+        </div>
+        <div class="property-detail-item">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="1em" height="1em"><path d="M19 12h-2V7h-4V4H7v3H5v5H3V6c0-1.1.9-2 2-2h6V3c0-1.1-.9-2-2-2H7C5.9 1 5 1.9 5 3v1H3v2h2v5H3v3h2v-2h2v5h2v-5h4v5h2v-5h2v2h2v-3h-2v-5zm-6-8h4v3h-4V4zM5 13v-2h2v2H5z"/></svg>
+          <strong>Unfurnished</strong>
+        </div>
+        <div class="property-detail-item">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="1em" height="1em"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z"/></svg>
+          <strong>Today</strong>
+        </div>
+      </div>
+      <div class="price-emi">
+        <div class="price">₹2.95 Cr</div>
+        <div class="emi">EMI: ₹165,845/month. Check <a href="#" onclick="alert('Please visit the bank\'s official website for current loan rates and applications.')">ICICI Bank</a> for best rates.</div>
+      </div>
+      <div class="features-nearby">
+        <h4>Features</h4>
+        <ul>
+          <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="1em" height="1em"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>Ready To Move</li>
+        </ul>
+        <h4>Places Nearby</h4>
+        <ul>
+          <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="1em" height="1em"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>Alpha 1 metro station</li>
+          <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="1em" height="1em"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>Delta 1 metro station</li>
+          <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="1em" height="1em"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>+3</li>
+        </ul>
+      </div>
+      <a href="https://www.99acres.com/3-bhk-bedroom-independent-house-villa-for-sale-in-block-d-alpha-1-greater-noida-1615-sq-ft-r1-spid-P84277218" class="visit-button" target="_blank">Visit Property</a>
+    </div>
+  </div>
 
         </div>
     </div>
-
-    <script>
-        // Function to calculate EMI (JavaScript version for dynamic use if needed, but not strictly required by prompt)
-        function calculateEmi(priceStr) {
-            let p;
-            priceStr = priceStr.replace("₹", "").trim();
-            if (priceStr.includes("Cr")) {
-                p = parseFloat(priceStr.replace("Cr", "").trim()) * 1_00_00_000;
-            } else if (priceStr.includes("Lac")) {
-                p = parseFloat(priceStr.replace("Lac", "").trim()) * 1_00_000;
-            } else {
-                p = parseFloat(priceStr);
-            }
-
-            const r_annual = 0.075; // 7.5% annual interest
-            const R = r_annual / 12; // Monthly interest rate
-            const N = 240; // 20 years in months
-
-            if (R === 0) {
-                return (p / N).toFixed(0);
-            } else {
-                const emi = (p * R * Math.pow(1 + R, N)) / (Math.pow(1 + R, N) - 1);
-                return emi.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ","); // Format with commas
-            }
-        }
-    </script>
 </body>
 </html>
