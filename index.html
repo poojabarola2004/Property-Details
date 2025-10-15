@@ -1,506 +1,897 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Your Property Recommendations</title>
-  <style>
-    body {
-      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #f5f6fa;
-      margin: 40px;
-      line-height: 1.6;
-      color: #333;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Property Recommendations</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
-    .section {
-      margin-bottom: 40px;
-    }
+        :root {
+            --primary-color: #007bff;
+            --secondary-color: #6c757d;
+            --accent-color: #28a745;
+            --background-light: #f8f9fa;
+            --background-dark: #e9ecef;
+            --text-color-dark: #343a40;
+            --text-color-light: #6c757d;
+            --border-color: #dee2e6;
+            --card-bg: #ffffff;
+            --shadow-light: rgba(0, 0, 0, 0.05);
+            --shadow-hover: rgba(0, 0, 0, 0.1);
+        }
 
-    .section h2 {
-      font-size: 1.5rem;
-      color: #1e1e1e;
-      margin-bottom: 20px;
-      border-bottom: 2px solid #e0e0e0;
-      padding-bottom: 10px;
-    }
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: var(--background-light);
+            color: var(--text-color-dark);
+            line-height: 1.6;
+        }
 
-    .property-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 24px;
-    }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
 
-    .property-card {
-      background: #fff;
-      border-radius: 16px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
-      overflow: hidden;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
+        h1, h2 {
+            color: var(--primary-color);
+            text-align: center;
+            margin-bottom: 30px;
+            font-weight: 600;
+        }
 
-    .property-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
-    }
+        h2 {
+            font-size: 1.8em;
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 10px;
+            display: inline-block;
+            margin-left: 10px; /* Align with the start of the grid */
+            text-align: left; /* Override text-align: center from h1, h2 */
+            width: fit-content;
+        }
 
-    .property-image {
-      width: 100%;
-      height: 220px;
-      object-fit: cover;
-    }
+        .property-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
 
-    .property-content {
-      padding: 16px;
-    }
+        .property-card {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            box-shadow: 0 4px 12px var(--shadow-light);
+            overflow: hidden;
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid var(--border-color);
+        }
 
-    .property-title {
-      font-size: 1.1rem;
-      font-weight: 600;
-      margin: 6px 0;
-      color: #1a1a1a;
-    }
+        .property-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px var(--shadow-hover);
+        }
 
-    .property-location {
-      color: #777;
-      font-size: 0.9rem;
-      margin-bottom: 10px;
-    }
+        .property-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-bottom: 1px solid var(--border-color);
+        }
 
-    .property-price {
-      color: #008000;
-      font-weight: 700;
-      font-size: 1.1rem;
-      margin-bottom: 10px;
-    }
+        .property-content {
+            padding: 20px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
 
-    .property-info {
-      display: flex;
-      justify-content: space-between;
-      border-top: 1px solid #e0e0e0;
-      border-bottom: 1px solid #e0e0e0;
-      padding: 10px 0;
-      font-size: 0.9rem;
-    }
-    
-    .property-info > div {
-        flex-basis: 48%; /* To ensure good spacing for two items */
-    }
+        .property-title {
+            font-size: 1.4em;
+            margin-top: 0;
+            margin-bottom: 10px;
+            color: var(--text-color-dark);
+            font-weight: 600;
+        }
 
-    .info-label {
-      color: #777;
-      font-size: 0.8rem;
-      margin-bottom: 4px;
-    }
+        .property-location {
+            font-size: 0.9em;
+            color: var(--text-color-light);
+            margin-bottom: 15px;
+        }
 
-    .section-title {
-      font-weight: 600;
-      color: #333;
-      margin: 12px 0 6px;
-      font-size: 0.95rem;
-    }
+        .property-price {
+            font-size: 1.6em;
+            color: var(--accent-color);
+            font-weight: 700;
+            margin-bottom: 20px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 15px;
+        }
 
-    .tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      margin-bottom: 10px;
-    }
+        .property-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px dashed var(--border-color);
+            font-size: 0.95em;
+        }
 
-    .tag {
-      background-color: #e8f1ff;
-      color: #246bfd;
-      padding: 4px 8px;
-      border-radius: 12px;
-      font-size: 0.8rem;
-      white-space: nowrap; /* Prevent tags from breaking */
-    }
+        .property-info > div {
+            flex: 1;
+            padding-right: 10px;
+        }
 
-    .nearby-tag {
-      background-color: #e6f7ed;
-      color: #2b8a3e;
-      padding: 4px 8px;
-      border-radius: 12px;
-      font-size: 0.8rem;
-      white-space: nowrap; /* Prevent tags from breaking */
-    }
+        .property-info > div:last-child {
+            padding-right: 0;
+            text-align: right;
+        }
 
-    .emi {
-      font-size: 0.9rem;
-      margin-top: 10px;
-      color: #555;
-    }
+        .info-label {
+            font-size: 0.8em;
+            color: var(--text-color-light);
+            margin-bottom: 3px;
+            font-weight: 500;
+            text-transform: uppercase;
+        }
 
-    .emi span {
-      color: #e63946;
-      font-weight: 600;
-    }
+        .section-title {
+            font-size: 1em;
+            font-weight: 600;
+            color: var(--text-color-dark);
+            margin-top: 15px;
+            margin-bottom: 10px;
+            border-bottom: 1px solid var(--background-dark);
+            padding-bottom: 5px;
+        }
 
-    .emi a {
-      color: #246bfd;
-      text-decoration: none;
-      font-weight: 500;
-    }
-    .emi a:hover {
-      text-decoration: underline;
-    }
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 15px;
+        }
+        
+        /* Specific styling for nearby-tag, as specified in the prompt */
+        .tags .nearby-tag {
+            background-color: var(--background-dark);
+            color: var(--text-color-dark);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            white-space: nowrap;
+            display: inline-flex;
+            align-items: center;
+        }
 
-    .view-btn {
-      display: block;
-      background-color: #007bff;
-      color: #fff;
-      text-align: center;
-      padding: 10px;
-      margin-top: 12px;
-      border-radius: 8px;
-      text-decoration: none;
-      font-weight: 600;
-      transition: background-color 0.2s ease;
-    }
 
-    .view-btn:hover {
-      background-color: #0056cc;
-    }
+        .tag {
+            background-color: var(--background-dark);
+            color: var(--text-color-dark);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            white-space: nowrap;
+            display: inline-flex;
+            align-items: center;
+        }
 
-    @media (max-width: 768px) {
-      body {
-        margin: 20px;
-      }
-      .property-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-  </style>
+        .tag::before {
+            content: '✓';
+            margin-right: 5px;
+            color: var(--accent-color);
+        }
+
+        .nearby-tag::before {
+            content: '•';
+            margin-right: 5px;
+            color: var(--primary-color);
+        }
+
+        .emi {
+            background-color: #e6f7ff; /* Light blue background */
+            border: 1px solid #99daff; /* Slightly darker blue border */
+            padding: 12px 15px;
+            border-radius: 8px;
+            font-size: 0.9em;
+            color: var(--text-color-dark);
+            margin-top: 20px;
+            margin-bottom: 20px;
+            line-height: 1.4;
+        }
+
+        .emi span {
+            font-weight: 700;
+            color: var(--primary-color);
+            font-size: 1.1em;
+        }
+
+        .emi a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .emi a:hover {
+            text-decoration: underline;
+        }
+
+        .view-btn {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background-color: var(--primary-color);
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 8px;
+            margin-top: auto; /* Push button to the bottom */
+            font-weight: 500;
+            transition: background-color 0.2s ease-in-out;
+        }
+
+        .view-btn:hover {
+            background-color: #0056b3;
+        }
+
+        @media (max-width: 768px) {
+            .property-grid {
+                grid-template-columns: 1fr;
+            }
+            .property-info {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .property-info > div {
+                width: 100%;
+                text-align: left !important;
+                margin-bottom: 8px;
+            }
+            .property-info > div:last-child {
+                margin-bottom: 0;
+            }
+        }
+    </style>
 </head>
 <body>
+    <div class="container">
+        <h1>Property Recommendations for You</h1>
 
-  <div class="section">
-    <h2>🏠 Under-Budget Properties</h2>
-    <div class="property-grid">
-      <!-- Under-Budget Property 1 -->
-      <div class="property-card">
-        <img src="https://via.placeholder.com/400x250" alt="Property Image" class="property-image" />
-        <div class="property-content">
-          <h2 class="property-title">3 BHK Flat in Alpha 1, Greater Noida</h2>
-          <p class="property-location">📍 Gharonda apartments Alpha 1 Greater Noida</p>
-          <div class="property-price">₹98 Lac</div>
-          <div class="property-info">
-            <div>
-              <div class="info-label">Area</div>
-              <div>1000 sq.ft. (93 sqm)</div>
-            </div>
-            <div>
-              <div class="info-label">Config</div>
-              <div>3 BHK (2 Baths)</div>
-            </div>
-          </div>
-          <div class="property-info" style="border-top:none;">
-            <div>
-              <div class="info-label">Furnishing</div>
-              <div>Semi-Furnished</div>
-            </div>
-            <div>
-              <div class="info-label">Available</div>
-              <div>Ready To Move</div>
-            </div>
-          </div>
-          <div class="section-title">Key Features:</div>
-          <div class="tags">
-            <span class="tag">Super Built-up Area</span>
-            <span class="tag">North-East Facing</span>
-            <span class="tag">Top Floor</span>
-          </div>
-          <div class="section-title">Nearby Places:</div>
-          <div class="tags">
-            <span class="nearby-tag">No specific nearby places listed</span>
-          </div>
-          <div class="emi" data-type="buy">
-            EMI from: <span>₹0/month</span><br>
-            (via <a href="#">HDFC Bank</a>)
-          </div>
-          <a href="https://www.99acres.com/3-bhk-bedroom-apartment-flat-for-sale-in-gharonda-apartments-alpha-1-greater-noida-1000-sq-ft-spid-E85523950" class="view-btn">Visit Property</a>
+        <h2 id="under-budget-section">🏠 Under-Budget Properties</h2>
+        <div class="property-grid" id="under-budget-properties">
+            <!-- Under-Budget Properties will be injected here by JS -->
         </div>
-      </div>
 
-      <!-- Under-Budget Property 2 -->
-      <div class="property-card">
-        <img src="https://via.placeholder.com/400x250" alt="Property Image" class="property-image" />
-        <div class="property-content">
-          <h2 class="property-title">3 BHK Flat in Alpha 1, Greater Noida</h2>
-          <p class="property-location">📍 Gharonda apartments Alpha 1 Greater Noida</p>
-          <div class="property-price">₹1.1 Cr</div>
-          <div class="property-info">
-            <div>
-              <div class="info-label">Area</div>
-              <div>1000 sq.ft. (93 sqm)</div>
-            </div>
-            <div>
-              <div class="info-label">Config</div>
-              <div>3 BHK (2 Baths)</div>
-            </div>
-          </div>
-          <div class="property-info" style="border-top:none;">
-            <div>
-              <div class="info-label">Furnishing</div>
-              <div>Semi-Furnished</div>
-            </div>
-            <div>
-              <div class="info-label">Available</div>
-              <div>Ready To Move</div>
-            </div>
-          </div>
-          <div class="section-title">Key Features:</div>
-          <div class="tags">
-            <span class="tag">Super Built-up Area</span>
-            <span class="tag">North East Facing</span>
-            <span class="tag">Top Floor</span>
-          </div>
-          <div class="section-title">Nearby Places:</div>
-          <div class="tags">
-            <span class="nearby-tag">No specific nearby places listed</span>
-          </div>
-          <div class="emi" data-type="buy">
-            EMI from: <span>₹0/month</span><br>
-            (via <a href="#">ICICI Bank</a>)
-          </div>
-          <a href="https://www.99acres.com/3-bhk-bedroom-apartment-flat-for-sale-in-gharonda-apartments-alpha-1-greater-noida-1000-sq-ft-spid-E85523950" class="view-btn">Visit Property</a>
+        <h2 id="recommended-section">🌟 Recommended Properties</h2>
+        <div class="property-grid" id="recommended-properties">
+            <!-- Recommended Properties will be injected here by JS -->
         </div>
-      </div>
-      
-      <!-- Under-Budget Property 3 -->
-      <div class="property-card">
-        <img src="https://via.placeholder.com/400x250" alt="Property Image" class="property-image" />
-        <div class="property-content">
-          <h2 class="property-title">3 BHK Flat in Alpha 1, Greater Noida</h2>
-          <p class="property-location">📍 Spacetech Edana Alpha 1, Greater Noida</p>
-          <div class="property-price">₹1.4 Cr</div>
-          <div class="property-info">
-            <div>
-              <div class="info-label">Area</div>
-              <div>1715 sq.ft. (159 sqm)</div>
-            </div>
-            <div>
-              <div class="info-label">Config</div>
-              <div>3 BHK (3 Baths)</div>
-            </div>
-          </div>
-          <div class="property-info" style="border-top:none;">
-            <div>
-              <div class="info-label">Furnishing</div>
-              <div>Semi-Furnished</div>
-            </div>
-            <div>
-              <div class="info-label">Available</div>
-              <div>Ready To Move</div>
-            </div>
-          </div>
-          <div class="section-title">Key Features:</div>
-          <div class="tags">
-            <span class="tag">Super Built-up Area</span>
-            <span class="tag">North-East Facing</span>
-            <span class="tag">Private Garden</span>
-            <span class="tag">Rooftop swimming pool</span>
-            <span class="tag">health spa</span>
-          </div>
-          <div class="section-title">Nearby Places:</div>
-          <div class="tags">
-            <span class="nearby-tag">No specific nearby places listed</span>
-          </div>
-          <div class="emi" data-type="buy">
-            EMI from: <span>₹0/month</span><br>
-            (via <a href="#">SBI</a>)
-          </div>
-          <a href="https://www.99acres.com/3-bhk-bedroom-apartment-flat-for-sale-in-spacetech-edana-alpha-1-greater-noida-1715-sq-ft-r7-spid-V72642921" class="view-btn">Visit Property</a>
-        </div>
-      </div>
-
-      <!-- Under-Budget Property 4 -->
-      <div class="property-card">
-        <img src="https://imagecdn.99acres.com/media1/31681/5/634110951M-1755332734495.webp" alt="Property Image" class="property-image" />
-        <div class="property-content">
-          <h2 class="property-title">3 Bedroom House in Alpha 1, Greater Noida</h2>
-          <p class="property-location">📍 null Alpha 1 Greater Noida</p>
-          <div class="property-price">₹1.45 Cr</div>
-          <div class="property-info">
-            <div>
-              <div class="info-label">Area</div>
-              <div>645 sq.ft. (60 sqm)</div>
-            </div>
-            <div>
-              <div class="info-label">Config</div>
-              <div>3 BHK (3 Baths)</div>
-            </div>
-          </div>
-          <div class="property-info" style="border-top:none;">
-            <div>
-              <div class="info-label">Furnishing</div>
-              <div>Semi-Furnished</div>
-            </div>
-            <div>
-              <div class="info-label">Available</div>
-              <div>Ready To Move</div>
-            </div>
-          </div>
-          <div class="section-title">Key Features:</div>
-          <div class="tags">
-            <span class="tag">Plot Area</span>
-            <span class="tag">Private Garden</span>
-            <span class="tag">Gated Society</span>
-          </div>
-          <div class="section-title">Nearby Places:</div>
-          <div class="tags">
-            <span class="nearby-tag">No specific nearby places listed</span>
-          </div>
-          <div class="emi" data-type="buy">
-            EMI from: <span>₹0/month</span><br>
-            (via <a href="#">Axis Bank</a>)
-          </div>
-          <a href="https://www.99acres.com/3-bhk-bedroom-independent-house-villa-for-sale-in-alpha-1-greater-noida-645-sq-ft-spid-C83346740" class="view-btn">Visit Property</a>
-        </div>
-      </div>
     </div>
-  </div>
 
-  <div class="section">
-    <h2>🌟 Recommended Properties</h2>
-    <div class="property-grid">
-      <!-- Recommended Property 1 -->
-      <div class="property-card">
-        <img src="https://via.placeholder.com/400x250" alt="Property Image" class="property-image" />
-        <div class="property-content">
-          <h2 class="property-title">3 Bedroom House in Block D Alpha 1, Greater Noida</h2>
-          <p class="property-location">📍 null Block D Alpha 1</p>
-          <div class="property-price">₹2.95 Cr</div>
-          <div class="property-info">
-            <div>
-              <div class="info-label">Area</div>
-              <div>1614 sq.ft. (150 sqm)</div>
-            </div>
-            <div>
-              <div class="info-label">Config</div>
-              <div>3 BHK (3 Baths)</div>
-            </div>
-          </div>
-          <div class="property-info" style="border-top:none;">
-            <div>
-              <div class="info-label">Furnishing</div>
-              <div>Semi-Furnished</div>
-            </div>
-            <div>
-              <div class="info-label">Available</div>
-              <div>Ready To Move</div>
-            </div>
-          </div>
-          <div class="section-title">Key Features:</div>
-          <div class="tags">
-            <span class="tag">Plot Area</span>
-            <span class="tag">North Facing</span>
-            <span class="tag">Alpha-1 metro Station Nearby</span>
-          </div>
-          <div class="section-title">Nearby Places:</div>
-          <div class="tags">
-            <span class="nearby-tag">Close to metro station</span>
-            <span class="nearby-tag">Close to hospital</span>
-            <span class="nearby-tag">Close to highway</span>
-          </div>
-          <div class="emi" data-type="buy">
-            EMI from: <span>₹0/month</span><br>
-            (via <a href="#">Kotak Mahindra Bank</a>)
-          </div>
-          <a href="https://www.99acres.com/3-bhk-bedroom-independent-house-villa-for-sale-in-block-d-alpha-1-greater-noida-1615-sq-ft-r1-spid-P84277218" class="view-btn">Visit Property</a>
-        </div>
-      </div>
+    <script>
+        const propertyData = [
+            {
+                "location_name": "Grand Ajnara Heritage",
+                "description": "Grand ajnara heritage is one of noida's most sought after destination for apartments and this 3 bhk flat in sector 74 noida is your opportunity to be a part of this community. This is a east-Facing property. The flat is over 1545 sq.Ft. Super built up area and comes with 3 bedroom(s), 2 bathrooms and more than 3 balconies. This flat is situated on the 10th floor of this 19 floors tall residenti...",
+                "price": "₹1.7 Cr",
+                "area": "1,545 sqft",
+                "config": "3 BHK",
+                "available_from": "Ready To Move",
+                "id": "K84985722",
+                "features": [
+                    "East Facing",
+                    "Gated Society"
+                ],
+                "places_nearby": null,
+                "image": "https://imagecdn.99acres.com/media1/32163/9/643269419M-1757076670833.webp",
+                "url": "https://www.99acres.com/3-bhk-bedroom-apartment-flat-for-sale-in-grand-ajnara-heritage-sector-74-noida-1545-sq-ft-spid-K84985722"
+            },
+            {
+                "location_name": "Jaypee klassic ONGC",
+                "description": "Jaypee klassic ongc is a premium residential property that was initially developed dedicatedly for employees of the oil and natural gas corporation (Ongc). These towers are an an ideal place for those looking to dwell in close-Knit, community-Driven societies. Jaypee klassic ongc has 3 residential towers. The 1st tower offers spacious 3 & 4 bhk apartments with a servant room, while the 2nd and 3rd...",
+                "price": "₹1.7 Cr",
+                "area": "1,862 sqft",
+                "config": "3 BHK",
+                "available_from": "Ready To Move",
+                "id": "I85611960",
+                "features": [
+                    "Servant Room"
+                ],
+                "places_nearby": null,
+                "image": "https://imagecdn.99acres.com/media1/32835/11/656711907M-1759835472278.webp",
+                "url": "https://www.99acres.com/3-bhk-bedroom-apartment-flat-for-sale-in-sector-134-noida-1862-sq-ft-spid-I85611960"
+            },
+            {
+                "location_name": "Ivory County",
+                "description": "Finest 3,4,5 BHK apartments in Sector 115 available for sale in Ivory County. This society is RERA approved and UPRERAPRJ256314 is the RERA number. Apartments in this complex are available in price range of Rs. 3.56 - 12.84 Cr. Ivory County apartments are available in multiples sizes, ranging from 2,034 - 6,939 sqft SUPER area",
+                "price": "₹3.56 - 4.3 Cr",
+                "area": "2,034 - 6,939 sqft",
+                "config": "3 BHK",
+                "available_from": "Under construction · Completion from Jul, 2028 onwards",
+                "id": "r400436",
+                "features": [],
+                "places_nearby": [
+                    "FNG Expressway",
+                    "Apex Multispeciality Hospital"
+                ],
+                "image": "https://static.99acres.com/universalapp/img/noImageBg.svg",
+                "url": "https://www.99acres.com/ivory-county-sector-115-noida-npxid-r400436"
+            },
+            {
+                "location_name": "Ace Mahagun Medalleo",
+                "description": "Choose your dream home from the wide variety of 3,4 BHK apartments in Sector 107, available for sale in Ace Mahagun Medalleo. The housing society is RERA-registered with UPRERAPRJ125561 registration number. Here units have different sizes, mostly in range of 2,500 - 7,450 sqft SUPER area. Apartment prices in this housing society vary in the range of Rs. 5.25 - 15.64 Cr",
+                "price": "₹5.25 - 5.41 Cr",
+                "area": "2,500 - 7,450 sqft",
+                "config": "3 BHK",
+                "available_from": "Under Construction · Completion in Sep, 2029",
+                "id": "r397844",
+                "features": [],
+                "places_nearby": [
+                    "Yatharth Super Specialty Hospital",
+                    "Regenta Central Hotel"
+                ],
+                "image": "https://static.99acres.com/universalapp/img/noImageBg.svg",
+                "url": "https://www.99acres.com/ace-mahagun-medalleo-sector-107-noida-npxid-r397844"
+            },
+            {
+                "location_name": "ATS Picturesque Reprieves",
+                "description": "ATS Picturesque Reprieves society now offers elegantly built 3,4 BHK apartments in Sector 152. Apartments in this complex are available in price range of Rs. 2.85 - 5.19 Cr. This society is RERA approved and UPRERAPRJ631 is the RERA number. Here units have different sizes, mostly in range of 1,850 - 3,200 sqft SUPER area",
+                "price": "₹2.85 - 3.83 Cr",
+                "area": "1,850 - 3,200 sqft",
+                "config": "3 BHK",
+                "available_from": "Under Construction · Completion in Aug, 2026",
+                "id": "r269397",
+                "features": [],
+                "places_nearby": [
+                    "Noida-Greater Noida Expressway",
+                    "Rohtas Matrix TechnoSquare"
+                ],
+                "image": "https://static.99acres.com/universalapp/img/noImageBg.svg",
+                "url": "https://www.99acres.com/ats-picturesque-reprieves-sector-152-noida-npxid-r269397"
+            },
+            {
+                "location_name": "ATS Kingston Heath",
+                "description": "ATS Kingston Heath, one of the known housing societes in Noida, brings classic yet modern 3,4 BHK apartments in Sector 150. Prices of apartments in this project, vary between Rs. 3.83 - 5.35 Cr. ATS Kingston Heath is a RERA- registered society and UPRERAPRJ180413 is the RERA registration number. ATS Kingston Heath has apartments in multiple configurations, in range of 2,350 - 3,300 sqft",
+                "price": "₹3.83 Cr",
+                "area": "2,350 - 3,300 sqft",
+                "config": "3 BHK",
+                "available_from": "Under Construction · Completion in May, 2028",
+                "id": "r376821",
+                "features": [],
+                "places_nearby": [
+                    "9 hole Golf Course",
+                    "Noida Sector 148 Metro Station"
+                ],
+                "image": "https://static.99acres.com/universalapp/img/noImageBg.svg",
+                "url": "https://www.99acres.com/ats-kingston-heath-sector-150-noida-npxid-r376821"
+            },
+            {
+                "location_name": "NBCC Aspire Silicon City",
+                "description": "Check out 3,4 BHK apartments in Sector 76, now available for sale at NBCC Aspire Silicon City. Apartments in this complex are available in price range of Rs. 3.89 - 7.37 Cr. Here units have different sizes, mostly in range of 1,599 - 3,202 sqft CARPET area. The property options in this society are Under Construction",
+                "price": "₹3.89 Cr",
+                "area": "1,599 - 3,202 sqft",
+                "config": "3 BHK",
+                "available_from": "Under Construction · Completion in Mar, 2026",
+                "id": "r443931",
+                "features": [],
+                "places_nearby": [
+                    "Sector 76 Metro Station",
+                    "Spectrum Metro Mall"
+                ],
+                "image": "https://static.99acres.com/universalapp/img/noImageBg.svg",
+                "url": "https://www.99acres.com/nbcc-aspire-silicon-city-sector-76-noida-npxid-r443931"
+            },
+            {
+                "location_name": "SKA Orion",
+                "description": "Choose your dream home from the wide variety of 3 BHK apartments in Sector 143B, available for sale in SKA Orion. The housing society is RERA-registered with UPRERAPRJ186008 registration number. This society offers apartments in the price range of Rs. 2.75 Cr. SKA Orion apartments are available in multiples sizes, ranging from 1,451 sqft CARPET area",
+                "price": "₹2.75 Cr",
+                "area": "1,451 sqft",
+                "config": "3 BHK",
+                "available_from": "Ready To Move · Since Dec, 2017",
+                "id": "r375353",
+                "features": [],
+                "places_nearby": [
+                    "Noida Sector 142 Metro Station",
+                    "Embassy Oxygen ( MetLife )"
+                ],
+                "image": "https://static.99acres.com/universalapp/img/noImageBg.svg",
+                "url": "https://www.99acres.com/ska-orion-sector-143b-noida-npxid-r375353"
+            },
+            {
+                "location_name": "Express Zenith",
+                "description": "Express Zenith, one of the known housing societes in Noida, brings classic yet modern 2,3,4 BHK apartments in Sector 77. The housing society is RERA-registered with UPRERAPRJ3393 registration number. Express Zenith has apartments in multiple configurations, in range of 990 - 4,075 sqft. Apartments in this complex are available in price range of Rs. 1.19 - 6.54 Cr",
+                "price": "₹1.94 - 2.71 Cr",
+                "area": "990 - 4,075 sqft",
+                "config": "3 BHK",
+                "available_from": "Under Construction · Completion in Jan, 2026",
+                "id": "r4376",
+                "features": [],
+                "places_nearby": [
+                    "Sector 77 Metro Station",
+                    "SkyJumper Trampoline Park"
+                ],
+                "image": "https://static.99acres.com/universalapp/img/noImageBg.svg",
+                "url": "https://www.99acres.com/express-zenith-sector-77-noida-npxid-r4376"
+            },
+            {
+                "location_name": "Lucky Wow Monk",
+                "description": "Check out beautifully designed 2,3,4 BHK Independent Floor in Lucky Wow Monk, coming up in Noida Extension. These Independent Floor are Under Construction. Lucky Wow Monk offers Independent Floor in the size range of 1,175 - 2,200 sqft. Residents can enjoy amenities such as Car Parking, CCTV Camera Security and Lifts",
+                "price": "₹72 - 74 L",
+                "area": "1,175 - 2,200 sqft",
+                "config": "3 BHK",
+                "available_from": "Partially Ready To Move · Completion in Oct, 2027",
+                "id": "r450624",
+                "features": [
+                    "Car Parking",
+                    "CCTV Camera Security",
+                    "Lifts"
+                ],
+                "places_nearby": null,
+                "image": "https://static.99acres.com/universalapp/img/noImageBg.svg",
+                "url": "https://www.99acres.com/lucky-wow-monk-noida-extension-noida-npxid-r450624"
+            },
+            {
+                "location_name": "Godrej Woods",
+                "description": "Spacious 2,3,4,5 BHK apartments in Sector 43 are available for sale.Check out latest property options at Godrej Woods housing society. Godrej Woods 's RERA registration number is UPRERAPRJ704730. This society offers apartments in the price range of Rs. 1.77 - 12.38 Cr. Godrej Woods apartments are available in multiples sizes, ranging from 773 - 3,754 sqft CARPET area",
+                "price": "₹2.52 - 9.52 Cr",
+                "area": "773 - 3,754 sqft",
+                "config": "3 BHK",
+                "available_from": "Under Construction · Completion in Dec, 2025",
+                "id": "r374312",
+                "features": [],
+                "places_nearby": [
+                    "Ryan International School, Sector 39",
+                    "Botanical Garden Metro Station"
+                ],
+                "image": "https://static.99acres.com/universalapp/img/noImageBg.svg",
+                "url": "https://www.99acres.com/godrej-woods-sector-43-noida-npxid-r374312"
+            },
+            {
+                "location_name": "Arena The Ultima Heights",
+                "description": "Check out 2,3,4 BHK apartments in Sector 107, now available for sale at Arena The Ultima Heights. Arena The Ultima Heights has apartments in multiple configurations, in range of 1,055 - 2,295 sqft. Prices of apartments in this project, vary between Rs. 64.3 L - 1.4 Cr. The property options in this society are Under Construction",
+                "price": "₹85.03 L - 1.09 Cr",
+                "area": "1,055 - 2,295 sqft",
+                "config": "3 BHK",
+                "available_from": "Under Construction · Completion in Feb, 2030",
+                "id": "r432599",
+                "features": [],
+                "places_nearby": [
+                    "Pathways School",
+                    "Metro Station Noida Sector 76"
+                ],
+                "image": "https://static.99acres.com/universalapp/img/noImageBg.svg",
+                "url": "https://www.99acres.com/arena-the-ultima-heights-sector-107-noida-npxid-r432599"
+            },
+            {
+                "location_name": "Godrej Tropical Isle",
+                "description": "Beautiful 3,4 BHK apartments in Sector 146, are now available in Godrej Tropical Isle housing project. The housing society is RERA-registered with UPRERAPRJ303390 registration number. Apartments in this complex are available in price range of Rs. 2.66 - 7.93 Cr. Here units have different sizes, mostly in range of 1,208 - 3,250 sqft CARPET area",
+                "price": "₹2.66 - 3.86 Cr",
+                "area": "1,208 - 3,250 sqft",
+                "config": "3 BHK",
+                "available_from": "Under Construction · Completion in Oct, 2025",
+                "id": "r409753",
+                "features": [],
+                "places_nearby": [
+                    "Noida Sector 146 Metro Station",
+                    "Noida-Greater Noida Expy"
+                ],
+                "image": "https://static.99acres.com/universalapp/img/noImageBg.svg",
+                "url": "https://www.99acres.com/godrej-tropical-isle-sector-146-noida-npxid-r409753"
+            },
+            {
+                "location_name": "Godrej Nest",
+                "description": "Godrej Nest, one of the known housing societes in Noida, brings classic yet modern 2,3,4 BHK apartments in Sector 150. Godrej Nest is a RERA- registered society and UPRERAPRJ13521 is the RERA registration number. This society offers apartments in the price range of Rs. 1.25 - 4.6 Cr. Apartments in Godrej Nest have CARPET area ranging between 743 - 2,164 sqft",
+                "price": "₹2.4 - 3.48 Cr",
+                "area": "743 - 2,164 sqft",
+                "config": "3 BHK",
+                "available_from": "Ready To Move · Since Dec, 2017",
+                "id": "r290685",
+                "features": [],
+                "places_nearby": [
+                    "9 hole Golf Course",
+                    "Noida Greater Noida Expressway"
+                ],
+                "image": "https://static.99acres.com/universalapp/img/noImageBg.svg",
+                "url": "https://www.99acres.com/godrej-nest-sector-150-noida-npxid-r290685"
+            },
+            {
+                "location_name": "ATS Pristine",
+                "description": "Beautiful 3,4,5 BHK apartments in Sector 150, are now available in ATS Pristine housing project. ATS Pristine 's RERA registration number is UPRERAPRJ2875. ATS Pristine has apartments in multiple configurations, in range of 2,000 - 4,000 sqft. Apartments in this complex are available in price range of Rs. 2.4 - 5.6 Cr",
+                "price": "₹2.1 - 2.76 Cr",
+                "area": "2,000 - 4,000 sqft",
+                "config": "3 BHK",
+                "available_from": "Under Construction · Completion in Dec, 2025",
+                "id": "r10130",
+                "features": [],
+                "places_nearby": [
+                    "Greater Noida Expressway",
+                    "Noida Sector 148 Metro Station"
+                ],
+                "image": "https://static.99acres.com/universalapp/img/noImageBg.svg",
+                "url": "https://www.99acres.com/ats-pristine-sector-150-noida-npxid-r10130"
+            },
+            {
+                "location_name": "Express Zenith Tower A",
+                "description": "Spacious 3,4 BHK apartments in Sector 77 are available for sale.Check out latest property options at Express Zenith Tower A housing society. Here units have different sizes, mostly in range of 1,915 - 3,975 sqft SUPER area. Express Zenith Tower A 's RERA registration number is UPRERAPRJ980703/04/2024. Apartments in this complex are available in price range of Rs. 2.64 - 5.48 Cr",
+                "price": "₹2.64 - 2.7 Cr",
+                "area": "1,915 - 3,975 sqft",
+                "config": "3 BHK",
+                "available_from": "Ready To Move · Since Aug, 2018",
+                "id": "r454311",
+                "features": [],
+                "places_nearby": [
+                    "Manav Rachna International School",
+                    "Amity University"
+                ],
+                "image": "https://static.99acres.com/universalapp/img/noImageBg.svg",
+                "url": "https://www.99acres.com/express-zenith-tower-a-sector-77-noida-npxid-r454311"
+            },
+            {
+                "location_name": "ABA Cleo County",
+                "description": "Finest 3,4 BHK apartments in Sector 121 available for sale in ABA Cleo County. Here units have different sizes, mostly in range of 1,350 - 4,455 sqft SUPER area. ABA Cleo County 's RERA registration number is UPRERAPRJ5931. Prices of apartments in this project, vary between Rs. 2.3 - 12 Cr",
+                "price": "₹2.3 - 4 Cr",
+                "area": "1,350 - 4,455 sqft",
+                "config": "3 BHK",
+                "available_from": "Under Construction · Completion in Sep, 2025",
+                "id": "r2274",
+                "features": [],
+                "places_nearby": [
+                    "Kailash Hospital",
+                    "Sapphire International School"
+                ],
+                "image": "https://static.99acres.com/universalapp/img/noImageBg.svg",
+                "url": "https://www.99acres.com/aba-cleo-county-sector-121-noida-npxid-r2274"
+            },
+            {
+                "location_name": "Godrej Nurture",
+                "description": "Beautiful 3,4 BHK apartments in Sector 150, are now available in Godrej Nurture housing project. This society offers apartments in the price range of Rs. 2.9 - 5.72 Cr. Godrej Nurture has apartments in multiple configurations, in range of 1,098 - 2,166 sqft. Godrej Nurture is a RERA- registered society and UPRERAPRJ17861 is the RERA registration number",
+                "price": "₹2.9 - 4.34 Cr",
+                "area": "1,098 - 2,166 sqft",
+                "config": "3 BHK",
+                "available_from": "Under Construction · Completion in Jun, 2028",
+                "id": "r318275",
+                "features": [],
+                "places_nearby": [
+                    "9 hole Golf Course",
+                    "Greater Valley School"
+                ],
+                "image": "https://static.99acres.com/universalapp/img/noImageBg.svg",
+                "url": "https://www.99acres.com/godrej-nurture-sector-150-noida-npxid-r318275"
+            },
+            {
+                "location_name": "RG Mirage",
+                "description": "RG Mirage society now offers elegantly built 3,4 BHK apartments in Sector 120. Apartments in RG Mirage have CARPET area ranging between 1,218 - 1,629 sqft. This society is RERA approved and UPRERAPRJ158423 is the RERA number. Apartment prices in this housing society vary in the range of Rs. 3.05 - 3.98 Cr",
+                "price": "₹3.05 - 3.14 Cr",
+                "area": "1,218 - 1,629 sqft",
+                "config": "3 BHK",
+                "available_from": "Ready To Move · Since Sep, 2024",
+                "id": "r384794",
+                "features": [],
+                "places_nearby": [
+                    "The Millennium School",
+                    "DPS School"
+                ],
+                "image": "https://static.99acres.com/universalapp/img/noImageBg.svg",
+                "url": "https://www.99acres.com/rg-mirage-sector-120-noida-npxid-r384794"
+            },
+            {
+                "location_name": "Ivy County",
+                "description": "Choose your dream home from the wide variety of 3,4 BHK apartments in Sector 75, available for sale in Ivy County. Apartment prices in this housing society vary in the range of Rs. 2.95 - 4.8 Cr. Ivy County 's RERA registration number is UPRERAPRJ757529. Ivy County apartments are available in multiples sizes, ranging from 1,656 - 2,511 sqft SUPER area",
+                "price": "₹2.95 - 3.85 Cr",
+                "area": "1,656 - 2,511 sqft",
+                "config": "3 BHK",
+                "available_from": "Ready To Move · Since Dec, 2020",
+                "id": "r341813",
+                "features": [],
+                "places_nearby": [
+                    "Spectrum Metro Mall",
+                    "Sector 50 Noida Metro Station"
+                ],
+                "image": "https://static.99acres.com/universalapp/img/noImageBg.svg",
+                "url": "https://www.99acres.com/ivy-county-sector-75-noida-npxid-r341813"
+            },
+            {
+                "location_name": "Amrapali Silicon City",
+                "description": "Here are beautifully built 1,2,3,4 BHK apartments in Sector 76, available for sale at Amrapali Silicon City. Prices of apartments in this project, vary between Rs. 95.06 L - 2.55 Cr. Amrapali Silicon City apartments are available in multiples sizes, ranging from 815 - 2,410 sqft SUPER area. The property options in this society are Ready To Move",
+                "price": "₹1.35 - 1.8 Cr",
+                "area": "815 - 2,410 sqft",
+                "config": "3 BHK",
+                "available_from": "Under Construction · Completion in Oct, 2025",
+                "id": "r769",
+                "features": [],
+                "places_nearby": [
+                    "Noida Sector 76 Metro Station",
+                    "Hyde Park Crown"
+                ],
+                "image": "https://static.99acres.com/universalapp/img/noImageBg.svg",
+                "url": "https://www.99acres.com/amrapali-silicon-city-sector-76-noida-npxid-r769"
+            },
+            {
+                "location_name": "Ace Starlit",
+                "description": "Looking for your dream home? Explore 2,3 BHK apartments in Sector 152, now available in Ace Starlit. Ace Starlit 's RERA registration number is UPRERAPRJ677294. Apartments in Ace Starlit have SUPER area ranging between 1,350 - 1,779 sqft. Apartment prices in this housing society vary in the range of Rs. 2.16 - 3.02 Cr",
+                "price": "₹3.02 Cr",
+                "area": "1,350 - 1,779 sqft",
+                "config": "3 BHK",
+                "available_from": "Under Construction · Completion in Oct, 2026",
+                "id": "r378409",
+                "features": [],
+                "places_nearby": [
+                    "Noida Sector 148 Metro Station",
+                    "Veda Adventures"
+                ],
+                "image": "https://static.99acres.com/universalapp/img/noImageBg.svg",
+                "url": "https://www.99acres.com/ace-starlit-sector-152-noida-npxid-r378409"
+            },
+            {
+                "location_name": "ATS Le Grandiose",
+                "description": "ATS Le Grandiose society now offers elegantly built 3,4 BHK apartments in Sector 150. Prices of apartments in this project, vary between Rs. 1.79 - 3.52 Cr. ATS Le Grandiose has apartments in multiple configurations, in range of 1,625 - 3,200 sqft. The housing society is RERA-registered with UPRERAPRJ3250 registration number",
+                "price": "₹1.79 - 2.53 Cr",
+                "area": "1,625 - 3,200 sqft",
+                "config": "3 BHK",
+                "available_from": "Under Construction · Completion in Dec, 2028",
+                "id": "r173041",
+                "features": [],
+                "places_nearby": [
+                    "Shaheed Bhagat Singh Park",
+                    "Gairathi Cricket Stadium"
+                ],
+                "image": "https://static.99acres.com/universalapp/img/noImageBg.svg",
+                "url": "https://www.99acres.com/ats-le-grandiose-sector-150-noida-npxid-r173041"
+            },
+            {
+                "location_name": "Godrej Jardinia",
+                "description": "Godrej Jardinia society now offers elegantly built 3,4 BHK apartments in Sector 146. Apartment prices in this housing society vary in the range of Rs. 7.3 - 9.66 Cr. Godrej Jardinia is a RERA- registered society and UPRERAPRJ288309/04/2024 is the RERA registration number. Apartments in Godrej Jardinia have CARPET area ranging between 1,540 - 1,714 sqft",
+                "price": "₹4.64 - 7.3 Cr",
+                "area": "1,540 - 1,714 sqft",
+                "config": "3 BHK",
+                "available_from": "Under Construction · Completion in Jan, 2030",
+                "id": "r425268",
+                "features": [],
+                "places_nearby": [
+                    "Noida Sector 146 Metro Station",
+                    "Advant Navis Business Park"
+                ],
+                "image": "https://static.99acres.com/universalapp/img/noImageBg.svg",
+                "url": "https://www.99acres.com/godrej-jardinia-sector-146-noida-npxid-r425268"
+            },
+            {
+                "location_name": "Nimbus The Arista Luxe",
+                "description": "Choose your dream home from the wide variety of 3,4,5 BHK apartments in Sector 168, available for sale in Nimbus The Arista Luxe. Apartments in this complex are available in price range of Rs. 5.34 - 12.45 Cr. Nimbus The Arista Luxe has apartments in multiple configurations, in range of 1,632 - 3,460 sqft. Nimbus The Arista Luxe 's RERA registration number is UPRERAPRJ11625",
+                "price": "₹5.34 - 5.57 Cr",
+                "area": "1,632 - 3,460 sqft",
+                "config": "3 BHK",
+                "available_from": "New Launch · Completion in Nov, 2026",
+                "id": "r449925",
+                "features": [],
+                "places_nearby": [
+                    "Noida International Airport",
+                    "Budha International Circuit"
+                ],
+                "image": "https://static.99acres.com/universalapp/img/noImageBg.svg",
+                "url": "https://www.99acres.com/nimbus-the-arista-luxe-sector-168-noida-npxid-r449925"
+            },
+            {
+                "location_name": "Residential Welfare Society",
+                "description": "Choose your dream home from the wide variety of 3 BHK apartments in Sector 48, available for sale in Residential Welfare Society. Apartment prices in this housing society vary in the range of Rs. 80 L. Apartments in Residential Welfare Society have CARPET area ranging between 5,45,454 sqft. Apartments are New Launch in this project",
+                "price": "₹80 L",
+                "area": "5,45,454 sqft",
+                "config": "3 BHK",
+                "available_from": "Under Construction · Completion in Oct, 2027",
+                "id": "r446957",
+                "features": [],
+                "places_nearby": null,
+                "image": "https://static.99acres.com/universalapp/img/noImageBg.svg",
+                "url": "https://www.99acres.com/residential-welfare-society-sector-48-noida-npxid-r446957"
+            },
+            {
+                "location_name": "Prateek Canary",
+                "description": "Prateek Canary is a premium residential project located in Sector 150, Noida. It offers luxurious 3, 4, and 5 BHK apartments with state-of-the-art amenities. The project boasts spacious living areas, modern kitchens, and balconies with scenic views. Residents can enjoy facilities like a clubhouse, swimming pool, gymnasium, landscaped gardens, and 24/7 security. The strategic location provides excellent connectivity to major highways, educational institutions, hospitals, and commercial hubs. Prateek Canary is designed for those seeking an elevated lifestyle amidst tranquility and convenience.",
+                "price": "₹3.59 - 7.5 Cr",
+                "area": "2,400 - 6,120 sqft",
+                "config": "3 BHK",
+                "available_from": "Under Construction · Completion in Oct, 2025",
+                "id": "r372091",
+                "features": ["Clubhouse", "Swimming Pool", "Gymnasium", "Landscaped Gardens", "24/7 Security"],
+                "places_nearby": ["Noida-Greater Noida Expressway", "Shaheed Bhagat Singh Park", "Gautam Buddha University"],
+                "image": "https://imagecdn.99acres.com/media1/37452/12/749041496M-1708453488734.webp",
+                "url": "https://www.99acres.com/prateek-canary-sector-150-noida-npxid-r372091"
+            }
+        ];
 
-      <!-- Recommended Property 2 -->
-      <div class="property-card">
-        <img src="https://imagecdn.99acres.com/media1/31936/7/638718827M-1756187772911.webp" alt="Property Image" class="property-image" />
-        <div class="property-content">
-          <h2 class="property-title">3 Bedroom House in Alpha 2, Greater Noida</h2>
-          <p class="property-location">📍 null Alpha 2 Greater Noida</p>
-          <div class="property-price">₹3.1 Cr</div>
-          <div class="property-info">
-            <div>
-              <div class="info-label">Area</div>
-              <div>1291 sq.ft. (120 sqm)</div>
-            </div>
-            <div>
-              <div class="info-label">Config</div>
-              <div>3 BHK (3 Baths)</div>
-            </div>
-          </div>
-          <div class="property-info" style="border-top:none;">
-            <div>
-              <div class="info-label">Furnishing</div>
-              <div>Semi-Furnished</div>
-            </div>
-            <div>
-              <div class="info-label">Available</div>
-              <div>Ready To Move</div>
-            </div>
-          </div>
-          <div class="section-title">Key Features:</div>
-          <div class="tags">
-            <span class="tag">Plot Area</span>
-            <span class="tag">Metro Nearby</span>
-            <span class="tag">Gated Society</span>
-            <span class="tag">North West Facing</span>
-          </div>
-          <div class="section-title">Nearby Places:</div>
-          <div class="tags">
-            <span class="nearby-tag">Opposite to Greater Noida Authority</span>
-            <span class="nearby-tag">Shopping complex</span>
-            <span class="nearby-tag">School</span>
-            <span class="nearby-tag">Hospital already operational</span>
-          </div>
-          <div class="emi" data-type="buy">
-            EMI from: <span>₹0/month</span><br>
-            (via <a href="#">HDFC Bank</a>)
-          </div>
-          <a href="https://www.99acres.com/3-bhk-bedroom-independent-house-villa-for-sale-in-alpha-2-greater-noida-1291-sq-ft-spid-K84282340" class="view-btn">Visit Property</a>
-        </div>
-      </div>
-    </div>
-  </div>
+        const userInputs = {
+            budget: "6 CR",
+            propertyType: "Buy", 
+            userRecommendation: "hospital",
+            furnishing: "semi",
+            configuration: "3 BHK"
+        };
 
-  <script>
-    const bankNames = ["HDFC Bank", "ICICI Bank", "SBI", "Axis Bank", "Kotak Mahindra Bank", "Punjab National Bank"];
+        // --- Helper Functions ---
+        function parsePriceToLakhs(priceStr) {
+            if (!priceStr) return 0;
+            priceStr = priceStr.replace(/₹/g, '').trim();
+            let value = 0;
+            let originalPricePart = priceStr;
 
-    document.querySelectorAll('.emi[data-type="buy"]').forEach(emiBlock => {
-      const priceText = emiBlock.closest('.property-card')
-        .querySelector('.property-price').innerText;
-      
-      let P;
-      const priceMatchCr = priceText.match(/₹([\d.]+) Cr/);
-      const priceMatchLac = priceText.match(/₹([\d.]+) Lac/);
+            if (priceStr.includes('-')) {
+                // For ranges, take the lower bound for budget comparison
+                originalPricePart = priceStr.split('-')[0].trim();
+            }
 
-      if (priceMatchCr) {
-        P = parseFloat(priceMatchCr[1]) * 10000000; // Convert Crores to Rupees
-      } else if (priceMatchLac) {
-        P = parseFloat(priceMatchLac[1]) * 100000; // Convert Lakhs to Rupees
-      } else {
-        P = parseFloat(priceText.replace(/[₹,]/g, '').trim()); // Assume raw number
-      }
-
-      if (P > 0) {
-        const R = 8.5 / 12 / 100; // Monthly rate for 8.5% annual
-        const N = 240; // 20 years in months
-        const emi = (P * R * Math.pow(1 + R, N)) / (Math.pow(1 + R, N) - 1);
-        const rounded = Math.round(emi / 100) * 100;
-        emiBlock.querySelector('span').textContent = `₹${rounded.toLocaleString('en-IN')}/month`;
-      } else {
-        emiBlock.querySelector('span').textContent = `N/A`; // Handle cases where price might be 0 or unparseable
-      }
-
-      // Assign a random bank name
-      const randomBank = bankNames[Math.floor(Math.random() * bankNames.length)];
-      emiBlock.querySelector('a').textContent = randomBank;
-    });
-
-    // Fallback image handling
-    document.querySelectorAll('.property-image').forEach(img => {
-        if (img.src.includes('noImageBg.svg') || img.src.includes('noImageBgPremium.svg') || img.src === '') {
-            img.src = 'https://via.placeholder.com/400x250';
+            if (originalPricePart.includes('Cr')) {
+                value = parseFloat(originalPricePart.replace('Cr', '').trim()) * 100; // Convert to Lakhs
+            } else if (originalPricePart.includes('L')) {
+                value = parseFloat(originalPricePart.replace('L', '').trim()); // Already in Lakhs
+            } else {
+                // Assume it's in plain rupees, convert to Lakhs
+                value = parseFloat(originalPricePart) / 100000;
+            }
+            return value; // Price in Lakhs
         }
-    });
 
-  </script>
+        function calculateEMI(principalLakhs) {
+            let P = principalLakhs * 100000; // Convert Lakhs to Rupees
+            if (isNaN(P) || P <= 0) return 0;
+
+            let R = 8.5 / 12 / 100; // Monthly interest rate (8.5% annual)
+            let N = 240; // Total number of monthly installments (20 years * 12 months)
+
+            let emi = (P * R * Math.pow((1 + R), N)) / (Math.pow((1 + R), N) - 1);
+            return Math.round(emi / 100) * 100; // Round to nearest ₹100
+        }
+
+        const genericNearbyPlaces = ["Metro Station", "Shopping Mall", "Hospital", "School", "Park", "Grocery Store", "Bus Stop", "Fitness Center", "ATM", "Pharmacy"];
+
+        function getRandomNearbyPlaces(count = 3) {
+            const shuffled = genericNearbyPlaces.sort(() => 0.5 - Math.random());
+            return shuffled.slice(0, count);
+        }
+
+        function getPropertyCardHTML(property) {
+            const imageUrl = (property.image && property.image !== "https://static.99acres.com/universalapp/img/noImageBg.svg" && property.image !== null)
+                ? property.image
+                : "https://via.placeholder.com/400x250";
+
+            const features = property.features.slice(0, 5).map(f => `<span class="tag">${f}</span>`).join('');
+            const displayFeatures = features || '<span class="tag">No specific features listed</span>';
+
+            const nearbyPlacesTags = property.places_nearby && property.places_nearby.length > 0
+                ? property.places_nearby.slice(0, 3).map(p => `<span class="nearby-tag">${p}</span>`).join('')
+                : getRandomNearbyPlaces(3).map(p => `<span class="nearby-tag">${p}</span>`).join('');
+
+
+            const furnishingDetails = userInputs.furnishing === "semi" ? "Semi-furnished" : "Not specified"; // Default to user input if not present in data
+
+            let emiBlock = '';
+            if (userInputs.propertyType === "Buy") {
+                const priceForEMI = parsePriceToLakhs(property.price);
+                const emiValue = calculateEMI(priceForEMI);
+                if (emiValue > 0) {
+                     emiBlock = `
+                        <div class="emi" data-type="buy">
+                            EMI from: <span>₹${emiValue.toLocaleString('en-IN')}/month</span><br>
+                            (via <a href="https://www.google.com/search?q=best+home+loan+interest+rates" target="_blank">Search and link to banks offering best interest rates</a>)
+                        </div>
+                    `;
+                }
+            }
+
+            return `
+                <div class="property-card">
+                    <img src="${imageUrl}" alt="Property Image" class="property-image" />
+
+                    <div class="property-content">
+                        <h2 class="property-title">${property.location_name}</h2>
+                        <p class="property-location">📍 ${property.location_name}</p>
+
+                        <div class="property-price">${property.price}</div>
+
+                        <div class="property-info">
+                            <div>
+                                <div class="info-label">Area</div>
+                                <div>${property.area}</div>
+                            </div>
+                            <div>
+                                <div class="info-label">Config</div>
+                                <div>${property.config}</div>
+                            </div>
+                        </div>
+
+                        <div class="property-info" style="border-top:none;">
+                            <div>
+                                <div class="info-label">Furnishing</div>
+                                <div>${furnishingDetails}</div>
+                            </div>
+                            <div>
+                                <div class="info-label">Available</div>
+                                <div>${property.available_from}</div>
+                            </div>
+                        </div>
+
+                        <div class="section-title">Key Features:</div>
+                        <div class="tags">
+                            ${displayFeatures}
+                        </div>
+
+                        <div class="section-title">Nearby Places:</div>
+                        <div class="tags">
+                            ${nearbyPlacesTags}
+                        </div>
+
+                        ${emiBlock}
+
+                        <a href="${property.url}" class="view-btn" target="_blank">Visit Property</a>
+                    </div>
+                </div>
+            `;
+        }
+
+        // --- Recommendation Logic ---
+        const budgetInLakhs = parsePriceToLakhs(userInputs.budget);
+        const desiredConfig = userInputs.configuration;
+        const recommendationKeyword = userInputs.userRecommendation.toLowerCase();
+
+        const filteredProperties = propertyData.filter(prop => prop.config === desiredConfig);
+
+        // 1. Under-Budget Properties
+        let underBudgetProperties = filteredProperties
+            .filter(prop => parsePriceToLakhs(prop.price) <= budgetInLakhs)
+            .sort((a, b) => parsePriceToLakhs(a.price) - parsePriceToLakhs(b.price))
+            .slice(0, 4); // Take top 4 cheapest under budget
+
+        let selectedPropertyIds = new Set(underBudgetProperties.map(p => p.id));
+
+        // 2. Recommended Properties (based on keyword, not already selected)
+        let recommendedProperties = filteredProperties
+            .filter(prop => !selectedPropertyIds.has(prop.id)) // Exclude already selected
+            .filter(prop => {
+                const lowerCaseDesc = prop.description ? prop.description.toLowerCase() : '';
+                const lowerCasePlaces = prop.places_nearby ? prop.places_nearby.map(place => place.toLowerCase()).join(' ') : '';
+                return (lowerCaseDesc.includes(recommendationKeyword) || lowerCasePlaces.includes(recommendationKeyword));
+            })
+            .slice(0, 2); // Take top 2 matching recommendation
+
+        recommendedProperties.forEach(p => selectedPropertyIds.add(p.id)); // Add to selected to prevent re-use if filling later
+
+        // Fallback if not enough recommended properties
+        if (recommendedProperties.length < 2) {
+            const remainingForRecommendation = filteredProperties
+                .filter(prop => !selectedPropertyIds.has(prop.id))
+                .slice(0, 2 - recommendedProperties.length); // Fill remaining slots
+            
+            recommendedProperties = recommendedProperties.concat(remainingForRecommendation);
+            recommendedProperties.forEach(p => selectedPropertyIds.add(p.id));
+        }
+        
+        // Ensure that there are exactly 4 under-budget and 2 recommended.
+        // If there are fewer than 4 under-budget properties, the list will be shorter.
+        // If there are fewer than 2 distinct recommended properties, the list will be shorter.
+
+        // --- Render Properties ---
+        const underBudgetGrid = document.getElementById('under-budget-properties');
+        const recommendedGrid = document.getElementById('recommended-properties');
+
+        if (underBudgetProperties.length === 0) {
+            underBudgetGrid.innerHTML = '<p style="text-align: center; grid-column: 1 / -1; color: var(--text-color-light);">No properties found under your budget with the specified criteria.</p>';
+        } else {
+            underBudgetProperties.forEach(property => {
+                underBudgetGrid.innerHTML += getPropertyCardHTML(property);
+            });
+        }
+
+        if (recommendedProperties.length === 0) {
+            recommendedGrid.innerHTML = '<p style="text-align: center; grid-column: 1 / -1; color: var(--text-color-light);">No recommended properties found based on your preference for hospitals.</p>';
+        } else {
+            recommendedProperties.forEach(property => {
+                recommendedGrid.innerHTML += getPropertyCardHTML(property);
+            });
+        }
+
+    </script>
 </body>
 </html>
