@@ -1,471 +1,589 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Property Recommendations</title>
     <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0;
-            padding: 20px;
-            background-color: #f4f7f6;
-            color: #333;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
-        h1, h2 {
-            color: #2c3e50;
-            text-align: center;
-            margin-bottom: 30px;
-            font-weight: 600;
-        }
-
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        margin: 20px;
+        background-color: #f4f7f6;
+        color: #333;
+        line-height: 1.6;
+      }
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+      h1,
+      h2 {
+        color: #2c3e50;
+        text-align: center;
+        margin-bottom: 30px;
+        font-weight: 600;
+      }
+      .property-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 25px;
+        padding: 20px 0;
+      }
+      .property-card {
+        background-color: #ffffff;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        display: flex;
+        flex-direction: column;
+      }
+      .property-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+      }
+      .property-image {
+        width: 100%;
+        height: 250px;
+        object-fit: cover;
+        border-bottom: 1px solid #eee;
+      }
+      .property-content {
+        padding: 20px;
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+      }
+      .property-title {
+        font-size: 1.5em;
+        margin-top: 0;
+        margin-bottom: 10px;
+        color: #34495e;
+        font-weight: 700;
+      }
+      .property-location {
+        font-size: 0.95em;
+        color: #7f8c8d;
+        margin-bottom: 15px;
+        display: flex;
+        align-items: center;
+      }
+      .property-location::before {
+        content: "📍";
+        margin-right: 5px;
+      }
+      .property-price {
+        font-size: 1.8em;
+        color: #e74c3c;
+        font-weight: 700;
+        margin-bottom: 15px;
+      }
+      .property-info {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px 0;
+        border-top: 1px solid #ecf0f1;
+        font-size: 0.9em;
+        margin-bottom: 10px;
+      }
+      .property-info > div {
+        flex: 1;
+        text-align: center;
+        padding: 0 5px;
+      }
+      .info-label {
+        font-weight: 600;
+        color: #555;
+        margin-bottom: 5px;
+      }
+      .section-title {
+        font-weight: 600;
+        color: #34495e;
+        margin-top: 15px;
+        margin-bottom: 8px;
+        border-bottom: 1px solid #ecf0f1;
+        padding-bottom: 5px;
+      }
+      .tags,
+      .nearby-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-bottom: 15px;
+      }
+      .tag,
+      .nearby-tag {
+        background-color: #e8f6f3;
+        color: #20b2aa;
+        padding: 6px 12px;
+        border-radius: 20px;
+        font-size: 0.85em;
+        font-weight: 500;
+      }
+      .nearby-tag {
+        background-color: #f1f8e9;
+        color: #8bc34a;
+      }
+      .emi {
+        background-color: #f8f9fa;
+        border: 1px solid #e9ecef;
+        padding: 12px 15px;
+        border-radius: 8px;
+        margin-top: 15px;
+        font-size: 0.9em;
+        color: #555;
+      }
+      .emi span {
+        font-weight: 700;
+        color: #28a745;
+        font-size: 1.1em;
+      }
+      .emi a {
+        color: #007bff;
+        text-decoration: none;
+        font-weight: 500;
+      }
+      .emi a:hover {
+        text-decoration: underline;
+      }
+      .view-btn {
+        display: block;
+        width: 100%;
+        padding: 12px 0;
+        background-color: #3498db;
+        color: white;
+        text-align: center;
+        border-radius: 8px;
+        text-decoration: none;
+        font-size: 1.1em;
+        font-weight: 600;
+        margin-top: 20px;
+        transition: background-color 0.3s ease;
+      }
+      .view-btn:hover {
+        background-color: #2980b9;
+      }
+      @media (max-width: 768px) {
         .property-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 25px;
-            margin-bottom: 50px;
+          grid-template-columns: 1fr;
         }
-
-        .property-card {
-            background-color: #ffffff;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            display: flex;
-            flex-direction: column;
-            cursor: pointer;
-        }
-
-        .property-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-        }
-
-        .property-image {
-            width: 100%;
-            height: 220px;
-            object-fit: cover;
-            border-bottom: 1px solid #eee;
-        }
-
-        .property-content {
-            padding: 20px;
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .property-title {
-            font-size: 1.4em;
-            margin-top: 0;
-            margin-bottom: 10px;
-            color: #34495e;
-            font-weight: 700;
-            line-height: 1.3;
-        }
-
-        .property-location {
-            font-size: 0.95em;
-            color: #7f8c8d;
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-
-        .property-price {
-            font-size: 1.6em;
-            font-weight: 700;
-            color: #27ae60;
-            margin-bottom: 20px;
-        }
-
         .property-info {
-            display: flex;
-            justify-content: space-between;
-            padding: 10px 0;
-            border-top: 1px solid #ecf0f1;
-            gap: 10px;
+          flex-direction: column;
+          align-items: flex-start;
         }
-
         .property-info > div {
-            flex: 1;
-            text-align: center;
+          text-align: left;
+          margin-bottom: 10px;
+          width: 100%;
+          padding: 0;
         }
-
-        .info-label {
-            font-size: 0.85em;
-            color: #95a5a6;
-            margin-bottom: 5px;
-            text-transform: uppercase;
-            font-weight: 600;
-        }
-
-        .section-title {
-            font-size: 1.0em;
-            font-weight: 600;
-            color: #34495e;
-            margin-top: 20px;
-            margin-bottom: 10px;
-        }
-
-        .tags, .nearby-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin-bottom: 15px;
-        }
-
-        .tag, .nearby-tag {
-            background-color: #e8f6f3;
-            color: #2ecc71;
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 0.8em;
-            font-weight: 500;
-            white-space: nowrap;
-        }
-
-        .nearby-tag {
-            background-color: #eaf3f8;
-            color: #3498db;
-        }
-
-        .emi {
-            font-size: 0.9em;
-            color: #555;
-            background-color: #f8fcfb;
-            padding: 10px 15px;
-            border-radius: 8px;
-            border: 1px dashed #d1e2e1;
-            margin-top: 15px;
-            margin-bottom: 20px;
-        }
-
-        .emi span {
-            font-weight: 700;
-            color: #27ae60;
-            font-size: 1.1em;
-        }
-        
-        .emi a {
-            color: #3498db;
-            text-decoration: none;
-            font-weight: 500;
-        }
-        .emi a:hover {
-            text-decoration: underline;
-        }
-
-        .view-btn {
-            display: block;
-            width: 100%;
-            padding: 12px;
-            background-color: #3498db;
-            color: white;
-            text-align: center;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: 600;
-            margin-top: auto; /* Pushes button to the bottom */
-            transition: background-color 0.3s ease;
-        }
-
-        .view-btn:hover {
-            background-color: #2980b9;
-        }
-
-        @media (max-width: 768px) {
-            .property-grid {
-                grid-template-columns: 1fr;
-            }
-        }
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <div class="container">
-        <h1>🏡 Property Recommendations for You</h1>
+      <h1>Property Recommendations</h1>
 
-        <h2>🏠 Under-Budget Properties</h2>
-        <div class="property-grid">
-            <div class="property-card">
-                <img src="https://imagecdn.99acres.com/media1/32105/14/642114963M-1756890487055.webp" alt="Property Image" class="property-image" />
-                <div class="property-content">
-                    <h2 class="property-title">3 BHK (3 Baths) in Alpha 2, Greater Noida</h2>
-                    <p class="property-location">📍 Alpha 2, Greater Noida</p>
-                    <div class="property-price">₹1.55 Cr</div>
-                    <div class="property-info">
-                        <div>
-                            <div class="info-label">Area</div>
-                            <div>645 sqft(60 sqm)</div>
-                        </div>
-                        <div>
-                            <div class="info-label">Config</div>
-                            <div>3 BHK (3 Baths)</div>
-                        </div>
-                    </div>
-                    <div class="property-info" style="border-top:none;">
-                        <div>
-                            <div class="info-label">Furnishing</div>
-                            <div>Semi-Furnished</div>
-                        </div>
-                        <div>
-                            <div class="info-label">Available</div>
-                            <div>1mo ago</div>
-                        </div>
-                    </div>
-                    <div class="section-title">Key Features:</div>
-                    <div class="tags">
-                        <span class="tag">Spacious-Layout</span><span class="tag">Ready-To-Move</span><span class="tag">Resale-Property</span><span class="tag">Well-Maintained</span><span class="tag">Bright-Rooms</span>
-                    </div>
-                    <div class="section-title">Nearby Places:</div>
-                    <div class="tags">
-                        <span class="nearby-tag">Alpha 1 metro station</span><span class="nearby-tag">Delta 1 metro station</span><span class="nearby-tag">Local Market</span>
-                    </div>
-                    
+      <h2>🏠 Under-Budget Properties</h2>
+      <div class="property-grid">
+        <div class="property-card">
+          <img
+            src="https://imagecdn.99acres.com/media1/32313/11/646271085M-1757676388402.webp"
+            alt="Property Image"
+            class="property-image"
+          />
+
+          <div class="property-content">
+            <h2 class="property-title">
+              3 BHK Independent Builder Floor in Sector 73, Noida
+            </h2>
+            <p class="property-location">📍 Sector 73, Noida</p>
+
+            <div class="property-price">₹55 Lac</div>
+
+            <div class="property-info">
+              <div>
+                <div class="info-label">Area</div>
+                <div>1,450 sqft</div>
+              </div>
+              <div>
+                <div class="info-label">Config</div>
+                <div>3 BHK (2 Baths)</div>
+              </div>
+            </div>
+
+            <div class="property-info" style="border-top: none">
+              <div>
+                <div class="info-label">Furnishing</div>
+                <div>semi-furnished</div>
+              </div>
+              <div>
+                <div class="info-label">Available</div>
+                <div>Ready To Move</div>
+              </div>
+            </div>
+
+            <div class="section-title">Key Features:</div>
+            <div class="tags">
+              <span class="tag">Owner</span>
+              <span class="tag">Verified</span>
+              <span class="tag">Under construction</span>
+              <span class="tag">Ready To Move</span>
+              <span class="tag">3 BHK</span>
+            </div>
+
+            <div class="section-title">Nearby Places:</div>
+            <div class="tags">
+              <span class="nearby-tag">Noida sector 50 metro station</span>
+              <span class="nearby-tag">Noida sector 51 metro station</span>
+            </div>
+
             <div class="emi" data-type="buy">
-                EMI from: <span>₹134,700/month</span><br>
-                (via <a href="https://www.google.com/search?q=best+home+loan+interest+rates" target="_blank">Search and link to banks offering best interest rates</a>)
+              EMI from: <span>₹48,200/month</span><br />
+              (via
+              <a href="https://www.bankbazaar.com/home-loan/bank-interest-rates.html"
+                >Banks offering best interest rates</a
+              >)
             </div>
-        
-                    <a href="https://www.99acres.com/3-bhk-bedroom-independent-house-villa-for-sale-in-alpha-2-greater-noida-646-sq-ft-spid-L84897590" class="view-btn" target="_blank">Visit Property</a>
-                </div>
-            </div>
-            <div class="property-card">
-                <img src="https://static.99acres.com/universalapp/img/noImageBg.svg" alt="Property Image" class="property-image" />
-                <div class="property-content">
-                    <h2 class="property-title">3 BHK (2 Baths) in Gharonda apartments Alpha 1, Greater Noida</h2>
-                    <p class="property-location">📍 Gharonda apartments Alpha 1, Greater Noida</p>
-                    <div class="property-price">₹98.00 Lac</div>
-                    <div class="property-info">
-                        <div>
-                            <div class="info-label">Area</div>
-                            <div>1,000 sqft(93 sqm)</div>
-                        </div>
-                        <div>
-                            <div class="info-label">Config</div>
-                            <div>3 BHK (2 Baths)</div>
-                        </div>
-                    </div>
-                    <div class="property-info" style="border-top:none;">
-                        <div>
-                            <div class="info-label">Furnishing</div>
-                            <div>Semi-Furnished</div>
-                        </div>
-                        <div>
-                            <div class="info-label">Available</div>
-                            <div>Dealer·2w ago</div>
-                        </div>
-                    </div>
-                    <div class="section-title">Key Features:</div>
-                    <div class="tags">
-                        <span class="tag">Multiple-Balconies</span><span class="tag">Spacious-Layout</span><span class="tag">Ready-To-Move</span><span class="tag">Resale-Property</span><span class="tag">North-East-Facing</span>
-                    </div>
-                    <div class="section-title">Nearby Places:</div>
-                    <div class="tags">
-                        <span class="nearby-tag">Alpha 1 metro station</span><span class="nearby-tag">Pari chowk metro station</span><span class="nearby-tag">Metro Station Nearby</span>
-                    </div>
-                    
-            <div class="emi" data-type="buy">
-                EMI from: <span>₹85,300/month</span><br>
-                (via <a href="https://www.google.com/search?q=best+home+loan+interest+rates" target="_blank">Search and link to banks offering best interest rates</a>)
-            </div>
-        
-                    <a href="https://www.99acres.com/3-bhk-bedroom-apartment-flat-for-sale-in-gharonda-apartments-alpha-1-greater-noida-1000-sq-ft-spid-E85523950" class="view-btn" target="_blank">Visit Property</a>
-                </div>
-            </div>
-            <div class="property-card">
-                <img src="https://via.placeholder.com/400x250" alt="Property Image" class="property-image" />
-                <div class="property-content">
-                    <h2 class="property-title">3 BHK (2 Baths) in MSX Alpha Homes Alpha 1, Greater Noida</h2>
-                    <p class="property-location">📍 MSX Alpha Homes Alpha 1, Greater Noida</p>
-                    <div class="property-price">₹97.00 Lac</div>
-                    <div class="property-info">
-                        <div>
-                            <div class="info-label">Area</div>
-                            <div>1,330 sqft(124 sqm)</div>
-                        </div>
-                        <div>
-                            <div class="info-label">Config</div>
-                            <div>3 BHK (2 Baths)</div>
-                        </div>
-                    </div>
-                    <div class="property-info" style="border-top:none;">
-                        <div>
-                            <div class="info-label">Furnishing</div>
-                            <div>Semi-Furnished</div>
-                        </div>
-                        <div>
-                            <div class="info-label">Available</div>
-                            <div>3mo ago</div>
-                        </div>
-                    </div>
-                    <div class="section-title">Key Features:</div>
-                    <div class="tags">
-                        <span class="tag">Multiple-Balconies</span><span class="tag">Gated-Community</span><span class="tag">Ready-To-Move</span><span class="tag">Resale-Property</span><span class="tag">North-East-Facing</span>
-                    </div>
-                    <div class="section-title">Nearby Places:</div>
-                    <div class="tags">
-                        <span class="nearby-tag">Local Market</span><span class="nearby-tag">Bank/ATM</span><span class="nearby-tag">Public Transport</span>
-                    </div>
-                    
-            <div class="emi" data-type="buy">
-                EMI from: <span>₹84,400/month</span><br>
-                (via <a href="https://www.google.com/search?q=best+home+loan+interest+rates" target="_blank">Search and link to banks offering best interest rates</a>)
-            </div>
-        
-                    <a href="https://www.99acres.com/3-bhk-bedroom-apartment-flat-for-sale-in-msx-alpha-homes-alpha-1-greater-noida-1330-sq-ft-spid-U83628076" class="view-btn" target="_blank">Visit Property</a>
-                </div>
-            </div>
-            <div class="property-card">
-                <img src="https://static.99acres.com/universalapp/img/noImageBg.svg" alt="Property Image" class="property-image" />
-                <div class="property-content">
-                    <h2 class="property-title">3 BHK (3 Baths) in Alpha 2, Greater Noida</h2>
-                    <p class="property-location">📍 Alpha 2, Greater Noida</p>
-                    <div class="property-price">₹1.05 Cr</div>
-                    <div class="property-info">
-                        <div>
-                            <div class="info-label">Area</div>
-                            <div>430 sqft(40 sqm)</div>
-                        </div>
-                        <div>
-                            <div class="info-label">Config</div>
-                            <div>3 BHK (3 Baths)</div>
-                        </div>
-                    </div>
-                    <div class="property-info" style="border-top:none;">
-                        <div>
-                            <div class="info-label">Furnishing</div>
-                            <div>Semi-Furnished</div>
-                        </div>
-                        <div>
-                            <div class="info-label">Available</div>
-                            <div>Dealer·1mo ago</div>
-                        </div>
-                    </div>
-                    <div class="section-title">Key Features:</div>
-                    <div class="tags">
-                        <span class="tag">Ready-To-Move</span><span class="tag">Resale-Property</span><span class="tag">Modern-Interiors</span><span class="tag">Good-Ventilation</span><span class="tag">Well-Maintained</span>
-                    </div>
-                    <div class="section-title">Nearby Places:</div>
-                    <div class="tags">
-                        <span class="nearby-tag">Alpha 1 metro station</span><span class="nearby-tag">Delta 1 metro station</span><span class="nearby-tag">Local Market</span>
-                    </div>
-                    
-            <div class="emi" data-type="buy">
-                EMI from: <span>₹91,400/month</span><br>
-                (via <a href="https://www.google.com/search?q=best+home+loan+interest+rates" target="_blank">Search and link to banks offering best interest rates</a>)
-            </div>
-        
-                    <a href="https://www.99acres.com/3-bhk-bedroom-independent-house-villa-for-sale-in-alpha-2-greater-noida-431-sq-ft-spid-X85025672" class="view-btn" target="_blank">Visit Property</a>
-                </div>
-            </div>
+
+            <a
+              href="https://www.99acres.com/3-bhk-bedroom-independent-builder-floor-for-sale-in-sector-73-noida-1450-sq-ft-spid-Q84908510"
+              class="view-btn"
+              >Visit Property</a
+            >
+          </div>
         </div>
 
-        <h2>🌟 Recommended Properties</h2>
-        <div class="property-grid">
-            <div class="property-card">
-                <img src="https://static.99acres.com/universalapp/img/noImageBg.svg" alt="Property Image" class="property-image" />
-                <div class="property-content">
-                    <h2 class="property-title">3 BHK (3 Baths) in Block D Alpha 1, Greater Noida</h2>
-                    <p class="property-location">📍 Block D Alpha 1, Greater Noida</p>
-                    <div class="property-price">₹2.95 Cr</div>
-                    <div class="property-info">
-                        <div>
-                            <div class="info-label">Area</div>
-                            <div>1,614 sqft(150 sqm)</div>
-                        </div>
-                        <div>
-                            <div class="info-label">Config</div>
-                            <div>3 BHK (3 Baths)</div>
-                        </div>
-                    </div>
-                    <div class="property-info" style="border-top:none;">
-                        <div>
-                            <div class="info-label">Furnishing</div>
-                            <div>Semi-Furnished</div>
-                        </div>
-                        <div>
-                            <div class="info-label">Available</div>
-                            <div>FEATURED DEALER·Yesterday</div>
-                        </div>
-                    </div>
-                    <div class="section-title">Key Features:</div>
-                    <div class="tags">
-                        <span class="tag">Multiple-Balconies</span><span class="tag">Ready-To-Move</span><span class="tag">Resale-Property</span><span class="tag">Modern-Interiors</span><span class="tag">Good-Ventilation</span>
-                    </div>
-                    <div class="section-title">Nearby Places:</div>
-                    <div class="tags">
-                        <span class="nearby-tag">Alpha 1 metro station</span><span class="nearby-tag">Delta 1 metro station</span><span class="nearby-tag">Metro Station Nearby</span>
-                    </div>
-                    
+        <div class="property-card">
+          <img
+            src="https://imagecdn.99acres.com/media1/32679/6/653586757M-1759041992270.webp"
+            alt="Property Image"
+            class="property-image"
+          />
+
+          <div class="property-content">
+            <h2 class="property-title">3 BHK Flat in Sector 129, Noida</h2>
+            <p class="property-location">📍 Jaypee Greens Kasa Isles Sector 129 Noida</p>
+
+            <div class="property-price">₹1.2 Cr</div>
+
+            <div class="property-info">
+              <div>
+                <div class="info-label">Area</div>
+                <div>1,570 sqft</div>
+              </div>
+              <div>
+                <div class="info-label">Config</div>
+                <div>3 BHK (4 Baths)</div>
+              </div>
+            </div>
+
+            <div class="property-info" style="border-top: none">
+              <div>
+                <div class="info-label">Furnishing</div>
+                <div>semi-furnished</div>
+              </div>
+              <div>
+                <div class="info-label">Available</div>
+                <div>Under Construction</div>
+              </div>
+            </div>
+
+            <div class="section-title">Key Features:</div>
+            <div class="tags">
+              <span class="tag">Verified</span>
+              <span class="tag">RERA</span>
+              <span class="tag">Under Construction</span>
+              <span class="tag">3 BHK</span>
+            </div>
+
+            <div class="section-title">Nearby Places:</div>
+            <div class="tags">
+              <span class="nearby-tag">NSEZ Metro Station</span>
+              <span class="nearby-tag">Saya Piazza Mall</span>
+            </div>
+
             <div class="emi" data-type="buy">
-                EMI from: <span>₹256,600/month</span><br>
-                (via <a href="https://www.google.com/search?q=best+home+loan+interest+rates" target="_blank">Search and link to banks offering best interest rates</a>)
+              EMI from: <span>₹1,05,200/month</span><br />
+              (via
+              <a href="https://www.bankbazaar.com/home-loan/bank-interest-rates.html"
+                >Banks offering best interest rates</a
+              >)
             </div>
-        
-                    <a href="https://www.99acres.com/3-bhk-bedroom-independent-house-villa-for-sale-in-block-d-alpha-1-greater-noida-1615-sq-ft-r1-spid-P84277218" class="view-btn" target="_blank">Visit Property</a>
-                </div>
-            </div>
-            <div class="property-card">
-                <img src="https://static.99acres.com/universalapp/img/noImageBg.svg" alt="Property Image" class="property-image" />
-                <div class="property-content">
-                    <h2 class="property-title">3 BHK (3 Baths) in Alpha 2, Greater Noida</h2>
-                    <p class="property-location">📍 Alpha 2, Greater Noida</p>
-                    <div class="property-price">₹3.10 Cr</div>
-                    <div class="property-info">
-                        <div>
-                            <div class="info-label">Area</div>
-                            <div>1,291 sqft(120 sqm)</div>
-                        </div>
-                        <div>
-                            <div class="info-label">Config</div>
-                            <div>3 BHK (3 Baths)</div>
-                        </div>
-                    </div>
-                    <div class="property-info" style="border-top:none;">
-                        <div>
-                            <div class="info-label">Furnishing</div>
-                            <div>Semi-Furnished</div>
-                        </div>
-                        <div>
-                            <div class="info-label">Available</div>
-                            <div>2w ago</div>
-                        </div>
-                    </div>
-                    <div class="section-title">Key Features:</div>
-                    <div class="tags">
-                        <span class="tag">Ready-To-Move</span><span class="tag">Resale-Property</span><span class="tag">North-West-Facing</span><span class="tag">Modern-Interiors</span><span class="tag">Good-Ventilation</span>
-                    </div>
-                    <div class="section-title">Nearby Places:</div>
-                    <div class="tags">
-                        <span class="nearby-tag">Alpha 1 metro station</span><span class="nearby-tag">Delta 1 metro station</span><span class="nearby-tag">Hospital Access</span>
-                    </div>
-                    
-            <div class="emi" data-type="buy">
-                EMI from: <span>₹269,700/month</span><br>
-                (via <a href="https://www.google.com/search?q=best+home+loan+interest+rates" target="_blank">Search and link to banks offering best interest rates</a>)
-            </div>
-        
-                    <a href="https://www.99acres.com/3-bhk-bedroom-independent-house-villa-for-sale-in-alpha-2-greater-noida-1292-sq-ft-spid-K84282340" class="view-btn" target="_blank">Visit Property</a>
-                </div>
-            </div>
+
+            <a
+              href="https://www.99acres.com/3-bhk-bedroom-apartment-flat-for-sale-in-jaypee-greens-kasa-isles-sector-129-noida-1570-sq-ft-spid-S85540152"
+              class="view-btn"
+              >Visit Property</a
+            >
+          </div>
         </div>
+
+        <div class="property-card">
+          <img
+            src="https://imagecdn.99acres.com/media1/32787/5/653589125M-1759045907788.webp"
+            alt="Property Image"
+            class="property-image"
+          />
+
+          <div class="property-content">
+            <h2 class="property-title">3 BHK Flat in Sector 133, Noida</h2>
+            <p class="property-location">📍 Jaypee Greens Kensington Park Apartments Sector 133 Noida</p>
+
+            <div class="property-price">₹1.35 Cr</div>
+
+            <div class="property-info">
+              <div>
+                <div class="info-label">Area</div>
+                <div>1,525 sqft</div>
+              </div>
+              <div>
+                <div class="info-label">Config</div>
+                <div>3 BHK (4 Baths)</div>
+              </div>
+            </div>
+
+            <div class="property-info" style="border-top: none">
+              <div>
+                <div class="info-label">Furnishing</div>
+                <div>semi-furnished</div>
+              </div>
+              <div>
+                <div class="info-label">Available</div>
+                <div>Ready To Move</div>
+              </div>
+            </div>
+
+            <div class="section-title">Key Features:</div>
+            <div class="tags">
+              <span class="tag">Verified</span>
+              <span class="tag">RERA</span>
+              <span class="tag">Ready To Move</span>
+              <span class="tag">3 BHK</span>
+            </div>
+
+            <div class="section-title">Nearby Places:</div>
+            <div class="tags">
+              <span class="nearby-tag">Okhla Bird Sanctuary</span>
+              <span class="nearby-tag">Paras One33</span>
+            </div>
+
+            <div class="emi" data-type="buy">
+              EMI from: <span>₹1,18,300/month</span><br />
+              (via
+              <a href="https://www.bankbazaar.com/home-loan/bank-interest-rates.html"
+                >Banks offering best interest rates</a
+              >)
+            </div>
+
+            <a
+              href="https://www.99acres.com/3-bhk-bedroom-apartment-flat-for-sale-in-jaypee-greens-kensington-park-apartments-sector-133-noida-1525-sq-ft-spid-N85582822"
+              class="view-btn"
+              >Visit Property</a
+            >
+          </div>
+        </div>
+
+        <div class="property-card">
+          <img
+            src="https://imagecdn.99acres.com/media1/32787/5/653589125M-1759045907788.webp"
+            alt="Property Image"
+            class="property-image"
+          />
+
+          <div class="property-content">
+            <h2 class="property-title">3 BHK Flat in Sector 133, Noida</h2>
+            <p class="property-location">📍 Jaypee Greens Kensington Park Apartments Sector 133 Noida</p>
+
+            <div class="property-price">₹1.35 Cr</div>
+
+            <div class="property-info">
+              <div>
+                <div class="info-label">Area</div>
+                <div>1,517 sqft</div>
+              </div>
+              <div>
+                <div class="info-label">Config</div>
+                <div>3 BHK (3 Baths)</div>
+              </div>
+            </div>
+
+            <div class="property-info" style="border-top: none">
+              <div>
+                <div class="info-label">Furnishing</div>
+                <div>semi-furnished</div>
+              </div>
+              <div>
+                <div class="info-label">Available</div>
+                <div>Ready To Move</div>
+              </div>
+            </div>
+
+            <div class="section-title">Key Features:</div>
+            <div class="tags">
+              <span class="tag">Verified</span>
+              <span class="tag">RERA</span>
+              <span class="tag">Ready To Move</span>
+              <span class="tag">3 BHK</span>
+            </div>
+
+            <div class="section-title">Nearby Places:</div>
+            <div class="tags">
+              <span class="nearby-tag">Okhla Bird Sanctuary</span>
+              <span class="nearby-tag">Paras One33</span>
+            </div>
+
+            <div class="emi" data-type="buy">
+              EMI from: <span>₹1,18,300/month</span><br />
+              (via
+              <a href="https://www.bankbazaar.com/home-loan/bank-interest-rates.html"
+                >Banks offering best interest rates</a
+              >)
+            </div>
+
+            <a
+              href="https://www.99acres.com/3-bhk-bedroom-apartment-flat-for-sale-in-jaypee-greens-kensington-park-apartments-sector-133-noida-1517-sq-ft-spid-L84383300"
+              class="view-btn"
+              >Visit Property</a
+            >
+          </div>
+        </div>
+      </div>
+
+      <h2>🌟 Recommended Properties</h2>
+      <div class="property-grid">
+        <div class="property-card">
+          <img
+            src="https://imagecdn.99acres.com/media1/32787/5/653589125M-1759045907788.webp"
+            alt="Property Image"
+            class="property-image"
+          />
+
+          <div class="property-content">
+            <h2 class="property-title">3 BHK Flat in Sector 133, Noida</h2>
+            <p class="property-location">📍 Jaypee Greens Kensington Heights Sector 133 Noida</p>
+
+            <div class="property-price">₹1.38 Cr</div>
+
+            <div class="property-info">
+              <div>
+                <div class="info-label">Area</div>
+                <div>1,516 sqft</div>
+              </div>
+              <div>
+                <div class="info-label">Config</div>
+                <div>3 BHK (3 Baths)</div>
+              </div>
+            </div>
+
+            <div class="property-info" style="border-top: none">
+              <div>
+                <div class="info-label">Furnishing</div>
+                <div>semi-furnished</div>
+              </div>
+              <div>
+                <div class="info-label">Available</div>
+                <div>Ready To Move</div>
+              </div>
+            </div>
+
+            <div class="section-title">Key Features:</div>
+            <div class="tags">
+              <span class="tag">Verified</span>
+              <span class="tag">RERA</span>
+              <span class="tag">Ready To Move</span>
+              <span class="tag">3 BHK</span>
+            </div>
+
+            <div class="section-title">Nearby Places:</div>
+            <div class="tags">
+              <span class="nearby-tag">J S Tomar Memorial Hospital Pvt. Ltd. - Noida</span>
+              <span class="nearby-tag">Maheshwari Clinic</span>
+            </div>
+
+            <div class="emi" data-type="buy">
+              EMI from: <span>₹1,20,900/month</span><br />
+              (via
+              <a href="https://www.bankbazaar.com/home-loan/bank-interest-rates.html"
+                >Banks offering best interest rates</a
+              >)
+            </div>
+
+            <a
+              href="https://www.99acres.com/3-bhk-bedroom-apartment-flat-for-sale-in-jaypee-greens-kensington-heights-sector-133-noida-1516-sq-ft-spid-L83363664"
+              class="view-btn"
+              >Visit Property</a
+            >
+          </div>
+        </div>
+
+        <div class="property-card">
+          <img
+            src="https://imagecdn.99acres.com/media1/28809/9/648508569M-1758037945449.webp"
+            alt="Property Image"
+            class="property-image"
+          />
+
+          <div class="property-content">
+            <h2 class="property-title">3 BHK Flat in Sector 77, Noida</h2>
+            <p class="property-location">📍 Antriksh Forest Sector 77 Noida</p>
+
+            <div class="property-price">₹1.65 Cr</div>
+
+            <div class="property-info">
+              <div>
+                <div class="info-label">Area</div>
+                <div>1,870 sqft</div>
+              </div>
+              <div>
+                <div class="info-label">Config</div>
+                <div>3 BHK (3 Baths)</div>
+              </div>
+            </div>
+
+            <div class="property-info" style="border-top: none">
+              <div>
+                <div class="info-label">Furnishing</div>
+                <div>semi-furnished</div>
+              </div>
+              <div>
+                <div class="info-label">Available</div>
+                <div>Ready To Move</div>
+              </div>
+            </div>
+
+            <div class="section-title">Key Features:</div>
+            <div class="tags">
+              <span class="tag">Owner</span>
+              <span class="tag">No-Brokerage-Tag</span>
+              <span class="tag">3D-Tag</span>
+              <span class="tag">Ready To Move</span>
+              <span class="tag">3 BHK</span>
+            </div>
+
+            <div class="section-title">Nearby Places:</div>
+            <div class="tags">
+              <span class="nearby-tag">Noida Sector 76 Metro Station</span>
+              <span class="nearby-tag">Spectrum Mall</span>
+            </div>
+
+            <div class="emi" data-type="buy">
+              EMI from: <span>₹1,44,600/month</span><br />
+              (via
+              <a href="https://www.bankbazaar.com/home-loan/bank-interest-rates.html"
+                >Banks offering best interest rates</a
+              >)
+            </div>
+
+            <a
+              href="https://www.99acres.com/3-bhk-bedroom-apartment-flat-for-sale-in-antriksh-forest-sector-77-noida-1870-sq-ft-spid-W85085682"
+              class="view-btn"
+              >Visit Property</a
+            >
+          </div>
+        </div>
+      </div>
     </div>
-
-    <script>
-        // Optional JavaScript for future interactivity, currently not required by prompt
-        console.log("Property recommendation page loaded.");
-    </script>
-</body>
+  </body>
 </html>
-```
