@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Property Recommendations</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f7f6;
+            color: #333;
+        }
+        h1, h2 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .property-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 50px;
+        }
+        .property-card {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            display: flex;
+            flex-direction: column;
+        }
+        .property-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+        }
+        .property-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-bottom: 1px solid #eee;
+        }
+        .card-content {
+            padding: 20px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .card-title {
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+        .card-description {
+            font-size: 0.9em;
+            color: #7f8c8d;
+            margin-bottom: 10px;
+        }
+        .card-price {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #27ae60;
+            margin-bottom: 10px;
+        }
+        .card-details {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            font-size: 0.85em;
+            margin-bottom: 15px;
+        }
+        .card-details span {
+            background-color: #ecf0f1;
+            padding: 5px 10px;
+            border-radius: 5px;
+            color: #555;
+        }
+        .card-features, .card-nearby, .card-emi, .card-loans {
+            margin-bottom: 15px;
+        }
+        .card-features h4, .card-nearby h4, .card-emi h4, .card-loans h4 {
+            margin-top: 0;
+            margin-bottom: 8px;
+            color: #34495e;
+            font-size: 0.95em;
+        }
+        .card-features ul, .card-nearby ul, .card-loans ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .card-features li, .card-nearby li {
+            background-color: #f8f8f8;
+            border-left: 3px solid #3498db;
+            padding: 5px 10px;
+            margin-bottom: 5px;
+            font-size: 0.85em;
+        }
+        .card-loans li {
+            margin-bottom: 5px;
+            font-size: 0.85em;
+        }
+        .card-loans a {
+            color: #3498db;
+            text-decoration: none;
+            word-break: break-all;
+        }
+        .card-loans a:hover {
+            text-decoration: underline;
+        }
+        .card-url {
+            margin-top: auto;
+            text-align: center;
+        }
+        .card-url a {
+            display: inline-block;
+            background-color: #3498db;
+            color: #fff;
+            padding: 10px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.2s ease;
+        }
+        .card-url a:hover {
+            background-color: #2980b9;
+        }
+        .placeholder-note {
+            background-color: #fef0cd;
+            border: 1px solid #fbdc9f;
+            color: #8c6a00;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            font-size: 1em;
+            text-align: center;
+        }
+        @media (max-width: 768px) {
+            .property-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Real Estate Property Recommendations</h1>
+
+        <div class="placeholder-note">
+            <strong>Note:</strong> No property data was provided. The following properties are placeholders to demonstrate the system's functionality based on your inputs.
+        </div>
+
+        <h2>🏠 Under Budget Properties</h2>
+        <div class="property-grid">
+            <!-- Under Budget Property 1 (Placeholder) -->
+            <div class="property-card">
+                <img src="https://via.placeholder.com/400x250?text=No+Property+Data" alt="No matching property image">
+                <div class="card-content">
+                    <div class="card-title">No matching property - Placeholder 1</div>
+                    <div class="card-description">No property data available to fulfill your request. Please provide property data.</div>
+                    <div class="card-price">Price: ₹3,00,00,000</div>
+                    <div class="card-details">
+                        <span>Location: Noida, Sector 63</span>
+                        <span>Area: N/A</span>
+                        <span>Configuration: 2BHK</span>
+                        <span>Furnishing: Semi-furnished</span>
+                        <span>Available From: N/A</span>
+                    </div>
+                    <div class="card-features">
+                        <h4>Features:</h4>
+                        <ul>
+                            <li>No data</li>
+                            <li>No data</li>
+                            <li>No data</li>
+                        </ul>
+                    </div>
+                    <div class="card-nearby">
+                        <h4>Nearby Places:</h4>
+                        <ul>
+                            <li>Shopping Mall (Placeholder)</li>
+                            <li>Hospital (Placeholder)</li>
+                            <li>Park (Placeholder)</li>
+                        </ul>
+                    </div>
+                    <div class="card-emi">
+                        <h4>EMI (20 Years @ 8.5%):</h4>
+                        <span>₹2,62,450 / month</span>
+                    </div>
+                    <div class="card-loans">
+                        <h4>Home Loan Banks:</h4>
+                        <ul>
+                            <li>HDFC Bank: <a href="https://www.hdfcbank.com/personal/borrow/popular-loans/home-loan" target="_blank">View Details</a></li>
+                            <li>SBI: <a href="https://homeloans.sbi/" target="_blank">View Details</a></li>
+                            <li>ICICI Bank: <a href="https://www.icicibank.com/personal-banking/loans/home-loan" target="_blank">View Details</a></li>
+                        </ul>
+                    </div>
+                    <div class="card-url">
+                        <a href="#" target="_blank">View Property</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Under Budget Property 2 (Placeholder) -->
+            <div class="property-card">
+                <img src="https://via.placeholder.com/400x250?text=No+Property+Data" alt="No matching property image">
+                <div class="card-content">
+                    <div class="card-title">No matching property - Placeholder 2</div>
+                    <div class="card-description">No property data available to fulfill your request. Please provide property data.</div>
+                    <div class="card-price">Price: ₹3,00,00,000</div>
+                    <div class="card-details">
+                        <span>Location: Noida, Sector 63</span>
+                        <span>Area: N/A</span>
+                        <span>Configuration: 2BHK</span>
+                        <span>Furnishing: Semi-furnished</span>
+                        <span>Available From: N/A</span>
+                    </div>
+                    <div class="card-features">
+                        <h4>Features:</h4>
+                        <ul>
+                            <li>No data</li>
+                            <li>No data</li>
+                            <li>No data</li>
+                        </ul>
+                    </div>
+                    <div class="card-nearby">
+                        <h4>Nearby Places:</h4>
+                        <ul>
+                            <li>Shopping Mall (Placeholder)</li>
+                            <li>Hospital (Placeholder)</li>
+                            <li>Park (Placeholder)</li>
+                        </ul>
+                    </div>
+                    <div class="card-emi">
+                        <h4>EMI (20 Years @ 8.5%):</h4>
+                        <span>₹2,62,450 / month</span>
+                    </div>
+                    <div class="card-loans">
+                        <h4>Home Loan Banks:</h4>
+                        <ul>
+                            <li>HDFC Bank: <a href="https://www.hdfcbank.com/personal/borrow/popular-loans/home-loan" target="_blank">View Details</a></li>
+                            <li>SBI: <a href="https://homeloans.sbi/" target="_blank">View Details</a></li>
+                            <li>ICICI Bank: <a href="https://www.icicibank.com/personal-banking/loans/home-loan" target="_blank">View Details</a></li>
+                        </ul>
+                    </div>
+                    <div class="card-url">
+                        <a href="#" target="_blank">View Property</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Under Budget Property 3 (Placeholder) -->
+            <div class="property-card">
+                <img src="https://via.placeholder.com/400x250?text=No+Property+Data" alt="No matching property image">
+                <div class="card-content">
+                    <div class="card-title">No matching property - Placeholder 3</div>
+                    <div class="card-description">No property data available to fulfill your request. Please provide property data.</div>
+                    <div class="card-price">Price: ₹3,00,00,000</div>
+                    <div class="card-details">
+                        <span>Location: Noida, Sector 63</span>
+                        <span>Area: N/A</span>
+                        <span>Configuration: 2BHK</span>
+                        <span>Furnishing: Semi-furnished</span>
+                        <span>Available From: N/A</span>
+                    </div>
+                    <div class="card-features">
+                        <h4>Features:</h4>
+                        <ul>
+                            <li>No data</li>
+                            <li>No data</li>
+                            <li>No data</li>
+                        </ul>
+                    </div>
+                    <div class="card-nearby">
+                        <h4>Nearby Places:</h4>
+                        <ul>
+                            <li>Shopping Mall (Placeholder)</li>
+                            <li>Hospital (Placeholder)</li>
+                            <li>Park (Placeholder)</li>
+                        </ul>
+                    </div>
+                    <div class="card-emi">
+                        <h4>EMI (20 Years @ 8.5%):</h4>
+                        <span>₹2,62,450 / month</span>
+                    </div>
+                    <div class="card-loans">
+                        <h4>Home Loan Banks:</h4>
+                        <ul>
+                            <li>HDFC Bank: <a href="https://www.hdfcbank.com/personal/borrow/popular-loans/home-loan" target="_blank">View Details</a></li>
+                            <li>SBI: <a href="https://homeloans.sbi/" target="_blank">View Details</a></li>
+                            <li>ICICI Bank: <a href="https://www.icicibank.com/personal-banking/loans/home-loan" target="_blank">View Details</a></li>
+                        </ul>
+                    </div>
+                    <div class="card-url">
+                        <a href="#" target="_blank">View Property</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Under Budget Property 4 (Placeholder) -->
+            <div class="property-card">
+                <img src="https://via.placeholder.com/400x250?text=No+Property+Data" alt="No matching property image">
+                <div class="card-content">
+                    <div class="card-title">No matching property - Placeholder 4</div>
+                    <div class="card-description">No property data available to fulfill your request. Please provide property data.</div>
+                    <div class="card-price">Price: ₹3,00,00,000</div>
+                    <div class="card-details">
+                        <span>Location: Noida, Sector 63</span>
+                        <span>Area: N/A</span>
+                        <span>Configuration: 2BHK</span>
+                        <span>Furnishing: Semi-furnished</span>
+                        <span>Available From: N/A</span>
+                    </div>
+                    <div class="card-features">
+                        <h4>Features:</h4>
+                        <ul>
+                            <li>No data</li>
+                            <li>No data</li>
+                            <li>No data</li>
+                        </ul>
+                    </div>
+                    <div class="card-nearby">
+                        <h4>Nearby Places:</h4>
+                        <ul>
+                            <li>Shopping Mall (Placeholder)</li>
+                            <li>Hospital (Placeholder)</li>
+                            <li>Park (Placeholder)</li>
+                        </ul>
+                    </div>
+                    <div class="card-emi">
+                        <h4>EMI (20 Years @ 8.5%):</h4>
+                        <span>₹2,62,450 / month</span>
+                    </div>
+                    <div class="card-loans">
+                        <h4>Home Loan Banks:</h4>
+                        <ul>
+                            <li>HDFC Bank: <a href="https://www.hdfcbank.com/personal/borrow/popular-loans/home-loan" target="_blank">View Details</a></li>
+                            <li>SBI: <a href="https://homeloans.sbi/" target="_blank">View Details</a></li>
+                            <li>ICICI Bank: <a href="https://www.icicibank.com/personal-banking/loans/home-loan" target="_blank">View Details</a></li>
+                        </ul>
+                    </div>
+                    <div class="card-url">
+                        <a href="#" target="_blank">View Property</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h2>🌟 Recommended Properties</h2>
+        <div class="property-grid">
+            <!-- Recommended Property 1 (Placeholder) -->
+            <div class="property-card">
+                <img src="https://via.placeholder.com/400x250?text=No+Property+Data" alt="No matching property image">
+                <div class="card-content">
+                    <div class="card-title">No matching property - Placeholder 5</div>
+                    <div class="card-description">No property data available to fulfill your request. Please provide property data.</div>
+                    <div class="card-price">Price: ₹3,00,00,000</div>
+                    <div class="card-details">
+                        <span>Location: Noida, Sector 63</span>
+                        <span>Area: N/A</span>
+                        <span>Configuration: 2BHK</span>
+                        <span>Furnishing: Semi-furnished</span>
+                        <span>Available From: N/A</span>
+                    </div>
+                    <div class="card-features">
+                        <h4>Features:</h4>
+                        <ul>
+                            <li>No data</li>
+                            <li>No data</li>
+                            <li>No data</li>
+                        </ul>
+                    </div>
+                    <div class="card-nearby">
+                        <h4>Nearby Places:</h4>
+                        <ul>
+                            <li>Shopping Mall (Placeholder)</li>
+                            <li>Hospital (Placeholder)</li>
+                            <li>Park (Placeholder)</li>
+                        </ul>
+                    </div>
+                    <div class="card-emi">
+                        <h4>EMI (20 Years @ 8.5%):</h4>
+                        <span>₹2,62,450 / month</span>
+                    </div>
+                    <div class="card-loans">
+                        <h4>Home Loan Banks:</h4>
+                        <ul>
+                            <li>HDFC Bank: <a href="https://www.hdfcbank.com/personal/borrow/popular-loans/home-loan" target="_blank">View Details</a></li>
+                            <li>SBI: <a href="https://homeloans.sbi/" target="_blank">View Details</a></li>
+                            <li>ICICI Bank: <a href="https://www.icicibank.com/personal-banking/loans/home-loan" target="_blank">View Details</a></li>
+                        </ul>
+                    </div>
+                    <div class="card-url">
+                        <a href="#" target="_blank">View Property</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recommended Property 2 (Placeholder) -->
+            <div class="property-card">
+                <img src="https://via.placeholder.com/400x250?text=No+Property+Data" alt="No matching property image">
+                <div class="card-content">
+                    <div class="card-title">No matching property - Placeholder 6</div>
+                    <div class="card-description">No property data available to fulfill your request. Please provide property data.</div>
+                    <div class="card-price">Price: ₹3,00,00,000</div>
+                    <div class="card-details">
+                        <span>Location: Noida, Sector 63</span>
+                        <span>Area: N/A</span>
+                        <span>Configuration: 2BHK</span>
+                        <span>Furnishing: Semi-furnished</span>
+                        <span>Available From: N/A</span>
+                    </div>
+                    <div class="card-features">
+                        <h4>Features:</h4>
+                        <ul>
+                            <li>No data</li>
+                            <li>No data</li>
+                            <li>No data</li>
+                        </ul>
+                    </div>
+                    <div class="card-nearby">
+                        <h4>Nearby Places:</h4>
+                        <ul>
+                            <li>Shopping Mall (Placeholder)</li>
+                            <li>Hospital (Placeholder)</li>
+                            <li>Park (Placeholder)</li>
+                        </ul>
+                    </div>
+                    <div class="card-emi">
+                        <h4>EMI (20 Years @ 8.5%):</h4>
+                        <span>₹2,62,450 / month</span>
+                    </div>
+                    <div class="card-loans">
+                        <h4>Home Loan Banks:</h4>
+                        <ul>
+                            <li>HDFC Bank: <a href="https://www.hdfcbank.com/personal/borrow/popular-loans/home-loan" target="_blank">View Details</a></li>
+                            <li>SBI: <a href="https://homeloans.sbi/" target="_blank">View Details</a></li>
+                            <li>ICICI Bank: <a href="https://www.icicibank.com/personal-banking/loans/home-loan" target="_blank">View Details</a></li>
+                        </ul>
+                    </div>
+                    <div class="card-url">
+                        <a href="#" target="_blank">View Property</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
