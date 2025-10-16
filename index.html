@@ -3,45 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Property Recommendations</title>
+    <title>Property Recommendations in Noida</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 20px;
+            margin: 20px;
             background-color: #f4f7f6;
             color: #333;
         }
+        .container {
+            max-width: 1200px;
+            margin: auto;
+        }
         h1, h2 {
-            color: #2c3e50;
+            color: #0056b3;
             text-align: center;
             margin-bottom: 30px;
         }
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
+        .section {
+            margin-bottom: 40px;
         }
-        .property-grid {
+        .card-container {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 25px;
-            margin-bottom: 50px;
         }
-        .property-card {
-            background-color: #fff;
+        .card {
+            background-color: #ffffff;
             border-radius: 10px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
             overflow: hidden;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
             display: flex;
             flex-direction: column;
         }
-        .property-card:hover {
+        .card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
         }
-        .property-card img {
+        .card-image {
             width: 100%;
             height: 200px;
             object-fit: cover;
@@ -54,399 +54,268 @@
             flex-direction: column;
         }
         .card-title {
-            font-size: 1.3em;
-            font-weight: bold;
-            color: #2c3e50;
+            font-size: 1.4em;
+            color: #0056b3;
+            margin-top: 0;
             margin-bottom: 10px;
+            min-height: 50px;
         }
         .card-description {
-            font-size: 0.9em;
-            color: #7f8c8d;
-            margin-bottom: 10px;
+            font-size: 0.95em;
+            color: #555;
+            margin-bottom: 15px;
+            flex-grow: 1;
         }
         .card-price {
             font-size: 1.2em;
             font-weight: bold;
-            color: #27ae60;
+            color: #28a745;
             margin-bottom: 10px;
         }
-        .card-details {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            font-size: 0.85em;
-            margin-bottom: 15px;
+        .card-detail {
+            font-size: 0.9em;
+            margin-bottom: 5px;
+            color: #666;
         }
-        .card-details span {
-            background-color: #ecf0f1;
-            padding: 5px 10px;
-            border-radius: 5px;
-            color: #555;
-        }
-        .card-features, .card-nearby, .card-emi, .card-loans {
-            margin-bottom: 15px;
-        }
-        .card-features h4, .card-nearby h4, .card-emi h4, .card-loans h4 {
-            margin-top: 0;
-            margin-bottom: 8px;
-            color: #34495e;
-            font-size: 0.95em;
-        }
-        .card-features ul, .card-nearby ul, .card-loans ul {
+        .card-features, .card-nearby {
             list-style: none;
             padding: 0;
-            margin: 0;
+            margin-bottom: 10px;
         }
         .card-features li, .card-nearby li {
-            background-color: #f8f8f8;
-            border-left: 3px solid #3498db;
-            padding: 5px 10px;
-            margin-bottom: 5px;
-            font-size: 0.85em;
-        }
-        .card-loans li {
-            margin-bottom: 5px;
-            font-size: 0.85em;
-        }
-        .card-loans a {
-            color: #3498db;
-            text-decoration: none;
-            word-break: break-all;
-        }
-        .card-loans a:hover {
-            text-decoration: underline;
-        }
-        .card-url {
-            margin-top: auto;
-            text-align: center;
-        }
-        .card-url a {
+            background-color: #e9f7ef;
+            color: #28a745;
             display: inline-block;
-            background-color: #3498db;
-            color: #fff;
-            padding: 10px 15px;
+            padding: 5px 10px;
+            margin: 0 5px 5px 0;
             border-radius: 5px;
+            font-size: 0.85em;
+        }
+        .card-link {
+            display: block;
+            text-align: center;
+            padding: 10px 15px;
+            background-color: #007bff;
+            color: white;
             text-decoration: none;
-            font-weight: bold;
+            border-radius: 5px;
+            margin-top: auto;
             transition: background-color 0.2s ease;
         }
-        .card-url a:hover {
-            background-color: #2980b9;
+        .card-link:hover {
+            background-color: #0056b3;
         }
-        .placeholder-note {
-            background-color: #fef0cd;
-            border: 1px solid #fbdc9f;
-            color: #8c6a00;
-            padding: 15px;
-            border-radius: 8px;
-            margin-bottom: 30px;
-            font-size: 1em;
-            text-align: center;
+        .emi-info {
+            font-size: 0.9em;
+            color: #777;
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px dashed #eee;
         }
-        @media (max-width: 768px) {
-            .property-grid {
-                grid-template-columns: 1fr;
-            }
+        .bank-link {
+            color: #007bff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .bank-link:hover {
+            text-decoration: underline;
+        }
+        .placeholder-image {
+            background-color: #e0e0e0;
+            color: #666;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2em;
+            height: 200px;
+            border-bottom: 1px solid #eee;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Real Estate Property Recommendations</h1>
+        <h1>Property Recommendations in Noida</h1>
 
-        <div class="placeholder-note">
-            <strong>Note:</strong> No property data was provided. The following properties are placeholders to demonstrate the system's functionality based on your inputs.
-        </div>
-
-        <h2>🏠 Under Budget Properties</h2>
-        <div class="property-grid">
-            <!-- Under Budget Property 1 (Placeholder) -->
-            <div class="property-card">
-                <img src="https://via.placeholder.com/400x250?text=No+Property+Data" alt="No matching property image">
-                <div class="card-content">
-                    <div class="card-title">No matching property - Placeholder 1</div>
-                    <div class="card-description">No property data available to fulfill your request. Please provide property data.</div>
-                    <div class="card-price">Price: ₹3,00,00,000</div>
-                    <div class="card-details">
-                        <span>Location: Noida, Sector 63</span>
-                        <span>Area: N/A</span>
-                        <span>Configuration: 2BHK</span>
-                        <span>Furnishing: Semi-furnished</span>
-                        <span>Available From: N/A</span>
-                    </div>
-                    <div class="card-features">
-                        <h4>Features:</h4>
-                        <ul>
-                            <li>No data</li>
-                            <li>No data</li>
-                            <li>No data</li>
+        <div class="section">
+            <h2>🏠 Under Budget Properties</h2>
+            <div class="card-container">
+                <!-- Property 1 -->
+                <div class="card">
+                    <img src="https://imagecdn.99acres.com/media1/27337/13/546753077M-1755662810581.webp" alt="2 BHK Flat in Sector 63, Noida" class="card-image">
+                    <div class="card-content">
+                        <h3 class="card-title">2 BHK Flat in Sector 63, Noida</h3>
+                        <p class="card-description">A comfortable 2 BHK (2 Baths) apartment located in Sector 63, Noida. Semi-Furnished (Assumed).</p>
+                        <p class="card-price">₹36 Lac</p>
+                        <p class="card-detail"><strong>Area:</strong> 1,000 sqft</p>
+                        <p class="card-detail"><strong>Configuration:</strong> 2 BHK (2 Baths)</p>
+                        <p class="card-detail"><strong>Available From:</strong> 1mo ago</p>
+                        <ul class="card-features">
+                            <li>Carpet Area</li>
+                            <li>Ready To Move</li>
                         </ul>
-                    </div>
-                    <div class="card-nearby">
-                        <h4>Nearby Places:</h4>
-                        <ul>
-                            <li>Shopping Mall (Placeholder)</li>
-                            <li>Hospital (Placeholder)</li>
-                            <li>Park (Placeholder)</li>
+                        <p class="card-detail"><strong>Nearby Places:</strong></p>
+                        <ul class="card-nearby">
+                            <li>Noida sector 62 metro station</li>
+                            <li>Noida electronic city metro station</li>
+                            <li>Global Business School</li>
                         </ul>
-                    </div>
-                    <div class="card-emi">
-                        <h4>EMI (20 Years @ 8.5%):</h4>
-                        <span>₹2,62,450 / month</span>
-                    </div>
-                    <div class="card-loans">
-                        <h4>Home Loan Banks:</h4>
-                        <ul>
-                            <li>HDFC Bank: <a href="https://www.hdfcbank.com/personal/borrow/popular-loans/home-loan" target="_blank">View Details</a></li>
-                            <li>SBI: <a href="https://homeloans.sbi/" target="_blank">View Details</a></li>
-                            <li>ICICI Bank: <a href="https://www.icicibank.com/personal-banking/loans/home-loan" target="_blank">View Details</a></li>
-                        </ul>
-                    </div>
-                    <div class="card-url">
-                        <a href="#" target="_blank">View Property</a>
+                        <div class="emi-info">
+                            <strong>EMI:</strong> ₹31,492/month
+                            <br>
+                            <a href="https://www.hdfc.com/housing-loans/home-loans" target="_blank" class="bank-link">Get Home Loan from HDFC Bank</a>
+                        </div>
+                        <a href="https://www.99acres.com/2-bhk-bedroom-apartment-flat-for-sale-in-sector-63-noida-1000-sq-ft-r3-spid-T79173609" target="_blank" class="card-link">View Property</a>
                     </div>
                 </div>
-            </div>
 
-            <!-- Under Budget Property 2 (Placeholder) -->
-            <div class="property-card">
-                <img src="https://via.placeholder.com/400x250?text=No+Property+Data" alt="No matching property image">
-                <div class="card-content">
-                    <div class="card-title">No matching property - Placeholder 2</div>
-                    <div class="card-description">No property data available to fulfill your request. Please provide property data.</div>
-                    <div class="card-price">Price: ₹3,00,00,000</div>
-                    <div class="card-details">
-                        <span>Location: Noida, Sector 63</span>
-                        <span>Area: N/A</span>
-                        <span>Configuration: 2BHK</span>
-                        <span>Furnishing: Semi-furnished</span>
-                        <span>Available From: N/A</span>
-                    </div>
-                    <div class="card-features">
-                        <h4>Features:</h4>
-                        <ul>
-                            <li>No data</li>
-                            <li>No data</li>
-                            <li>No data</li>
+                <!-- Property 2 -->
+                <div class="card">
+                    <div class="placeholder-image">Image Not Available</div>
+                    <div class="card-content">
+                        <h3 class="card-title">3 BHK Flat in Sector 63, Noida</h3>
+                        <p class="card-description">Spacious 3 BHK (3 Baths) apartment in Sector 63, Noida. Semi-Furnished (Assumed).</p>
+                        <p class="card-price">₹75 Lac</p>
+                        <p class="card-detail"><strong>Area:</strong> 1,495 sqft</p>
+                        <p class="card-detail"><strong>Configuration:</strong> 3 BHK (3 Baths)</p>
+                        <p class="card-detail"><strong>Available From:</strong> 1mo ago</p>
+                        <ul class="card-features">
+                            <li>Built-up Area</li>
+                            <li>Ready To Move</li>
                         </ul>
-                    </div>
-                    <div class="card-nearby">
-                        <h4>Nearby Places:</h4>
-                        <ul>
-                            <li>Shopping Mall (Placeholder)</li>
-                            <li>Hospital (Placeholder)</li>
-                            <li>Park (Placeholder)</li>
+                        <p class="card-detail"><strong>Nearby Places:</strong></p>
+                        <ul class="card-nearby">
+                            <li>Global Business School</li>
+                            <li>ASPAM Scottish School</li>
+                            <li>Mohan International School</li>
                         </ul>
-                    </div>
-                    <div class="card-emi">
-                        <h4>EMI (20 Years @ 8.5%):</h4>
-                        <span>₹2,62,450 / month</span>
-                    </div>
-                    <div class="card-loans">
-                        <h4>Home Loan Banks:</h4>
-                        <ul>
-                            <li>HDFC Bank: <a href="https://www.hdfcbank.com/personal/borrow/popular-loans/home-loan" target="_blank">View Details</a></li>
-                            <li>SBI: <a href="https://homeloans.sbi/" target="_blank">View Details</a></li>
-                            <li>ICICI Bank: <a href="https://www.icicibank.com/personal-banking/loans/home-loan" target="_blank">View Details</a></li>
-                        </ul>
-                    </div>
-                    <div class="card-url">
-                        <a href="#" target="_blank">View Property</a>
+                        <div class="emi-info">
+                            <strong>EMI:</strong> ₹65,610/month
+                            <br>
+                            <a href="https://www.hdfc.com/housing-loans/home-loans" target="_blank" class="bank-link">Get Home Loan from HDFC Bank</a>
+                        </div>
+                        <a href="https://www.99acres.com/3-bhk-bedroom-apartment-flat-for-sale-in-sanskriti-apartment-sector-63-noida-1495-sq-ft-spid-B85242322" target="_blank" class="card-link">View Property</a>
                     </div>
                 </div>
-            </div>
 
-            <!-- Under Budget Property 3 (Placeholder) -->
-            <div class="property-card">
-                <img src="https://via.placeholder.com/400x250?text=No+Property+Data" alt="No matching property image">
-                <div class="card-content">
-                    <div class="card-title">No matching property - Placeholder 3</div>
-                    <div class="card-description">No property data available to fulfill your request. Please provide property data.</div>
-                    <div class="card-price">Price: ₹3,00,00,000</div>
-                    <div class="card-details">
-                        <span>Location: Noida, Sector 63</span>
-                        <span>Area: N/A</span>
-                        <span>Configuration: 2BHK</span>
-                        <span>Furnishing: Semi-furnished</span>
-                        <span>Available From: N/A</span>
-                    </div>
-                    <div class="card-features">
-                        <h4>Features:</h4>
-                        <ul>
-                            <li>No data</li>
-                            <li>No data</li>
-                            <li>No data</li>
+                <!-- Property 3 -->
+                <div class="card">
+                    <div class="placeholder-image">Image Not Available</div>
+                    <div class="card-content">
+                        <h3 class="card-title">3 BHK Flat in Sector 63, Noida</h3>
+                        <p class="card-description">Modern 3 BHK (2 Baths) apartment in Amrapali Kingswood, Sector 63, Noida. Semi-Furnished (Assumed).</p>
+                        <p class="card-price">₹94 Lac</p>
+                        <p class="card-detail"><strong>Area:</strong> 1,115 sqft</p>
+                        <p class="card-detail"><strong>Configuration:</strong> 3 BHK (2 Baths)</p>
+                        <p class="card-detail"><strong>Available From:</strong> 2mo ago</p>
+                        <ul class="card-features">
+                            <li>Super Built-up Area</li>
+                            <li>Ready To Move</li>
                         </ul>
-                    </div>
-                    <div class="card-nearby">
-                        <h4>Nearby Places:</h4>
-                        <ul>
-                            <li>Shopping Mall (Placeholder)</li>
-                            <li>Hospital (Placeholder)</li>
-                            <li>Park (Placeholder)</li>
+                        <p class="card-detail"><strong>Nearby Places:</strong></p>
+                        <ul class="card-nearby">
+                            <li>Global Business School</li>
+                            <li>ASPAM Scottish School</li>
+                            <li>Mohan International School</li>
                         </ul>
-                    </div>
-                    <div class="card-emi">
-                        <h4>EMI (20 Years @ 8.5%):</h4>
-                        <span>₹2,62,450 / month</span>
-                    </div>
-                    <div class="card-loans">
-                        <h4>Home Loan Banks:</h4>
-                        <ul>
-                            <li>HDFC Bank: <a href="https://www.hdfcbank.com/personal/borrow/popular-loans/home-loan" target="_blank">View Details</a></li>
-                            <li>SBI: <a href="https://homeloans.sbi/" target="_blank">View Details</a></li>
-                            <li>ICICI Bank: <a href="https://www.icicibank.com/personal-banking/loans/home-loan" target="_blank">View Details</a></li>
-                        </ul>
-                    </div>
-                    <div class="card-url">
-                        <a href="#" target="_blank">View Property</a>
+                        <div class="emi-info">
+                            <strong>EMI:</strong> ₹82,230/month
+                            <br>
+                            <a href="https://www.hdfc.com/housing-loans/home-loans" target="_blank" class="bank-link">Get Home Loan from HDFC Bank</a>
+                        </div>
+                        <a href="https://www.99acres.com/3-bhk-bedroom-apartment-flat-for-sale-in-amrapali-kingswood-sector-63-noida-1115-sq-ft-spid-U84370560" target="_blank" class="card-link">View Property</a>
                     </div>
                 </div>
-            </div>
 
-            <!-- Under Budget Property 4 (Placeholder) -->
-            <div class="property-card">
-                <img src="https://via.placeholder.com/400x250?text=No+Property+Data" alt="No matching property image">
-                <div class="card-content">
-                    <div class="card-title">No matching property - Placeholder 4</div>
-                    <div class="card-description">No property data available to fulfill your request. Please provide property data.</div>
-                    <div class="card-price">Price: ₹3,00,00,000</div>
-                    <div class="card-details">
-                        <span>Location: Noida, Sector 63</span>
-                        <span>Area: N/A</span>
-                        <span>Configuration: 2BHK</span>
-                        <span>Furnishing: Semi-furnished</span>
-                        <span>Available From: N/A</span>
-                    </div>
-                    <div class="card-features">
-                        <h4>Features:</h4>
-                        <ul>
-                            <li>No data</li>
-                            <li>No data</li>
-                            <li>No data</li>
+                <!-- Property 4 -->
+                <div class="card">
+                    <div class="placeholder-image">Image Not Available</div>
+                    <div class="card-content">
+                        <h3 class="card-title">3 BHK Flat in Sector 63, Noida</h3>
+                        <p class="card-description">Comfortable 3 BHK (2 Baths) apartment in Amrapali Kingswood, Sector 63, Noida. Semi-Furnished (Assumed).</p>
+                        <p class="card-price">₹95 Lac</p>
+                        <p class="card-detail"><strong>Area:</strong> 1,115 sqft</p>
+                        <p class="card-detail"><strong>Configuration:</strong> 3 BHK (2 Baths)</p>
+                        <p class="card-detail"><strong>Available From:</strong> 3w ago</p>
+                        <ul class="card-features">
+                            <li>Carpet Area</li>
+                            <li>Ready To Move</li>
                         </ul>
-                    </div>
-                    <div class="card-nearby">
-                        <h4>Nearby Places:</h4>
-                        <ul>
-                            <li>Shopping Mall (Placeholder)</li>
-                            <li>Hospital (Placeholder)</li>
-                            <li>Park (Placeholder)</li>
+                        <p class="card-detail"><strong>Nearby Places:</strong></p>
+                        <ul class="card-nearby">
+                            <li>Global Business School</li>
+                            <li>ASPAM Scottish School</li>
+                            <li>Mohan International School</li>
                         </ul>
-                    </div>
-                    <div class="card-emi">
-                        <h4>EMI (20 Years @ 8.5%):</h4>
-                        <span>₹2,62,450 / month</span>
-                    </div>
-                    <div class="card-loans">
-                        <h4>Home Loan Banks:</h4>
-                        <ul>
-                            <li>HDFC Bank: <a href="https://www.hdfcbank.com/personal/borrow/popular-loans/home-loan" target="_blank">View Details</a></li>
-                            <li>SBI: <a href="https://homeloans.sbi/" target="_blank">View Details</a></li>
-                            <li>ICICI Bank: <a href="https://www.icicibank.com/personal-banking/loans/home-loan" target="_blank">View Details</a></li>
-                        </ul>
-                    </div>
-                    <div class="card-url">
-                        <a href="#" target="_blank">View Property</a>
+                        <div class="emi-info">
+                            <strong>EMI:</strong> ₹83,105/month
+                            <br>
+                            <a href="https://www.hdfc.com/housing-loans/home-loans" target="_blank" class="bank-link">Get Home Loan from HDFC Bank</a>
+                        </div>
+                        <a href="https://www.99acres.com/3-bhk-bedroom-apartment-flat-for-sale-in-amrapali-kingswood-sector-63-noida-1115-sq-ft-spid-K85458856" target="_blank" class="card-link">View Property</a>
                     </div>
                 </div>
             </div>
         </div>
 
-        <h2>🌟 Recommended Properties</h2>
-        <div class="property-grid">
-            <!-- Recommended Property 1 (Placeholder) -->
-            <div class="property-card">
-                <img src="https://via.placeholder.com/400x250?text=No+Property+Data" alt="No matching property image">
-                <div class="card-content">
-                    <div class="card-title">No matching property - Placeholder 5</div>
-                    <div class="card-description">No property data available to fulfill your request. Please provide property data.</div>
-                    <div class="card-price">Price: ₹3,00,00,000</div>
-                    <div class="card-details">
-                        <span>Location: Noida, Sector 63</span>
-                        <span>Area: N/A</span>
-                        <span>Configuration: 2BHK</span>
-                        <span>Furnishing: Semi-furnished</span>
-                        <span>Available From: N/A</span>
-                    </div>
-                    <div class="card-features">
-                        <h4>Features:</h4>
-                        <ul>
-                            <li>No data</li>
-                            <li>No data</li>
-                            <li>No data</li>
+        <div class="section">
+            <h2>🌟 Recommended Properties</h2>
+            <p>Based on your preference for properties near schools.</p>
+            <div class="card-container">
+                <!-- Recommended Property 1 -->
+                <div class="card">
+                    <div class="placeholder-image">Image Not Available</div>
+                    <div class="card-content">
+                        <h3 class="card-title">1 BHK Independent Builder Floor in Sector 63, Noida</h3>
+                        <p class="card-description">Compact 1 BHK (2 Baths) independent builder floor in Sector 63, Noida. Semi-Furnished (Assumed).</p>
+                        <p class="card-price">₹2 Cr</p>
+                        <p class="card-detail"><strong>Area:</strong> 270 sqft</p>
+                        <p class="card-detail"><strong>Configuration:</strong> 1 BHK (2 Baths)</p>
+                        <p class="card-detail"><strong>Available From:</strong> 2mo ago</p>
+                        <ul class="card-features">
+                            <li>Super Built-up Area</li>
+                            <li>Ready To Move</li>
                         </ul>
-                    </div>
-                    <div class="card-nearby">
-                        <h4>Nearby Places:</h4>
-                        <ul>
-                            <li>Shopping Mall (Placeholder)</li>
-                            <li>Hospital (Placeholder)</li>
-                            <li>Park (Placeholder)</li>
+                        <p class="card-detail"><strong>Nearby Places:</strong></p>
+                        <ul class="card-nearby">
+                            <li>Global Business School</li>
+                            <li>ASPAM Scottish School</li>
+                            <li>Mohan International School</li>
                         </ul>
-                    </div>
-                    <div class="card-emi">
-                        <h4>EMI (20 Years @ 8.5%):</h4>
-                        <span>₹2,62,450 / month</span>
-                    </div>
-                    <div class="card-loans">
-                        <h4>Home Loan Banks:</h4>
-                        <ul>
-                            <li>HDFC Bank: <a href="https://www.hdfcbank.com/personal/borrow/popular-loans/home-loan" target="_blank">View Details</a></li>
-                            <li>SBI: <a href="https://homeloans.sbi/" target="_blank">View Details</a></li>
-                            <li>ICICI Bank: <a href="https://www.icicibank.com/personal-banking/loans/home-loan" target="_blank">View Details</a></li>
-                        </ul>
-                    </div>
-                    <div class="card-url">
-                        <a href="#" target="_blank">View Property</a>
+                        <div class="emi-info">
+                            <strong>EMI:</strong> ₹175,000/month
+                            <br>
+                            <a href="https://www.hdfc.com/housing-loans/home-loans" target="_blank" class="bank-link">Get Home Loan from HDFC Bank</a>
+                        </div>
+                        <a href="https://www.99acres.com/1-bhk-bedroom-independent-builder-floor-for-sale-in-sector-63-noida-270-sq-ft-spid-D84498574" target="_blank" class="card-link">View Property</a>
                     </div>
                 </div>
-            </div>
 
-            <!-- Recommended Property 2 (Placeholder) -->
-            <div class="property-card">
-                <img src="https://via.placeholder.com/400x250?text=No+Property+Data" alt="No matching property image">
-                <div class="card-content">
-                    <div class="card-title">No matching property - Placeholder 6</div>
-                    <div class="card-description">No property data available to fulfill your request. Please provide property data.</div>
-                    <div class="card-price">Price: ₹3,00,00,000</div>
-                    <div class="card-details">
-                        <span>Location: Noida, Sector 63</span>
-                        <span>Area: N/A</span>
-                        <span>Configuration: 2BHK</span>
-                        <span>Furnishing: Semi-furnished</span>
-                        <span>Available From: N/A</span>
-                    </div>
-                    <div class="card-features">
-                        <h4>Features:</h4>
-                        <ul>
-                            <li>No data</li>
-                            <li>No data</li>
-                            <li>No data</li>
+                <!-- Recommended Property 2 -->
+                <div class="card">
+                    <img src="https://imagecdn.99acres.com/media1/23271/18/465438842M-1755299808201.webp" alt="2 Bedroom House in Sector 63A, Noida" class="card-image">
+                    <div class="card-content">
+                        <h3 class="card-title">2 Bedroom House in Sector 63A, Noida</h3>
+                        <p class="card-description">Charming 2 Bedroom House (1 Bath) in Sector 63A, Noida, ideal for families. Semi-Furnished (Assumed).</p>
+                        <p class="card-price">₹2.55 Cr</p>
+                        <p class="card-detail"><strong>Area:</strong> 1,157 sqft</p>
+                        <p class="card-detail"><strong>Configuration:</strong> 2 BHK (1 Bath)</p>
+                        <p class="card-detail"><strong>Available From:</strong> 3w ago</p>
+                        <ul class="card-features">
+                            <li>Plot Area</li>
+                            <li>Ready To Move</li>
                         </ul>
-                    </div>
-                    <div class="card-nearby">
-                        <h4>Nearby Places:</h4>
-                        <ul>
-                            <li>Shopping Mall (Placeholder)</li>
-                            <li>Hospital (Placeholder)</li>
-                            <li>Park (Placeholder)</li>
+                        <p class="card-detail"><strong>Nearby Places:</strong></p>
+                        <ul class="card-nearby">
+                            <li>Sector 62 metro station</li>
+                            <li>Global Business School</li>
+                            <li>ASPAM Scottish School</li>
                         </ul>
-                    </div>
-                    <div class="card-emi">
-                        <h4>EMI (20 Years @ 8.5%):</h4>
-                        <span>₹2,62,450 / month</span>
-                    </div>
-                    <div class="card-loans">
-                        <h4>Home Loan Banks:</h4>
-                        <ul>
-                            <li>HDFC Bank: <a href="https://www.hdfcbank.com/personal/borrow/popular-loans/home-loan" target="_blank">View Details</a></li>
-                            <li>SBI: <a href="https://homeloans.sbi/" target="_blank">View Details</a></li>
-                            <li>ICICI Bank: <a href="https://www.icicibank.com/personal-banking/loans/home-loan" target="_blank">View Details</a></li>
-                        </ul>
-                    </div>
-                    <div class="card-url">
-                        <a href="#" target="_blank">View Property</a>
+                        <div class="emi-info">
+                            <strong>EMI:</strong> ₹223,018/month
+                            <br>
+                            <a href="https://www.hdfc.com/housing-loans/home-loans" target="_blank" class="bank-link">Get Home Loan from HDFC Bank</a>
+                        </div>
+                        <a href="https://www.99acres.com/2-bhk-bedroom-independent-house-villa-for-sale-in-sector-63-a-noida-1156-sq-ft-r4-spid-H73032687" target="_blank" class="card-link">View Property</a>
                     </div>
                 </div>
             </div>
