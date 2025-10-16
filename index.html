@@ -4,8 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Property Recommendations</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
+
         body {
             font-family: 'Roboto', sans-serif;
             margin: 0;
@@ -13,368 +14,388 @@
             background-color: #f4f7f6;
             color: #333;
         }
+
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
-            background-color: #ffffff;
-            border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
         }
+
         h1, h2 {
-            color: #0056b3;
             text-align: center;
+            color: #0056b3;
             margin-bottom: 30px;
             font-weight: 700;
         }
+
         .section-title {
-            background-color: #e0f2f7;
-            padding: 15px 20px;
-            border-radius: 8px;
-            margin-bottom: 25px;
-            font-size: 1.5em;
-            color: #0056b3;
             display: flex;
             align-items: center;
-            gap: 10px;
+            justify-content: center;
+            font-size: 1.8em;
+            margin-bottom: 25px;
+            color: #0056b3;
         }
+
+        .section-title i {
+            margin-right: 10px;
+            color: #28a745;
+        }
+
         .property-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
+            gap: 25px;
             margin-bottom: 40px;
         }
+
         .property-card {
             background-color: #ffffff;
-            border: 1px solid #e3e6e8;
-            border-radius: 10px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
             overflow: hidden;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-            transition: all 0.3s ease;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
             display: flex;
             flex-direction: column;
         }
+
         .property-card:hover {
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-            transform: translateY(-5px);
+            transform: translateY(-8px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
         }
+
         .property-image {
             width: 100%;
             height: 200px;
             object-fit: cover;
-            border-bottom: 1px solid #e3e6e8;
+            border-bottom: 1px solid #eee;
         }
+
         .property-content {
             padding: 20px;
             flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
         }
+
         .property-title {
-            font-size: 1.3em;
+            font-size: 1.4em;
             color: #0056b3;
             margin-bottom: 10px;
-            font-weight: 500;
+            font-weight: 600;
         }
+
         .property-location {
             font-size: 0.95em;
             color: #555;
             margin-bottom: 10px;
         }
+
         .property-price {
-            font-size: 1.2em;
-            font-weight: 700;
+            font-size: 1.3em;
             color: #28a745;
+            font-weight: 700;
             margin-bottom: 10px;
         }
-        .property-details {
+
+        .property-details p {
+            margin: 5px 0;
             font-size: 0.9em;
             color: #666;
-            margin-bottom: 15px;
         }
+
         .property-features, .property-nearby {
-            margin-top: 10px;
+            margin-top: 15px;
+            border-top: 1px dashed #eee;
+            padding-top: 15px;
         }
+
         .property-features h4, .property-nearby h4 {
             font-size: 1em;
             color: #0056b3;
-            margin-bottom: 5px;
+            margin-bottom: 8px;
         }
+
         .property-features ul, .property-nearby ul {
-            list-style-type: none;
+            list-style: none;
             padding: 0;
             margin: 0;
+            font-size: 0.85em;
+            color: #777;
         }
+
         .property-features li, .property-nearby li {
-            background-color: #f0f8ff;
-            border-left: 3px solid #007bff;
+            background-color: #e9f7ef;
+            border-left: 3px solid #28a745;
             padding: 5px 10px;
             margin-bottom: 5px;
-            border-radius: 3px;
+            border-radius: 4px;
         }
+
         .emi-details {
-            background-color: #fff3cd;
-            border-left: 4px solid #ffc107;
-            padding: 10px;
             margin-top: 15px;
-            border-radius: 5px;
+            background-color: #f0f8ff;
+            border-left: 4px solid #007bff;
+            padding: 10px 15px;
+            border-radius: 4px;
             font-size: 0.9em;
-            color: #856404;
+            color: #0056b3;
         }
-        .bank-link {
-            display: block;
-            margin-top: 10px;
+
+        .emi-details a {
             color: #007bff;
             text-decoration: none;
             font-weight: 500;
         }
-        .bank-link:hover {
+
+        .emi-details a:hover {
             text-decoration: underline;
         }
-        .view-property-btn {
+
+        .property-link {
             display: block;
-            width: 100%;
-            padding: 10px;
+            margin-top: 20px;
+            padding: 10px 15px;
             background-color: #007bff;
-            color: #ffffff;
+            color: white;
             text-align: center;
             text-decoration: none;
-            border-radius: 5px;
-            margin-top: 20px;
-            font-weight: 500;
+            border-radius: 8px;
             transition: background-color 0.3s ease;
+            font-weight: 500;
         }
-        .view-property-btn:hover {
+
+        .property-link:hover {
             background-color: #0056b3;
         }
+
         @media (max-width: 768px) {
             .property-grid {
                 grid-template-columns: 1fr;
             }
         }
     </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 </head>
 <body>
     <div class="container">
-        <h1>Property Recommendations in Greater Noida</h1>
+        <h1>Property Recommendations for You</h1>
 
-        <div class="section-title">
-            🏠 Under Budget Properties
-        </div>
+        <h2 class="section-title"><i class="fas fa-home"></i> Under Budget Properties</h2>
         <div class="property-grid">
+            <!-- Property 1 -->
             <div class="property-card">
-                <img src="https://imagecdn.99acres.com/media1/32227/11/644551223M-1757401180150.webp" alt="Jaypee Greens Kosmos" class="property-image">
+                <img src="https://imagecdn.99acres.com/media1/26004/5/520085437M-1739012520256.webp" alt="2 BHK Apartment in Sector 107, Noida" class="property-image">
                 <div class="property-content">
-                    <div>
-                        <div class="property-title">Jaypee Greens Kosmos</div>
-                        <div class="property-location">Sector 134, Noida</div>
-                        <div class="property-price">₹75 Lac</div>
-                        <div class="property-details">
-                            Area: 950 sqft | Config: 2 BHK (2 Baths) | Furnishing: Unfurnished | Available From: Ready To Move
-                        </div>
-                        <div class="property-features">
-                            <h4>Features:</h4>
-                            <ul>
-                                <li>Power Backup</li>
-                                <li>Gated Community</li>
-                                <li>24/7 Security</li>
-                            </ul>
-                        </div>
-                        <div class="property-nearby">
-                            <h4>Nearby Places:</h4>
-                            <ul>
-                                <li>Sector 137 Metro</li>
-                                <li>Gulshan One29</li>
-                                <li>Yatharth Super Speciality Hospital</li>
-                            </ul>
-                        </div>
+                    <h3 class="property-title">2 BHK Apartment in Sector 107, Noida</h3>
+                    <p class="property-location"><i class="fas fa-map-marker-alt"></i> Sector 107, Noida</p>
+                    <p class="property-price">₹64.3 L</p>
+                    <div class="property-details">
+                        <p><strong>Area:</strong> 1,055 - 2,295 sqft</p>
+                        <p><strong>Configuration:</strong> 2 BHK</p>
+                        <p><strong>Furnishing:</strong> Not specified</p>
+                        <p><strong>Available From:</strong> Under Construction</p>
+                    </div>
+                    <div class="property-features">
+                        <h4>Features:</h4>
+                        <ul>
+                            <li>RERA</li>
+                            <li>No Brokerage</li>
+                            <li>3D</li>
+                        </ul>
+                    </div>
+                    <div class="property-nearby">
+                        <h4>Nearby Places:</h4>
+                        <ul>
+                            <li>Pathways School</li>
+                            <li>Metro Station Noida Sector 76</li>
+                            <li>Sunworld Vanalika</li>
+                        </ul>
                     </div>
                     <div class="emi-details">
-                        EMI: ₹65,190 <br>
-                        Check <a href="https://www.hdfcbank.com/personal/loans/home-loan" class="bank-link" target="_blank">HDFC Bank</a> for best home loan rates.
+                        <p>Estimated EMI: ₹55,753/month (for 20 years at 8.5% interest)</p>
+                        <p>Explore home loans: <a href="https://www.hdfcbank.com/personal/loans/home-loan" target="_blank">HDFC Bank</a> | <a href="https://homeloans.sbi/" target="_blank">SBI</a> | <a href="https://www.icicibank.com/personal-banking/loans/home-loan" target="_blank">ICICI Bank</a></p>
                     </div>
-                    <a href="https://www.99acres.com/2-bhk-bedroom-apartment-flat-for-sale-in-jaypee-greens-kosmos-sector-134-noida-950-sq-ft-spid-G85065050" target="_blank" class="view-property-btn">View Property</a>
+                    <a href="https://www.99acres.com/arena-the-ultima-heights-sector-107-noida-npxid-r432599" target="_blank" class="property-link">View Property</a>
                 </div>
             </div>
 
+            <!-- Property 2 -->
             <div class="property-card">
-                <img src="https://imagecdn.99acres.com/media1/31113/4/622264637M-1753248172053.webp" alt="RG Residency" class="property-image">
+                <img src="https://imagecdn.99acres.com/media1/32878/17/657577333M-1759837708584.webp" alt="2 BHK Flat in Sector 61, Noida" class="property-image">
                 <div class="property-content">
-                    <div>
-                        <div class="property-title">RG Residency</div>
-                        <div class="property-location">Sector 120, Noida</div>
-                        <div class="property-price">₹1.25 Cr</div>
-                        <div class="property-details">
-                            Area: 1,317 sqft | Config: 2 BHK (2 Baths) | Furnishing: Unfurnished | Available From: Ready To Move
-                        </div>
-                        <div class="property-features">
-                            <h4>Features:</h4>
-                            <ul>
-                                <li>Club House</li>
-                                <li>Gymnasium</li>
-                                <li>Swimming Pool</li>
-                            </ul>
-                        </div>
-                        <div class="property-nearby">
-                            <h4>Nearby Places:</h4>
-                            <ul>
-                                <li>Noida Sector 51 Metro Station</li>
-                                <li>Amprapali Zodiac Market</li>
-                                <li>Fortis Hospital Noida</li>
-                            </ul>
-                        </div>
+                    <h3 class="property-title">2 BHK Flat in Sector 61, Noida</h3>
+                    <p class="property-location"><i class="fas fa-map-marker-alt"></i> Sector 61 Noida</p>
+                    <p class="property-price">₹1.25 Cr</p>
+                    <div class="property-details">
+                        <p><strong>Area:</strong> 1,350 sqft</p>
+                        <p><strong>Configuration:</strong> 2 BHK (2 Baths)</p>
+                        <p><strong>Furnishing:</strong> Not specified</p>
+                        <p><strong>Available From:</strong> Ready To Move</p>
+                    </div>
+                    <div class="property-features">
+                        <h4>Features:</h4>
+                        <ul>
+                            <li>No features listed</li>
+                        </ul>
+                    </div>
+                    <div class="property-nearby">
+                        <h4>Nearby Places:</h4>
+                        <ul>
+                            <li>Noida sector 61 metro station</li>
+                            <li>Noida sector 52 metro station</li>
+                            <li>Gardenia Grace</li>
+                        </ul>
                     </div>
                     <div class="emi-details">
-                        EMI: ₹1,08,651 <br>
-                        Check <a href="https://bank.sbi/web/personal-banking/loans/home-loan" class="bank-link" target="_blank">SBI Home Loans</a> for best home loan rates.
+                        <p>Estimated EMI: ₹108,397/month (for 20 years at 8.5% interest)</p>
+                        <p>Explore home loans: <a href="https://www.hdfcbank.com/personal/loans/home-loan" target="_blank">HDFC Bank</a> | <a href="https://homeloans.sbi/" target="_blank">SBI</a> | <a href="https://www.icicibank.com/personal-banking/loans/home-loan" target="_blank">ICICI Bank</a></p>
                     </div>
-                    <a href="https://www.99acres.com/2-bhk-bedroom-apartment-flat-for-sale-in-rg-residency-sector-120-noida-1317-sq-ft-r1-spid-W83934636" target="_blank" class="view-property-btn">View Property</a>
+                    <a href="https://www.99acres.com/2-bhk-bedroom-apartment-flat-for-sale-in-gardenia-grace-sector-61-noida-1350-sq-ft-spid-O85749926" target="_blank" class="property-link">View Property</a>
                 </div>
             </div>
 
+            <!-- Property 3 -->
             <div class="property-card">
-                <img src="https://imagecdn.99acres.com/media1/32386/18/647738231M-1758002075178.jpg" alt="Lucky Wow Monk" class="property-image">
+                <img src="https://imagecdn.99acres.com/media1/26004/5/520085437M-1739012520256.webp" alt="2 BHK Flat in Sector 43, Noida" class="property-image">
                 <div class="property-content">
-                    <div>
-                        <div class="property-title">Lucky Wow Monk</div>
-                        <div class="property-location">Noida Extension</div>
-                        <div class="property-price">₹52.88 L</div>
-                        <div class="property-details">
-                            Area: Not Available | Config: 2 BHK Independent Floor | Furnishing: Unfurnished | Available From: Under construction · Completion in Jan, 2026
-                        </div>
-                        <div class="property-features">
-                            <h4>Features:</h4>
-                            <ul>
-                                <li>Car Parking</li>
-                                <li>CCTV Camera Security</li>
-                                <li>Lifts</li>
-                            </ul>
-                        </div>
-                        <div class="property-nearby">
-                            <h4>Nearby Places:</h4>
-                            <ul>
-                                <li>Gaur City Mall</li>
-                                <li>Ace City Market</li>
-                                <li>Yatharth Hospital</li>
-                            </ul>
-                        </div>
+                    <h3 class="property-title">2 BHK Flat in Sector 43, Noida</h3>
+                    <p class="property-location"><i class="fas fa-map-marker-alt"></i> Sector 43, Noida</p>
+                    <p class="property-price">₹1.9 Cr</p>
+                    <div class="property-details">
+                        <p><strong>Area:</strong> 1,053 sqft</p>
+                        <p><strong>Configuration:</strong> 2 BHK (2 Baths)</p>
+                        <p><strong>Furnishing:</strong> Not specified</p>
+                        <p><strong>Available From:</strong> Under Construction</p>
+                    </div>
+                    <div class="property-features">
+                        <h4>Features:</h4>
+                        <ul>
+                            <li>RERA</li>
+                        </ul>
+                    </div>
+                    <div class="property-nearby">
+                        <h4>Nearby Places:</h4>
+                        <ul>
+                            <li>Botanical Garden Metro Station</li>
+                            <li>DLF Mall of India</li>
+                            <li>Godrej Woods</li>
+                        </ul>
                     </div>
                     <div class="emi-details">
-                        EMI: ₹45,958 <br>
-                        Check <a href="https://www.icicibank.com/personal-banking/loans/home-loan" class="bank-link" target="_blank">ICICI Bank</a> for best home loan rates.
+                        <p>Estimated EMI: ₹164,769/month (for 20 years at 8.5% interest)</p>
+                        <p>Explore home loans: <a href="https://www.hdfcbank.com/personal/loans/home-loan" target="_blank">HDFC Bank</a> | <a href="https://homeloans.sbi/" target="_blank">SBI</a> | <a href="https://www.icicibank.com/personal-banking/loans/home-loan" target="_blank">ICICI Bank</a></p>
                     </div>
-                    <a href="https://www.99acres.com/lucky-wow-monk-noida-extension-noida-npxid-r450624" target="_blank" class="view-property-btn">View Property</a>
+                    <a href="https://www.99acres.com/2-bhk-bedroom-apartment-flat-for-sale-in-godrej-woods-sector-43-noida-1053-sq-ft-r5-spid-I77577553" target="_blank" class="property-link">View Property</a>
                 </div>
             </div>
 
+            <!-- Property 4 -->
             <div class="property-card">
-                <img src="https://manavproperties.com/wp-content/uploads/2025/04/afdgf-18.jpg" alt="Arena The Ultima Heights" class="property-image">
+                <img src="https://static.99acres.com/universalapp/img/noImageBg.svg" alt="2 BHK Independent Floor in Noida Extension" class="property-image">
                 <div class="property-content">
-                    <div>
-                        <div class="property-title">Arena The Ultima Heights</div>
-                        <div class="property-location">Sector 107, Noida</div>
-                        <div class="property-price">₹64.3 - 68.06 L</div>
-                        <div class="property-details">
-                            Area: 1,055 - 2,295 sqft | Config: 2 BHK Apartment | Furnishing: Unfurnished | Available From: Under Construction · Completion in Dec, 2025
-                        </div>
-                        <div class="property-features">
-                            <h4>Features:</h4>
-                            <ul>
-                                <li>Swimming Pool</li>
-                                <li>Gymnasium</li>
-                                <li>Kids Play Area</li>
-                            </ul>
-                        </div>
-                        <div class="property-nearby">
-                            <h4>Nearby Places:</h4>
-                            <ul>
-                                <li>Pathways School</li>
-                                <li>Metro Station Noida Sector 76</li>
-                                <li>Kailash Hospital</li>
-                            </ul>
-                        </div>
+                    <h3 class="property-title">2 BHK Independent Floor in Noida Extension</h3>
+                    <p class="property-location"><i class="fas fa-map-marker-alt"></i> Noida Extension</p>
+                    <p class="property-price">₹52.88 L</p>
+                    <div class="property-details">
+                        <p><strong>Area:</strong> 1,175 - 2,200 sqft</p>
+                        <p><strong>Configuration:</strong> 2 BHK</p>
+                        <p><strong>Furnishing:</strong> Not specified</p>
+                        <p><strong>Available From:</strong> Under Construction</p>
+                    </div>
+                    <div class="property-features">
+                        <h4>Features:</h4>
+                        <ul>
+                            <li>Car Parking</li>
+                            <li>CCTV Camera Security</li>
+                            <li>Lifts</li>
+                        </ul>
+                    </div>
+                    <div class="property-nearby">
+                        <h4>Nearby Places:</h4>
+                        <ul>
+                            <li>Leelawati Multispeciality Hospital</li>
+                            <li>NH-24</li>
+                            <li>Paradise Greens Villas</li>
+                        </ul>
                     </div>
                     <div class="emi-details">
-                        EMI: ₹55,876 <br>
-                        Check <a href="https://www.axisbank.com/retail/loans/home-loan" class="bank-link" target="_blank">Axis Bank</a> for best home loan rates.
+                        <p>Estimated EMI: ₹45,841/month (for 20 years at 8.5% interest)</p>
+                        <p>Explore home loans: <a href="https://www.hdfcbank.com/personal/loans/home-loan" target="_blank">HDFC Bank</a> | <a href="https://homeloans.sbi/" target="_blank">SBI</a> | <a href="https://www.icicibank.com/personal-banking/loans/home-loan" target="_blank">ICICI Bank</a></p>
                     </div>
-                    <a href="https://www.99acres.com/arena-the-ultima-heights-sector-107-noida-npxid-r432599" target="_blank" class="view-property-btn">View Property</a>
+                    <a href="https://www.99acres.com/lucky-wow-monk-noida-extension-noida-npxid-r450624" target="_blank" class="property-link">View Property</a>
                 </div>
             </div>
         </div>
 
-        <div class="section-title">
-            🌟 Recommended Properties
-        </div>
+        <h2 class="section-title"><i class="fas fa-star"></i> Recommended Properties</h2>
         <div class="property-grid">
+            <!-- Recommended Property 1 -->
             <div class="property-card">
-                <img src="https://images.nobroker.in/images/8a9f82a77213fe9e017216cd552139d0/8a9f82a77213fe9e017216cd552139d0_39340_95998_medium.jpg" alt="Paras Tierea" class="property-image">
+                <img src="https://static.99acres.com/universalapp/img/noImageBg.svg" alt="2 BHK Apartment in Sector 74, Noida" class="property-image">
                 <div class="property-content">
-                    <div>
-                        <div class="property-title">Paras Tierea</div>
-                        <div class="property-location">Sector 137, Noida</div>
-                        <div class="property-price">₹68 - 98.5 L</div>
-                        <div class="property-details">
-                            Area: 825 - 1,725 sqft | Config: 2 BHK Apartment | Furnishing: Unfurnished | Available From: Ready To Move · Since Oct, 2015
-                        </div>
-                        <div class="property-features">
-                            <h4>Features:</h4>
-                            <ul>
-                                <li>Power Backup</li>
-                                <li>24/7 Security</li>
-                                <li>Landscaped Gardens</li>
-                            </ul>
-                        </div>
-                        <div class="property-nearby">
-                            <h4>Nearby Places:</h4>
-                            <ul>
-                                <li>Felix Hospital</li>
-                                <li>SKS World School</li>
-                                <li>Sector 137 metro</li>
-                            </ul>
-                        </div>
+                    <h3 class="property-title">2 BHK Apartment in Sector 74, Noida</h3>
+                    <p class="property-location"><i class="fas fa-map-marker-alt"></i> Sector 74, Noida</p>
+                    <p class="property-price">₹42 L</p>
+                    <div class="property-details">
+                        <p><strong>Area:</strong> 650 - 1,450 sqft SUPER</p>
+                        <p><strong>Configuration:</strong> 2 BHK</p>
+                        <p><strong>Furnishing:</strong> Not specified</p>
+                        <p><strong>Available From:</strong> Under Construction</p>
+                    </div>
+                    <div class="property-features">
+                        <h4>Features:</h4>
+                        <ul>
+                            <li>Verified</li>
+                        </ul>
+                    </div>
+                    <div class="property-nearby">
+                        <h4>Nearby Places:</h4>
+                        <ul>
+                            <li>NEO Hospital</li>
+                            <li>Yadu Public School</li>
+                            <li>Golf avenue 2</li>
+                        </ul>
                     </div>
                     <div class="emi-details">
-                        EMI: ₹59,103 <br>
-                        Check <a href="https://www.unionbankofindia.co.in/english/home-loan.aspx" class="bank-link" target="_blank">Union Bank of India</a> for best home loan rates.
+                        <p>Estimated EMI: ₹36,396/month (for 20 years at 8.5% interest)</p>
+                        <p>Explore home loans: <a href="https://www.hdfcbank.com/personal/loans/home-loan" target="_blank">HDFC Bank</a> | <a href="https://homeloans.sbi/" target="_blank">SBI</a> | <a href="https://www.icicibank.com/personal-banking/loans/home-loan" target="_blank">ICICI Bank</a></p>
                     </div>
-                    <a href="https://www.99acres.com/paras-tierea-sector-137-noida-npxid-r756" target="_blank" class="view-property-btn">View Property</a>
+                    <a href="https://www.99acres.com/capital-hometech-pride-sector-74-noida-npxid-r449510" target="_blank" class="property-link">View Property</a>
                 </div>
             </div>
 
+            <!-- Recommended Property 2 -->
             <div class="property-card">
-                <img src="https://imagecdn.99acres.com/media1/32592/1/651841451M-1758708913076.jpg" alt="Independent Builder Floor" class="property-image">
+                <img src="https://static.99acres.com/universalapp/img/noImageBg.svg" alt="2 BHK Apartment in Sector 137, Noida" class="property-image">
                 <div class="property-content">
-                    <div>
-                        <div class="property-title">Independent Builder Floor</div>
-                        <div class="property-location">Sarfabad Village, Noida</div>
-                        <div class="property-price">₹33.5 Lac</div>
-                        <div class="property-details">
-                            Area: 650 sqft | Config: 2 BHK (2 Baths) | Furnishing: Unfurnished | Available From: Ready To Move
-                        </div>
-                        <div class="property-features">
-                            <h4>Features:</h4>
-                            <ul>
-                                <li>Vaastu Compliant</li>
-                                <li>Reserved Parking</li>
-                                <li>Park Facing</li>
-                            </ul>
-                        </div>
-                        <div class="property-nearby">
-                            <h4>Nearby Places:</h4>
-                            <ul>
-                                <li>Noida Sector 51 Metro Station</li>
-                                <li>Noida Sector 52 Metro Station</li>
-                                <li>Fortis Hospital Noida</li>
-                            </ul>
-                        </div>
+                    <h3 class="property-title">2 BHK Apartment in Sector 137, Noida</h3>
+                    <p class="property-location"><i class="fas fa-map-marker-alt"></i> Sector 137, Noida</p>
+                    <p class="property-price">₹68 L</p>
+                    <div class="property-details">
+                        <p><strong>Area:</strong> 825 - 1,725 sqft SUPER</p>
+                        <p><strong>Configuration:</strong> 2 BHK</p>
+                        <p><strong>Furnishing:</strong> Not specified</p>
+                        <p><strong>Available From:</strong> Ready To Move</p>
+                    </div>
+                    <div class="property-features">
+                        <h4>Features:</h4>
+                        <ul>
+                            <li>No Brokerage</li>
+                            <li>3D</li>
+                        </ul>
+                    </div>
+                    <div class="property-nearby">
+                        <h4>Nearby Places:</h4>
+                        <ul>
+                            <li>Felix Hospital</li>
+                            <li>SKS World School</li>
+                            <li>Gulshan Vivante</li>
+                        </ul>
                     </div>
                     <div class="emi-details">
-                        EMI: ₹29,105 <br>
-                        Check <a href="https://www.bankofbaroda.in/personal-banking/loans/home-loan" class="bank-link" target="_blank">Bank of Baroda</a> for best home loan rates.
+                        <p>Estimated EMI: ₹58,939/month (for 20 years at 8.5% interest)</p>
+                        <p>Explore home loans: <a href="https://www.hdfcbank.com/personal/loans/home-loan" target="_blank">HDFC Bank</a> | <a href="https://homeloans.sbi/" target="_blank">SBI</a> | <a href="https://www.icicibank.com/personal-banking/loans/home-loan" target="_blank">ICICI Bank</a></p>
                     </div>
-                    <a href="https://www.99acres.com/2-bhk-bedroom-independent-builder-floor-for-sale-in-sarfabad-village-noida-650-sq-ft-spid-K84729092" target="_blank" class="view-property-btn">View Property</a>
+                    <a href="https://www.99acres.com/paras-tierea-sector-137-noida-npxid-r756" target="_blank" class="property-link">View Property</a>
                 </div>
             </div>
         </div>
