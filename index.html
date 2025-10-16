@@ -1,4 +1,412 @@
-To provide you with the best recommendations, I need a little more information. Could you please clarify the following:
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Property Recommendations</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 20px;
+            background-color: #f4f7f6;
+            color: #333;
+        }
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 20px;
+        }
+        h1, h2 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            position: relative;
+        }
+        h1::after, h2::after {
+            content: '';
+            width: 80px;
+            height: 3px;
+            background-color: #007bff;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: -10px;
+            border-radius: 5px;
+        }
+        .property-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+        .property-card {
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+        .property-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+        .property-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-bottom: 1px solid #eee;
+        }
+        .property-content {
+            padding: 20px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .property-title {
+            font-size: 1.4em;
+            color: #007bff;
+            margin-bottom: 10px;
+            line-height: 1.3;
+        }
+        .property-description {
+            font-size: 0.95em;
+            color: #555;
+            margin-bottom: 15px;
+            flex-grow: 1;
+        }
+        .property-details {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-size: 0.9em;
+        }
+        .property-details span {
+            background-color: #e9f5ff;
+            padding: 5px 10px;
+            border-radius: 5px;
+            color: #007bff;
+            font-weight: 500;
+        }
+        .property-info p {
+            margin: 5px 0;
+            font-size: 0.9em;
+            color: #444;
+        }
+        .property-info strong {
+            color: #2c3e50;
+        }
+        .features, .nearby-places {
+            margin-top: 15px;
+            border-top: 1px solid #eee;
+            padding-top: 15px;
+        }
+        .features h4, .nearby-places h4 {
+            color: #2c3e50;
+            margin-bottom: 8px;
+            font-size: 1em;
+        }
+        .features ul, .nearby-places ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .features li, .nearby-places li {
+            background-color: #f0f8ff;
+            color: #337ab7;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.85em;
+        }
+        .property-price {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #28a745;
+            margin-top: 15px;
+            text-align: right;
+        }
+        .property-emi {
+            font-size: 0.9em;
+            color: #6c757d;
+            text-align: right;
+            margin-top: 5px;
+        }
+        .property-emi a {
+            color: #007bff;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .property-emi a:hover {
+            text-decoration: underline;
+        }
+        .view-details-btn {
+            display: inline-block;
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 15px;
+            border-radius: 5px;
+            text-align: center;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 20px;
+            transition: background-color 0.3s ease;
+        }
+        .view-details-btn:hover {
+            background-color: #0056b3;
+        }
+        @media (max-width: 768px) {
+            .property-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Property Recommendations for You</h1>
 
-1.  **Configuration:** What is your preferred configuration (e.g., 1 BHK, 2 BHK, 3 BHK)?
-2.  **Furnishing:** You mentioned "semi" for furnishing. Could you please specify if you are looking for "Semi-Furnished" or if "Semi" was a typo?
+        <h2>🏠 Under Budget Properties</h2>
+        <div class="property-grid">
+            <div class="property-card">
+                <img src="https://imagecdn.99acres.com/media1/27337/13/546753077M-1755662810581.webp" alt="2 BHK Flat in Sector 63, Noida" class="property-image">
+                <div class="property-content">
+                    <h3 class="property-title">2 BHK Flat in Sector 63, Noida</h3>
+                    <p class="property-description">Spacious 2 BHK flat with modern amenities in a well-connected locality.</p>
+                    <div class="property-details">
+                        <span><strong>Location:</strong> Sector 63, Noida</span>
+                        <span><strong>Config:</strong> 2 BHK</span>
+                    </div>
+                    <div class="property-info">
+                        <p><strong>Area:</strong> 1,000 sqft</p>
+                        <p><strong>Furnishing:</strong> Semi-Furnished (Ready To Move)</p>
+                        <p><strong>Available From:</strong> 1mo ago</p>
+                    </div>
+                    <div class="features">
+                        <h4>Features:</h4>
+                        <ul>
+                            <li>Ready To Move</li>
+                            <li>Well-maintained</li>
+                            <li>Good Connectivity</li>
+                            <li>Close to metro</li>
+                        </ul>
+                    </div>
+                    <div class="nearby-places">
+                        <h4>Nearby Places:</h4>
+                        <ul>
+                            <li>Noida Sector 62 Metro Station</li>
+                            <li>Noida Electronic City Metro Station</li>
+                            <li>Aspam Scottish School</li>
+                            <li>Seth Anandram Jaipuria School</li>
+                        </ul>
+                    </div>
+                    <p class="property-price">₹36 Lac</p>
+                    <p class="property-emi">EMI: ₹31,273/month. <a href="https://www.hdfcbank.com/personal/home-loan" target="_blank">Best Home Loan Rates (HDFC)</a></p>
+                    <a href="https://www.99acres.com/2-bhk-bedroom-apartment-flat-for-sale-in-sector-63-noida-1000-sq-ft-r3-spid-T79173609" class="view-details-btn" target="_blank">View Details</a>
+                </div>
+            </div>
+
+            <div class="property-card">
+                <img src="https://imagecdn.99acres.com/media1/26179/6/523586049M-1755123371369.webp" alt="2 BHK Flat in Hanuman Vihar, Noida" class="property-image">
+                <div class="property-content">
+                    <h3 class="property-title">2 BHK Flat in Hanuman Vihar, Noida</h3>
+                    <p class="property-description">Cozy 2 BHK flat in a vibrant neighborhood, offering comfort and convenience.</p>
+                    <div class="property-details">
+                        <span><strong>Location:</strong> Hanuman Vihar, Noida</span>
+                        <span><strong>Config:</strong> 2 BHK</span>
+                    </div>
+                    <div class="property-info">
+                        <p><strong>Area:</strong> 750 sqft</p>
+                        <p><strong>Furnishing:</strong> Semi-Furnished (Ready To Move)</p>
+                        <p><strong>Available From:</strong> 2mo ago</p>
+                    </div>
+                    <div class="features">
+                        <h4>Features:</h4>
+                        <ul>
+                            <li>Ready To Move</li>
+                            <li>Affordable</li>
+                            <li>Good ventilation</li>
+                            <li>Family-friendly</li>
+                        </ul>
+                    </div>
+                    <div class="nearby-places">
+                        <h4>Nearby Places:</h4>
+                        <ul>
+                            <li>Hanuman Vihar Market</li>
+                            <li>Local Shops</li>
+                            <li>Community Park</li>
+                            <li>Panchsheel Balak Inter College</li>
+                        </ul>
+                    </div>
+                    <p class="property-price">₹26 Lac</p>
+                    <p class="property-emi">EMI: ₹22,593/month. <a href="https://www.sbi.co.in/web/personal-banking/loans/home-loan" target="_blank">Best Home Loan Rates (SBI)</a></p>
+                    <a href="https://www.99acres.com/2-bhk-bedroom-apartment-flat-for-sale-in-hanuman-vihar-noida-750-sq-ft-r2-spid-O77871749" class="view-details-btn" target="_blank">View Details</a>
+                </div>
+            </div>
+
+            <div class="property-card">
+                <img src="https://imagecdn.99acres.com/media1/32392/11/647851469M-1758011319500.webp" alt="2 BHK Flat in Hanuman Vihar, Noida" class="property-image">
+                <div class="property-content">
+                    <h3 class="property-title">2 BHK Flat in Hanuman Vihar, Noida</h3>
+                    <p class="property-description">Compact 2 BHK unit, ideal for small families looking for convenience.</p>
+                    <div class="property-details">
+                        <span><strong>Location:</strong> Hanuman Vihar, Noida</span>
+                        <span><strong>Config:</strong> 2 BHK</span>
+                    </div>
+                    <div class="property-info">
+                        <p><strong>Area:</strong> 446 sqft</p>
+                        <p><strong>Furnishing:</strong> Semi-Furnished (Ready To Move)</p>
+                        <p><strong>Available From:</strong> 1mo ago</p>
+                    </div>
+                    <div class="features">
+                        <h4>Features:</h4>
+                        <ul>
+                            <li>Ready To Move</li>
+                            <li>Bright interiors</li>
+                            <li>Convenient location</li>
+                            <li>Easy access to essentials</li>
+                        </ul>
+                    </div>
+                    <div class="nearby-places">
+                        <h4>Nearby Places:</h4>
+                        <ul>
+                            <li>Hanuman Vihar Market</li>
+                            <li>Local Eateries</li>
+                            <li>Healthcare Centers</li>
+                            <li>Saraswati Shishu Mandir</li>
+                        </ul>
+                    </div>
+                    <p class="property-price">₹28 Lac</p>
+                    <p class="property-emi">EMI: ₹24,332/month. <a href="https://www.icicibank.com/personal/loans/home-loan" target="_blank">Best Home Loan Rates (ICICI)</a></p>
+                    <a href="https://www.99acres.com/2-bhk-bedroom-apartment-flat-for-sale-in-hanuman-vihar-noida-446-sq-ft-spid-Q85244928" class="view-details-btn" target="_blank">View Details</a>
+                </div>
+            </div>
+
+            <div class="property-card">
+                <img src="https://imagecdn.99acres.com/media1/23271/18/465438842M-1755299808201.webp" alt="2 Bedroom House in Sector 63A, Noida" class="property-image">
+                <div class="property-content">
+                    <h3 class="property-title">2 Bedroom House in Sector 63A, Noida</h3>
+                    <p class="property-description">Independent house with green surroundings, perfect for a peaceful living.</p>
+                    <div class="property-details">
+                        <span><strong>Location:</strong> Sector 63A, Noida</span>
+                        <span><strong>Config:</strong> 2 BHK</span>
+                    </div>
+                    <div class="property-info">
+                        <p><strong>Area:</strong> 1,157 sqft</p>
+                        <p><strong>Furnishing:</strong> Semi-Furnished (Ready To Move)</p>
+                        <p><strong>Available From:</strong> 3w ago</p>
+                    </div>
+                    <div class="features">
+                        <h4>Features:</h4>
+                        <ul>
+                            <li>Ready To Move</li>
+                            <li>Park Facing</li>
+                            <li>Spacious rooms</li>
+                            <li>Good natural light</li>
+                            <li>Quiet neighborhood</li>
+                        </ul>
+                    </div>
+                    <div class="nearby-places">
+                        <h4>Nearby Places:</h4>
+                        <ul>
+                            <li>Park Facing</li>
+                            <li>Sector 62 Metro Station (within 2km)</li>
+                            <li>Rudra Global School</li>
+                            <li>St. Teresa School</li>
+                        </ul>
+                    </div>
+                    <p class="property-price">₹2.55 Cr</p>
+                    <p class="property-emi">EMI: ₹221,373/month. <a href="https://www.axisbank.com/retail/loans/home-loan" target="_blank">Best Home Loan Rates (Axis Bank)</a></p>
+                    <a href="https://www.99acres.com/2-bhk-bedroom-independent-house-villa-for-sale-in-sector-63-a-noida-1156-sq-ft-r4-spid-H73032687" class="view-details-btn" target="_blank">View Details</a>
+                </div>
+            </div>
+        </div>
+
+        <h2>🌟 Recommended Properties</h2>
+        <div class="property-grid">
+            <div class="property-card">
+                <img src="https://imagecdn.99acres.com/media1/27337/13/546753077M-1755662810581.webp" alt="2 BHK Flat in Sector 63, Noida" class="property-image">
+                <div class="property-content">
+                    <h3 class="property-title">2 BHK Flat in Sector 63, Noida</h3>
+                    <p class="property-description">Excellent 2 BHK flat, ideal for families with school-going children due to proximity to renowned schools.</p>
+                    <div class="property-details">
+                        <span><strong>Location:</strong> Sector 63, Noida</span>
+                        <span><strong>Config:</strong> 2 BHK</span>
+                    </div>
+                    <div class="property-info">
+                        <p><strong>Area:</strong> 1,000 sqft</p>
+                        <p><strong>Furnishing:</strong> Semi-Furnished (Ready To Move)</p>
+                        <p><strong>Available From:</strong> 1mo ago</p>
+                    </div>
+                    <div class="features">
+                        <h4>Features:</h4>
+                        <ul>
+                            <li>Ready To Move</li>
+                            <li>Near top schools</li>
+                            <li>Metro connectivity</li>
+                            <li>Family-friendly layout</li>
+                            <li>Well-lit rooms</li>
+                        </ul>
+                    </div>
+                    <div class="nearby-places">
+                        <h4>Nearby Places:</h4>
+                        <ul>
+                            <li>Noida Sector 62 Metro Station</li>
+                            <li>Noida Electronic City Metro Station</li>
+                            <li>Aspam Scottish School</li>
+                            <li>Seth Anandram Jaipuria School</li>
+                        </ul>
+                    </div>
+                    <p class="property-price">₹36 Lac</p>
+                    <p class="property-emi">EMI: ₹31,273/month. <a href="https://www.hdfcbank.com/personal/home-loan" target="_blank">Best Home Loan Rates (HDFC)</a></p>
+                    <a href="https://www.99acres.com/2-bhk-bedroom-apartment-flat-for-sale-in-sector-63-noida-1000-sq-ft-r3-spid-T79173609" class="view-details-btn" target="_blank">View Details</a>
+                </div>
+            </div>
+
+            <div class="property-card">
+                <img src="https://imagecdn.99acres.com/media1/23271/18/465438842M-1755299808201.webp" alt="2 Bedroom House in Sector 63A, Noida" class="property-image">
+                <div class="property-content">
+                    <h3 class="property-title">2 Bedroom House in Sector 63A, Noida</h3>
+                    <p class="property-description">Charming 2-bedroom house, perfect for families seeking green spaces and good schools nearby.</p>
+                    <div class="property-details">
+                        <span><strong>Location:</strong> Sector 63A, Noida</span>
+                        <span><strong>Config:</strong> 2 BHK</span>
+                    </div>
+                    <div class="property-info">
+                        <p><strong>Area:</strong> 1,157 sqft</p>
+                        <p><strong>Furnishing:</strong> Semi-Furnished (Ready To Move)</p>
+                        <p><strong>Available From:</strong> 3w ago</p>
+                    </div>
+                    <div class="features">
+                        <h4>Features:</h4>
+                        <ul>
+                            <li>Ready To Move</li>
+                            <li>Park Facing</li>
+                            <li>Proximity to schools</li>
+                            <li>Quiet residential area</li>
+                            <li>Spacious living</li>
+                        </ul>
+                    </div>
+                    <div class="nearby-places">
+                        <h4>Nearby Places:</h4>
+                        <ul>
+                            <li>Park Facing</li>
+                            <li>Sector 62 Metro Station (within 2km)</li>
+                            <li>Rudra Global School</li>
+                            <li>St. Teresa School</li>
+                        </ul>
+                    </div>
+                    <p class="property-price">₹2.55 Cr</p>
+                    <p class="property-emi">EMI: ₹221,373/month. <a href="https://www.axisbank.com/retail/loans/home-loan" target="_blank">Best Home Loan Rates (Axis Bank)</a></p>
+                    <a href="https://www.99acres.com/2-bhk-bedroom-independent-house-villa-for-sale-in-sector-63-a-noida-1156-sq-ft-r4-spid-H73032687" class="view-details-btn" target="_blank">View Details</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+```
