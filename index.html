@@ -1,1 +1,384 @@
-I'm sorry, but I cannot process your request because the "Property Data" is missing. Please provide the property data so I can filter and recommend properties based on your criteria.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Property Recommendations in Noida</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f7f6;
+            color: #333;
+        }
+        .container {
+            max-width: 1200px;
+            margin: auto;
+        }
+        h1, h2 {
+            color: #0056b3;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .property-section {
+            margin-bottom: 40px;
+        }
+        .property-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+        .property-card {
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: transform 0.2s, box-shadow 0.2s;
+            display: flex;
+            flex-direction: column;
+        }
+        .property-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+        .property-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-bottom: 1px solid #eee;
+        }
+        .property-content {
+            padding: 20px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .property-title {
+            font-size: 1.4em;
+            margin-top: 0;
+            margin-bottom: 10px;
+            color: #0056b3;
+        }
+        .property-location {
+            font-size: 0.9em;
+            color: #555;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        .property-location svg {
+            margin-right: 5px;
+        }
+        .property-price {
+            font-size: 1.3em;
+            color: #28a745;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .property-details {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 15px;
+            font-size: 0.9em;
+            color: #666;
+        }
+        .property-details div {
+            background-color: #e9f7ef;
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+        .property-features, .property-nearby {
+            margin-top: 10px;
+            margin-bottom: 15px;
+            font-size: 0.9em;
+        }
+        .property-features strong, .property-nearby strong {
+            color: #0056b3;
+        }
+        .property-features ul, .property-nearby ul {
+            list-style: none;
+            padding: 0;
+            margin: 5px 0 0 0;
+        }
+        .property-features li, .property-nearby li {
+            background-color: #f8f9fa;
+            border-left: 3px solid #007bff;
+            padding: 5px 10px;
+            margin-bottom: 5px;
+            border-radius: 3px;
+        }
+        .property-emi {
+            font-size: 1em;
+            color: #e67e22;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        .property-link {
+            display: inline-block;
+            background-color: #007bff;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            text-align: center;
+            margin-top: auto; /* Pushes the link to the bottom */
+        }
+        .property-link:hover {
+            background-color: #0056b3;
+        }
+        .bank-link {
+            font-size: 0.9em;
+            margin-top: 10px;
+        }
+        .bank-link a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        .bank-link a:hover {
+            text-decoration: underline;
+        }
+        @media (max-width: 768px) {
+            .property-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Property Recommendations in Noida</h1>
+
+        <div class="property-section">
+            <h2>🏠 Under Budget Properties</h2>
+            <div class="property-grid">
+                <!-- Property 1 -->
+                <div class="property-card">
+                    <img class="property-image" src="https://pix10.agoda.net/hotelImages/6919075/0/72fa792d08312f5f14a0ac58c108c0bd.jpg?ca=8&ce=1&s=1024x768" alt="1 Bedroom House in Sector 18, Noida">
+                    <div class="property-content">
+                        <h3 class="property-title">1 Bedroom House in Sector 18, Noida</h3>
+                        <p class="property-location">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
+                                <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/>
+                            </svg>
+                            Sector 18, Noida
+                        </p>
+                        <p class="property-price">₹1 Lac</p>
+                        <div class="property-details">
+                            <div>Area: 100 sqft</div>
+                            <div>Config: 1 BHK (1 Bath)</div>
+                            <div>Available From: 3mo ago</div>
+                        </div>
+                        <div class="property-features">
+                            <strong>Features:</strong>
+                            <ul>
+                                <li>Ready To Move</li>
+                            </ul>
+                        </div>
+                        <div class="property-nearby">
+                            <strong>Nearby Places:</strong>
+                            <ul>
+                                <li>The Great India Place</li>
+                                <li>Atta Market</li>
+                                <li>Worlds of Wonder Water Park</li>
+                            </ul>
+                        </div>
+                        <p class="property-emi">EMI: ₹875</p>
+                        <a href="https://www.99acres.com/1-bhk-bedroom-independent-house-villa-for-sale-in-chokhani-square-sector-18-noida-100-sq-ft-spid-R83347420" target="_blank" class="property-link">View Property</a>
+                        <p class="bank-link">Home Loan: <a href="https://www.paisabazaar.com/sbi-bank/home-loan/" target="_blank">SBI Home Loan</a></p>
+                    </div>
+                </div>
+
+                <!-- Property 2 -->
+                <div class="property-card">
+                    <img class="property-image" src="https://housing-images.n7net.in/4f2250e8/9289b5574cc868795b882741571ed05d/v0/medium.jpg" alt="2 BHK Flat in Sector 62, Noida">
+                    <div class="property-content">
+                        <h3 class="property-title">2 BHK Flat in Sector 62, Noida</h3>
+                        <p class="property-location">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
+                                <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/>
+                            </svg>
+                            Sector 62, Noida
+                        </p>
+                        <p class="property-price">₹98 Lac</p>
+                        <div class="property-details">
+                            <div>Area: 980 sqft</div>
+                            <div>Config: 2 BHK (2 Baths)</div>
+                            <div>Available From: Today</div>
+                        </div>
+                        <div class="property-features">
+                            <strong>Features:</strong>
+                            <ul>
+                                <li>Ready To Move</li>
+                            </ul>
+                        </div>
+                        <div class="property-nearby">
+                            <strong>Nearby Places:</strong>
+                            <ul>
+                                <li>Sector 76 metro</li>
+                                <li>Spectrum Mall</li>
+                                <li>Top Schools</li>
+                            </ul>
+                        </div>
+                        <p class="property-emi">EMI: ₹85,728</p>
+                        <a href="https://www.99acres.com/2-bhk-bedroom-apartment-flat-for-sale-in-rajat-vihar-sector-62-noida-980-sq-ft-spid-A85950608" target="_blank" class="property-link">View Property</a>
+                        <p class="bank-link">Home Loan: <a href="https://www.paisabazaar.com/sbi-bank/home-loan/" target="_blank">SBI Home Loan</a></p>
+                    </div>
+                </div>
+
+                <!-- Property 3 -->
+                <div class="property-card">
+                    <img class="property-image" src="https://housing-images.n7net.in/4f2250e8/9289b5574cc868795b882741571ed05d/v0/medium.jpg" alt="2 BHK Flat in A Block Sector-34, Noida">
+                    <div class="property-content">
+                        <h3 class="property-title">2 BHK Flat in A Block Sector-34, Noida</h3>
+                        <p class="property-location">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
+                                <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/>
+                            </svg>
+                            A Block Sector-34, Noida
+                        </p>
+                        <p class="property-price">₹60 Lac</p>
+                        <div class="property-details">
+                            <div>Area: 950 sqft</div>
+                            <div>Config: 2 BHK (2 Baths)</div>
+                            <div>Available From: Yesterday</div>
+                        </div>
+                        <div class="property-features">
+                            <strong>Features:</strong>
+                            <ul>
+                                <li>Ready To Move</li>
+                            </ul>
+                        </div>
+                        <div class="property-nearby">
+                            <strong>Nearby Places:</strong>
+                            <ul>
+                                <li>Noida sector 34 metro station</li>
+                                <li>Noida sector 52 metro station</li>
+                            </ul>
+                        </div>
+                        <p class="property-emi">EMI: ₹52,498</p>
+                        <a href="https://www.99acres.com/2-bhk-bedroom-apartment-flat-for-sale-in-a-block-sector-34-noida-950-sq-ft-spid-O85929936" target="_blank" class="property-link">View Property</a>
+                        <p class="bank-link">Home Loan: <a href="https://www.paisabazaar.com/sbi-bank/home-loan/" target="_blank">SBI Home Loan</a></p>
+                    </div>
+                </div>
+
+                <!-- Property 4 -->
+                <div class="property-card">
+                    <img class="property-image" src="https://housing-images.n7net.in/4f2250e8/9289b5574cc868795b882741571ed05d/v0/medium.jpg" alt="2 BHK Flat in Sector 67, Noida">
+                    <div class="property-content">
+                        <h3 class="property-title">2 BHK Flat in Sector 67, Noida</h3>
+                        <p class="property-location">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
+                                <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/>
+                            </svg>
+                            Sector 67, Noida
+                        </p>
+                        <p class="property-price">₹37 Lac</p>
+                        <div class="property-details">
+                            <div>Area: 1,000 sqft</div>
+                            <div>Config: 2 BHK (2 Baths)</div>
+                            <div>Available From: 1mo ago</div>
+                        </div>
+                        <div class="property-features">
+                            <strong>Features:</strong>
+                            <ul>
+                                <li>Ready To Move</li>
+                            </ul>
+                        </div>
+                        <div class="property-nearby">
+                            <strong>Nearby Places:</strong>
+                            <ul>
+                                <li>Noida sector 59 metro station</li>
+                                <li>Noida sector 61 metro station</li>
+                                <li>Metro, school, hospital, market, shopping mall</li>
+                            </ul>
+                        </div>
+                        <p class="property-emi">EMI: ₹32,372</p>
+                        <a href="https://www.99acres.com/2-bhk-bedroom-apartment-flat-for-sale-in-sector-67-noida-1000-sq-ft-r2-spid-X79192097" target="_blank" class="property-link">View Property</a>
+                        <p class="bank-link">Home Loan: <a href="https://www.paisabazaar.com/sbi-bank/home-loan/" target="_blank">SBI Home Loan</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="property-section">
+            <h2>🌟 Recommended Properties</h2>
+            <div class="property-grid">
+                <!-- Recommended Property 1 -->
+                <div class="property-card">
+                    <img class="property-image" src="https://newprojects.99acres.com/projects/paras/tierea/images/m5v9xcl_1760435808_660476115_med.jpg" alt="Paras Tierea">
+                    <div class="property-content">
+                        <h3 class="property-title">Paras Tierea</h3>
+                        <p class="property-location">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
+                                <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/>
+                            </svg>
+                            Sector 137, Noida
+                        </p>
+                        <p class="property-price">₹68 - 98.5 L</p>
+                        <div class="property-details">
+                            <div>Area: 825 - 1,725 sqft</div>
+                            <div>Config: 2 BHK, 3 BHK</div>
+                            <div>Available From: Ready To Move</div>
+                        </div>
+                        <div class="property-features">
+                            <strong>Features:</strong>
+                            <ul>
+                                <li>Ready To Move</li>
+                            </ul>
+                        </div>
+                        <div class="property-nearby">
+                            <strong>Nearby Places:</strong>
+                            <ul>
+                                <li>Felix Hospital</li>
+                                <li>SKS World School, Sector 137 Noida</li>
+                            </ul>
+                        </div>
+                        <p class="property-emi">EMI: ₹59,489</p>
+                        <a href="https://www.99acres.com/paras-tierea-sector-137-noida-npxid-r756" target="_blank" class="property-link">View Property</a>
+                        <p class="bank-link">Home Loan: <a href="https://www.paisabazaar.com/sbi-bank/home-loan/" target="_blank">SBI Home Loan</a></p>
+                    </div>
+                </div>
+
+                <!-- Recommended Property 2 -->
+                <div class="property-card">
+                    <img class="property-image" src="https://housing-images.n7net.in/4f2250e8/9289b5574cc868795b882741571ed05d/v0/medium.jpg" alt="2 BHK Flat in Sector 42, Noida">
+                    <div class="property-content">
+                        <h3 class="property-title">2 BHK Flat in Sector 42, Noida</h3>
+                        <p class="property-location">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
+                                <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/>
+                            </svg>
+                            Sector 42, Noida
+                        </p>
+                        <p class="property-price">₹55 Lac</p>
+                        <div class="property-details">
+                            <div>Area: 750 sqft</div>
+                            <div>Config: 2 BHK (2 Baths)</div>
+                            <div>Available From: 2mo ago</div>
+                        </div>
+                        <div class="property-features">
+                            <strong>Features:</strong>
+                            <ul>
+                                <li>Ready To Move</li>
+                            </ul>
+                        </div>
+                        <div class="property-nearby">
+                            <strong>Nearby Places:</strong>
+                            <ul>
+                                <li>Botanical Garden</li>
+                                <li>Golf Course</li>
+                                <li>Ryan, Apeejay, Ramgya, The Khaitan & Jagaran Public School</li>
+                            </ul>
+                        </div>
+                        <p class="property-emi">EMI: ₹48,114</p>
+                        <a href="https://www.99acres.com/2-bhk-bedroom-apartment-flat-for-sale-in-dhanya-niketan-chs-sector-42-noida-750-sq-ft-spid-H84380346" target="_blank" class="property-link">View Property</a>
+                        <p class="bank-link">Home Loan: <a href="https://www.paisabazaar.com/sbi-bank/home-loan/" target="_blank">SBI Home Loan</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
