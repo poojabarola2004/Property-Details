@@ -1,1 +1,358 @@
-I'm sorry, but there are no properties available for "Greater noida" and "sector 4" in our current listings. Most of our properties are located in "Noida" and "Noida Extension". Please try searching with one of these available cities.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Property Recommendations</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f7f6;
+            color: #333;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1, h2 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .section-title {
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+            margin-top: 40px;
+            margin-bottom: 30px;
+            font-size: 1.8em;
+            color: #2980b9;
+        }
+        .card-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            justify-content: center;
+        }
+        .property-card {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+        }
+        .property-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+        .card-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-bottom: 1px solid #eee;
+        }
+        .card-content {
+            padding: 20px;
+        }
+        .card-title {
+            font-size: 1.4em;
+            margin-bottom: 10px;
+            color: #34495e;
+        }
+        .card-location {
+            font-size: 0.9em;
+            color: #7f8c8d;
+            margin-bottom: 15px;
+        }
+        .card-price {
+            font-size: 1.2em;
+            color: #e74c3c;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .card-detail {
+            font-size: 0.95em;
+            margin-bottom: 8px;
+            color: #555;
+        }
+        .card-features, .card-nearby {
+            margin-top: 15px;
+        }
+        .card-features h4, .card-nearby h4 {
+            font-size: 1.05em;
+            color: #3498db;
+            margin-bottom: 8px;
+        }
+        .card-features ul, .card-nearby ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .card-features li, .card-nearby li {
+            background-color: #ecf0f1;
+            border-left: 3px solid #3498db;
+            padding: 5px 10px;
+            margin-bottom: 5px;
+            border-radius: 3px;
+        }
+        .card-link {
+            display: block;
+            margin-top: 20px;
+            text-align: center;
+            background-color: #3498db;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+        .card-link:hover {
+            background-color: #2980b9;
+        }
+        .emi-details {
+            background-color: #f9f9f9;
+            border: 1px dashed #ccc;
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 15px;
+        }
+        .emi-details h4 {
+            color: #27ae60;
+            margin-bottom: 5px;
+        }
+        .emi-details a {
+            color: #27ae60;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .emi-details a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Your Personalized Property Recommendations</h1>
+
+        <h2 class="section-title">🏠 Under Budget Properties</h2>
+        <div class="card-container">
+            <div class="property-card">
+                <img src="https://is1-3.housingcdn.com/4f2250e8/dc6e047842d9e1c0ed49ce0a0ae4ee3d/v0/fs/lucky_wow_monk-noida_extension-greater+noida-lucky_homes_builder_and_developers.jpeg" alt="Lucky Wow Monk" class="card-image">
+                <div class="card-content">
+                    <h3 class="card-title">Lucky Wow Monk</h3>
+                    <p class="card-location">Noida Extension</p>
+                    <p class="card-price">₹72 L</p>
+                    <p class="card-detail"><strong>Area:</strong> 1,175 - 2,200 sqft</p>
+                    <p class="card-detail"><strong>Configuration:</strong> 3 BHK Independent Floor</p>
+                    <p class="card-detail"><strong>Furnishing:</strong> Unfurnished</p>
+                    <p class="card-detail"><strong>Available From:</strong> Under Construction · Completion in Dec, 2025</p>
+                    <div class="card-features">
+                        <h4>Features:</h4>
+                        <ul>
+                            <li>Spacious Living Areas</li>
+                            <li>Modern Architecture</li>
+                            <li>Green Surroundings</li>
+                            <li>Ample Natural Light</li>
+                            <li>Well-ventilated Rooms</li>
+                        </ul>
+                    </div>
+                    <div class="card-nearby">
+                        <h4>Nearby Places:</h4>
+                        <ul>
+                            <li>Delhi Public World School</li>
+                            <li>Eco Tech Police Chowki</li>
+                            <li>Gaur City Mall</li>
+                        </ul>
+                    </div>
+                    <div class="emi-details">
+                        <h4>EMI: ₹56,664/month</h4>
+                        <a href="https://www.hdfcbank.com/personal/loans/home-loan" target="_blank">Best Home Loan Rates - HDFC Bank</a>
+                    </div>
+                    <a href="https://www.99acres.com/lucky-wow-monk-noida-extension-noida-npxid-r450624" class="card-link" target="_blank">View Property</a>
+                </div>
+            </div>
+            <div class="property-card">
+                <img src="https://newprojects.99acres.com/projects/testingbuilder23/residential_welfare_society/images/i3ekjbd_1753871292_625773609_sm.jpg" alt="Residential Welfare Society" class="card-image">
+                <div class="card-content">
+                    <h3 class="card-title">Residential Welfare Society</h3>
+                    <p class="card-location">Sector 48, Noida</p>
+                    <p class="card-price">₹80 L</p>
+                    <p class="card-detail"><strong>Area:</strong> 5,45,454 sqft CARPET</p>
+                    <p class="card-detail"><strong>Configuration:</strong> 3 BHK Apartment</p>
+                    <p class="card-detail"><strong>Furnishing:</strong> Unfurnished</p>
+                    <p class="card-detail"><strong>Available From:</strong> Ready To Move · Since Apr, 2016</p>
+                    <div class="card-features">
+                        <h4>Features:</h4>
+                        <ul>
+                            <li>Community Living</li>
+                            <li>Well-maintained Society</li>
+                            <li>Convenient Location</li>
+                            <li>Family-friendly Environment</li>
+                            <li>Secure Premises</li>
+                        </ul>
+                    </div>
+                    <div class="card-nearby">
+                        <h4>Nearby Places:</h4>
+                        <ul>
+                            <li>Meghdootam Park</li>
+                            <li>Eldeco Ananda Apartments</li>
+                            <li>Prachin Shiv Mandir</li>
+                        </ul>
+                    </div>
+                    <div class="emi-details">
+                        <h4>EMI: ₹62,960/month</h4>
+                        <a href="https://www.sbi.co.in/web/personal-banking/loans/home-loan" target="_blank">Best Home Loan Rates - SBI</a>
+                    </div>
+                    <a href="https://www.99acres.com/residential-welfare-society-sector-48-noida-npxid-r446957" class="card-link" target="_blank">View Property</a>
+                </div>
+            </div>
+            <div class="property-card">
+                <img src="https://www.estateavenues.com/api/images/1735128522788_1.png" alt="Arena The Ultima Heights" class="card-image">
+                <div class="card-content">
+                    <h3 class="card-title">Arena The Ultima Heights</h3>
+                    <p class="card-location">Sector 107, Noida</p>
+                    <p class="card-price">₹85.03 L</p>
+                    <p class="card-detail"><strong>Area:</strong> 1,055 - 2,295 sqft</p>
+                    <p class="card-detail"><strong>Configuration:</strong> 3 BHK Apartment</p>
+                    <p class="card-detail"><strong>Furnishing:</strong> Unfurnished</p>
+                    <p class="card-detail"><strong>Available From:</strong> Under Construction · Completion in Oct, 2027</p>
+                    <div class="card-features">
+                        <h4>Features:</h4>
+                        <ul>
+                            <li>Modern Design</li>
+                            <li>Excellent Connectivity</li>
+                            <li>Spacious Interiors</li>
+                            <li>Premium Finishes</li>
+                            <li>Access to Amenities</li>
+                        </ul>
+                    </div>
+                    <div class="card-nearby">
+                        <h4>Nearby Places:</h4>
+                        <ul>
+                            <li>Pathways School</li>
+                            <li>Metro Station Noida Sector 76</li>
+                            <li>Noida Greater Noida Expy</li>
+                        </ul>
+                    </div>
+                    <div class="emi-details">
+                        <h4>EMI: ₹66,974/month</h4>
+                        <a href="https://www.icicibank.com/personal-banking/loans/home-loan" target="_blank">Best Home Loan Rates - ICICI Bank</a>
+                    </div>
+                    <a href="https://www.99acres.com/arena-the-ultima-heights-sector-107-noida-npxid-r432599" class="card-link" target="_blank">View Property</a>
+                </div>
+            </div>
+            <div class="property-card">
+                <img src="https://vrindavangardennoida.com/linerolaw/images/slide2/11.jpg" alt="Vrindavan Garden" class="card-image">
+                <div class="card-content">
+                    <h3 class="card-title">Vrindavan Garden</h3>
+                    <p class="card-location">Noida Extension</p>
+                    <p class="card-price">₹85 L</p>
+                    <p class="card-detail"><strong>Area:</strong> N/A</p>
+                    <p class="card-detail"><strong>Configuration:</strong> 3 BHK Villa</p>
+                    <p class="card-detail"><strong>Furnishing:</strong> Unfurnished</p>
+                    <p class="card-detail"><strong>Available From:</strong> Ready To Move · Since Dec, 2019</p>
+                    <div class="card-features">
+                        <h4>Features:</h4>
+                        <ul>
+                            <li>Park Access</li>
+                            <li>Gated Community</li>
+                            <li>Paved Compound</li>
+                            <li>Independent Living</li>
+                            <li>Serene Environment</li>
+                        </ul>
+                    </div>
+                    <div class="card-nearby">
+                        <h4>Nearby Places:</h4>
+                        <ul>
+                            <li>Leelawati Multispeciality Hospital</li>
+                            <li>NH-24</li>
+                            <li>ABES Engineering College</li>
+                        </ul>
+                    </div>
+                    <div class="emi-details">
+                        <h4>EMI: ₹66,903/month</h4>
+                        <a href="https://www.axisbank.com/retail/loans/home-loan" target="_blank">Best Home Loan Rates - Axis Bank</a>
+                    </div>
+                    <a href="https://www.99acres.com/vrindavan-garden-noida-extension-noida-npxid-r368780" class="card-link" target="_blank">View Property</a>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="section-title">🌟 Recommended Properties</h2>
+        <div class="card-container">
+            <div class="property-card">
+                <img src="https://content.jdmagicbox.com/comp/noida/x6/011pxx11.xx11.191120204230.d5x6/catalogue/paras-tierea-noida-residential-buildings-puuqmzeqvh.jpg" alt="Paras Tierea" class="card-image">
+                <div class="card-content">
+                    <h3 class="card-title">Paras Tierea</h3>
+                    <p class="card-location">Sector 137, Noida</p>
+                    <p class="card-price">₹1.2 Cr</p>
+                    <p class="card-detail"><strong>Area:</strong> 825 - 1,725 sqft SUPER</p>
+                    <p class="card-detail"><strong>Configuration:</strong> 3 BHK Apartment</p>
+                    <p class="card-detail"><strong>Furnishing:</strong> Unfurnished</p>
+                    <p class="card-detail"><strong>Available From:</strong> Ready To Move</p>
+                    <div class="card-features">
+                        <h4>Features:</h4>
+                        <ul>
+                            <li>Strategic Location</li>
+                            <li>Proximity to Metro</li>
+                            <li>Modern Amenities</li>
+                            <li>Well-Planned Layout</li>
+                            <li>Lush Green Spaces</li>
+                        </ul>
+                    </div>
+                    <div class="card-nearby">
+                        <h4>Nearby Places:</h4>
+                        <ul>
+                            <li>Felix Hospital</li>
+                            <li>SKS World School, Sector 137 Noida</li>
+                            <li>Lenskart.com at Sector 137</li>
+                        </ul>
+                    </div>
+                    <div class="emi-details">
+                        <h4>EMI: ₹94,440/month</h4>
+                        <a href="https://www.pnbhousing.com/home-loan" target="_blank">Best Home Loan Rates - PNB Housing</a>
+                    </div>
+                    <a href="https://www.99acres.com/paras-tierea-sector-137-noida-npxid-r756" class="card-link" target="_blank">View Property</a>
+                </div>
+            </div>
+            <div class="property-card">
+                <img src="https://cdn-ilbompl.nitrocdn.com/ekftxraLRFUYZcKnOWazVKzvpTyQONCM/assets/images/optimized/rev-c7e58e4/myrealestatepublic.s3.ap-south-1.amazonaws.com/Project__c/a0EC5000001qtBKMAY/Amrapali%20Silicon%20city%20_MRE%20img-1_06332023103344.jpeg" alt="Amrapali Silicon City" class="card-image">
+                <div class="card-content">
+                    <h3 class="card-title">Amrapali Silicon City</h3>
+                    <p class="card-location">Sector 76, Noida</p>
+                    <p class="card-price">₹1.35 Cr</p>
+                    <p class="card-detail"><strong>Area:</strong> 815 - 2,410 sqft SUPER</p>
+                    <p class="card-detail"><strong>Configuration:</strong> 3 BHK Apartment</p>
+                    <p class="card-detail"><strong>Furnishing:</strong> Unfurnished</p>
+                    <p class="card-detail"><strong>Available From:</strong> Ready To Move</p>
+                    <div class="card-features">
+                        <h4>Features:</h4>
+                        <ul>
+                            <li>Good Road Connectivity</li>
+                            <li>Proximity to Commercial Hubs</li>
+                            <li>Essential Amenities Nearby</li>
+                            <li>Modern Infrastructure</li>
+                            <li>Gated Community</li>
+                        </ul>
+                    </div>
+                    <div class="card-nearby">
+                        <h4>Nearby Places:</h4>
+                        <ul>
+                            <li>Noida Sector 76 Metro Station</li>
+                            <li>Hyde Park Crown</li>
+                            <li>Max Hospital, Noida</li>
+                        </ul>
+                    </div>
+                    <div class="emi-details">
+                        <h4>EMI: ₹106,215/month</h4>
+                        <a href="https://www.bankofbaroda.in/personal-banking/loans/home-loan" target="_blank">Best Home Loan Rates - Bank of Baroda</a>
+                    </div>
+                    <a href="https://www.99acres.com/amrapali-silicon-city-sector-76-noida-npxid-r769" class="card-link" target="_blank">View Property</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
