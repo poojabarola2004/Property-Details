@@ -8,46 +8,38 @@
         body {
             font-family: Arial, sans-serif;
             margin: 20px;
-            background-color: #f4f7f6;
+            background-color: #f4f4f4;
             color: #333;
         }
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 20px;
         }
         h1, h2 {
-            color: #2c3e50;
+            color: #0056b3;
             text-align: center;
             margin-bottom: 30px;
         }
-        .section-title {
-            border-bottom: 2px solid #3498db;
-            padding-bottom: 10px;
-            margin-top: 40px;
-            margin-bottom: 30px;
-            font-size: 1.8em;
-            color: #2980b9;
+        .property-section {
+            margin-bottom: 50px;
         }
         .card-container {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
-            justify-content: center;
+            gap: 30px;
         }
         .property-card {
             background-color: #fff;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             overflow: hidden;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            position: relative;
+            transition: all 0.3s ease;
         }
         .property-card:hover {
-            transform: translateY(-5px);
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            transform: translateY(-5px);
         }
-        .card-image {
+        .property-card img {
             width: 100%;
             height: 200px;
             object-fit: cover;
@@ -56,300 +48,291 @@
         .card-content {
             padding: 20px;
         }
-        .card-title {
+        .card-content h3 {
+            margin-top: 0;
+            color: #007bff;
             font-size: 1.4em;
-            margin-bottom: 10px;
-            color: #34495e;
         }
-        .card-location {
-            font-size: 0.9em;
-            color: #7f8c8d;
-            margin-bottom: 15px;
-        }
-        .card-price {
-            font-size: 1.2em;
-            color: #e74c3c;
-            font-weight: bold;
-            margin-bottom: 10px;
-        }
-        .card-detail {
+        .card-content p {
+            margin: 8px 0;
             font-size: 0.95em;
-            margin-bottom: 8px;
-            color: #555;
         }
-        .card-features, .card-nearby {
-            margin-top: 15px;
+        .card-content .price {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #28a745;
         }
-        .card-features h4, .card-nearby h4 {
-            font-size: 1.05em;
-            color: #3498db;
-            margin-bottom: 8px;
-        }
-        .card-features ul, .card-nearby ul {
+        .card-content .features ul,
+        .card-content .nearby-places ul {
             list-style: none;
             padding: 0;
-            margin: 0;
+            margin: 10px 0;
         }
-        .card-features li, .card-nearby li {
-            background-color: #ecf0f1;
-            border-left: 3px solid #3498db;
+        .card-content .features li,
+        .card-content .nearby-places li {
+            background-color: #e9f7ef;
+            color: #218838;
+            display: inline-block;
             padding: 5px 10px;
-            margin-bottom: 5px;
-            border-radius: 3px;
-        }
-        .card-link {
-            display: block;
-            margin-top: 20px;
-            text-align: center;
-            background-color: #3498db;
-            color: white;
-            padding: 10px 15px;
+            margin: 3px;
             border-radius: 5px;
-            text-decoration: none;
-            transition: background-color 0.3s ease;
+            font-size: 0.85em;
         }
-        .card-link:hover {
-            background-color: #2980b9;
+        .card-content .nearby-places li {
+            background-color: #e0f2f7;
+            color: #117a8b;
         }
-        .emi-details {
-            background-color: #f9f9f9;
-            border: 1px dashed #ccc;
-            padding: 10px;
-            border-radius: 5px;
+        .card-content a {
+            display: inline-block;
             margin-top: 15px;
-        }
-        .emi-details h4 {
-            color: #27ae60;
-            margin-bottom: 5px;
-        }
-        .emi-details a {
-            color: #27ae60;
+            color: #007bff;
             text-decoration: none;
             font-weight: bold;
         }
-        .emi-details a:hover {
+        .card-content a:hover {
             text-decoration: underline;
+        }
+        .emi-details {
+            background-color: #f8f9fa;
+            border-left: 4px solid #007bff;
+            padding: 10px;
+            margin-top: 15px;
+        }
+        .emi-details p {
+            font-size: 0.9em;
+            margin: 5px 0;
+        }
+        .bank-link {
+            color: #dc3545;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Your Personalized Property Recommendations</h1>
+        <h1>Property Recommendations in Greater Noida</h1>
 
-        <h2 class="section-title">🏠 Under Budget Properties</h2>
-        <div class="card-container">
-            <div class="property-card">
-                <img src="https://is1-3.housingcdn.com/4f2250e8/dc6e047842d9e1c0ed49ce0a0ae4ee3d/v0/fs/lucky_wow_monk-noida_extension-greater+noida-lucky_homes_builder_and_developers.jpeg" alt="Lucky Wow Monk" class="card-image">
-                <div class="card-content">
-                    <h3 class="card-title">Lucky Wow Monk</h3>
-                    <p class="card-location">Noida Extension</p>
-                    <p class="card-price">₹72 L</p>
-                    <p class="card-detail"><strong>Area:</strong> 1,175 - 2,200 sqft</p>
-                    <p class="card-detail"><strong>Configuration:</strong> 3 BHK Independent Floor</p>
-                    <p class="card-detail"><strong>Furnishing:</strong> Unfurnished</p>
-                    <p class="card-detail"><strong>Available From:</strong> Under Construction · Completion in Dec, 2025</p>
-                    <div class="card-features">
-                        <h4>Features:</h4>
-                        <ul>
-                            <li>Spacious Living Areas</li>
-                            <li>Modern Architecture</li>
-                            <li>Green Surroundings</li>
-                            <li>Ample Natural Light</li>
-                            <li>Well-ventilated Rooms</li>
-                        </ul>
+        <div class="property-section">
+            <h2>🏠 Under Budget Properties</h2>
+            <div class="card-container">
+                <div class="property-card">
+                    <img src="https://newprojects.99acres.com/projects/gaursons_india/gaur_city_7th_avenue/images/1ebps6x7_med.jpg" alt="Property Image">
+                    <div class="card-content">
+                        <h3>Gaur City 7th Avenue</h3>
+                        <p><strong>Location:</strong> Sector 4, Greater Noida West</p>
+                        <p class="price"><strong>Price:</strong> ₹91.38 - 99.03 Lakh</p>
+                        <p><strong>Area:</strong> N/A</p>
+                        <p><strong>Configuration:</strong> 2 BHK</p>
+                        <p><strong>Furnishing:</strong> Unfurnished</p>
+                        <p><strong>Available From:</strong> Ready To Move · Since Mar, 2023</p>
+                        <div class="features">
+                            <h4>Features:</h4>
+                            <ul>
+                                <li>Ready To Move</li>
+                                <li>Verified Listing</li>
+                                <li>New Construction</li>
+                                <li>Spacious Layout</li>
+                                <li>Well-connected</li>
+                            </ul>
+                        </div>
+                        <div class="nearby-places">
+                            <h4>Nearby Places:</h4>
+                            <ul>
+                                <li>LYF Hospital</li>
+                                <li>Sarvodaya Hospital</li>
+                                <li>Cloudnine Hospital</li>
+                            </ul>
+                        </div>
+                        <div class="emi-details">
+                            <p><strong>Estimated EMI (20 years @ 8.5% p.a.):</strong> ₹82,823</p>
+                            <p>Get the best home loan rates from: <a class="bank-link" href="https://www.hdfc.com/checklist/home-loan-interest-rates" target="_blank">HDFC Bank</a> | <a class="bank-link" href="https://sbi.co.in/web/interest-rates/interest-rates/loan-schemes-interest-rates/home-loans-interest-rates-current" target="_blank">SBI</a> | <a class="bank-link" href="https://www.icicibank.com/personal-banking/loans/home-loan/interest-rates" target="_blank">ICICI Bank</a> | <a class="bank-link" href="https://www.axisbank.com/retail/loans/home-loan/interest-rates-charges" target="_blank">Axis Bank</a></p>
+                        </div>
+                        <a href="https://www.99acres.com/gaur-city-7th-avenue-sector-4-greater-noida-npxid-r130119" target="_blank">View Details</a>
                     </div>
-                    <div class="card-nearby">
-                        <h4>Nearby Places:</h4>
-                        <ul>
-                            <li>Delhi Public World School</li>
-                            <li>Eco Tech Police Chowki</li>
-                            <li>Gaur City Mall</li>
-                        </ul>
-                    </div>
-                    <div class="emi-details">
-                        <h4>EMI: ₹56,664/month</h4>
-                        <a href="https://www.hdfcbank.com/personal/loans/home-loan" target="_blank">Best Home Loan Rates - HDFC Bank</a>
-                    </div>
-                    <a href="https://www.99acres.com/lucky-wow-monk-noida-extension-noida-npxid-r450624" class="card-link" target="_blank">View Property</a>
                 </div>
-            </div>
-            <div class="property-card">
-                <img src="https://newprojects.99acres.com/projects/testingbuilder23/residential_welfare_society/images/i3ekjbd_1753871292_625773609_sm.jpg" alt="Residential Welfare Society" class="card-image">
-                <div class="card-content">
-                    <h3 class="card-title">Residential Welfare Society</h3>
-                    <p class="card-location">Sector 48, Noida</p>
-                    <p class="card-price">₹80 L</p>
-                    <p class="card-detail"><strong>Area:</strong> 5,45,454 sqft CARPET</p>
-                    <p class="card-detail"><strong>Configuration:</strong> 3 BHK Apartment</p>
-                    <p class="card-detail"><strong>Furnishing:</strong> Unfurnished</p>
-                    <p class="card-detail"><strong>Available From:</strong> Ready To Move · Since Apr, 2016</p>
-                    <div class="card-features">
-                        <h4>Features:</h4>
-                        <ul>
-                            <li>Community Living</li>
-                            <li>Well-maintained Society</li>
-                            <li>Convenient Location</li>
-                            <li>Family-friendly Environment</li>
-                            <li>Secure Premises</li>
-                        </ul>
+
+                <div class="property-card">
+                    <img src="https://static.99acres.com/universalapp/img/projectnoimage.webp" alt="Property Image">
+                    <div class="card-content">
+                        <h3>Gaur City 4th Avenue</h3>
+                        <p><strong>Location:</strong> Sector 4, Greater Noida West</p>
+                        <p class="price"><strong>Price:</strong> ₹1.16 Cr</p>
+                        <p><strong>Area:</strong> 1,400 sqft</p>
+                        <p><strong>Configuration:</strong> 3 BHK</p>
+                        <p><strong>Furnishing:</strong> Unfurnished</p>
+                        <p><strong>Available From:</strong> Ready To Move · 1mo ago</p>
+                        <div class="features">
+                            <h4>Features:</h4>
+                            <ul>
+                                <li>FEATURED DEALER</li>
+                                <li>Verified Listing</li>
+                                <li>Resale Property</li>
+                                <li>Good Connectivity</li>
+                                <li>Modern Design</li>
+                            </ul>
+                        </div>
+                        <div class="nearby-places">
+                            <h4>Nearby Places:</h4>
+                            <ul>
+                                <li>LYF Hospital</li>
+                                <li>Sarvodaya Hospital</li>
+                                <li>Cloudnine Hospital</li>
+                            </ul>
+                        </div>
+                        <div class="emi-details">
+                            <p><strong>Estimated EMI (20 years @ 8.5% p.a.):</strong> ₹100,928</p>
+                            <p>Get the best home loan rates from: <a class="bank-link" href="https://www.hdfc.com/checklist/home-loan-interest-rates" target="_blank">HDFC Bank</a> | <a class="bank-link" href="https://sbi.co.in/web/interest-rates/interest-rates/loan-schemes-interest-rates/home-loans-interest-rates-current" target="_blank">SBI</a> | <a class="bank-link" href="https://www.icicibank.com/personal-banking/loans/home-loan/interest-rates" target="_blank">ICICI Bank</a> | <a class="bank-link" href="https://www.axisbank.com/retail/loans/home-loan/interest-rates-charges" target="_blank">Axis Bank</a></p>
+                        </div>
+                        <a href="https://www.99acres.com/3-bhk-bedroom-apartment-flat-for-sale-in-gaur-city-4th-avenue-sector-4-greater-noida-1400-sq-ft-spid-V83849458" target="_blank">View Details</a>
                     </div>
-                    <div class="card-nearby">
-                        <h4>Nearby Places:</h4>
-                        <ul>
-                            <li>Meghdootam Park</li>
-                            <li>Eldeco Ananda Apartments</li>
-                            <li>Prachin Shiv Mandir</li>
-                        </ul>
-                    </div>
-                    <div class="emi-details">
-                        <h4>EMI: ₹62,960/month</h4>
-                        <a href="https://www.sbi.co.in/web/personal-banking/loans/home-loan" target="_blank">Best Home Loan Rates - SBI</a>
-                    </div>
-                    <a href="https://www.99acres.com/residential-welfare-society-sector-48-noida-npxid-r446957" class="card-link" target="_blank">View Property</a>
                 </div>
-            </div>
-            <div class="property-card">
-                <img src="https://www.estateavenues.com/api/images/1735128522788_1.png" alt="Arena The Ultima Heights" class="card-image">
-                <div class="card-content">
-                    <h3 class="card-title">Arena The Ultima Heights</h3>
-                    <p class="card-location">Sector 107, Noida</p>
-                    <p class="card-price">₹85.03 L</p>
-                    <p class="card-detail"><strong>Area:</strong> 1,055 - 2,295 sqft</p>
-                    <p class="card-detail"><strong>Configuration:</strong> 3 BHK Apartment</p>
-                    <p class="card-detail"><strong>Furnishing:</strong> Unfurnished</p>
-                    <p class="card-detail"><strong>Available From:</strong> Under Construction · Completion in Oct, 2027</p>
-                    <div class="card-features">
-                        <h4>Features:</h4>
-                        <ul>
-                            <li>Modern Design</li>
-                            <li>Excellent Connectivity</li>
-                            <li>Spacious Interiors</li>
-                            <li>Premium Finishes</li>
-                            <li>Access to Amenities</li>
-                        </ul>
+
+                <div class="property-card">
+                    <img src="https://newprojects.99acres.com/projects/gaursons_india/gaur_city_7th_avenue/images/1ebps6x7_med.jpg" alt="Property Image">
+                    <div class="card-content">
+                        <h3>Gaur City 7th Avenue</h3>
+                        <p><strong>Location:</strong> Sector 4, Greater Noida West</p>
+                        <p class="price"><strong>Price:</strong> ₹1.07 - 1.31 Cr</p>
+                        <p><strong>Area:</strong> 1,075 - 2,220 sqft</p>
+                        <p><strong>Configuration:</strong> 3 BHK</p>
+                        <p><strong>Furnishing:</strong> Unfurnished</p>
+                        <p><strong>Available From:</strong> Ready To Move · Since Mar, 2023</p>
+                        <div class="features">
+                            <h4>Features:</h4>
+                            <ul>
+                                <li>Ready To Move</li>
+                                <li>Owner Verified</li>
+                                <li>Under Construction Phase</li>
+                                <li>Video Tour Available</li>
+                                <li>Prime Location</li>
+                            </ul>
+                        </div>
+                        <div class="nearby-places">
+                            <h4>Nearby Places:</h4>
+                            <ul>
+                                <li>LYF Hospital</li>
+                                <li>Sarvodaya Hospital</li>
+                                <li>Cloudnine Hospital</li>
+                            </ul>
+                        </div>
+                        <div class="emi-details">
+                            <p><strong>Estimated EMI (20 years @ 8.5% p.a.):</strong> ₹103,545</p>
+                            <p>Get the best home loan rates from: <a class="bank-link" href="https://www.hdfc.com/checklist/home-loan-interest-rates" target="_blank">HDFC Bank</a> | <a class="bank-link" href="https://sbi.co.in/web/interest-rates/interest-rates/loan-schemes-interest-rates/home-loans-interest-rates-current" target="_blank">SBI</a> | <a class="bank-link" href="https://www.icicibank.com/personal-banking/loans/home-loan/interest-rates" target="_blank">ICICI Bank</a> | <a class="bank-link" href="https://www.axisbank.com/retail/loans/home-loan/interest-rates-charges" target="_blank">Axis Bank</a></p>
+                        </div>
+                        <a href="https://www.99acres.com/gaur-city-7th-avenue-sector-4-greater-noida-npxid-r130119" target="_blank">View Details</a>
                     </div>
-                    <div class="card-nearby">
-                        <h4>Nearby Places:</h4>
-                        <ul>
-                            <li>Pathways School</li>
-                            <li>Metro Station Noida Sector 76</li>
-                            <li>Noida Greater Noida Expy</li>
-                        </ul>
-                    </div>
-                    <div class="emi-details">
-                        <h4>EMI: ₹66,974/month</h4>
-                        <a href="https://www.icicibank.com/personal-banking/loans/home-loan" target="_blank">Best Home Loan Rates - ICICI Bank</a>
-                    </div>
-                    <a href="https://www.99acres.com/arena-the-ultima-heights-sector-107-noida-npxid-r432599" class="card-link" target="_blank">View Property</a>
                 </div>
-            </div>
-            <div class="property-card">
-                <img src="https://vrindavangardennoida.com/linerolaw/images/slide2/11.jpg" alt="Vrindavan Garden" class="card-image">
-                <div class="card-content">
-                    <h3 class="card-title">Vrindavan Garden</h3>
-                    <p class="card-location">Noida Extension</p>
-                    <p class="card-price">₹85 L</p>
-                    <p class="card-detail"><strong>Area:</strong> N/A</p>
-                    <p class="card-detail"><strong>Configuration:</strong> 3 BHK Villa</p>
-                    <p class="card-detail"><strong>Furnishing:</strong> Unfurnished</p>
-                    <p class="card-detail"><strong>Available From:</strong> Ready To Move · Since Dec, 2019</p>
-                    <div class="card-features">
-                        <h4>Features:</h4>
-                        <ul>
-                            <li>Park Access</li>
-                            <li>Gated Community</li>
-                            <li>Paved Compound</li>
-                            <li>Independent Living</li>
-                            <li>Serene Environment</li>
-                        </ul>
+
+                <div class="property-card">
+                    <img src="https://imagecdn.99acres.com/media1/32367/1/647341051M-1757923268977.webp" alt="Property Image">
+                    <div class="card-content">
+                        <h3>Gaur City 1st Avenue</h3>
+                        <p><strong>Location:</strong> Sector 4, Greater Noida West</p>
+                        <p class="price"><strong>Price:</strong> ₹1.57 Cr</p>
+                        <p><strong>Area:</strong> 1,734 sqft</p>
+                        <p><strong>Configuration:</strong> 3 BHK (3 Baths)</p>
+                        <p><strong>Furnishing:</strong> Unfurnished</p>
+                        <p><strong>Available From:</strong> Ready To Move · 1mo ago</p>
+                        <div class="features">
+                            <h4>Features:</h4>
+                            <ul>
+                                <li>Resale Property</li>
+                                <li>Owner Posted</li>
+                                <li>Spacious Living Area</li>
+                                <li>Well-maintained Building</li>
+                                <li>Balcony Access</li>
+                            </ul>
+                        </div>
+                        <div class="nearby-places">
+                            <h4>Nearby Places:</h4>
+                            <ul>
+                                <li>LYF Hospital</li>
+                                <li>Sarvodaya Hospital</li>
+                                <li>Cloudnine Hospital</li>
+                            </ul>
+                        </div>
+                        <div class="emi-details">
+                            <p><strong>Estimated EMI (20 years @ 8.5% p.a.):</strong> ₹136,656</p>
+                            <p>Get the best home loan rates from: <a class="bank-link" href="https://www.hdfc.com/checklist/home-loan-interest-rates" target="_blank">HDFC Bank</a> | <a class="bank-link" href="https://sbi.co.in/web/interest-rates/interest-rates/loan-schemes-interest-rates/home-loans-interest-rates-current" target="_blank">SBI</a> | <a class="bank-link" href="https://www.icicibank.com/personal-banking/loans/home-loan/interest-rates" target="_blank">ICICI Bank</a> | <a class="bank-link" href="https://www.axisbank.com/retail/loans/home-loan/interest-rates-charges" target="_blank">Axis Bank</a></p>
+                        </div>
+                        <a href="https://www.99acres.com/3-bhk-bedroom-apartment-flat-for-sale-in-gaur-city-1st-avenue-sector-4-greater-noida-1734-sq-ft-spid-U84738976" target="_blank">View Details</a>
                     </div>
-                    <div class="card-nearby">
-                        <h4>Nearby Places:</h4>
-                        <ul>
-                            <li>Leelawati Multispeciality Hospital</li>
-                            <li>NH-24</li>
-                            <li>ABES Engineering College</li>
-                        </ul>
-                    </div>
-                    <div class="emi-details">
-                        <h4>EMI: ₹66,903/month</h4>
-                        <a href="https://www.axisbank.com/retail/loans/home-loan" target="_blank">Best Home Loan Rates - Axis Bank</a>
-                    </div>
-                    <a href="https://www.99acres.com/vrindavan-garden-noida-extension-noida-npxid-r368780" class="card-link" target="_blank">View Property</a>
                 </div>
             </div>
         </div>
 
-        <h2 class="section-title">🌟 Recommended Properties</h2>
-        <div class="card-container">
-            <div class="property-card">
-                <img src="https://content.jdmagicbox.com/comp/noida/x6/011pxx11.xx11.191120204230.d5x6/catalogue/paras-tierea-noida-residential-buildings-puuqmzeqvh.jpg" alt="Paras Tierea" class="card-image">
-                <div class="card-content">
-                    <h3 class="card-title">Paras Tierea</h3>
-                    <p class="card-location">Sector 137, Noida</p>
-                    <p class="card-price">₹1.2 Cr</p>
-                    <p class="card-detail"><strong>Area:</strong> 825 - 1,725 sqft SUPER</p>
-                    <p class="card-detail"><strong>Configuration:</strong> 3 BHK Apartment</p>
-                    <p class="card-detail"><strong>Furnishing:</strong> Unfurnished</p>
-                    <p class="card-detail"><strong>Available From:</strong> Ready To Move</p>
-                    <div class="card-features">
-                        <h4>Features:</h4>
-                        <ul>
-                            <li>Strategic Location</li>
-                            <li>Proximity to Metro</li>
-                            <li>Modern Amenities</li>
-                            <li>Well-Planned Layout</li>
-                            <li>Lush Green Spaces</li>
-                        </ul>
+        <div class="property-section">
+            <h2>🌟 Recommended Properties</h2>
+            <div class="card-container">
+                <div class="property-card">
+                    <img src="https://imagecdn.99acres.com/media1/32367/1/647341051M-1757923268977.webp" alt="Property Image">
+                    <div class="card-content">
+                        <h3>Gaur City 1st Avenue</h3>
+                        <p><strong>Location:</strong> Sector 4, Greater Noida West</p>
+                        <p class="price"><strong>Price:</strong> ₹1.87 Cr</p>
+                        <p><strong>Area:</strong> 1,734 sqft (161 sqm)</p>
+                        <p><strong>Configuration:</strong> 3 BHK (3 Baths)</p>
+                        <p><strong>Furnishing:</strong> Unfurnished</p>
+                        <p><strong>Available From:</strong> Ready To Move · 1mo ago</p>
+                        <div class="features">
+                            <h4>Features:</h4>
+                            <ul>
+                                <li>Owner Verified Listing</li>
+                                <li>Spacious Bedrooms</li>
+                                <li>Modern Amenities</li>
+                                <li>Good Natural Light</li>
+                                <li>Secure Gated Community</li>
+                            </ul>
+                        </div>
+                        <div class="nearby-places">
+                            <h4>Nearby Places:</h4>
+                            <ul>
+                                <li>LYF Hospital</li>
+                                <li>Sarvodaya Hospital</li>
+                                <li>Cloudnine Hospital</li>
+                            </ul>
+                        </div>
+                        <div class="emi-details">
+                            <p><strong>Estimated EMI (20 years @ 8.5% p.a.):</strong> ₹162,657</p>
+                            <p>Get the best home loan rates from: <a class="bank-link" href="https://www.hdfc.com/checklist/home-loan-interest-rates" target="_blank">HDFC Bank</a> | <a class="bank-link" href="https://sbi.co.in/web/interest-rates/interest-rates/loan-schemes-interest-rates/home-loans-interest-rates-current" target="_blank">SBI</a> | <a class="bank-link" href="https://www.icicibank.com/personal-banking/loans/home-loan/interest-rates" target="_blank">ICICI Bank</a> | <a class="bank-link" href="https://www.axisbank.com/retail/loans/home-loan/interest-rates-charges" target="_blank">Axis Bank</a></p>
+                        </div>
+                        <a href="https://www.99acres.com/3-bhk-bedroom-apartment-flat-for-sale-in-gaur-city-1st-avenue-sector-4-greater-noida-1734-sq-ft-spid-U84738652" target="_blank">View Details</a>
                     </div>
-                    <div class="card-nearby">
-                        <h4>Nearby Places:</h4>
-                        <ul>
-                            <li>Felix Hospital</li>
-                            <li>SKS World School, Sector 137 Noida</li>
-                            <li>Lenskart.com at Sector 137</li>
-                        </ul>
-                    </div>
-                    <div class="emi-details">
-                        <h4>EMI: ₹94,440/month</h4>
-                        <a href="https://www.pnbhousing.com/home-loan" target="_blank">Best Home Loan Rates - PNB Housing</a>
-                    </div>
-                    <a href="https://www.99acres.com/paras-tierea-sector-137-noida-npxid-r756" class="card-link" target="_blank">View Property</a>
                 </div>
-            </div>
-            <div class="property-card">
-                <img src="https://cdn-ilbompl.nitrocdn.com/ekftxraLRFUYZcKnOWazVKzvpTyQONCM/assets/images/optimized/rev-c7e58e4/myrealestatepublic.s3.ap-south-1.amazonaws.com/Project__c/a0EC5000001qtBKMAY/Amrapali%20Silicon%20city%20_MRE%20img-1_06332023103344.jpeg" alt="Amrapali Silicon City" class="card-image">
-                <div class="card-content">
-                    <h3 class="card-title">Amrapali Silicon City</h3>
-                    <p class="card-location">Sector 76, Noida</p>
-                    <p class="card-price">₹1.35 Cr</p>
-                    <p class="card-detail"><strong>Area:</strong> 815 - 2,410 sqft SUPER</p>
-                    <p class="card-detail"><strong>Configuration:</strong> 3 BHK Apartment</p>
-                    <p class="card-detail"><strong>Furnishing:</strong> Unfurnished</p>
-                    <p class="card-detail"><strong>Available From:</strong> Ready To Move</p>
-                    <div class="card-features">
-                        <h4>Features:</h4>
-                        <ul>
-                            <li>Good Road Connectivity</li>
-                            <li>Proximity to Commercial Hubs</li>
-                            <li>Essential Amenities Nearby</li>
-                            <li>Modern Infrastructure</li>
-                            <li>Gated Community</li>
-                        </ul>
+
+                <div class="property-card">
+                    <img src="https://newprojects.99acres.com/projects/gaursons_india/gaur_city_7th_avenue/images/1ebps6x7_med.jpg" alt="Property Image">
+                    <div class="card-content">
+                        <h3>Gaur City 7th Avenue</h3>
+                        <p><strong>Location:</strong> Sector 4, Greater Noida West</p>
+                        <p class="price"><strong>Price:</strong> ₹2.04 Cr</p>
+                        <p><strong>Area:</strong> N/A</p>
+                        <p><strong>Configuration:</strong> 4 BHK</p>
+                        <p><strong>Furnishing:</strong> Unfurnished</p>
+                        <p><strong>Available From:</strong> Ready To Move · Since Mar, 2023</p>
+                        <div class="features">
+                            <h4>Features:</h4>
+                            <ul>
+                                <li>Premium Location</li>
+                                <li>Under Construction</li>
+                                <li>Gated Community</li>
+                                <li>Modern Architecture</li>
+                                <li>Excellent Connectivity</li>
+                            </ul>
+                        </div>
+                        <div class="nearby-places">
+                            <h4>Nearby Places:</h4>
+                            <ul>
+                                <li>LYF Hospital</li>
+                                <li>Sarvodaya Hospital</li>
+                                <li>Cloudnine Hospital</li>
+                            </ul>
+                        </div>
+                        <div class="emi-details">
+                            <p><strong>Estimated EMI (20 years @ 8.5% p.a.):</strong> ₹177,491</p>
+                            <p>Get the best home loan rates from: <a class="bank-link" href="https://www.hdfc.com/checklist/home-loan-interest-rates" target="_blank">HDFC Bank</a> | <a class="bank-link" href="https://sbi.co.in/web/interest-rates/interest-rates/loan-schemes-interest-rates/home-loans-interest-rates-current" target="_blank">SBI</a> | <a class="bank-link" href="https://www.icicibank.com/personal-banking/loans/home-loan/interest-rates" target="_blank">ICICI Bank</a> | <a class="bank-link" href="https://www.axisbank.com/retail/loans/home-loan/interest-rates-charges" target="_blank">Axis Bank</a></p>
+                        </div>
+                        <a href="https://www.99acres.com/gaur-city-7th-avenue-sector-4-greater-noida-npxid-r130119" target="_blank">View Details</a>
                     </div>
-                    <div class="card-nearby">
-                        <h4>Nearby Places:</h4>
-                        <ul>
-                            <li>Noida Sector 76 Metro Station</li>
-                            <li>Hyde Park Crown</li>
-                            <li>Max Hospital, Noida</li>
-                        </ul>
-                    </div>
-                    <div class="emi-details">
-                        <h4>EMI: ₹106,215/month</h4>
-                        <a href="https://www.bankofbaroda.in/personal-banking/loans/home-loan" target="_blank">Best Home Loan Rates - Bank of Baroda</a>
-                    </div>
-                    <a href="https://www.99acres.com/amrapali-silicon-city-sector-76-noida-npxid-r769" class="card-link" target="_blank">View Property</a>
                 </div>
             </div>
         </div>
