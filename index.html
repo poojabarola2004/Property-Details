@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Property Recommendations</title>
     <style>
         body {
@@ -11,370 +13,399 @@
         }
         .container {
             max-width: 1200px;
-            margin: auto;
+            margin: 0 auto;
         }
-        h1, h2 {
+        h2 {
             color: #2c3e50;
             text-align: center;
             margin-bottom: 30px;
+            font-size: 2em;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
         }
         .property-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 25px;
-            margin-bottom: 50px;
+            margin-bottom: 40px;
         }
         .property-card {
             background-color: #fff;
             border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             overflow: hidden;
-            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
             display: flex;
             flex-direction: column;
-            text-decoration: none;
-            color: inherit;
         }
         .property-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
         }
-        .property-image-container {
+        .property-card img {
             width: 100%;
             height: 200px;
-            overflow: hidden;
-        }
-        .property-image {
-            width: 100%;
-            height: 100%;
             object-fit: cover;
             border-bottom: 1px solid #eee;
         }
-        .property-content {
-            padding: 15px;
+        .property-info {
+            padding: 20px;
             flex-grow: 1;
             display: flex;
             flex-direction: column;
+            justify-content: space-between;
         }
-        .property-title {
-            font-size: 1.3em;
-            font-weight: bold;
-            margin-bottom: 5px;
+        .property-info h3 {
+            font-size: 1.4em;
             color: #34495e;
-        }
-        .property-location {
-            font-size: 0.9em;
-            color: #7f8c8d;
+            margin-top: 0;
             margin-bottom: 10px;
         }
-        .property-price {
+        .property-info p {
+            margin: 5px 0;
+            font-size: 0.95em;
+            color: #555;
+        }
+        .property-info .price {
             font-size: 1.2em;
-            color: #27ae60;
             font-weight: bold;
+            color: #27ae60;
             margin-bottom: 10px;
         }
-        .property-details {
-            font-size: 0.9em;
-            margin-bottom: 10px;
+        .property-info .features, .property-info .nearby-places {
+            margin-top: 15px;
         }
-        .property-details p {
-            margin: 3px 0;
+        .property-info .features strong, .property-info .nearby-places strong {
+            color: #3498db;
+            font-size: 1em;
+            display: block;
+            margin-bottom: 5px;
         }
-        .property-features, .property-nearby {
-            margin-bottom: 10px;
-        }
-        .property-features ul, .property-nearby ul {
-            list-style: none;
+        .property-info ul {
+            list-style-type: none;
             padding: 0;
             margin: 0;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 5px;
+            font-size: 0.9em;
+            color: #666;
         }
-        .property-features li, .property-nearby li {
+        .property-info ul li {
             background-color: #ecf0f1;
-            border-radius: 5px;
+            border-left: 3px solid #3498db;
             padding: 5px 10px;
-            font-size: 0.8em;
-            color: #5d6d7e;
+            margin-bottom: 5px;
+            border-radius: 3px;
         }
-        .emi-info {
-            background-color: #d4edda;
-            color: #155724;
-            padding: 8px 10px;
-            border-radius: 5px;
+        .property-card .footer {
+            padding: 15px 20px;
+            background-color: #f8f8f8;
+            border-top: 1px solid #eee;
+            text-align: center;
+        }
+        .property-card .footer .emi {
             font-weight: bold;
-            margin-top: auto; /* Push EMI and links to the bottom */
+            color: #e67e22;
             margin-bottom: 10px;
         }
-        .loan-links {
-            margin-top: 10px;
-        }
-        .loan-links a {
+        .property-card .footer .loan-links a {
             display: block;
+            color: #3498db;
+            text-decoration: none;
+            margin-top: 5px;
+            font-size: 0.9em;
+        }
+        .property-card .footer .loan-links a:hover {
+            text-decoration: underline;
+        }
+        .property-card .footer .property-link a {
+            display: inline-block;
             background-color: #3498db;
             color: #fff;
-            padding: 8px 10px;
+            padding: 8px 15px;
             border-radius: 5px;
-            text-align: center;
             text-decoration: none;
             font-size: 0.9em;
-            margin-bottom: 5px;
-            transition: background-color 0.2s;
+            margin-top: 10px;
+            transition: background-color 0.2s ease;
         }
-        .loan-links a:hover {
+        .property-card .footer .property-link a:hover {
             background-color: #2980b9;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Property Recommendations</h1>
-
         <h2>🏠 Under Budget Properties</h2>
         <div class="property-grid">
-            <a href="https://www.99acres.com/2-bhk-bedroom-apartment-flat-for-sale-in-amrapali-centurian-park-terrace-homes-sector-4-greater-noida-990-sq-ft-spid-E85327826" class="property-card">
-                <div class="property-image-container">
-                    <img src="https://static.99acres.com/universalapp/img/noImageBgPremium.svg" alt="Amrapali Centurian Park Terrace Homes" class="property-image">
-                </div>
-                <div class="property-content">
-                    <h3 class="property-title">Amrapali Centurian Park Terrace Homes</h3>
-                    <p class="property-location">Sector 4, Greater Noida West</p>
-                    <p class="property-price">₹69.3 Lac</p>
-                    <div class="property-details">
-                        <p><strong>Area:</strong> 990 sqft (92 sqm) Super Built-up Area</p>
-                        <p><strong>Config:</strong> 2 BHK (2 Baths)</p>
+            
+            <div class="property-card">
+                <img src="https://static.99acres.com/universalapp/img/noImageBg.svg" alt="4 Bedroom House in Block B Alpha 1, Greater Noida">
+                <div class="property-info">
+                    <div>
+                        <h3>4 Bedroom House in Block B Alpha 1</h3>
+                        <p><strong>Location:</strong> Block B Alpha 1, Greater Noida</p>
+                        <p class="price"><strong>Price:</strong> ₹1.55 Cr</p>
+                        <p><strong>Area:</strong> 645 sqft (60 sqm)</p>
+                        <p><strong>Config:</strong> 4 BHK (4 Baths)</p>
                         <p><strong>Furnishing:</strong> Semi-furnished</p>
                         <p><strong>Available From:</strong> Ready To Move</p>
+                        <div class="features">
+                            <strong>Key Features:</strong>
+                            <ul>
+                                <li>North-East Facing</li>
+                                <li>Private Garden</li>
+                                <li>Spacious Plot Area</li>
+                                <li>Ready To Move</li>
+                            </ul>
+                        </div>
+                        <div class="nearby-places">
+                            <strong>Nearby Places:</strong>
+                            <ul>
+                                <li>Close to metro station</li>
+                                <li>Close to hospital</li>
+                                <li>Close to airport</li>
+                            </ul>
+                        </div>
                     </div>
-                    <div class="property-features">
-                        <strong>Key Features:</strong>
-                        <ul>
-                            <li>RESALE</li>
-                            <li>FEATURED DEALER</li>
-                            <li>Verified</li>
-                            <li>North-East Facing</li>
-                            <li>Private Garden</li>
-                        </ul>
-                    </div>
-                    <div class="property-nearby">
-                        <strong>Nearby Places:</strong>
-                        <ul>
-                            <li>Ryan International School</li>
-                            <li>Noida Sector 52 Metro Station</li>
-                            <li>Galaxy Diamond Plaza (Mall)</li>
-                        </ul>
-                    </div>
-                    <p class="emi-info">EMI: ₹48,460/month (approx. 80% loan, 8.5% interest, 20 years)</p>
-                    <div class="loan-links">
-                        <a href="https://www.bankbazaar.com/sbi-home-loan.html" target="_blank">SBI Home Loan</a>
-                        <a href="https://www.hdfc.com/checklist/home-loan-interest-rates" target="_blank">HDFC Home Loan</a>
+                    <div class="footer">
+                        <p class="emi">EMI: ₹135541.33/month (approx.)</p>
+                        <div class="loan-links">
+                            <strong>Home Loan Links:</strong>
+                            <a href="https://www.hdfcbank.com/personal/borrow/popular-loans/home-loan" target="_blank">HDFC Bank Home Loan</a>
+                            <a href="https://sbi.co.in/web/personal-banking/loans/home-loan" target="_blank">SBI Home Loan</a>
+                            <a href="https://www.icicibank.com/personal-banking/loans/home-loan" target="_blank">ICICI Bank Home Loan</a>
+                        </div>
+                        <div class="property-link">
+                            <a href="https://www.99acres.com/4-bhk-bedroom-independent-house-villa-for-sale-in-block-b-alpha-1-greater-noida-645-sq-ft-r1-spid-Z80219121" target="_blank">View Property</a>
+                        </div>
                     </div>
                 </div>
-            </a>
-
-            <a href="https://www.99acres.com/2-bhk-bedroom-apartment-flat-for-sale-in-amrapali-golf-homes-sector-4-greater-noida-930-sq-ft-spid-Q85126264" class="property-card">
-                <div class="property-image-container">
-                    <img src="https://static.99acres.com/universalapp/img/noImageBgPremium.svg" alt="Amrapali Golf Homes" class="property-image">
-                </div>
-                <div class="property-content">
-                    <h3 class="property-title">Amrapali Golf Homes</h3>
-                    <p class="property-location">Sector 4, Greater Noida West</p>
-                    <p class="property-price">₹70 Lac</p>
-                    <div class="property-details">
-                        <p><strong>Area:</strong> 930 sqft (86 sqm) Super Built-up Area</p>
-                        <p><strong>Config:</strong> 2 BHK (2 Baths)</p>
+            </div>
+            
+            <div class="property-card">
+                <img src="https://static.99acres.com/universalapp/img/noImageBg.svg" alt="4 Bedroom House in Alpha 1, Greater Noida">
+                <div class="property-info">
+                    <div>
+                        <h3>4 Bedroom House in Alpha 1</h3>
+                        <p><strong>Location:</strong> Alpha 1, Greater Noida</p>
+                        <p class="price"><strong>Price:</strong> ₹1.6 Cr</p>
+                        <p><strong>Area:</strong> 645 sqft (60 sqm)</p>
+                        <p><strong>Config:</strong> 4 BHK (2 Baths)</p>
                         <p><strong>Furnishing:</strong> Semi-furnished</p>
                         <p><strong>Available From:</strong> Ready To Move</p>
+                        <div class="features">
+                            <strong>Key Features:</strong>
+                            <ul>
+                                <li>North-East Facing</li>
+                                <li>Private Garden</li>
+                                <li>Spacious Living Area</li>
+                                <li>Ready To Move</li>
+                            </ul>
+                        </div>
+                        <div class="nearby-places">
+                            <strong>Nearby Places:</strong>
+                            <ul>
+                                <li>Close to metro station</li>
+                                <li>Close to school</li>
+                                <li>Close to hospital</li>
+                            </ul>
+                        </div>
                     </div>
-                    <div class="property-features">
-                        <strong>Key Features:</strong>
-                        <ul>
-                            <li>RESALE</li>
-                            <li>Dealer</li>
-                            <li>Verified</li>
-                            <li>52 Sector Metro Nearby</li>
-                            <li>Gated Society</li>
-                        </ul>
-                    </div>
-                    <div class="property-nearby">
-                        <strong>Nearby Places:</strong>
-                        <ul>
-                            <li>Sarvottam International School</li>
-                            <li>Gagan Public School</li>
-                            <li>Anytime Fitness (Gym)</li>
-                        </ul>
-                    </div>
-                    <p class="emi-info">EMI: ₹48,970/month (approx. 80% loan, 8.5% interest, 20 years)</p>
-                    <div class="loan-links">
-                        <a href="https://www.bankbazaar.com/sbi-home-loan.html" target="_blank">SBI Home Loan</a>
-                        <a href="https://www.hdfc.com/checklist/home-loan-interest-rates" target="_blank">HDFC Home Loan</a>
+                    <div class="footer">
+                        <p class="emi">EMI: ₹140093.03/month (approx.)</p>
+                        <div class="loan-links">
+                            <strong>Home Loan Links:</strong>
+                            <a href="https://www.hdfcbank.com/personal/borrow/popular-loans/home-loan" target="_blank">HDFC Bank Home Loan</a>
+                            <a href="https://sbi.co.in/web/personal-banking/loans/home-loan" target="_blank">SBI Home Loan</a>
+                            <a href="https://www.icicibank.com/personal-banking/loans/home-loan" target="_blank">ICICI Bank Home Loan</a>
+                        </div>
+                        <div class="property-link">
+                            <a href="https://www.99acres.com/4-bhk-bedroom-independent-house-villa-for-sale-in-alpha-1-greater-noida-646-sq-ft-spid-L84648896" target="_blank">View Property</a>
+                        </div>
                     </div>
                 </div>
-            </a>
-
-            <a href="https://www.99acres.com/2-bhk-bedroom-apartment-flat-for-sale-in-gaur-city-1st-avenue-sector-4-greater-noida-860-sq-ft-spid-J84969238" class="property-card">
-                <div class="property-image-container">
-                    <img src="https://static.99acres.com/universalapp/img/noImageBgPremium.svg" alt="Gaur City 1st Avenue" class="property-image">
-                </div>
-                <div class="property-content">
-                    <h3 class="property-title">Gaur City 1st Avenue</h3>
-                    <p class="property-location">Sector 4, Greater Noida West</p>
-                    <p class="property-price">₹75 Lac</p>
-                    <div class="property-details">
-                        <p><strong>Area:</strong> 860 sqft (80 sqm) Super Built-up Area</p>
-                        <p><strong>Config:</strong> 2 BHK (2 Baths)</p>
+            </div>
+            
+            <div class="property-card">
+                <img src="https://static.99acres.com/universalapp/img/noImageBg.svg" alt="4 Bedroom House in Alpha 1, Greater Noida">
+                <div class="property-info">
+                    <div>
+                        <h3>4 Bedroom House in Alpha 1</h3>
+                        <p><strong>Location:</strong> Alpha 1, Greater Noida</p>
+                        <p class="price"><strong>Price:</strong> ₹1.5 Cr</p>
+                        <p><strong>Area:</strong> 645 sqft (60 sqm)</p>
+                        <p><strong>Config:</strong> 4 BHK (4 Baths)</p>
                         <p><strong>Furnishing:</strong> Semi-furnished</p>
                         <p><strong>Available From:</strong> Ready To Move</p>
+                        <div class="features">
+                            <strong>Key Features:</strong>
+                            <ul>
+                                <li>Gated Society</li>
+                                <li>Overlooking Park/Garden</li>
+                                <li>Community Amenities</li>
+                                <li>Ready To Move</li>
+                            </ul>
+                        </div>
+                        <div class="nearby-places">
+                            <strong>Nearby Places:</strong>
+                            <ul>
+                                <li>Snu Lake</li>
+                                <li>Alpha 1 Market</li>
+                                <li>City Park, Alpha-I commercial belt</li>
+                            </ul>
+                        </div>
                     </div>
-                    <div class="property-features">
-                        <strong>Key Features:</strong>
-                        <ul>
-                            <li>RESALE</li>
-                            <li>Dealer</li>
-                            <li>Verified</li>
-                            <li>East Facing</li>
-                            <li>Corner Property</li>
-                        </ul>
-                    </div>
-                    <div class="property-nearby">
-                        <strong>Nearby Places:</strong>
-                        <ul>
-                            <li>LYF Hospital</li>
-                            <li>Sarvodaya Hospital</li>
-                            <li>Healic Multispecialty Clinic</li>
-                        </ul>
-                    </div>
-                    <p class="emi-info">EMI: ₹52,473/month (approx. 80% loan, 8.5% interest, 20 years)</p>
-                    <div class="loan-links">
-                        <a href="https://www.bankbazaar.com/sbi-home-loan.html" target="_blank">SBI Home Loan</a>
-                        <a href="https://www.hdfc.com/checklist/home-loan-interest-rates" target="_blank">HDFC Home Loan</a>
+                    <div class="footer">
+                        <p class="emi">EMI: ₹131331.75/month (approx.)</p>
+                        <div class="loan-links">
+                            <strong>Home Loan Links:</strong>
+                            <a href="https://www.hdfcbank.com/personal/borrow/popular-loans/home-loan" target="_blank">HDFC Bank Home Loan</a>
+                            <a href="https://sbi.co.in/web/personal-banking/loans/home-loan" target="_blank">SBI Home Loan</a>
+                            <a href="https://www.icicibank.com/personal-banking/loans/home-loan" target="_blank">ICICI Bank Home Loan</a>
+                        </div>
+                        <div class="property-link">
+                            <a href="https://www.99acres.com/4-bhk-bedroom-independent-house-villa-for-sale-in-alpha-1-greater-noida-646-sq-ft-spid-T84980046" target="_blank">View Property</a>
+                        </div>
                     </div>
                 </div>
-            </a>
-
-            <a href="https://www.99acres.com/2-bhk-bedroom-apartment-flat-for-sale-in-gaur-city-7th-avenue-sector-4-greater-noida-1075-sq-ft-spid-C84781224" class="property-card">
-                <div class="property-image-container">
-                    <img src="https://static.99acres.com/universalapp/img/noImageBgPremium.svg" alt="Gaur City 7th Avenue" class="property-image">
-                </div>
-                <div class="property-content">
-                    <h3 class="property-title">Gaur City 7th Avenue</h3>
-                    <p class="property-location">Sector 4, Greater Noida West</p>
-                    <p class="property-price">₹90 Lac</p>
-                    <div class="property-details">
-                        <p><strong>Area:</strong> 1,075 sqft (100 sqm) Super Built-up Area</p>
-                        <p><strong>Config:</strong> 2 BHK (2 Baths)</p>
+            </div>
+            
+            <div class="property-card">
+                <img src="https://static.99acres.com/universalapp/img/noImageBg.svg" alt="4 Bedroom House in Alpha 1, Greater Noida">
+                <div class="property-info">
+                    <div>
+                        <h3>4 Bedroom House in Alpha 1</h3>
+                        <p><strong>Location:</strong> Alpha 1, Greater Noida</p>
+                        <p class="price"><strong>Price:</strong> ₹1.4 Cr</p>
+                        <p><strong>Area:</strong> 645 sqft (60 sqm)</p>
+                        <p><strong>Config:</strong> 4 BHK (4 Baths)</p>
                         <p><strong>Furnishing:</strong> Semi-furnished</p>
                         <p><strong>Available From:</strong> Ready To Move</p>
+                        <div class="features">
+                            <strong>Key Features:</strong>
+                            <ul>
+                                <li>Gated Society</li>
+                                <li>Overlooking Park/Garden</li>
+                                <li>Prime Location</li>
+                                <li>Ready To Move</li>
+                            </ul>
+                        </div>
+                        <div class="nearby-places">
+                            <strong>Nearby Places:</strong>
+                            <ul>
+                                <li>Close to metro station</li>
+                                <li>Close to school</li>
+                                <li>Close to hospital</li>
+                            </ul>
+                        </div>
                     </div>
-                    <div class="property-features">
-                        <strong>Key Features:</strong>
-                        <ul>
-                            <li>RESALE</li>
-                            <li>RERA Registered</li>
-                            <li>Verified</li>
-                            <li>East Facing</li>
-                            <li>Gated Society</li>
-                        </ul>
-                    </div>
-                    <div class="property-nearby">
-                        <strong>Nearby Places:</strong>
-                        <ul>
-                            <li>Gaur City Mall</li>
-                            <li>Greater Noida W Road</li>
-                            <li>Noida Sector 15 Metro</li>
-                        </ul>
-                    </div>
-                    <p class="emi-info">EMI: ₹62,968/month (approx. 80% loan, 8.5% interest, 20 years)</p>
-                    <div class="loan-links">
-                        <a href="https://www.bankbazaar.com/sbi-home-loan.html" target="_blank">SBI Home Loan</a>
-                        <a href="https://www.hdfc.com/checklist/home-loan-interest-rates" target="_blank">HDFC Home Loan</a>
+                    <div class="footer">
+                        <p class="emi">EMI: ₹122671.21/month (approx.)</p>
+                        <div class="loan-links">
+                            <strong>Home Loan Links:</strong>
+                            <a href="https://www.hdfcbank.com/personal/borrow/popular-loans/home-loan" target="_blank">HDFC Bank Home Loan</a>
+                            <a href="https://sbi.co.in/web/personal-banking/loans/home-loan" target="_blank">SBI Home Loan</a>
+                            <a href="https://www.icicibank.com/personal-banking/loans/home-loan" target="_blank">ICICI Bank Home Loan</a>
+                        </div>
+                        <div class="property-link">
+                            <a href="https://www.99acres.com/4-bhk-bedroom-independent-house-villa-for-sale-in-alpha-1-greater-noida-646-sq-ft-spid-J84979494" target="_blank">View Property</a>
+                        </div>
                     </div>
                 </div>
-            </a>
+            </div>
+            
         </div>
 
         <h2>🌟 Recommended Properties</h2>
         <div class="property-grid">
-            <a href="https://www.99acres.com/2-bhk-bedroom-apartment-flat-for-sale-in-amrapali-golf-homes-sector-4-greater-noida-945-sq-ft-spid-P85421160" class="property-card">
-                <div class="property-image-container">
-                    <img src="https://static.99acres.com/universalapp/img/noImageBg.svg" alt="Amrapali Golf Homes" class="property-image">
-                </div>
-                <div class="property-content">
-                    <h3 class="property-title">Amrapali Golf Homes</h3>
-                    <p class="property-location">Sector 4, Greater Noida West</p>
-                    <p class="property-price">₹77 Lac</p>
-                    <div class="property-details">
-                        <p><strong>Area:</strong> 945 sqft (88 sqm) Super Built-up Area</p>
-                        <p><strong>Config:</strong> 2 BHK (2 Baths)</p>
+            
+            <div class="property-card">
+                <img src="https://static.99acres.com/universalapp/img/noImageBg.svg" alt="4 Bedroom House in Block B Alpha 1, Greater Noida">
+                <div class="property-info">
+                    <div>
+                        <h3>4 Bedroom House in Block B Alpha 1</h3>
+                        <p><strong>Location:</strong> Block B Alpha 1, Greater Noida</p>
+                        <p class="price"><strong>Price:</strong> ₹1.55 Cr</p>
+                        <p><strong>Area:</strong> 645 sqft (60 sqm)</p>
+                        <p><strong>Config:</strong> 4 BHK (4 Baths)</p>
                         <p><strong>Furnishing:</strong> Semi-furnished</p>
                         <p><strong>Available From:</strong> Ready To Move</p>
+                        <div class="features">
+                            <strong>Key Features:</strong>
+                            <ul>
+                                <li>North-East Facing</li>
+                                <li>Private Garden</li>
+                                <li>Spacious Plot Area</li>
+                                <li>Close to Metro Station</li>
+                            </ul>
+                        </div>
+                        <div class="nearby-places">
+                            <strong>Nearby Places:</strong>
+                            <ul>
+                                <li>Close to metro station</li>
+                                <li>Close to hospital</li>
+                                <li>Close to airport</li>
+                            </ul>
+                        </div>
                     </div>
-                    <div class="property-features">
-                        <strong>Key Features:</strong>
-                        <ul>
-                            <li>RESALE</li>
-                            <li>Owner</li>
-                            <li>Verified</li>
-                            <li>East Facing</li>
-                            <li>Fresh Construction</li>
-                        </ul>
-                    </div>
-                    <div class="property-nearby">
-                        <strong>Nearby Places:</strong>
-                        <ul>
-                            <li>Swastham Medicare Hospital</li>
-                            <li>LYF Hospital</li>
-                            <li>NIMMS Multi-Speciality Hospital</li>
-                        </ul>
-                    </div>
-                    <p class="emi-info">EMI: ₹53,875/month (approx. 80% loan, 8.5% interest, 20 years)</p>
-                    <div class="loan-links">
-                        <a href="https://www.bankbazaar.com/sbi-home-loan.html" target="_blank">SBI Home Loan</a>
-                        <a href="https://www.hdfc.com/checklist/home-loan-interest-rates" target="_blank">HDFC Home Loan</a>
+                    <div class="footer">
+                        <p class="emi">EMI: ₹135541.33/month (approx.)</p>
+                        <div class="loan-links">
+                            <strong>Home Loan Links:</strong>
+                            <a href="https://www.hdfcbank.com/personal/borrow/popular-loans/home-loan" target="_blank">HDFC Bank Home Loan</a>
+                            <a href="https://sbi.co.in/web/personal-banking/loans/home-loan" target="_blank">SBI Home Loan</a>
+                            <a href="https://www.icicibank.com/personal-banking/loans/home-loan" target="_blank">ICICI Bank Home Loan</a>
+                        </div>
+                        <div class="property-link">
+                            <a href="https://www.99acres.com/4-bhk-bedroom-independent-house-villa-for-sale-in-block-b-alpha-1-greater-noida-645-sq-ft-r1-spid-Z80219121" target="_blank">View Property</a>
+                        </div>
                     </div>
                 </div>
-            </a>
-
-            <a href="https://www.99acres.com/2-bhk-bedroom-apartment-flat-for-sale-in-gaur-city-1st-avenue-sector-4-greater-noida-860-sq-ft-spid-F84517514" class="property-card">
-                <div class="property-image-container">
-                    <img src="https://static.99acres.com/universalapp/img/noImageBg.svg" alt="Gaur City 1st Avenue" class="property-image">
-                </div>
-                <div class="property-content">
-                    <h3 class="property-title">Gaur City 1st Avenue</h3>
-                    <p class="property-location">Sector 4, Greater Noida West</p>
-                    <p class="property-price">₹78 Lac</p>
-                    <div class="property-details">
-                        <p><strong>Area:</strong> 860 sqft (80 sqm) Super Built-up Area</p>
-                        <p><strong>Config:</strong> 2 BHK (2 Baths)</p>
+            </div>
+            
+            <div class="property-card">
+                <img src="https://static.99acres.com/universalapp/img/noImageBg.svg" alt="4 Bedroom House in Alpha 1, Greater Noida">
+                <div class="property-info">
+                    <div>
+                        <h3>4 Bedroom House in Alpha 1</h3>
+                        <p><strong>Location:</strong> Alpha 1, Greater Noida</p>
+                        <p class="price"><strong>Price:</strong> ₹1.6 Cr</p>
+                        <p><strong>Area:</strong> 645 sqft (60 sqm)</p>
+                        <p><strong>Config:</strong> 4 BHK (2 Baths)</p>
                         <p><strong>Furnishing:</strong> Semi-furnished</p>
                         <p><strong>Available From:</strong> Ready To Move</p>
+                        <div class="features">
+                            <strong>Key Features:</strong>
+                            <ul>
+                                <li>North-East Facing</li>
+                                <li>Private Garden</li>
+                                <li>Spacious Living Area</li>
+                                <li>Close to Metro Station</li>
+                            </ul>
+                        </div>
+                        <div class="nearby-places">
+                            <strong>Nearby Places:</strong>
+                            <ul>
+                                <li>Close to metro station</li>
+                                <li>Close to school</li>
+                                <li>Close to hospital</li>
+                            </ul>
+                        </div>
                     </div>
-                    <div class="property-features">
-                        <strong>Key Features:</strong>
-                        <ul>
-                            <li>RESALE</li>
-                            <li>Dealer</li>
-                            <li>Verified</li>
-                            <li>Very good condition property</li>
-                            <li>Gated Community</li>
-                        </ul>
-                    </div>
-                    <div class="property-nearby">
-                        <strong>Nearby Places:</strong>
-                        <ul>
-                            <li>LYF Hospital</li>
-                            <li>Sarvodaya Hospital</li>
-                            <li>Healic Multispecialty Clinic</li>
-                        </ul>
-                    </div>
-                    <p class="emi-info">EMI: ₹54,577/month (approx. 80% loan, 8.5% interest, 20 years)</p>
-                    <div class="loan-links">
-                        <a href="https://www.bankbazaar.com/sbi-home-loan.html" target="_blank">SBI Home Loan</a>
-                        <a href="https://www.icicibank.com/personal-banking/loans/home-loan/interest-rates" target="_blank">ICICI Bank Home Loan</a>
+                    <div class="footer">
+                        <p class="emi">EMI: ₹140093.03/month (approx.)</p>
+                        <div class="loan-links">
+                            <strong>Home Loan Links:</strong>
+                            <a href="https://www.hdfcbank.com/personal/borrow/popular-loans/home-loan" target="_blank">HDFC Bank Home Loan</a>
+                            <a href="https://sbi.co.in/web/personal-banking/loans/home-loan" target="_blank">SBI Home Loan</a>
+                            <a href="https://www.icicibank.com/personal-banking/loans/home-loan" target="_blank">ICICI Bank Home Loan</a>
+                        </div>
+                        <div class="property-link">
+                            <a href="https://www.99acres.com/4-bhk-bedroom-independent-house-villa-for-sale-in-alpha-1-greater-noida-646-sq-ft-spid-L84648896" target="_blank">View Property</a>
+                        </div>
                     </div>
                 </div>
-            </a>
+            </div>
+            
         </div>
     </div>
 </body>
