@@ -1,1 +1,248 @@
-I apologize, but I was unable to retrieve the property data, as indicated by "ERROR_QUERY: couldn't understand the query." Without the property data, I cannot filter properties or generate recommendations. Please provide the property data so I can assist you further.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Property Recommendations</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        h1, h2 {
+            color: #0056b3;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .section-title {
+            border-bottom: 2px solid #0056b3;
+            padding-bottom: 10px;
+            margin-top: 40px;
+            margin-bottom: 30px;
+            font-size: 1.8em;
+        }
+        .card-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+        .property-card {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s;
+            overflow: hidden;
+        }
+        .property-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+        .property-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-bottom: 1px solid #eee;
+        }
+        .card-content {
+            padding: 20px;
+        }
+        .card-content h3 {
+            color: #0056b3;
+            margin-top: 0;
+            margin-bottom: 10px;
+            font-size: 1.4em;
+        }
+        .card-content p {
+            margin-bottom: 8px;
+            line-height: 1.5;
+            font-size: 0.95em;
+        }
+        .card-content strong {
+            color: #000;
+        }
+        .features, .nearby-places {
+            margin-top: 15px;
+            border-top: 1px dashed #eee;
+            padding-top: 15px;
+        }
+        .features p, .nearby-places p {
+            margin-bottom: 5px;
+            font-size: 0.9em;
+        }
+        .features span, .nearby-places span {
+            display: inline-block;
+            background-color: #e6f2ff;
+            color: #0056b3;
+            border-radius: 5px;
+            padding: 5px 10px;
+            margin: 3px;
+            font-size: 0.85em;
+        }
+        .emi-details, .bank-links {
+            margin-top: 15px;
+            border-top: 1px dashed #eee;
+            padding-top: 15px;
+        }
+        .bank-links a {
+            display: inline-block;
+            margin-right: 10px;
+            color: #007bff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .bank-links a:hover {
+            text-decoration: underline;
+        }
+        .url-link {
+            display: block;
+            margin-top: 20px;
+            text-align: center;
+        }
+        .url-link a {
+            color: #007bff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .url-link a:hover {
+            text-decoration: underline;
+        }
+        .disclaimer {
+            background-color: #fff3cd;
+            border-left: 5px solid #ffc107;
+            padding: 15px;
+            margin-top: 30px;
+            border-radius: 5px;
+            color: #856404;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Property Recommendations in Noida</h1>
+
+        <div class="disclaimer">
+            <p><strong>Note:</strong> Due to the limited number of properties in the provided dataset that meet all criteria (City: Noida, Type: Buy, Budget: &le; 1 Cr, and having a valid non-placeholder image), only 3 properties could be displayed instead of the requested 6.</p>
+        </div>
+
+        <h2 class="section-title">🌟 Recommended Properties</h2>
+        <div class="card-container">
+            <div class="property-card">
+                <img src="https://imagecdn.99acres.com/media1/27337/13/546753077M-1755662810581.webp" alt="Orchid Apartment">
+                <div class="card-content">
+                    <h3>Orchid Apartment, Sector 63, Noida</h3>
+                    <p><strong>Price:</strong> ₹36 Lac</p>
+                    <p><strong>Area:</strong> 1,000 sqft</p>
+                    <p><strong>Configuration:</strong> 2 BHK (2 Baths)</p>
+                    <p><strong>Furnishing:</strong> Thoughtfully curated interiors</p>
+                    <p><strong>Available From:</strong> 1mo ago</p>
+                    <div class="features">
+                        <p><strong>Key Features:</strong></p>
+                        <span>Ready To Move</span>
+                        <span>Prime Location</span>
+                        <span>Near Metro</span>
+                        <span>Luxury & Comfort</span>
+                        <span>Premium Finishes</span>
+                    </div>
+                    <div class="nearby-places">
+                        <p><strong>Nearby Places:</strong></p>
+                        <span>Metro Station</span>
+                        <span>School</span>
+                        <span>Hospital</span>
+                    </div>
+                    <div class="emi-details">
+                        <p><strong>Estimated EMI:</strong> ₹31,289/month (for 20 years at 8.5% interest)</p>
+                    </div>
+                    <div class="bank-links">
+                        <p><strong>Home Loan Links:</strong></p>
+                        <a href="https://www.hdfcbank.com/personal/borrow/popular-loans/home-loan" target="_blank">HDFC Bank Home Loan</a>
+                        <a href="https://homeloans.sbi/" target="_blank">SBI Home Loan</a>
+                    </div>
+                    <div class="url-link">
+                        <a href="https://www.99acres.com/2-bhk-bedroom-apartment-flat-for-sale-in-sector-63-noida-1000-sq-ft-r3-spid-T79173609" target="_blank">View Property Details</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="section-title">🏠 Under Budget Properties</h2>
+        <div class="card-container">
+            <div class="property-card">
+                <img src="https://imagecdn.99acres.com/media1/26179/6/523586049M-1755123371369.webp" alt="barula">
+                <div class="card-content">
+                    <h3>barula, Hanuman Vihar, Noida</h3>
+                    <p><strong>Price:</strong> ₹26 Lac</p>
+                    <p><strong>Area:</strong> 750 sqft</p>
+                    <p><strong>Configuration:</strong> 2 BHK (2 Baths)</p>
+                    <p><strong>Furnishing:</strong> Unfurnished (Ready to Move)</p>
+                    <p><strong>Available From:</strong> 2mo ago</p>
+                    <div class="features">
+                        <p><strong>Key Features:</strong></p>
+                        <span>Ready To Move</span>
+                        <span>No Brokerage</span>
+                        <span>Quick Possession</span>
+                    </div>
+                    <div class="nearby-places">
+                        <p><strong>Nearby Places:</strong></p>
+                        <span>Shri Hanuman Dham</span>
+                        <span>Shri Hanuman Mandir Noida</span>
+                        <span>Shiv Shakti Hanuman Temple</span>
+                    </div>
+                    <div class="emi-details">
+                        <p><strong>Estimated EMI:</strong> ₹22,630/month (for 20 years at 8.5% interest)</p>
+                    </div>
+                    <div class="bank-links">
+                        <p><strong>Home Loan Links:</strong></p>
+                        <a href="https://www.hdfcbank.com/personal/borrow/popular-loans/home-loan" target="_blank">HDFC Bank Home Loan</a>
+                        <a href="https://homeloans.sbi/" target="_blank">SBI Home Loan</a>
+                    </div>
+                    <div class="url-link">
+                        <a href="https://www.99acres.com/2-bhk-bedroom-apartment-flat-for-sale-in-hanuman-vihar-noida-750-sq-ft-r2-spid-O77871749" target="_blank">View Property Details</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="property-card">
+                <img src="https://imagecdn.99acres.com/media1/32392/11/647851469M-1758011319500.webp" alt="Maa Ambe Bhawan">
+                <div class="card-content">
+                    <h3>Maa Ambe Bhawan, Hanuman Vihar, Noida</h3>
+                    <p><strong>Price:</strong> ₹28 Lac</p>
+                    <p><strong>Area:</strong> 446 sqft</p>
+                    <p><strong>Configuration:</strong> 2 BHK (2 Baths)</p>
+                    <p><strong>Furnishing:</strong> Unfurnished (Ready to Move)</p>
+                    <p><strong>Available From:</strong> 1mo ago</p>
+                    <div class="features">
+                        <p><strong>Key Features:</strong></p>
+                        <span>Ready To Move</span>
+                        <span>Spacious 2 BHK</span>
+                        <span>First Floor Location</span>
+                    </div>
+                    <div class="nearby-places">
+                        <p><strong>Nearby Places:</strong></p>
+                        <span>Shri Hanuman Dham</span>
+                        <span>Shri Hanuman Mandir Noida</span>
+                        <span>Shiv Shakti Hanuman Temple</span>
+                    </div>
+                    <div class="emi-details">
+                        <p><strong>Estimated EMI:</strong> ₹24,325/month (for 20 years at 8.5% interest)</p>
+                    </div>
+                    <div class="bank-links">
+                        <p><strong>Home Loan Links:</strong></p>
+                        <a href="https://www.hdfcbank.com/personal/borrow/popular-loans/home-loan" target="_blank">HDFC Bank Home Loan</a>
+                        <a href="https://homeloans.sbi/" target="_blank">SBI Home Loan</a>
+                    </div>
+                    <div class="url-link">
+                        <a href="https://www.99acres.com/2-bhk-bedroom-apartment-flat-for-sale-in-hanuman-vihar-noida-446-sq-ft-spid-Q85244928" target="_blank">View Property Details</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
