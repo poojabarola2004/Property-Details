@@ -1,386 +1,373 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Property Recommendations</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 20px;
-            background-color: #f4f4f4;
+            background-color: #f4f7f6;
             color: #333;
         }
         .container {
             max-width: 1200px;
             margin: auto;
-            padding: 20px;
         }
         h1, h2 {
-            color: #0056b3;
             text-align: center;
+            color: #2c3e50;
             margin-bottom: 30px;
         }
-        .property-section {
-            margin-bottom: 50px;
-        }
-        .card-container {
+        .property-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
+            gap: 25px;
+            margin-bottom: 40px;
         }
         .property-card {
-            background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            transition: transform 0.2s;
+            background-color: #ffffff;
+            border-radius: 12px;
             overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
             display: flex;
             flex-direction: column;
+            border: 1px solid #e0e0e0;
         }
         .property-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            transform: translateY(-8px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
         }
         .property-image-container {
             width: 100%;
             height: 200px;
             overflow: hidden;
-            background-color: #e9e9e9;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            border-bottom: 1px solid #eee;
         }
         .property-image {
             width: 100%;
             height: 100%;
             object-fit: cover;
+            transition: transform 0.3s ease;
         }
-        .image-fallback-text {
-            color: #888;
-            font-style: italic;
-            text-align: center;
+        .property-card:hover .property-image {
+            transform: scale(1.05);
         }
         .property-info {
-            padding: 15px;
+            padding: 20px;
             flex-grow: 1;
             display: flex;
             flex-direction: column;
         }
         .property-title {
-            font-size: 1.2em;
-            font-weight: bold;
+            font-size: 1.4em;
+            font-weight: 700;
+            color: #34495e;
             margin-bottom: 10px;
-            color: #0056b3;
+            min-height: 50px;
         }
-        .property-location {
-            font-size: 0.9em;
-            color: #666;
+        .property-location, .property-area, .property-config, .property-furnishing, .property-available {
+            font-size: 0.95em;
+            color: #555;
             margin-bottom: 5px;
         }
         .property-price {
-            font-size: 1.1em;
-            color: #28a745;
-            font-weight: bold;
-            margin-bottom: 10px;
+            font-size: 1.5em;
+            font-weight: 700;
+            color: #27ae60;
+            margin-bottom: 15px;
         }
-        .property-details {
-            font-size: 0.9em;
+        .property-emi {
+            font-size: 1em;
+            font-weight: 600;
+            color: #e67e22;
+            margin-top: 10px;
             margin-bottom: 10px;
+            padding-top: 5px;
+            border-top: 1px dashed #e0e0e0;
         }
-        .property-features, .property-nearby {
-            list-style-type: none;
+        .features-list, .nearby-list {
+            list-style: none;
             padding: 0;
-            margin: 5px 0;
-        }
-        .property-features li, .property-nearby li {
-            background-color: #eaf6ff;
-            border-left: 3px solid #007bff;
-            padding: 5px 10px;
-            margin-bottom: 3px;
-            font-size: 0.85em;
-        }
-        .property-url {
-            display: block;
-            margin-top: auto; /* Pushes the link to the bottom */
-            text-align: center;
-            padding-top: 10px;
-            border-top: 1px solid #eee;
-        }
-        .property-url a {
-            color: #007bff;
-            text-decoration: none;
-            font-weight: bold;
-        }
-        .property-url a:hover {
-            text-decoration: underline;
-        }
-        .emi-info {
-            background-color: #d4edda;
-            border: 1px solid #c3e6cb;
-            border-radius: 5px;
-            padding: 10px;
-            margin-top: 15px;
+            margin-top: 10px;
+            margin-bottom: 15px;
             font-size: 0.9em;
-            color: #155724;
         }
-        .bank-links {
-            margin-top: 30px;
-            text-align: center;
-        }
-        .bank-links a {
+        .features-list li, .nearby-list li {
+            background-color: #ecf0f1;
+            border-radius: 5px;
+            padding: 5px 10px;
+            margin-bottom: 5px;
+            color: #34495e;
             display: inline-block;
-            background-color: #007bff;
+            margin-right: 5px;
+        }
+        .loan-links {
+            margin-top: auto;
+            padding-top: 15px;
+            border-top: 1px solid #f0f0f0;
+        }
+        .loan-links a {
+            display: block;
+            background-color: #3498db;
             color: white;
-            padding: 10px 15px;
-            margin: 0 10px;
+            padding: 8px 15px;
             border-radius: 5px;
             text-decoration: none;
-            font-weight: bold;
+            text-align: center;
+            font-size: 0.9em;
+            margin-bottom: 8px;
+            transition: background-color 0.2s ease;
         }
-        .bank-links a:hover {
-            background-color: #0056b3;
+        .loan-links a:hover {
+            background-color: #2980b9;
+        }
+        .property-link {
+            display: block;
+            text-align: center;
+            background-color: #2ecc71;
+            color: white;
+            padding: 10px 0;
+            text-decoration: none;
+            border-radius: 0 0 12px 12px;
+            margin-top: 15px;
+            font-weight: 600;
+            transition: background-color 0.2s ease;
+        }
+        .property-link:hover {
+            background-color: #27ae60;
+        }
+        .section-header {
+            background-color: #e0f2f7;
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            text-align: center;
+            font-size: 1.8em;
+            font-weight: 600;
+            color: #1a5276;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+        .no-image-placeholder {
+            background-color: #dbe4eb;
+            color: #616161;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2em;
+            text-align: center;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>🏠 Property Recommendations in Noida</h1>
+        <h1>Find Your Dream Home!</h1>
 
-        <div class="property-section">
-            <h2>Under Budget Properties</h2>
-            <div class="card-container">
-
-                <!-- Property 1: Orchid Apartment Sector 63 Noida -->
-                <div class="property-card">
-                    <div class="property-image-container">
-                        <img src="https://imagecdn.99acres.com/media1/27337/13/546753077M-1755662810581.webp" alt="Orchid Apartment Sector 63 Noida" class="property-image">
-                    </div>
-                    <div class="property-info">
-                        <div class="property-location">Orchid Apartment Sector 63 Noida</div>
-                        <div class="property-title">2 BHK Flat in Sector 63, Noida</div>
-                        <div class="property-price">₹36 Lac</div>
-                        <div class="property-details">
-                            <strong>Area:</strong> 1,000 sqft<br>
-                            <strong>Config:</strong> 2 BHK (2 Baths)<br>
-                            <strong>Furnishing:</strong> Unfurnished<br>
-                            <strong>Available From:</strong> 1mo ago
-                        </div>
-                        <ul class="property-features">
-                            <li>Carpet Area</li>
-                            <li>Ready To Move</li>
-                            <li>Prime location</li>
-                            <li>Near by metro</li>
-                            <li>Discover the perfect blend of luxury and comfort</li>
-                        </ul>
-                        <ul class="property-nearby">
-                            <li>Metro</li>
-                            <li>school</li>
-                            <li>hospital</li>
-                            <li>market</li>
-                        </ul>
-                        <div class="emi-info">
-                            <strong>Estimated EMI:</strong> ₹31,438/month (for 20 years at 8.5% p.a.)
-                        </div>
-                        <div class="property-url">
-                            <a href="https://www.99acres.com/2-bhk-bedroom-apartment-flat-for-sale-in-sector-63-noida-1000-sq-ft-r3-spid-T79173609" target="_blank">View Property</a>
-                        </div>
+        <h2 class="section-header">🏠 Under Budget Properties</h2>
+        <div class="property-grid">
+            <div class="property-card">
+                <div class="property-image-container">
+                    <img src="https://newprojects.99acres.com/projects/gaursons_india/gaur_city_7th_avenue/images/1ebps6x7_med.jpg" alt="Gaur City 7th Avenue" class="property-image">
+                </div>
+                <div class="property-info">
+                    <h3 class="property-title">Gaur City 7th Avenue</h3>
+                    <p class="property-location">Sector 4, Greater Noida West</p>
+                    <p class="property-price">₹99.03 Lac</p>
+                    <p class="property-area">1,075 - 2,220 sqft</p>
+                    <p class="property-config">2 BHK Apartment</p>
+                    <p class="property-furnishing">Semi-furnished</p>
+                    <p class="property-available">Ready To Move</p>
+                    <ul class="features-list">
+                        <li>New Launch</li>
+                        <li>Ready To Move</li>
+                        <li>Verified Property</li>
+                        <li>Good Connectivity</li>
+                    </ul>
+                    <p><strong>Nearby:</strong></p>
+                    <ul class="nearby-list">
+                        <li>Sarvodaya Hospital</li>
+                        <li>Gaur City Mall</li>
+                        <li>Greater Noida W Road</li>
+                    </ul>
+                    <p class="property-emi">EMI starts at ₹68,260/month</p>
+                    <div class="loan-links">
+                        <a href="https://www.hdfcbank.com/personal/loans/home-loan" target="_blank">HDFC Bank Home Loan</a>
+                        <a href="https://bank.sbi/web/personal-banking/loans/home-loan" target="_blank">SBI Home Loan</a>
                     </div>
                 </div>
+                <a href="https://www.99acres.com/gaur-city-7th-avenue-sector-4-greater-noida-npxid-r130119" target="_blank" class="property-link">View Property</a>
+            </div>
 
-                <!-- Property 2: barula Hanuman Vihar, Noida -->
-                <div class="property-card">
-                    <div class="property-image-container">
-                        <img src="https://imagecdn.99acres.com/media1/26179/6/523586049M-1755123371369.webp" alt="barula Hanuman Vihar, Noida" class="property-image">
-                    </div>
-                    <div class="property-info">
-                        <div class="property-location">barula Hanuman Vihar, Noida</div>
-                        <div class="property-title">2 BHK Flat in Hanuman Vihar, Noida</div>
-                        <div class="property-price">₹26 Lac</div>
-                        <div class="property-details">
-                            <strong>Area:</strong> 750 sqft<br>
-                            <strong>Config:</strong> 2 BHK (2 Baths)<br>
-                            <strong>Furnishing:</strong> Unfurnished<br>
-                            <strong>Available From:</strong> 2mo ago
-                        </div>
-                        <ul class="property-features">
-                            <li>Carpet Area</li>
-                            <li>Ready To Move</li>
-                            <li>No brokerage</li>
-                            <li>Ready to move within a week</li>
-                            <li>Well-maintained property</li>
-                        </ul>
-                        <ul class="property-nearby">
-                            <li>Shri Ram Singh Multispeciality Hospital</li>
-                            <li>Cloudnine Hospital - Sector 51</li>
-                            <li>Dr Bhimrao Ambedkar Multispeciality Hospital</li>
-                        </ul>
-                        <div class="emi-info">
-                            <strong>Estimated EMI:</strong> ₹22,693/month (for 20 years at 8.5% p.a.)
-                        </div>
-                        <div class="property-url">
-                            <a href="https://www.99acres.com/2-bhk-bedroom-apartment-flat-for-sale-in-hanuman-vihar-noida-750-sq-ft-r2-spid-O77871749" target="_blank">View Property</a>
-                        </div>
+            <div class="property-card">
+                <div class="property-image-container">
+                    <img src="https://imagecdn.99acres.com/media1/31732/11/634651103M-1755441733412.webp" alt="Gaur City 4th Avenue" class="property-image">
+                </div>
+                <div class="property-info">
+                    <h3 class="property-title">Gaur City 4th Avenue</h3>
+                    <p class="property-location">Sector 4, Greater Noida West</p>
+                    <p class="property-price">₹1.3 Cr</p>
+                    <p class="property-area">1,400 sqft</p>
+                    <p class="property-config">2 BHK (2 Baths)</p>
+                    <p class="property-furnishing">Semi-furnished</p>
+                    <p class="property-available">Ready To Move</p>
+                    <ul class="features-list">
+                        <li>Resale Property</li>
+                        <li>Owner Listed</li>
+                        <li>Prime Location</li>
+                        <li>Spacious Rooms</li>
+                    </ul>
+                    <p><strong>Nearby:</strong></p>
+                    <ul class="nearby-list">
+                        <li>LYF Hospital</li>
+                        <li>Sarvodaya Hospital</li>
+                        <li>Gaur City Mall</li>
+                    </ul>
+                    <p class="property-emi">EMI starts at ₹89,613/month</p>
+                    <div class="loan-links">
+                        <a href="https://www.icicibank.com/personal-banking/loans/home-loan" target="_blank">ICICI Bank Home Loan</a>
+                        <a href="https://www.axisbank.com/retail/loans/home-loan" target="_blank">Axis Bank Home Loan</a>
                     </div>
                 </div>
+                <a href="https://www.99acres.com/2-bhk-bedroom-apartment-flat-for-sale-in-gaur-city-4th-avenue-sector-4-greater-noida-1400-sq-ft-spid-W84534184" target="_blank" class="property-link">View Property</a>
+            </div>
 
-                <!-- Property 3: A1 Tower Sector 73 Noida -->
-                <div class="property-card">
-                    <div class="property-image-container">
-                        <img src="https://newprojects.99acres.com/projects/a1_construction/a1_tower/images/kjp9ewx_1733122817_534872743_med.jpg" alt="A1 Tower Sector 73 Noida" class="property-image">
-                    </div>
-                    <div class="property-info">
-                        <div class="property-location">A1 Tower Sector 73 Noida</div>
-                        <div class="property-title">2 BHK Apartment in Sector 73, Noida</div>
-                        <div class="property-price">₹40 L</div>
-                        <div class="property-details">
-                            <strong>Area:</strong> 1,000 sqft (approx)<br>
-                            <strong>Config:</strong> 2 BHK Apartment<br>
-                            <strong>Furnishing:</strong> Unfurnished<br>
-                            <strong>Available From:</strong> Completion in Dec, 2025
-                        </div>
-                        <ul class="property-features">
-                            <li>Under Construction</li>
-                            <li>NEW BOOKING</li>
-                            <li>Metro Connectivity nearby</li>
-                            <li>Good Public Transport</li>
-                            <li>Hospitals accessible</li>
-                        </ul>
-                        <ul class="property-nearby">
-                            <li>Max Super Speciality Hospital</li>
-                            <li>Noida Sector 51 Metro Station</li>
-                            <li>Barola Market</li>
-                        </ul>
-                        <div class="emi-info">
-                            <strong>Estimated EMI:</strong> ₹34,931/month (for 20 years at 8.5% p.a.)
-                        </div>
-                        <div class="property-url">
-                            <a href="https://www.99acres.com/a1-tower-sector-73-noida-npxid-r435902" target="_blank">View Property</a>
-                        </div>
+            <div class="property-card">
+                <div class="property-image-container no-image-placeholder">
+                    <span>No Image Available</span>
+                </div>
+                <div class="property-info">
+                    <h3 class="property-title">Amrapali Golf Homes</h3>
+                    <p class="property-location">Sector 4, Greater Noida West</p>
+                    <p class="property-price">₹70 Lac</p>
+                    <p class="property-area">930 sqft</p>
+                    <p class="property-config">2 BHK (2 Baths)</p>
+                    <p class="property-furnishing">Semi-furnished</p>
+                    <p class="property-available">Ready To Move</p>
+                    <ul class="features-list">
+                        <li>Gated Society</li>
+                        <li>Near Metro Station</li>
+                        <li>Good Ventilation</li>
+                        <li>Affordable Price</li>
+                    </ul>
+                    <p><strong>Nearby:</strong></p>
+                    <ul class="nearby-list">
+                        <li>Swastham Medicare Hospital</li>
+                        <li>LYF Hospital</li>
+                        <li>52 sector metro</li>
+                    </ul>
+                    <p class="property-emi">EMI starts at ₹48,272/month</p>
+                    <div class="loan-links">
+                        <a href="https://www.hdfcbank.com/personal/loans/home-loan" target="_blank">HDFC Bank Home Loan</a>
+                        <a href="https://bank.sbi/web/personal-banking/loans/home-loan" target="_blank">SBI Home Loan</a>
                     </div>
                 </div>
+                <a href="https://www.99acres.com/2-bhk-bedroom-apartment-flat-for-sale-in-amrapali-golf-homes-sector-4-greater-noida-930-sq-ft-spid-Q85126264" target="_blank" class="property-link">View Property</a>
+            </div>
 
-                <!-- Property 4: Maa Ambe Bhawan Hanuman Vihar, Noida -->
-                <div class="property-card">
-                    <div class="property-image-container">
-                        <span class="image-fallback-text">Image not available - Fallback</span>
-                    </div>
-                    <div class="property-info">
-                        <div class="property-location">Maa Ambe Bhawan Hanuman Vihar, Noida</div>
-                        <div class="property-title">2 BHK Flat in Hanuman Vihar, Noida</div>
-                        <div class="property-price">₹28 Lac</div>
-                        <div class="property-details">
-                            <strong>Area:</strong> 446 sqft<br>
-                            <strong>Config:</strong> 2 BHK (2 Baths)<br>
-                            <strong>Furnishing:</strong> Unfurnished<br>
-                            <strong>Available From:</strong> 1mo ago
-                        </div>
-                        <ul class="property-features">
-                            <li>Carpet Area</li>
-                            <li>Ready To Move</li>
-                            <li>Spacious 2bhk flat</li>
-                            <li>Prime locality</li>
-                            <li>Good investment opportunity</li>
-                        </ul>
-                        <ul class="property-nearby">
-                            <li>Shri Ram Singh Multispeciality Hospital</li>
-                            <li>Cloudnine Hospital - Sector 51</li>
-                            <li>Dr Bhimrao Ambedkar Multispeciality Hospital</li>
-                        </ul>
-                        <div class="emi-info">
-                            <strong>Estimated EMI:</strong> ₹24,452/month (for 20 years at 8.5% p.a.)
-                        </div>
-                        <div class="property-url">
-                            <a href="https://www.99acres.com/2-bhk-bedroom-apartment-flat-for-sale-in-hanuman-vihar-noida-446-sq-ft-spid-Q85244928" target="_blank">View Property</a>
-                        </div>
+            <div class="property-card">
+                <div class="property-image-container no-image-placeholder">
+                    <span>No Image Available</span>
+                </div>
+                <div class="property-info">
+                    <h3 class="property-title">Amrapali Centurian Park Terrace Homes</h3>
+                    <p class="property-location">Sector 4, Greater Noida West</p>
+                    <p class="property-price">₹69.3 Lac</p>
+                    <p class="property-area">990 sqft</p>
+                    <p class="property-config">2 BHK (2 Baths)</p>
+                    <p class="property-furnishing">Semi-furnished</p>
+                    <p class="property-available">Ready To Move</p>
+                    <ul class="features-list">
+                        <li>Private Garden</li>
+                        <li>North-East Facing</li>
+                        <li>Family-friendly</li>
+                        <li>Reputable Builder</li>
+                    </ul>
+                    <p><strong>Nearby:</strong></p>
+                    <ul class="nearby-list">
+                        <li>Swastham Medicare Hospital</li>
+                        <li>Ryan International School</li>
+                        <li>Fresh Construction</li>
+                    </ul>
+                    <p class="property-emi">EMI starts at ₹47,789/month</p>
+                    <div class="loan-links">
+                        <a href="https://www.icicibank.com/personal-banking/loans/home-loan" target="_blank">ICICI Bank Home Loan</a>
+                        <a href="https://www.axisbank.com/retail/loans/home-loan" target="_blank">Axis Bank Home Loan</a>
                     </div>
                 </div>
-
+                <a href="https://www.99acres.com/2-bhk-bedroom-apartment-flat-for-sale-in-amrapali-centurian-park-terrace-homes-sector-4-greater-noida-990-sq-ft-spid-E85327826" target="_blank" class="property-link">View Property</a>
             </div>
         </div>
 
-        <div class="property-section">
-            <h2>🌟 Recommended Properties</h2>
-            <div class="card-container">
-
-                <!-- Recommended Property 1: Kings Tower Hanuman Vihar, Noida -->
-                <div class="property-card">
-                    <div class="property-image-container">
-                        <span class="image-fallback-text">Image not available - Fallback</span>
-                    </div>
-                    <div class="property-info">
-                        <div class="property-location">Kings Tower Hanuman Vihar, Noida</div>
-                        <div class="property-title">2 BHK Furnished Flat in Hanuman Vihar, Noida</div>
-                        <div class="property-price">₹42 Lac</div>
-                        <div class="property-details">
-                            <strong>Area:</strong> 950 sqft<br>
-                            <strong>Config:</strong> 2 BHK (2 Baths)<br>
-                            <strong>Furnishing:</strong> Furnished (AC, Fridge, Bed, Wardrobe, Sofa, Power backup)<br>
-                            <strong>Available From:</strong> 1mo ago
-                        </div>
-                        <ul class="property-features">
-                            <li>Built-up Area</li>
-                            <li>Ready To Move</li>
-                            <li>Modular kitchen with chimney</li>
-                            <li>Power backup (Inverter)</li>
-                            <li>Near all major markets, hospitals & schools</li>
-                        </ul>
-                        <ul class="property-nearby">
-                            <li>Major Markets</li>
-                            <li>Malls</li>
-                            <li>Hospitals & Schools</li>
-                        </ul>
-                        <div class="emi-info">
-                            <strong>Estimated EMI:</strong> ₹36,698/month (for 20 years at 8.5% p.a.)
-                        </div>
-                        <div class="property-url">
-                            <a href="https://www.99acres.com/2-bhk-bedroom-apartment-flat-for-sale-in-hanuman-vihar-noida-950-sq-ft-spid-D83156900" target="_blank">View Property</a>
-                        </div>
+        <h2 class="section-header">🌟 Recommended Properties</h2>
+        <div class="property-grid">
+            <div class="property-card">
+                <div class="property-image-container no-image-placeholder">
+                    <span>No Image Available</span>
+                </div>
+                <div class="property-info">
+                    <h3 class="property-title">Aastha Greens</h3>
+                    <p class="property-location">Sector 4, Greater Noida West</p>
+                    <p class="property-price">₹1.19 Cr</p>
+                    <p class="property-area">696 sqft</p>
+                    <p class="property-config">2 BHK (2 Baths)</p>
+                    <p class="property-furnishing">Semi-furnished</p>
+                    <p class="property-available">Ready To Move</p>
+                    <ul class="features-list">
+                        <li>Resale Property</li>
+                        <li>RERA Approved</li>
+                        <li>Gated Society</li>
+                        <li>Near Hospitals</li>
+                        <li>Furnished</li>
+                    </ul>
+                    <p><strong>Nearby:</strong></p>
+                    <ul class="nearby-list">
+                        <li>Sarvodaya Hospital</li>
+                        <li>Felix Hospital</li>
+                        <li>Swastham Medicare Hospital</li>
+                    </ul>
+                    <p class="property-emi">EMI starts at ₹82,040/month</p>
+                    <div class="loan-links">
+                        <a href="https://www.hdfcbank.com/personal/loans/home-loan" target="_blank">HDFC Bank Home Loan</a>
+                        <a href="https://bank.sbi/web/personal-banking/loans/home-loan" target="_blank">SBI Home Loan</a>
                     </div>
                 </div>
-
-                <!-- Recommended Property 2: Sanskriti apartment Sector 63, Noida -->
-                <div class="property-card">
-                    <div class="property-image-container">
-                        <span class="image-fallback-text">Image not available - Fallback</span>
-                    </div>
-                    <div class="property-info">
-                        <div class="property-location">Sanskriti apartment Sector 63, Noida</div>
-                        <div class="property-title">3 BHK Flat in Sector 63, Noida</div>
-                        <div class="property-price">₹75 Lac</div>
-                        <div class="property-details">
-                            <strong>Area:</strong> 1,495 sqft<br>
-                            <strong>Config:</strong> 3 BHK (3 Baths)<br>
-                            <strong>Furnishing:</strong> Unfurnished<br>
-                            <strong>Available From:</strong> 1mo ago
-                        </div>
-                        <ul class="property-features">
-                            <li>Built-up Area</li>
-                            <li>Ready To Move</li>
-                            <li>East facing</li>
-                            <li>Close to metro station</li>
-                            <li>Close to hospital & market</li>
-                        </ul>
-                        <ul class="property-nearby">
-                            <li>Fortis Hospital Noida</li>
-                            <li>SJM Hospital & IVF Centre</li>
-                            <li>Sarvodaya Hospital</li>
-                        </ul>
-                        <div class="emi-info">
-                            <strong>Estimated EMI:</strong> ₹65,502/month (for 20 years at 8.5% p.a.)
-                        </div>
-                        <div class="property-url">
-                            <a href="https://www.99acres.com/3-bhk-bedroom-apartment-flat-for-sale-in-sanskriti-apartment-sector-63-noida-1495-sq-ft-spid-B85242322" target="_blank">View Property</a>
-                        </div>
-                    </div>
-                </div>
-
+                <a href="https://www.99acres.com/2-bhk-bedroom-apartment-flat-for-sale-in-aastha-greens-sector-4-greater-noida-697-sq-ft-spid-C85018768" target="_blank" class="property-link">View Property</a>
             </div>
-        </div>
 
-        <div class="bank-links">
-            <h2>Home Loan Options</h2>
-            <p>Explore home loan interest rates from leading banks:</p>
-            <a href="https://www.hdfcbank.com/personal/borrow/popular-loans/home-loan" target="_blank">HDFC Bank Home Loan</a>
-            <a href="https://homeloans.sbi/" target="_blank">SBI Home Loan</a>
+            <div class="property-card">
+                <div class="property-image-container no-image-placeholder">
+                    <span>No Image Available</span>
+                </div>
+                <div class="property-info">
+                    <h3 class="property-title">Galaxy North Avenue</h3>
+                    <p class="property-location">Sector 4, Greater Noida West</p>
+                    <p class="property-price">₹98 Lac</p>
+                    <p class="property-area">1,140 sqft</p>
+                    <p class="property-config">2 BHK (2 Baths)</p>
+                    <p class="property-furnishing">Semi-furnished</p>
+                    <p class="property-available">Ready To Move</p>
+                    <ul class="features-list">
+                        <li>RERA Approved</li>
+                        <li>Resale Property</li>
+                        <li>Mall Nearby</li>
+                        <li>Close to Hospitals</li>
+                    </ul>
+                    <p><strong>Nearby:</strong></p>
+                    <ul class="nearby-list">
+                        <li>Numed Hospital</li>
+                        <li>Fortis Hospital</li>
+                        <li>Mall and local market</li>
+                    </ul>
+                    <p class="property-emi">EMI starts at ₹67,556/month</p>
+                    <div class="loan-links">
+                        <a href="https://www.icicibank.com/personal-banking/loans/home-loan" target="_blank">ICICI Bank Home Loan</a>
+                        <a href="https://www.axisbank.com/retail/loans/home-loan" target="_blank">Axis Bank Home Loan</a>
+                    </div>
+                </div>
+                <a href="https://www.99acres.com/2-bhk-bedroom-apartment-flat-for-sale-in-galaxy-north-avenue-sector-4-greater-noida-1140-sq-ft-spid-F85640370" target="_blank" class="property-link">View Property</a>
+            </div>
         </div>
     </div>
 </body>
