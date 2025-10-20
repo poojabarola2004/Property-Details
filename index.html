@@ -1,46 +1,42 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Property Recommendations</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 20px;
-            background-color: #f4f7f6;
+            background-color: #f0f2f5;
             color: #333;
         }
         .container {
             max-width: 1200px;
             margin: 0 auto;
         }
-        h2 {
+        h1, h2 {
             color: #2c3e50;
             text-align: center;
             margin-bottom: 30px;
-            font-size: 2em;
-            border-bottom: 2px solid #3498db;
-            padding-bottom: 10px;
         }
         .property-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 25px;
-            margin-bottom: 40px;
+            margin-bottom: 50px;
         }
         .property-card {
             background-color: #fff;
-            border-radius: 10px;
+            border-radius: 12px;
             overflow: hidden;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
             display: flex;
             flex-direction: column;
+            cursor: pointer;
         }
         .property-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            transform: translateY(-8px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
         }
         .property-card img {
             width: 100%;
@@ -53,359 +49,297 @@
             flex-grow: 1;
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
         }
         .property-info h3 {
-            font-size: 1.4em;
-            color: #34495e;
             margin-top: 0;
             margin-bottom: 10px;
+            font-size: 1.4em;
+            color: #34495e;
         }
         .property-info p {
-            margin: 5px 0;
+            margin-bottom: 8px;
             font-size: 0.95em;
+            line-height: 1.4;
+        }
+        .property-info strong {
+            color: #2c3e50;
+        }
+        .features-list, .nearby-list {
+            list-style: none;
+            padding: 0;
+            margin-top: 10px;
+            font-size: 0.9em;
             color: #555;
         }
-        .property-info .price {
+        .features-list li, .nearby-list li {
+            background-color: #ecf0f1;
+            border-radius: 5px;
+            padding: 5px 10px;
+            margin-right: 8px;
+            margin-bottom: 8px;
+            display: inline-block;
+            white-space: nowrap;
+        }
+        .price-emi {
             font-size: 1.2em;
             font-weight: bold;
-            color: #27ae60;
-            margin-bottom: 10px;
-        }
-        .property-info .features, .property-info .nearby-places {
-            margin-top: 15px;
-        }
-        .property-info .features strong, .property-info .nearby-places strong {
-            color: #3498db;
-            font-size: 1em;
-            display: block;
-            margin-bottom: 5px;
-        }
-        .property-info ul {
-            list-style-type: none;
-            padding: 0;
-            margin: 0;
-            font-size: 0.9em;
-            color: #666;
-        }
-        .property-info ul li {
-            background-color: #ecf0f1;
-            border-left: 3px solid #3498db;
-            padding: 5px 10px;
-            margin-bottom: 5px;
-            border-radius: 3px;
-        }
-        .property-card .footer {
-            padding: 15px 20px;
-            background-color: #f8f8f8;
-            border-top: 1px solid #eee;
-            text-align: center;
-        }
-        .property-card .footer .emi {
-            font-weight: bold;
             color: #e67e22;
-            margin-bottom: 10px;
+            margin-top: 15px;
+            margin-bottom: 15px;
+            border-top: 1px solid #eee;
+            padding-top: 15px;
         }
-        .property-card .footer .loan-links a {
+        .loan-links {
+            margin-top: 15px;
+            border-top: 1px solid #eee;
+            padding-top: 15px;
+        }
+        .loan-links a {
             display: block;
-            color: #3498db;
+            color: #2980b9;
             text-decoration: none;
-            margin-top: 5px;
+            margin-bottom: 5px;
             font-size: 0.9em;
+            transition: color 0.2s ease;
         }
-        .property-card .footer .loan-links a:hover {
+        .loan-links a:hover {
+            color: #3498db;
             text-decoration: underline;
         }
-        .property-card .footer .property-link a {
+        .view-property-btn {
             display: inline-block;
-            background-color: #3498db;
+            background-color: #27ae60;
             color: #fff;
-            padding: 8px 15px;
-            border-radius: 5px;
+            padding: 10px 15px;
+            border-radius: 8px;
             text-decoration: none;
-            font-size: 0.9em;
-            margin-top: 10px;
+            font-weight: bold;
+            text-align: center;
+            margin-top: auto;
+            align-self: flex-start;
             transition: background-color 0.2s ease;
         }
-        .property-card .footer .property-link a:hover {
-            background-color: #2980b9;
+        .view-property-btn:hover {
+            background-color: #2ecc71;
         }
     </style>
 </head>
 <body>
     <div class="container">
+        <h1>Property Recommendations</h1>
+
         <h2>🏠 Under Budget Properties</h2>
         <div class="property-grid">
-            
+
             <div class="property-card">
-                <img src="https://static.99acres.com/universalapp/img/noImageBg.svg" alt="4 Bedroom House in Block B Alpha 1, Greater Noida">
+                <img src="https://imagecdn.99acres.com/media1/31851/16/637036695M-1755846868048.webp" alt="Alpha 2 Commercial Belt, Greater Noida">
                 <div class="property-info">
-                    <div>
-                        <h3>4 Bedroom House in Block B Alpha 1</h3>
-                        <p><strong>Location:</strong> Block B Alpha 1, Greater Noida</p>
-                        <p class="price"><strong>Price:</strong> ₹1.55 Cr</p>
-                        <p><strong>Area:</strong> 645 sqft (60 sqm)</p>
-                        <p><strong>Config:</strong> 4 BHK (4 Baths)</p>
-                        <p><strong>Furnishing:</strong> Semi-furnished</p>
-                        <p><strong>Available From:</strong> Ready To Move</p>
-                        <div class="features">
-                            <strong>Key Features:</strong>
-                            <ul>
-                                <li>North-East Facing</li>
-                                <li>Private Garden</li>
-                                <li>Spacious Plot Area</li>
-                                <li>Ready To Move</li>
-                            </ul>
-                        </div>
-                        <div class="nearby-places">
-                            <strong>Nearby Places:</strong>
-                            <ul>
-                                <li>Close to metro station</li>
-                                <li>Close to hospital</li>
-                                <li>Close to airport</li>
-                            </ul>
-                        </div>
+                    <h3>Alpha 2 Commercial Belt, Greater Noida</h3>
+                    <p><strong>Location:</strong> Alpha 2 Commercial Belt, Greater Noida</p>
+                    <p><strong>Price:</strong> ₹1.55 Cr</p>
+                    <p><strong>Area:</strong> 645 sqft(60 sqm)</p>
+                    <p><strong>Configuration:</strong> 4 BHK (3 Baths)</p>
+                    <p><strong>Available From:</strong> Dealer·1w ago</p>
+                    <p><strong>Key Features:</strong></p>
+                    <ul class="features-list">
+                        <li>Plot Area</li>
+                        <li>Ready To Move</li>
+                        <li>Close to Commercial Hub</li>
+                        <li>Good Connectivity</li>
+                        <li>Spacious Layout</li>
+                    </ul>
+                    <p><strong>Nearby Places:</strong></p>
+                    <ul class="nearby-list">
+                        <li>Snu Lake</li>
+                        <li>Omaxe Connaught Place</li>
+                        <li>Buddh International Circuit</li>
+                    </ul>
+                    <div class="price-emi">
+                        EMI: ₹1,35,711/month
                     </div>
-                    <div class="footer">
-                        <p class="emi">EMI: ₹135541.33/month (approx.)</p>
-                        <div class="loan-links">
-                            <strong>Home Loan Links:</strong>
-                            <a href="https://www.hdfcbank.com/personal/borrow/popular-loans/home-loan" target="_blank">HDFC Bank Home Loan</a>
-                            <a href="https://sbi.co.in/web/personal-banking/loans/home-loan" target="_blank">SBI Home Loan</a>
-                            <a href="https://www.icicibank.com/personal-banking/loans/home-loan" target="_blank">ICICI Bank Home Loan</a>
-                        </div>
-                        <div class="property-link">
-                            <a href="https://www.99acres.com/4-bhk-bedroom-independent-house-villa-for-sale-in-block-b-alpha-1-greater-noida-645-sq-ft-r1-spid-Z80219121" target="_blank">View Property</a>
-                        </div>
+                    <div class="loan-links">
+                        <a href="https://sbi.co.in/web/personal-banking/loans/home-loan" target="_blank">SBI Home Loan</a>
+                        <a href="https://www.bankofbaroda.in/personal/loans/home-loan" target="_blank">Bank of Baroda Home Loan</a>
                     </div>
+                    <a href="https://www.99acres.com/4-bhk-bedroom-independent-house-villa-for-sale-in-alpha-2-commercial-belt-greater-noida-646-sq-ft-spid-C84494392" target="_blank" class="view-property-btn">View Property</a>
                 </div>
             </div>
-            
+
             <div class="property-card">
-                <img src="https://static.99acres.com/universalapp/img/noImageBg.svg" alt="4 Bedroom House in Alpha 1, Greater Noida">
+                <img src="https://imagecdn.99acres.com/media1/31338/14/626774929M-1754042690105.webp" alt="Delta 1, Greater Noida">
                 <div class="property-info">
-                    <div>
-                        <h3>4 Bedroom House in Alpha 1</h3>
-                        <p><strong>Location:</strong> Alpha 1, Greater Noida</p>
-                        <p class="price"><strong>Price:</strong> ₹1.6 Cr</p>
-                        <p><strong>Area:</strong> 645 sqft (60 sqm)</p>
-                        <p><strong>Config:</strong> 4 BHK (2 Baths)</p>
-                        <p><strong>Furnishing:</strong> Semi-furnished</p>
-                        <p><strong>Available From:</strong> Ready To Move</p>
-                        <div class="features">
-                            <strong>Key Features:</strong>
-                            <ul>
-                                <li>North-East Facing</li>
-                                <li>Private Garden</li>
-                                <li>Spacious Living Area</li>
-                                <li>Ready To Move</li>
-                            </ul>
-                        </div>
-                        <div class="nearby-places">
-                            <strong>Nearby Places:</strong>
-                            <ul>
-                                <li>Close to metro station</li>
-                                <li>Close to school</li>
-                                <li>Close to hospital</li>
-                            </ul>
-                        </div>
+                    <h3>Delta 1, Greater Noida</h3>
+                    <p><strong>Location:</strong> Delta 1, Greater Noida</p>
+                    <p><strong>Price:</strong> ₹1.5 Cr</p>
+                    <p><strong>Area:</strong> 645 sqft(60 sqm)</p>
+                    <p><strong>Configuration:</strong> 4 BHK (2 Baths)</p>
+                    <p><strong>Available From:</strong> 2w ago</p>
+                    <p><strong>Key Features:</strong></p>
+                    <ul class="features-list">
+                        <li>Plot Area</li>
+                        <li>Ready To Move</li>
+                        <li>Corner Property</li>
+                        <li>Private Garden</li>
+                        <li>Excellent for Investment</li>
+                    </ul>
+                    <p><strong>Nearby Places:</strong></p>
+                    <ul class="nearby-list">
+                        <li>Delta 1 Market</li>
+                        <li>City Park</li>
+                        <li>Knowledge Park II</li>
+                    </ul>
+                    <div class="price-emi">
+                        EMI: ₹1,31,238/month
                     </div>
-                    <div class="footer">
-                        <p class="emi">EMI: ₹140093.03/month (approx.)</p>
-                        <div class="loan-links">
-                            <strong>Home Loan Links:</strong>
-                            <a href="https://www.hdfcbank.com/personal/borrow/popular-loans/home-loan" target="_blank">HDFC Bank Home Loan</a>
-                            <a href="https://sbi.co.in/web/personal-banking/loans/home-loan" target="_blank">SBI Home Loan</a>
-                            <a href="https://www.icicibank.com/personal-banking/loans/home-loan" target="_blank">ICICI Bank Home Loan</a>
-                        </div>
-                        <div class="property-link">
-                            <a href="https://www.99acres.com/4-bhk-bedroom-independent-house-villa-for-sale-in-alpha-1-greater-noida-646-sq-ft-spid-L84648896" target="_blank">View Property</a>
-                        </div>
+                    <div class="loan-links">
+                        <a href="https://www.pnbhousing.com/home-loan/" target="_blank">PNB Housing Finance</a>
+                        <a href="https://www.axisbank.com/retail/loans/home-loan" target="_blank">Axis Bank Home Loan</a>
                     </div>
+                    <a href="https://www.99acres.com/4-bhk-bedroom-independent-house-villa-for-sale-in-delta-1-greater-noida-1130-sq-ft-r1-spid-Q84162890" target="_blank" class="view-property-btn">View Property</a>
                 </div>
             </div>
-            
+
             <div class="property-card">
-                <img src="https://static.99acres.com/universalapp/img/noImageBg.svg" alt="4 Bedroom House in Alpha 1, Greater Noida">
+                <img src="https://static.99acres.com/universalapp/img/noImageBg.svg" alt="Block G Alpha 2, Greater Noida">
                 <div class="property-info">
-                    <div>
-                        <h3>4 Bedroom House in Alpha 1</h3>
-                        <p><strong>Location:</strong> Alpha 1, Greater Noida</p>
-                        <p class="price"><strong>Price:</strong> ₹1.5 Cr</p>
-                        <p><strong>Area:</strong> 645 sqft (60 sqm)</p>
-                        <p><strong>Config:</strong> 4 BHK (4 Baths)</p>
-                        <p><strong>Furnishing:</strong> Semi-furnished</p>
-                        <p><strong>Available From:</strong> Ready To Move</p>
-                        <div class="features">
-                            <strong>Key Features:</strong>
-                            <ul>
-                                <li>Gated Society</li>
-                                <li>Overlooking Park/Garden</li>
-                                <li>Community Amenities</li>
-                                <li>Ready To Move</li>
-                            </ul>
-                        </div>
-                        <div class="nearby-places">
-                            <strong>Nearby Places:</strong>
-                            <ul>
-                                <li>Snu Lake</li>
-                                <li>Alpha 1 Market</li>
-                                <li>City Park, Alpha-I commercial belt</li>
-                            </ul>
-                        </div>
+                    <h3>Block G Alpha 2, Greater Noida</h3>
+                    <p><strong>Location:</strong> Block G Alpha 2, Greater Noida</p>
+                    <p><strong>Price:</strong> ₹1.35 Cr</p>
+                    <p><strong>Area:</strong> 645 sqft(60 sqm)</p>
+                    <p><strong>Configuration:</strong> 4 BHK (4 Baths)</p>
+                    <p><strong>Available From:</strong> 5d ago</p>
+                    <p><strong>Key Features:</strong></p>
+                    <ul class="features-list">
+                        <li>Plot Area</li>
+                        <li>Ready To Move</li>
+                        <li>Private Garden</li>
+                        <li>Delta 1 Metro Station Nearby</li>
+                        <li>Close to Metro and Hospital</li>
+                    </ul>
+                    <p><strong>Nearby Places:</strong></p>
+                    <ul class="nearby-list">
+                        <li>Metro Station</li>
+                        <li>Hospital</li>
+                        <li>The Grand Venice Mall</li>
+                    </ul>
+                    <div class="price-emi">
+                        EMI: ₹1,18,114/month
                     </div>
-                    <div class="footer">
-                        <p class="emi">EMI: ₹131331.75/month (approx.)</p>
-                        <div class="loan-links">
-                            <strong>Home Loan Links:</strong>
-                            <a href="https://www.hdfcbank.com/personal/borrow/popular-loans/home-loan" target="_blank">HDFC Bank Home Loan</a>
-                            <a href="https://sbi.co.in/web/personal-banking/loans/home-loan" target="_blank">SBI Home Loan</a>
-                            <a href="https://www.icicibank.com/personal-banking/loans/home-loan" target="_blank">ICICI Bank Home Loan</a>
-                        </div>
-                        <div class="property-link">
-                            <a href="https://www.99acres.com/4-bhk-bedroom-independent-house-villa-for-sale-in-alpha-1-greater-noida-646-sq-ft-spid-T84980046" target="_blank">View Property</a>
-                        </div>
+                    <div class="loan-links">
+                        <a href="https://www.hdfcbank.com/personal/borrow/popular-loans/home-loan" target="_blank">HDFC Bank Home Loan</a>
+                        <a href="https://www.lichousing.com/" target="_blank">LIC Housing Finance</a>
                     </div>
+                    <a href="https://www.99acres.com/4-bhk-bedroom-independent-house-villa-for-sale-in-block-g-alpha-2-greater-noida-645-sq-ft-r1-spid-I81735350" target="_blank" class="view-property-btn">View Property</a>
                 </div>
             </div>
-            
+
             <div class="property-card">
-                <img src="https://static.99acres.com/universalapp/img/noImageBg.svg" alt="4 Bedroom House in Alpha 1, Greater Noida">
+                <img src="https://static.99acres.com/universalapp/img/noImageBg.svg" alt="Block F Alpha 2, Greater Noida">
                 <div class="property-info">
-                    <div>
-                        <h3>4 Bedroom House in Alpha 1</h3>
-                        <p><strong>Location:</strong> Alpha 1, Greater Noida</p>
-                        <p class="price"><strong>Price:</strong> ₹1.4 Cr</p>
-                        <p><strong>Area:</strong> 645 sqft (60 sqm)</p>
-                        <p><strong>Config:</strong> 4 BHK (4 Baths)</p>
-                        <p><strong>Furnishing:</strong> Semi-furnished</p>
-                        <p><strong>Available From:</strong> Ready To Move</p>
-                        <div class="features">
-                            <strong>Key Features:</strong>
-                            <ul>
-                                <li>Gated Society</li>
-                                <li>Overlooking Park/Garden</li>
-                                <li>Prime Location</li>
-                                <li>Ready To Move</li>
-                            </ul>
-                        </div>
-                        <div class="nearby-places">
-                            <strong>Nearby Places:</strong>
-                            <ul>
-                                <li>Close to metro station</li>
-                                <li>Close to school</li>
-                                <li>Close to hospital</li>
-                            </ul>
-                        </div>
+                    <h3>Block F Alpha 2, Greater Noida</h3>
+                    <p><strong>Location:</strong> Block F Alpha 2, Greater Noida</p>
+                    <p><strong>Price:</strong> ₹1.4 Cr</p>
+                    <p><strong>Area:</strong> 645 sqft(60 sqm)</p>
+                    <p><strong>Configuration:</strong> 4 BHK (4 Baths)</p>
+                    <p><strong>Available From:</strong> 1mo ago</p>
+                    <p><strong>Key Features:</strong></p>
+                    <ul class="features-list">
+                        <li>Plot Area</li>
+                        <li>Ready To Move</li>
+                        <li>North-East Facing</li>
+                        <li>Delta 1 metro within 250m</li>
+                        <li>Multi-storey Property</li>
+                    </ul>
+                    <p><strong>Nearby Places:</strong></p>
+                    <ul class="nearby-list">
+                        <li>Delta 1 Metro Station</li>
+                        <li>Alpha Commercial Belt</li>
+                        <li>MSX Mall</li>
+                    </ul>
+                    <div class="price-emi">
+                        EMI: ₹1,22,576/month
                     </div>
-                    <div class="footer">
-                        <p class="emi">EMI: ₹122671.21/month (approx.)</p>
-                        <div class="loan-links">
-                            <strong>Home Loan Links:</strong>
-                            <a href="https://www.hdfcbank.com/personal/borrow/popular-loans/home-loan" target="_blank">HDFC Bank Home Loan</a>
-                            <a href="https://sbi.co.in/web/personal-banking/loans/home-loan" target="_blank">SBI Home Loan</a>
-                            <a href="https://www.icicibank.com/personal-banking/loans/home-loan" target="_blank">ICICI Bank Home Loan</a>
-                        </div>
-                        <div class="property-link">
-                            <a href="https://www.99acres.com/4-bhk-bedroom-independent-house-villa-for-sale-in-alpha-1-greater-noida-646-sq-ft-spid-J84979494" target="_blank">View Property</a>
-                        </div>
+                    <div class="loan-links">
+                        <a href="https://www.icicibank.com/personal-banking/loans/home-loan" target="_blank">ICICI Bank Home Loan</a>
+                        <a href="https://www.kotak.com/en/personal-banking/loans/home-loan.html" target="_blank">Kotak Mahindra Bank Home Loan</a>
                     </div>
+                    <a href="https://www.99acres.com/4-bhk-bedroom-independent-house-villa-for-sale-in-block-f-alpha-2-greater-noida-645-sq-ft-r3-spid-L80089863" target="_blank" class="view-property-btn">View Property</a>
                 </div>
             </div>
-            
+
         </div>
 
         <h2>🌟 Recommended Properties</h2>
         <div class="property-grid">
-            
+
             <div class="property-card">
-                <img src="https://static.99acres.com/universalapp/img/noImageBg.svg" alt="4 Bedroom House in Block B Alpha 1, Greater Noida">
+                <img src="https://imagecdn.99acres.com/media1/28441/17/568837819M-1739343255258.webp" alt="Block B Alpha 1, Greater Noida">
                 <div class="property-info">
-                    <div>
-                        <h3>4 Bedroom House in Block B Alpha 1</h3>
-                        <p><strong>Location:</strong> Block B Alpha 1, Greater Noida</p>
-                        <p class="price"><strong>Price:</strong> ₹1.55 Cr</p>
-                        <p><strong>Area:</strong> 645 sqft (60 sqm)</p>
-                        <p><strong>Config:</strong> 4 BHK (4 Baths)</p>
-                        <p><strong>Furnishing:</strong> Semi-furnished</p>
-                        <p><strong>Available From:</strong> Ready To Move</p>
-                        <div class="features">
-                            <strong>Key Features:</strong>
-                            <ul>
-                                <li>North-East Facing</li>
-                                <li>Private Garden</li>
-                                <li>Spacious Plot Area</li>
-                                <li>Close to Metro Station</li>
-                            </ul>
-                        </div>
-                        <div class="nearby-places">
-                            <strong>Nearby Places:</strong>
-                            <ul>
-                                <li>Close to metro station</li>
-                                <li>Close to hospital</li>
-                                <li>Close to airport</li>
-                            </ul>
-                        </div>
+                    <h3>Block B Alpha 1, Greater Noida</h3>
+                    <p><strong>Location:</strong> Block B Alpha 1, Greater Noida</p>
+                    <p><strong>Price:</strong> ₹1.55 Cr</p>
+                    <p><strong>Area:</strong> 645 sqft(60 sqm)</p>
+                    <p><strong>Configuration:</strong> 4 BHK (4 Baths)</p>
+                    <p><strong>Available From:</strong> 5d ago</p>
+                    <p><strong>Key Features:</strong></p>
+                    <ul class="features-list">
+                        <li>Plot Area</li>
+                        <li>Ready To Move</li>
+                        <li>North-East Facing</li>
+                        <li>Private Garden</li>
+                        <li>Close to Metro Station</li>
+                    </ul>
+                    <p><strong>Nearby Places:</strong></p>
+                    <ul class="nearby-list">
+                        <li>Metro Station</li>
+                        <li>Hospital</li>
+                        <li>Airport</li>
+                    </ul>
+                    <div class="price-emi">
+                        EMI: ₹1,35,711/month
                     </div>
-                    <div class="footer">
-                        <p class="emi">EMI: ₹135541.33/month (approx.)</p>
-                        <div class="loan-links">
-                            <strong>Home Loan Links:</strong>
-                            <a href="https://www.hdfcbank.com/personal/borrow/popular-loans/home-loan" target="_blank">HDFC Bank Home Loan</a>
-                            <a href="https://sbi.co.in/web/personal-banking/loans/home-loan" target="_blank">SBI Home Loan</a>
-                            <a href="https://www.icicibank.com/personal-banking/loans/home-loan" target="_blank">ICICI Bank Home Loan</a>
-                        </div>
-                        <div class="property-link">
-                            <a href="https://www.99acres.com/4-bhk-bedroom-independent-house-villa-for-sale-in-block-b-alpha-1-greater-noida-645-sq-ft-r1-spid-Z80219121" target="_blank">View Property</a>
-                        </div>
+                    <div class="loan-links">
+                        <a href="https://www.hdfcbank.com/personal/borrow/popular-loans/home-loan" target="_blank">HDFC Bank Home Loan</a>
+                        <a href="https://sbi.co.in/web/personal-banking/loans/home-loan" target="_blank">SBI Home Loan</a>
                     </div>
+                    <a href="https://www.99acres.com/4-bhk-bedroom-independent-house-villa-for-sale-in-block-b-alpha-1-greater-noida-645-sq-ft-r1-spid-Z80219121" target="_blank" class="view-property-btn">View Property</a>
                 </div>
             </div>
-            
+
             <div class="property-card">
-                <img src="https://static.99acres.com/universalapp/img/noImageBg.svg" alt="4 Bedroom House in Alpha 1, Greater Noida">
+                <img src="https://imagecdn.99acres.com/media1/31427/14/628554619M-1754388397564.webp" alt="Block-E, Beta 1, Greater Noida">
                 <div class="property-info">
-                    <div>
-                        <h3>4 Bedroom House in Alpha 1</h3>
-                        <p><strong>Location:</strong> Alpha 1, Greater Noida</p>
-                        <p class="price"><strong>Price:</strong> ₹1.6 Cr</p>
-                        <p><strong>Area:</strong> 645 sqft (60 sqm)</p>
-                        <p><strong>Config:</strong> 4 BHK (2 Baths)</p>
-                        <p><strong>Furnishing:</strong> Semi-furnished</p>
-                        <p><strong>Available From:</strong> Ready To Move</p>
-                        <div class="features">
-                            <strong>Key Features:</strong>
-                            <ul>
-                                <li>North-East Facing</li>
-                                <li>Private Garden</li>
-                                <li>Spacious Living Area</li>
-                                <li>Close to Metro Station</li>
-                            </ul>
-                        </div>
-                        <div class="nearby-places">
-                            <strong>Nearby Places:</strong>
-                            <ul>
-                                <li>Close to metro station</li>
-                                <li>Close to school</li>
-                                <li>Close to hospital</li>
-                            </ul>
-                        </div>
+                    <h3>Block-E, Beta 1, Greater Noida</h3>
+                    <p><strong>Location:</strong> Block-E, Beta 1, Greater Noida</p>
+                    <p><strong>Price:</strong> ₹1.49 Cr</p>
+                    <p><strong>Area:</strong> 645 sqft(60 sqm)</p>
+                    <p><strong>Configuration:</strong> 4 BHK (4 Baths)</p>
+                    <p><strong>Available From:</strong> 5d ago</p>
+                    <p><strong>Key Features:</strong></p>
+                    <ul class="features-list">
+                        <li>Plot Area</li>
+                        <li>Ready To Move</li>
+                        <li>North Facing</li>
+                        <li>Alpha 1 Metro Station Nearby</li>
+                        <li>Proximity to Hospitals</li>
+                    </ul>
+                    <p><strong>Nearby Places:</strong></p>
+                    <ul class="nearby-list">
+                        <li>Metro Station</li>
+                        <li>Hospital</li>
+                        <li>Alpha 1 Market</li>
+                    </ul>
+                    <div class="price-emi">
+                        EMI: ₹1,30,321/month
                     </div>
-                    <div class="footer">
-                        <p class="emi">EMI: ₹140093.03/month (approx.)</p>
-                        <div class="loan-links">
-                            <strong>Home Loan Links:</strong>
-                            <a href="https://www.hdfcbank.com/personal/borrow/popular-loans/home-loan" target="_blank">HDFC Bank Home Loan</a>
-                            <a href="https://sbi.co.in/web/personal-banking/loans/home-loan" target="_blank">SBI Home Loan</a>
-                            <a href="https://www.icicibank.com/personal-banking/loans/home-loan" target="_blank">ICICI Bank Home Loan</a>
-                        </div>
-                        <div class="property-link">
-                            <a href="https://www.99acres.com/4-bhk-bedroom-independent-house-villa-for-sale-in-alpha-1-greater-noida-646-sq-ft-spid-L84648896" target="_blank">View Property</a>
-                        </div>
+                    <div class="loan-links">
+                        <a href="https://www.hdfcbank.com/personal/borrow/popular-loans/home-loan" target="_blank">HDFC Bank Home Loan</a>
+                        <a href="https://www.icicibank.com/personal-banking/loans/home-loan" target="_blank">ICICI Bank Home Loan</a>
                     </div>
+                    <a href="https://www.99acres.com/4-bhk-bedroom-independent-house-villa-for-sale-in-block-e-beta-1-greater-noida-646-sq-ft-r1-spid-G84248378" target="_blank" class="view-property-btn">View Property</a>
                 </div>
             </div>
-            
+
         </div>
     </div>
 </body>
